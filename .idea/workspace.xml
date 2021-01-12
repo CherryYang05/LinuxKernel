@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.1/boot_helloworld.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.1/boot_read_from_sector.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/boot_helloworld.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot_read_from_sector.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/Floppy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/Floppy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Floppy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Floppy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OS.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -15,8 +44,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1d7eJf5x09Ana060IB6wt3Ng99L" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="F:/Software/Open Sources/Jar/junit/4.12/org.hamcrest.core_1.3.0.v201303031735.jar!/" />
@@ -90,10 +124,22 @@
       <workItem from="1610110935418" duration="2636000" />
       <workItem from="1610263255262" duration="5861000" />
       <workItem from="1610269185489" duration="6936000" />
+      <workItem from="1610344297359" duration="3112000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

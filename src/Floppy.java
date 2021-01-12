@@ -22,7 +22,7 @@ public class Floppy {
         MAGNETIC_HEAD_1
     }
 
-    public int SECTOR_SIZE = 512;       //一个扇区512B
+    private int SECTOR_SIZE = 512;      //一个扇区512B
     private int CYLINDER_COUNT = 80;    //80个柱面
     private int SECTORS_COUNT = 18;     //1个柱面18个扇区
     private MAGNETIC_HEAD magneticHead = MAGNETIC_HEAD.MAGNETIC_HEAD_0;
@@ -108,14 +108,10 @@ public class Floppy {
      * @return 扇区的 byte 数据
      */
     public byte[] readFloppy(MAGNETIC_HEAD head, int cylinder_num, int sector_num) {
-        setMagneticHead(head);
-        setCylinder(cylinder_num);
-        setSector(sector_num);
-
+        setParam(head, cylinder_num, sector_num);
         ArrayList<ArrayList<byte[]>> disk = floppy.get(magneticHead.ordinal());
         ArrayList<byte[]> cylinder = disk.get(current_cylinder);
-        byte[] sector = cylinder.get(current_sector);
-        return sector;
+        return cylinder.get(current_sector);
     }
 
     /**
@@ -127,10 +123,7 @@ public class Floppy {
      * @param data         扇区的 byte 数据
      */
     public void writeFloppy(MAGNETIC_HEAD head, int cylinder_num, int sector_num, byte[] data) {
-        setMagneticHead(head);
-        setCylinder(cylinder_num);
-        setSector(sector_num);
-
+        setParam(head, cylinder_num, sector_num);
         ArrayList<ArrayList<byte[]>> disk = floppy.get(magneticHead.ordinal());
         ArrayList<byte[]> cylinder = disk.get(current_cylinder);
         //这里的data不足一个扇区，但是要填充满整个扇区
@@ -168,6 +161,17 @@ public class Floppy {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * 设置磁盘参数，供读写使用
+     * @param head 磁头
+     * @param cylinder_num 柱面号
+     * @param sector_num 扇区号
+     */
+    private void setParam(MAGNETIC_HEAD head, int cylinder_num, int sector_num) {
+        setMagneticHead(head);
+        setCylinder(cylinder_num);
+        setSector(sector_num);
     }
 }
