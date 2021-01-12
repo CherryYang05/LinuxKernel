@@ -3,10 +3,11 @@ cls
 f:
 cd F:\Code\Java\Java4LinuxOS
 nasm boot.asm -o boot
+nasm kernel.asm -o kernel
 cd src
-javac HelloWorldOS.java
-java HelloWorldOS
-del HelloWorldOS.class
+javac OS.java
+java OS
+del OS.class
 move system.img ../
 cd F:\Code\Java\Java4LinuxOS
 e:

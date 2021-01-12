@@ -1,7 +1,7 @@
 ;内核加载器，指向内存地址0x8000
 org  0x7c00;
 
-LOAD_ADDR  EQU  0X9000
+LOAD_ADDR  EQU  0X8000
 
 entry:
     mov  ax, 0
@@ -36,7 +36,7 @@ readFloppy:
     mov  dl, 0         	;驱动器编号，只有一个软盘驱动器，所以写死为0
     int  13h          	;调用BIOS中断实现磁盘读取功能
    
-    jc   fin
+    JC   fin
 
     jmp  LOAD_ADDR
 fin:
