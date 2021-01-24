@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/asm/No.2 内核加载器/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.2 内核加载器/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.3 实模式与保护模式/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.3 实模式与保护模式/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GDT.java" afterDir="false" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="No.8 调色板绘制系统界面">
+      <change afterPath="$PROJECT_DIR$/asm/No.8 调色板绘制系统界面/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.8 调色板绘制系统界面/write_vga_desktop.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.8 调色板绘制系统界面/write_vga_desktop.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.8 调色板绘制系统界面/write_vga_rectangle.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.8 调色板绘制系统界面/write_vga_rectangle.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriter.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriter.dsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriter.dsw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriter.plg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriter.rc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriterDlg.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/FloppyWriterDlg.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/34-NeXT98 3.5 Floppy.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/Disk Floppy.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/FLOPPY4.ICO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy disk-2.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_blue.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_cream.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_grey.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_lime.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_mauve.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_orange.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_pink.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/ICON/floppy_sioux.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/Release/FloppyWriter.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/Resource.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/StdAfx.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/StdAfx.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/mssccprj.scc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/res/FloppyWriter.rc2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/FloppyWriter/res/FloppyWriter0.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.2 内核加载器/boot.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.2 内核加载器/kernel.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.3 实模式与保护模式/boot.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.3 实模式与保护模式/kernel.asm" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/del.bat" beforeDir="false" afterPath="$PROJECT_DIR$/del.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/del.bat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/make.bat" beforeDir="false" afterPath="$PROJECT_DIR$/make.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/move.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pm.inc" beforeDir="false" afterPath="$PROJECT_DIR$/pm.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OS.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +160,11 @@
       <workItem from="1610263255262" duration="5861000" />
       <workItem from="1610269185489" duration="6936000" />
       <workItem from="1610344297359" duration="3112000" />
-      <workItem from="1610433540166" duration="2517000" />
+      <workItem from="1610433540166" duration="2549000" />
+      <workItem from="1610776585489" duration="1424000" />
+      <workItem from="1611149796377" duration="2894000" />
+      <workItem from="1611308787648" duration="209000" />
+      <workItem from="1611488549135" duration="212000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -136,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610433593880</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="No.3 实模式与保护模式">
+      <created>1610444641400</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610444641400</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +202,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="No.2 实现内核加载器" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.2 实现内核加载器" />
+    <MESSAGE value="No.3 实模式与保护模式" />
+    <MESSAGE value="No.8 调色板绘制系统界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.8 调色板绘制系统界面" />
   </component>
 </project>

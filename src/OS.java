@@ -14,7 +14,7 @@ public class OS {
 
     private Floppy floppyDisk = new Floppy();
 
-    private static final String FILENAME = "F:\\Code\\Java\\Java4LinuxOS\\boot";
+    private static final String FILENAME = "../boot";
 
     private static int MAX_SECTOR_NUM = 18;
 
@@ -47,6 +47,8 @@ public class OS {
             while (in.read(data) > 0) {
                 //将内核读入到磁盘第0面，第0柱面，第1个扇区
                 floppyDisk.writeFloppy(Floppy.MAGNETIC_HEAD.MAGNETIC_HEAD_0, cylinder, sector, data);
+                System.out.println("Load file " + fileName.substring(3, fileName.length()) + " to floppy with cylinder:" +
+                        cylinder + " and sector:" + sector);
                 sector++;
                 if (sector > MAX_SECTOR_NUM) {
                     sector = 1;
@@ -62,7 +64,7 @@ public class OS {
     public void makeFloppy() {
         //String s = "This is Cylinder 1 and Sector 2...";
         //floppyDisk.writeFloppy(Floppy.MAGNETIC_HEAD.MAGNETIC_HEAD_0, 1, 2, s.getBytes());
-        writeFileToFloppy("kernel", false, 1, 2);
+        writeFileToFloppy("../kernel", false, 1, 2);
         floppyDisk.makeFloppy("system.img");
     }
 
