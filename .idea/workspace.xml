@@ -2,14 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ASMTest.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/fontDemo.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/fontTest.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.9 制作系统字体/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.9 制作系统字体/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MakeFont.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ProcessASMFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/write_vga_desktop_singlechar.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/FileOutputStreamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/TestDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Java4Linux_kernel/FileOutputStreamTest.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -48,12 +67,15 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Code\Java\Java4LinuxOS\Test" />
+      <recent name="F:\Code\Java\Java4LinuxOS" />
       <recent name="F:\Code\Java\Java4LinuxOS\src" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Code\Java\Java4LinuxOS\src" />
     </key>
   </component>
@@ -69,7 +91,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.OS">
+  <component name="RunManager" selected="Application.ProcessASMFile">
     <configuration name="FileOutputStreamTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="FileOutputStreamTest" />
       <module name="Java4Linux_kernel" />
@@ -77,25 +99,47 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HelloWorldOS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="HelloWorldOS" />
+    <configuration name="MakeFont" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MakeFont" />
       <module name="Java4Linux_kernel" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="OS" />
+    <configuration name="ProcessASMFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ProcessASMFile" />
       <module name="Java4Linux_kernel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileOutputStreamTest.Test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java4Linux_kernel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="FileOutputStreamTest" />
+      <option name="METHOD_NAME" value="Test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDemo.writeToBinary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java4Linux_kernel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestDemo" />
+      <option name="METHOD_NAME" value="writeToBinary" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.OS" />
+        <item itemvalue="Application.ProcessASMFile" />
+        <item itemvalue="Application.MakeFont" />
+        <item itemvalue="JUnit.TestDemo.writeToBinary" />
+        <item itemvalue="JUnit.FileOutputStreamTest.Test1" />
         <item itemvalue="Application.FileOutputStreamTest" />
-        <item itemvalue="Application.HelloWorldOS" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +164,11 @@
       <workItem from="1610776585489" duration="1424000" />
       <workItem from="1611149796377" duration="2894000" />
       <workItem from="1611308787648" duration="209000" />
-      <workItem from="1611488549135" duration="2396000" />
+      <workItem from="1611488549135" duration="4225000" />
+      <workItem from="1611562076526" duration="17521000" />
+      <workItem from="1611649698759" duration="104000" />
+      <workItem from="1611649845688" duration="35000" />
+      <workItem from="1611649897096" duration="6049000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -143,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611488775516</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="增加了 README.md 说明文件">
+      <created>1611491502641</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611491502641</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +222,7 @@
     <MESSAGE value="No.2 实现内核加载器" />
     <MESSAGE value="No.3 实模式与保护模式" />
     <MESSAGE value="No.8 调色板绘制系统界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.8 调色板绘制系统界面" />
+    <MESSAGE value="增加了 README.md 说明文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加了 README.md 说明文件" />
   </component>
 </project>

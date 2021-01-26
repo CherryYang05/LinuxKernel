@@ -17,10 +17,10 @@ GDTPtr	DW	GDTLen - 1
 		DD	0
 
 ;选择子
-SelectorCode32	EQU LABEL_DESC_CODE_32 - LABEL_GDT
-SelectorShow	EQU LABEL_DESC_SHOW - LABEL_GDT
-SelectorStack   EQU LABEL_DESC_STACK  -  LABEL_GDT
-SelectorVram	EQU	LABEL_DESC_VRAM - LABEL_GDT
+SelectorCode32	EQU LABEL_DESC_CODE_32 	- 	LABEL_GDT
+SelectorShow	EQU LABEL_DESC_SHOW 	- 	LABEL_GDT
+SelectorStack   EQU LABEL_DESC_STACK  	-  	LABEL_GDT
+SelectorVram	EQU	LABEL_DESC_VRAM 	- 	LABEL_GDT
 
 [SECTION  .s16]
 [BITS  16]
@@ -48,14 +48,14 @@ LABEL_BEGIN:
 	mov byte [LABEL_DESC_CODE_32 + 7], ah
 	
 	;设置C语言堆栈区
-	xor eax, eax
-	mov ax, ds
-	shl eax, 4
-	add eax, LABEL_STACK
-	mov word [LABEL_DESC_STACK + 2], ax
-	shr eax, 16
-    mov byte [LABEL_DESC_STACK + 4], al
-    mov byte [LABEL_DESC_STACK + 7], ah
+	;xor eax, eax
+	;mov ax, ds
+	;shl eax, 4
+	;add eax, LABEL_STACK
+	;mov word [LABEL_DESC_STACK + 2], ax
+	;shr eax, 16
+    ;mov byte [LABEL_DESC_STACK + 4], al
+    ;mov byte [LABEL_DESC_STACK + 7], ah
 	
 	
 	xor eax, eax
@@ -68,19 +68,18 @@ LABEL_BEGIN:
 	
 	cli					;关中断
 	
-	in al, 92h			;打开A20地址线从而进入保护模式
+	in al, 92h			;打开A20地址线
 	or al, 00000010b
 	out 92h, al
 	
 	mov eax, cr0
 	or eax, 1
-	mov cr0, eax
+	mov cr0, eax		;设置cr0的PE位为1，进入保护模式
 
 	jmp dword SelectorCode32:0
 	
-	[SECTION .s32]
-    [BITS  32]
-
+[SECTION .s32]
+[BITS  32]
 ;初始化C语言栈
 LABEL_SEG_CODE32:
 	mov ax, SelectorStack
@@ -90,7 +89,7 @@ LABEL_SEG_CODE32:
     mov ax, SelectorVram
     mov ds, ax
 
-%include "write_vga_desktop.asm"
+%include "write_vga_desktop_systemFont.asm"
 	
 io_hlt:  					;void io_hlt(void);
     HLT
@@ -164,13 +163,7 @@ io_store_eflags:
 	popfd
 	ret
 	
-table_rgb.1416:                                     ; byte
-    db 00H, 00H, 00H, 0FFH, 00H, 00H, 00H, 0FFH     ; 0000 _ ........
-    db 00H, 0FFH, 0FFH, 00H, 00H, 00H, 0FFH, 0FFH   ; 0008 _ ........
-    db 00H, 0FFH, 00H, 0FFH, 0FFH, 0FFH, 0FFH, 0FFH ; 0010 _ ........
-    db 0C6H, 0C6H, 0C6H, 84H, 00H, 00H, 00H, 84H    ; 0018 _ ........
-    db 00H, 84H, 84H, 00H, 00H, 00H, 84H, 84H       ; 0020 _ ........
-    db 00H, 84H, 00H, 84H, 84H, 84H, 84H, 84H
+%include "fontData.inc"			;导入字体二进制数据
 
 SegCode32Len   equ  $ - LABEL_SEG_CODE32
 

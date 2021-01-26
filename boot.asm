@@ -32,7 +32,7 @@ readFloppy:
     mov  bx, LOAD_ADDR  ;ES:BX 数据存储缓冲区
 
     mov  ah, 0x02      	;AH = 02 表示要做的是读盘操作
-    mov  al, 4        	;AL 表示要连续读取几个扇区
+    mov  al, 20        	;AL 表示要连续读取几个扇区
     mov  dl, 0         	;驱动器编号，只有一个软盘驱动器，所以写死为0
     int  13h          	;调用BIOS中断实现磁盘读取功能
    
