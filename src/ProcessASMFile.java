@@ -4,33 +4,49 @@ import java.io.*;
  * @Author Cherry
  * @Date 2021/1/26
  * @Time 16:32
- * @Brief å¤„ç† ASM æ±‡ç¼–æ–‡ä»¶ï¼Œåˆ é™¤å…¨å±€å˜é‡å£°æ˜ (global)
- * å¤–éƒ¨å˜é‡å£°æ˜ (extern) å’Œ SECTION æ®µå®šä¹‰
+ * @Brief ´¦Àí ASM »ã±àÎÄ¼ş£¬É¾³ıÈ«¾Ö±äÁ¿ÉùÃ÷ (global)
+ * Íâ²¿±äÁ¿ÉùÃ÷ (extern) ºÍ SECTION ¶Î¶¨Òå
  */
 
 public class ProcessASMFile {
     private String fileName = null;
-    private static String newFileName = null;
-    private static FileWriter fileWriter = null;
+    private static String bakFileName = null;
+    private FileWriter fileWriter = null;
     private static boolean isRename = false;
-    private static File newfile = null;
+    private static File bakFile = null;
+
+    /**
+     * ½«Ô­ ASM ÎÄ¼ş¿½±´Ò»·İ£¬¼ÓÉÏ .bak ºó×º£¬ÔÙ½«¿½±´µÄÎÄ¼ş½øĞĞ´¦ÀíĞ´ÈëÔ­ÎÄ¼ş
+     * @param fileName ×îÖÕ±£´æµÄÎÄ¼şÃû£¬Ò²ÊÇÒ»¿ªÊ¼ĞèÒª´¦ÀíµÄÎÄ¼ş
+     * @throws IOException IOException
+     */
     private ProcessASMFile(String fileName) throws IOException {
         this.fileName = fileName;
         File file = new File(fileName);
-        newFileName = fileName + ".bak";
-        newfile = new File(newFileName);
-        isRename = file.renameTo(newfile);
-        fileWriter = new FileWriter(fileName, true);
+        if (file.exists()) {
+            bakFileName = fileName + ".bak";
+            bakFile = new File(bakFileName);
+            isRename = file.renameTo(bakFile);
+            fileWriter = new FileWriter(fileName, true);
+        } else {
+            System.out.println("Do not exist this file!");
+        }
+
     }
 
+    /**
+     * É¾³ıÈ«¾Ö±äÁ¿ÉùÃ÷ (global) Íâ²¿±äÁ¿ÉùÃ÷ (extern) ºÍ SECTION ¶Î¶¨Òå
+     * @throws IOException IOException
+     */
     private void processASM() throws IOException {
-        File file = new File(newFileName);
+        File file = new File(bakFileName);
         FileInputStream fis = new FileInputStream(file);
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
         if (file.getName().endsWith(".asm.bak") && file.exists() && file.isFile()) {
-            String lineText = null;
+            String lineText;
             while ((lineText = reader.readLine()) != null) {
-                while (lineText.contains("global") | lineText.contains("extern") |
+                while (lineText.toLowerCase().contains("global") |
+                        lineText.toLowerCase().contains("extern") |
                         lineText.toLowerCase().contains("section")) {
                     lineText = reader.readLine();
                 }
@@ -40,15 +56,15 @@ public class ProcessASMFile {
         }
         fileWriter.flush();
         fileWriter.close();
-        fis.close();                        //å¿…é¡»å…³é—­æµæ‰èƒ½åˆ é™¤æ–‡ä»¶
+        fis.close();                        //±ØĞë¹Ø±ÕÁ÷²ÅÄÜÉ¾³ıÎÄ¼ş
     }
 
     public static void main(String[] args) throws IOException {
-        ProcessASMFile processASMFile = new ProcessASMFile("ASMTest.asm");
+        ProcessASMFile processASMFile = new ProcessASMFile(args[0]);    //ÓÃÓÚÃüÁîĞĞÊäÈë²ÎÊıÖ´ĞĞ
         if (isRename) {
             processASMFile.processASM();
             System.out.println("ASM file modified done!");
-            System.out.println(newfile.getName() + " delete " + newfile.delete());
+            System.out.println(bakFile.getName() + " delete " + bakFile.delete());
         } else {
             System.out.println("ASM file modified failed!");
         }

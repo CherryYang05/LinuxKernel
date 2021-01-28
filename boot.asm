@@ -1,4 +1,4 @@
-;内核加载器，指向内存地址0x8000
+;内核加载器，指向内存地址0x9000
 org  0x7c00;
 
 LOAD_ADDR  EQU  0X9000
@@ -24,21 +24,31 @@ entry:
 ;ES:BX＝缓冲区的地址 
 ;出口参数：CF＝0——操作成功，AH＝00H，AL＝传输的扇区数，否则，AH＝状态代码，参见功能号01H中的说明
 
+    mov  bx, LOAD_ADDR  ;ES:BX 数据存储缓冲区
+	
 readFloppy:
+	cmp  byte [load_count], 0
+	je   beginLoad
+	
     mov  ch, 1        	;CH 用来存储柱面号
     mov  dh, 0        	;DH 用来存储磁头号
-    mov  cl, 2        	;CL 用来存储扇区号
-
-    mov  bx, LOAD_ADDR  ;ES:BX 数据存储缓冲区
+    mov  cl, 1        	;CL 用来存储扇区号
 
     mov  ah, 0x02      	;AH = 02 表示要做的是读盘操作
     mov  al, 20        	;AL 表示要连续读取几个扇区
     mov  dl, 0         	;驱动器编号，只有一个软盘驱动器，所以写死为0
     int  13h          	;调用BIOS中断实现磁盘读取功能
-   
+	
+	inc  ch
+	dec  byte [load_count]
+	
     jc   fin
-
+	jmp  readFloppy
+	
+beginLoad:
     jmp  LOAD_ADDR
+
+load_count db 2			;表示连续读取几个磁道(柱面)
 fin:
     HLT
     jmp  fin

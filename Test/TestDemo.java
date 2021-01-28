@@ -66,4 +66,10 @@ public class TestDemo {
 
         fileWriter.flush();
     }
+
+    @Test
+    public void makeFile() throws IOException {
+        File file = new File("123.txt");
+        FileWriter fileWriter = new FileWriter(file);
+    }
 }

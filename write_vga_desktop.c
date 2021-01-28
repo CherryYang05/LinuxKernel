@@ -17,17 +17,17 @@
 
 void io_hlt(void);
 void io_cli(void);
+void io_sti(void);
 void io_out8(int port, int data);
 int  io_load_eflags(void);
 void io_store_eflags(int eflags);
-
+void show_char(void);
 void init_palette(void);
 void set_palette(int start, int end, unsigned char *rgb);
-void boxfill8(unsigned char *vram,int xsize,  unsigned char c, int x, int y,
-int x0, int y0);
+void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x, int y, int x0, int y0);
 
-struct  BOOTINFO {
-    char* vgaRam;
+struct BOOTINFO {
+    char *vgaRam;
     short screenX, screenY;
 };
 
@@ -37,10 +37,22 @@ static char fontA[16] = {0x00, 0x18, 0x18, 0x18, 0x18, 0x24, 0x24, 0x24,
     0x24, 0x7e, 0x42, 0x42, 0x42, 0xe7, 0x00, 0x00
 };
 
-void showFont8(char *vram, int xsize, int x, int y, char c, char* font);
+extern char systemFont[16];
+
+void showFont8(char *vram, int xsize, int x, int y, char c, char *font);
+
+void showString(char *vram, int xsize, int x, int y, char color, unsigned char *s );
+
+void putblock(char *vram, int vxsize, int pxsize,
+int pysize, int px0, int py0, char *buf, int bxsize);
+
+void init_mouse_cursor(char* mouse, char bc);
+void intHandlerFromC(void);
+
+static char mcursor[256];
+struct BOOTINFO bootInfo;
 
 void CMain(void) {
-    struct BOOTINFO bootInfo;
     initBootInfo(&bootInfo);
     char *vram = bootInfo.vgaRam;
     int xsize = bootInfo.screenX, ysize = bootInfo.screenY;
@@ -63,8 +75,26 @@ void CMain(void) {
     boxfill8(vram, xsize, COL8_848484, xsize-47, ysize-23, xsize-47, ysize-4);
     boxfill8(vram, xsize, COL8_FFFFFF, xsize-47, ysize-3, xsize-4, ysize-3);
     boxfill8(vram, xsize, COL8_FFFFFF, xsize-3,  ysize-24, xsize-3, ysize-3);
-  
-    showFont8(vram, xsize, 20, 20, COL8_FFFFFF, fontA);
+ 
+    //showFont8(vram, xsize, 8, 8, COL8_FFFFFF, fontA);  
+
+    //showFont8(vram, xsize, 8, 8, COL8_FFFFFF, systemFont + 'B' * 16);
+    //showFont8(vram, xsize, 16, 8, COL8_FFFFFF, systemFont + 'M' * 16);
+    //showFont8(vram, xsize, 24, 8, COL8_FFFFFF, systemFont + 'Y' * 16);
+    //showFont8(vram, xsize, 32, 8, COL8_FFFFFF, systemFont + '2' *16);
+    //showFont8(vram, xsize, 40, 8, COL8_FFFFFF, systemFont + '0' * 16);
+    //showFont8(vram, xsize, 48, 8, COL8_FFFFFF, systemFont + '1' * 16);
+	//showFont8(vram, xsize, 56, 8, COL8_FFFFFF, systemFont + '7' * 16);
+	//showFont8(vram, xsize, 64, 8, COL8_FFFFFF, systemFont + '8' * 16);
+	//showFont8(vram, xsize, 72, 8, COL8_FFFFFF, systemFont + '0' * 16);
+	//showFont8(vram, xsize, 80, 8, COL8_FFFFFF, systemFont + '1' * 16);
+	//showFont8(vram, xsize, 88, 8, COL8_FFFFFF, systemFont + '3' * 16);
+	
+    //showString(vram, xsize, 104, 8, COL8_FFFFFF, "Show cursor below!");
+    
+    init_mouse_cursor(mcursor, COL8_008484);
+    putblock(vram, xsize, 16, 16, 80, 80, mcursor, 16);
+    io_sti();
 
     for(;;) {
        io_hlt();
@@ -76,6 +106,13 @@ void initBootInfo(struct BOOTINFO *pBootInfo) {
     pBootInfo->vgaRam = (char*)0xa0000;
     pBootInfo->screenX = 320;
     pBootInfo->screenY = 200;
+}
+
+void showString(char* vram, int xsize, int x, int y, char color, unsigned char *s ) {
+    for (; *s != 0x00; s++) {
+       showFont8(vram, xsize, x, y,color, systemFont + *s * 16);
+       x += 8;
+    }
 }
 
 void init_palette(void) {
@@ -102,15 +139,15 @@ void init_palette(void) {
     return;
 }
 
-void set_palette(int start,  int end,  unsigned char* rgb) {
+void set_palette(int start,  int end,  unsigned char *rgb) {
     int i, eflags;
     eflags = io_load_eflags();
     io_cli();
-    io_out8(0x03c8,  start);  //set  palette number
+    io_out8(0x03c8,  start);            //设置调色板编号，端口 03c8
     for (i = start; i <= end; i++) {
-        io_out8(0x03c9, rgb[0] / 4);
-        io_out8(0x03c9, rgb[1] / 4);
-        io_out8(0x03c9, rgb[2] / 4);
+        io_out8(0x03c9,  rgb[0] / 4);   //把调色板的RGB数值通过端口 0x3c9写入显存系统
+        io_out8(0x03c9,  rgb[1] / 4);   //先压栈第二个参数，再压栈第一个参数
+        io_out8(0x03c9,  rgb[2] / 4);
  
         rgb += 3;
     }
@@ -122,13 +159,16 @@ void set_palette(int start,  int end,  unsigned char* rgb) {
 void boxfill8(unsigned char* vram, int xsize, unsigned char c, 
 int x0, int y0, int x1, int y1) {
     int  x, y;
-    for (y = y0; y <= y1; y++)
-     for (x = x0; x <= x1; x++) {
-         vram[y * xsize + x] = c;
-     }
-
+    for (y = y0; y <= y1; y++) {
+		for (x = x0; x <= x1; x++) {
+			vram[y * xsize + x] = c;
+		}
+	}
 }
 
+/**
+ * 显示 8位的字符
+ */
 void showFont8(char *vram, int xsize, int x, int y, char c, char* font) {
     int i;
     char d;
@@ -145,4 +185,61 @@ void showFont8(char *vram, int xsize, int x, int y, char c, char* font) {
         if ((d & 0x01) != 0) {vram[(y + i) * xsize + x + 7] = c;}
     }
 
+}
+
+void init_mouse_cursor(char *mouse, char bc) {
+    static char cursor[16][16] = {
+		"*************...",
+		"*OOOOOOOOOO*....",
+		"*OOOOOOOOO*.....",
+		"*OOOOOOOO*......",
+		"*OOOOOOO*.......",
+		"*OOOOOO*........",
+		"*OOOOOOO*.......",
+		"*OOOOOOOO*......",
+		"*OOO***OOO*.....",
+		"*OO*...*OOO*....",
+		"*O*.....*OOO*...",
+		"**.......*OOO*..",
+		"*.........*OOO*.",
+		"...........*OOO*",
+		"............*OO*",
+		".............***"
+	};
+
+      int x, y;
+      for (y = 0; y < 16; y++) {
+          for (x = 0; x < 16; x++) {
+             if (cursor[y][x] == '*') {
+                 mouse[y * 16 + x] = COL8_000000;
+             }
+             if (cursor[y][x] == 'O') {
+                mouse[y * 16 + x] = COL8_FFFFFF;
+             }
+             if (cursor[y][x] == '.') {
+                 mouse[y * 16 + x] = bc;
+             }
+          }
+      }
+}
+
+void putblock(char *vram, int vxsize, int pxsize,
+int pysize, int px0, int py0, char *buf, int bxsize) {
+    int x, y;
+    for (y = 0; y < pysize; y++)
+      for (x = 0; x < pxsize; x++) {
+          vram[(py0 + y) * vxsize + (px0 + x)] = buf[y * bxsize + x];
+      }
+}
+
+void intHandlerFromC() {
+    char *vram = bootInfo.vgaRam;
+    int xsize = bootInfo.screenX;
+    int ysize = bootInfo.screenY;
+    boxfill8(vram, xsize, COL8_000000, 0, 0, xsize - 1, 15);
+    showString(vram, xsize, 0, 0, COL8_00FFFF, "Keyboard input:");
+    for(;;) {
+
+    }
+    show_char();
 }

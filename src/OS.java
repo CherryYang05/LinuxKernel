@@ -64,7 +64,7 @@ public class OS {
     public void makeFloppy() {
         //String s = "This is Cylinder 1 and Sector 2...";
         //floppyDisk.writeFloppy(Floppy.MAGNETIC_HEAD.MAGNETIC_HEAD_0, 1, 2, s.getBytes());
-        writeFileToFloppy("../kernel", false, 1, 2);
+        writeFileToFloppy("../kernel", false, 1, 1);
         floppyDisk.makeFloppy("system.img");
     }
 

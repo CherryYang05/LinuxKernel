@@ -89,7 +89,7 @@ LABEL_SEG_CODE32:
     mov ax, SelectorVram
     mov ds, ax
 
-%include "write_vga_desktop_systemFont.asm"
+%include "write_vga_cursor.asm"
 	
 io_hlt:  					;void io_hlt(void);
     HLT
