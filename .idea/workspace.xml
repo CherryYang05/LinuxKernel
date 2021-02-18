@@ -159,6 +159,7 @@
       <workItem from="1611822060831" duration="1173000" />
       <workItem from="1611824920841" duration="164000" />
       <workItem from="1611840003213" duration="1744000" />
+      <workItem from="1613622414151" duration="700000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -202,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611845741786</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="No.11 添加中断机制">
+      <created>1613622470318</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1613622470318</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +237,7 @@
     <MESSAGE value="增加了 README.md 说明文件" />
     <MESSAGE value="No.9 绘制系统字体，增加了 asm 处理程序" />
     <MESSAGE value="No.10 绘制鼠标指针" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.10 绘制鼠标指针" />
+    <MESSAGE value="No.11 添加中断机制" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.11 添加中断机制" />
   </component>
 </project>

@@ -15,9 +15,14 @@
 #define  COL8_008484  14
 #define  COL8_848484  15
 
+#define PORT_KEYDAT   0x60
+#define PIC_OCW2      0x20
+
 void io_hlt(void);
 void io_cli(void);
 void io_sti(void);
+void io_stihlt(void);
+char io_in8(int port);
 void io_out8(int port, int data);
 int  io_load_eflags(void);
 void io_store_eflags(int eflags);
@@ -43,14 +48,28 @@ void showFont8(char *vram, int xsize, int x, int y, char c, char *font);
 
 void showString(char *vram, int xsize, int x, int y, char color, unsigned char *s );
 
-void putblock(char *vram, int vxsize, int pxsize,
-int pysize, int px0, int py0, char *buf, int bxsize);
+void putblock(char *vram, int vxsize, int pxsize, int pysize, int px0, int py0, char *buf, int bxsize);
 
 void init_mouse_cursor(char* mouse, char bc);
+
 void intHandlerFromC(void);
 
 static char mcursor[256];
+
 static struct BOOTINFO bootInfo;
+
+static char keyVal[5] = {'0', 'x', 0, 0, 0};          //键盘扫描码和断码
+char charToVal(char c);
+char* charToHex(unsigned char c);
+
+struct KEYBUF {
+    unsigned char key_buf[32];
+    int read;
+    int write;
+    int len;               //read和 write 实际上是缓冲区首尾指针
+};
+
+static struct KEYBUF keybuf;
 
 void CMain(void) {
     initBootInfo(&bootInfo);
@@ -59,53 +78,57 @@ void CMain(void) {
 
     init_palette();
     
-    boxfill8(vram, xsize, COL8_008484, 0, 0, xsize-1, ysize-29);
-    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize-28, xsize-1, ysize-28);
-    boxfill8(vram, xsize, COL8_FFFFFF, 0, ysize-27, xsize-1, ysize-27);
-    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize-26, xsize-1, ysize-1);
+    boxfill8(vram, xsize, COL8_008484, 0, 0, xsize - 1, ysize - 29);
+    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 28, xsize - 1, ysize - 28);
+    boxfill8(vram, xsize, COL8_FFFFFF, 0, ysize - 27, xsize - 1, ysize - 27);
+    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 26, xsize - 1, ysize - 1);
     
-    boxfill8(vram, xsize, COL8_FFFFFF, 3, ysize-24, 59, ysize-24);
-    boxfill8(vram, xsize, COL8_FFFFFF, 2, ysize-24, 2, ysize-4);
-    boxfill8(vram, xsize, COL8_848484, 3, ysize-4,  59, ysize-4);
-    boxfill8(vram, xsize, COL8_848484, 59, ysize-23, 59, ysize-5);
-    boxfill8(vram, xsize, COL8_000000, 2, ysize-3, 59, ysize-3);
-    boxfill8(vram, xsize, COL8_000000, 60, ysize-24, 60, ysize-3);
+    boxfill8(vram, xsize, COL8_FFFFFF, 3, ysize - 24, 59, ysize - 24);
+    boxfill8(vram, xsize, COL8_FFFFFF, 2, ysize - 24, 2, ysize - 4);
+    boxfill8(vram, xsize, COL8_848484, 3, ysize - 4,  59, ysize - 4);
+    boxfill8(vram, xsize, COL8_848484, 59, ysize - 23, 59, ysize - 5);
+    boxfill8(vram, xsize, COL8_000000, 2, ysize - 3, 59, ysize - 3);
+    boxfill8(vram, xsize, COL8_000000, 60, ysize - 24, 60, ysize - 3);
 
-    boxfill8(vram, xsize, COL8_848484, xsize-47, ysize-24, xsize-4, ysize-24);
-    boxfill8(vram, xsize, COL8_848484, xsize-47, ysize-23, xsize-47, ysize-4);
-    boxfill8(vram, xsize, COL8_FFFFFF, xsize-47, ysize-3, xsize-4, ysize-3);
-    boxfill8(vram, xsize, COL8_FFFFFF, xsize-3,  ysize-24, xsize-3, ysize-3);
- 
-    //showFont8(vram, xsize, 8, 8, COL8_FFFFFF, fontA);  
+    boxfill8(vram, xsize, COL8_848484, xsize - 47, ysize - 24, xsize - 4, ysize - 24);
+    boxfill8(vram, xsize, COL8_848484, xsize - 47, ysize - 23, xsize - 47, ysize - 4);
+    boxfill8(vram, xsize, COL8_FFFFFF, xsize - 47, ysize - 3, xsize - 4, ysize - 3);
+    boxfill8(vram, xsize, COL8_FFFFFF, xsize - 3,  ysize - 24, xsize - 3, ysize - 3);
 
-    //showFont8(vram, xsize, 8, 8, COL8_FFFFFF, systemFont + 'B' * 16);
-    //showFont8(vram, xsize, 16, 8, COL8_FFFFFF, systemFont + 'M' * 16);
-    //showFont8(vram, xsize, 24, 8, COL8_FFFFFF, systemFont + 'Y' * 16);
-    //showFont8(vram, xsize, 32, 8, COL8_FFFFFF, systemFont + '2' *16);
-    //showFont8(vram, xsize, 40, 8, COL8_FFFFFF, systemFont + '0' * 16);
-    //showFont8(vram, xsize, 48, 8, COL8_FFFFFF, systemFont + '1' * 16);
-	//showFont8(vram, xsize, 56, 8, COL8_FFFFFF, systemFont + '7' * 16);
-	//showFont8(vram, xsize, 64, 8, COL8_FFFFFF, systemFont + '8' * 16);
-	//showFont8(vram, xsize, 72, 8, COL8_FFFFFF, systemFont + '0' * 16);
-	//showFont8(vram, xsize, 80, 8, COL8_FFFFFF, systemFont + '1' * 16);
-	//showFont8(vram, xsize, 88, 8, COL8_FFFFFF, systemFont + '3' * 16);
-	
-    //showString(vram, xsize, 104, 8, COL8_FFFFFF, "Show cursor below!");
-    
     init_mouse_cursor(mcursor, COL8_008484);
     putblock(vram, xsize, 16, 16, 80, 80, mcursor, 16);
     io_sti();
-
+    
+    unsigned char data = 0;
     for(;;) {
-       io_hlt();
+        io_cli();
+        if (keybuf.len == 0) {
+            io_stihlt();
+        } else {
+            data = keybuf.key_buf[keybuf.read];
+            keybuf.read = (keybuf.read + 1) % 32;
+            keybuf.len--;
+            io_sti();
+            char *p = charToHex(data);
+            static int pos = 0;
+            static int line = 0;
+            showString(vram, xsize, pos, line, COL8_FFFFFF, p);
+            pos += 32;
+            if (pos == 320) {
+                line = (line == 240) ? 0 : (line + 16);
+                pos = 0;
+            }
+        }
     }
-
 }
 
 void initBootInfo(struct BOOTINFO *pBootInfo) {
     pBootInfo->vgaRam = (char*)0xa0000;
     pBootInfo->screenX = 320;
     pBootInfo->screenY = 200;
+    keybuf.len = 0;
+    keybuf.read = 0;
+    keybuf.write = 0;
 }
 
 void showString(char* vram, int xsize, int x, int y, char color, unsigned char *s ) {
@@ -116,7 +139,7 @@ void showString(char* vram, int xsize, int x, int y, char color, unsigned char *
 }
 
 void init_palette(void) {
-    static  unsigned char table_rgb[16 * 3] = {
+    static unsigned char table_rgb[16 * 3] = {
         0x00,  0x00,  0x00,			//全黑
         0xff,  0x00,  0x00,			//亮红
         0x00,  0xff,  0x00,			//亮绿
@@ -232,14 +255,48 @@ int pysize, int px0, int py0, char *buf, int bxsize) {
       }
 }
 
+//C 语言处理中断的函数
 void intHandlerFromC() {
     char *vram = bootInfo.vgaRam;
     int xsize = bootInfo.screenX;
     int ysize = bootInfo.screenY;
-    boxfill8(vram, xsize, COL8_000000, 0, 0, xsize - 1, 15);
-    showString(vram, xsize, 0, 0, COL8_00FFFF, "Keyboard input:");
-    for(;;) {
-		io_hlt();
+    /*  
+        PIC_OCW2 的值是 0x20, 也就是主 PIC芯片的控制端口，
+        0x21对应的是键盘的中断向量。当键盘中断被CPU执行后，
+        下次键盘再向 CPU发送信号时，CPU就不会接收，要想让 CPU再次接收信号，
+        必须向主 PIC的端口再次发送键盘中断的中断向量号。
+    */
+    io_out8(PIC_OCW2, 0x21);
+    unsigned char data = 0;
+    data = io_in8(PORT_KEYDAT);
+    if (keybuf.len < 32) {
+        keybuf.key_buf[keybuf.write] = data;
+        keybuf.len++;
+        keybuf.write = (keybuf.write + 1) % 32;
     }
-    show_char();
+
+    // boxfill8(vram, xsize, COL8_000000, 0, 0, xsize - 1, 15);
+    // showString(vram, xsize, 0, 0, COL8_00FFFF, "Keyboard input:");
+    // for(;;) {
+	// 	io_hlt();
+    // }
+    // show_char();
+}
+
+//将ASCII码转为十六进制数
+char* charToHex(unsigned char c) {
+    char temp = c % 16;
+    keyVal[3] = charToVal(temp);
+    c = c / 16;
+    keyVal[2] = charToVal(c);
+    return keyVal;
+}
+
+//将十六进制转为十六进制字符
+char charToVal(char c) {
+    if (c >= 10) {
+        return 'A' + c - 10;
+    } else {
+        return '0' + c;
+    }
 }
