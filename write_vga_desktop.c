@@ -50,7 +50,7 @@ void init_mouse_cursor(char* mouse, char bc);
 void intHandlerFromC(void);
 
 static char mcursor[256];
-struct BOOTINFO bootInfo;
+static struct BOOTINFO bootInfo;
 
 void CMain(void) {
     initBootInfo(&bootInfo);
@@ -239,7 +239,7 @@ void intHandlerFromC() {
     boxfill8(vram, xsize, COL8_000000, 0, 0, xsize - 1, 15);
     showString(vram, xsize, 0, 0, COL8_00FFFF, "Keyboard input:");
     for(;;) {
-
+		io_hlt();
     }
     show_char();
 }

@@ -5,6 +5,7 @@ org	0x9000
 jmp LABEL_BEGIN
 
 [SECTION .GDT]
+;全局描述符表
 ;                             		  段基址          段界限               属性
 LABEL_GDT:				Descriptor		0,				0,					0
 LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C + DA_32	;结构体初始化时只能传入常量
@@ -22,6 +23,16 @@ SelectorShow	EQU LABEL_DESC_SHOW 	- 	LABEL_GDT
 SelectorStack   EQU LABEL_DESC_STACK  	-  	LABEL_GDT
 SelectorVram	EQU	LABEL_DESC_VRAM 	- 	LABEL_GDT
 
+;中断描述符表
+LABEL_IDT:
+%rep  255
+    Gate  SelectorCode32, SpuriousHandler,0, DA_386IGate
+%endrep
+
+IdtLen	EQU 	$ - LABEL_IDT
+IdtPtr  DW  	IdtLen - 1
+        DD  	0
+
 [SECTION  .s16]
 [BITS  16]
 
@@ -36,6 +47,8 @@ LABEL_BEGIN:
 	mov al, 0x13		;al的值表示640×480 256色
 	mov ah, 0			;ah寄存器的值表示设置显示器模式
 	int 0x10			;调用系统中断的显示服务
+	
+	call init8259A		;初始化8259A控制器
 	
 	;起始地址写入byte2,3,4,7
 	xor eax, eax		;清零
@@ -68,16 +81,72 @@ LABEL_BEGIN:
 	
 	cli					;关中断
 	
-	in al, 92h			;打开A20地址线
-	or al, 00000010b
+	;准备加载IDT
+	xor   eax, eax
+    mov   ax,  ds
+    shl   eax, 4
+    add   eax, LABEL_IDT
+    mov   dword [IdtPtr + 2], eax
+    lidt  [IdtPtr]
+	 
+	in 	al, 92h			;打开A20地址线
+	or 	al, 00000010b
 	out 92h, al
 	
 	mov eax, cr0
-	or eax, 1
+	or  eax, 1
 	mov cr0, eax		;设置cr0的PE位为1，进入保护模式
 
 	jmp dword SelectorCode32:0
 	
+init8259A:
+    mov  al, 011h
+    out  02h, al
+    call io_delay
+  
+    out 0A0h, al
+    call io_delay
+
+    mov al, 020h
+    out 021h, al
+    call io_delay
+
+    mov  al, 028h
+    out  0A1h, al
+    call io_delay
+
+    mov  al, 004h
+    out  021h, al
+    call io_delay
+
+    mov  al, 002h
+    out  0A1h, al
+    call io_delay
+
+    mov  al, 003h
+    out  021h, al
+    call io_delay
+
+    out  0A1h, al
+    call io_delay
+
+    mov  al, 11111101b ;允许键盘中断
+    out  21h, al
+    call io_delay
+
+    mov  al, 11111111b
+    out  0A1h, al
+    call io_delay
+
+    ret
+
+io_delay:
+    nop
+    nop
+    nop
+    nop
+    ret
+
 [SECTION .s32]
 [BITS  32]
 ;初始化C语言栈
@@ -88,8 +157,21 @@ LABEL_SEG_CODE32:
 
     mov ax, SelectorVram
     mov ds, ax
+	
+	mov ax, SelectorShow
+	mov gs, ax
+	sti
 
-%include "write_vga_cursor.asm"
+	%include "write_vga_desktop.asm"
+	
+	jmp $
+
+_SpuriousHandler:
+SpuriousHandler  equ _SpuriousHandler - $$
+
+	call intHandlerFromC
+	
+	iretd
 	
 io_hlt:  					;void io_hlt(void);
     HLT
