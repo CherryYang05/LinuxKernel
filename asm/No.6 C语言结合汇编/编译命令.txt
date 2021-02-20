@@ -1,0 +1,25 @@
+nasm -f elf32 foo.asm -o foo.o
+gcc -m32 -c bar.c -o bar.o
+ld -m elf_i386 foo.o bar.o -o foobar
+
+##不包含调试信息和符号表
+gcc -m32 -fno-pic -fno-asynchronous-unwind-tables -s -c -o bar.o bar.c
+git clone https://github.com/vertis/objconv.git
+
+g++ -o objconv -O2 src/*cpp
+
+##错误信息: g++ narrowing conversion of ‘2147483648’ from ‘unsigned int’ to ‘int’ inside
+##C++11中的列表初始化禁止缩窄转换, 切换低版本进行编译: 
+
+g++ -o objconv -O2 src/*cpp --std=c++98
+
+./objconv -fnasm bar.o -o bar.asm
+
+nasm -f elf32 foo.asm
+gcc -m32 foo.o -o foo
+
+##如果提示缺少balabala，执行下面的命令
+##sudo  apt-get  update
+##sudo  apt-get  purge  libc6-dev
+##sudo  apt-get  install  libc6-dev
+##sudo  apt-get  install  libc6-dev-i386

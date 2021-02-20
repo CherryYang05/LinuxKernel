@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "array": "cpp"
+    },
+    "python.pythonPath": "F:\\Software\\Python\\Python 3.7.3\\python.exe",
+    "latex-workshop.view.pdf.external.viewer.command": "F:\\Software\\LaTeX\\SumatraPDF\\SumatraPDF\\SumatraPDF.exe",
+    "latex-workshop.view.pdf.external.viewer.args": [
+        "%PDF%"
+    ]
+}
