@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/system.img" beforeDir="false" afterPath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/system.img" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.12 建立键盘中断并设立缓冲区/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.12 建立键盘中断并设立缓冲区/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.asm" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.c" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +171,7 @@
       <workItem from="1613816651933" duration="1009000" />
       <workItem from="1613826551489" duration="339000" />
       <workItem from="1613826934040" duration="605000" />
-      <workItem from="1613827593630" duration="229000" />
+      <workItem from="1613827593630" duration="1440000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -243,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613827649754</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="No.14 实现鼠标中断，识别鼠标并获取鼠标移动信息">
+      <created>1613827896451</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1613827896451</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -146,7 +146,8 @@ void init_palette(void) {
         0x84,  0x84,  0x00,			//暗黄
         0x00,  0x00,  0x84,			//暗蓝
         0x84,  0x00,  0x84,			//暗紫
-        0x00,  0x84,  0x84,			//浅暗蓝
+        //0x00,  0x84,  0x84,			//浅暗蓝
+        0x00,  0x78,  0xd7,			//windows蓝
         0x84,  0x84,  0x84,			//暗灰
     };
  
@@ -194,19 +195,18 @@ void boxfill8(unsigned char* vram, int xsize, unsigned char c,
 int x0, int y0, int x1, int y1) {
     int  x, y;
     for (y = y0; y <= y1; y++) {
-		for (x = x0; x <= x1; x++) {
-			vram[y * xsize + x] = c;
+	    for (x = x0; x <= x1; x++) {
+		    vram[y * xsize + x] = c;
 		}
 	}
 }
 
 /**
-  显示 8位的字符
+  显示 8 位的字符
  */
 void showFont8(char *vram, int xsize, int x, int y, char c, char* font) {
     int i;
     char d;
-
     for (i = 0; i < 16; i++) {
         d = font[i]; 
         if ((d & 0x80) != 0) {vram[(y + i) * xsize + x + 0] = c;}
@@ -223,22 +223,24 @@ void showFont8(char *vram, int xsize, int x, int y, char c, char* font) {
 
 void init_mouse_cursor(char *mouse, char bc) {
     static char cursor[16][16] = {
-		"*************...",
-		"*OOOOOOOOOO*....",
-		"*OOOOOOOOO*.....",
-		"*OOOOOOOO*......",
-		"*OOOOOOO*.......",
+		
+        "**..............",
+		"*O*.............",
+		"*OO*............",
+		"*OOO*...........",
+		"*OOOO*..........",
+		"*OOOOO*.........",
 		"*OOOOOO*........",
 		"*OOOOOOO*.......",
-		"*OOOOOOOO*......",
-		"*OOO***OOO*.....",
-		"*OO*...*OOO*....",
-		"*O*.....*OOO*...",
-		"**.......*OOO*..",
-		"*.........*OOO*.",
-		"...........*OOO*",
-		"............*OO*",
-		".............***"
+		"*OOOOO**........",
+		"*OOOOO*.........",
+		"*O**OO*.........",
+		"**..*OO*........",
+		"....*OO*........",
+		".....*OO*.......",
+		".....*OO*.......",
+		"......**........"
+
 	};
 
       int x, y;
