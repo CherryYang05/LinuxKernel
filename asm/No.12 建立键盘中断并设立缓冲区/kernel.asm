@@ -11,7 +11,7 @@ LABEL_GDT:				Descriptor		0,				0,					0
 LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C + DA_32	;结构体初始化时只能传入常量
 LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFh,			  DA_DRW		;0B8000h是显存地址，设置该数据段属性为可读写
 LABEL_DESC_VRAM:		Descriptor	    0,			0FFFFFFFFh,			  DA_DRW		;4G显存，为了C语言开发方便，全部设置为可读写
-LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,			DA_DRWA + DA_32
+LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,		   DA_DRWA + DA_32
 
 GDTLen	EQU	$ - LABEL_GDT
 GDTPtr	DW	GDTLen - 1
@@ -25,9 +25,20 @@ SelectorVram	EQU	LABEL_DESC_VRAM 	- 	LABEL_GDT
 
 ;中断描述符表
 LABEL_IDT:
-%rep  255
-    Gate  SelectorCode32, SpuriousHandler,0, DA_386IGate
+
+%rep 33
+	Gate SelectorCode32, SpuriousHandler, 0, DA_386IGate
 %endrep
+
+.021h:		;对应主8259A芯片IRQ1引脚，控制键盘中断
+	Gate SelectorCode32, KeyBoardHandler, 0, DA_386IGate
+
+%rep 10
+	Gate SelectorCode32, SpuriousHandler, 0, DA_386IGate
+%endrep
+
+.2ch:		;对应从8259A芯片IRQ4引脚，控制鼠标中断
+	Gate SelectorCode32, mouseHandler, 0, DA_386IGate
 
 IdtLen	EQU 	$ - LABEL_IDT
 IdtPtr  DW  	IdtLen - 1
@@ -47,8 +58,6 @@ LABEL_BEGIN:
 	mov al, 0x13		;al的值表示640×480 256色
 	mov ah, 0			;ah寄存器的值表示设置显示器模式
 	int 0x10			;调用系统中断的显示服务
-	
-	call init8259A		;初始化8259A控制器
 	
 	;起始地址写入byte2,3,4,7
 	xor eax, eax		;清零
@@ -80,6 +89,8 @@ LABEL_BEGIN:
 	lgdt [GDTPtr]
 	
 	cli					;关中断
+	
+	call init8259A		;初始化8259A控制器
 	
 	;准备加载IDT
 	xor   eax, eax
@@ -123,18 +134,18 @@ init8259A:
     out  0A1h, al
     call io_delay
 
-    mov  al, 003h
+    mov  al, 001h
     out  021h, al
     call io_delay
 
     out  0A1h, al
     call io_delay
 
-    mov  al, 11111101b ;允许键盘中断
+    mov  al, 11111001b 	;允许键盘中断，打开主8259A控制器的IRQ1和IRQ2号引脚
     out  21h, al
     call io_delay
 
-    mov  al, 11111111b
+    mov  al, 11101111b	;允许鼠标中断，打开从8259A控制器的IRQ4号引脚
     out  0A1h, al
     call io_delay
 
@@ -162,17 +173,53 @@ LABEL_SEG_CODE32:
 	mov gs, ax
 	sti
 
-	%include "write_vga_desktop_keyboard_buf.asm"
+	%include "write_vga_desktop_mouse_enable.asm"
 	
 	jmp $
-
+	
+;=============================== 中断处理函数 ======================================
 _SpuriousHandler:
-SpuriousHandler  equ _SpuriousHandler - $$
+SpuriousHandler  equ _SpuriousHandler - $$	
+	iretd
 
+;键盘中断处理函数
+_KeyBoardHandler:
+KeyBoardHandler equ _KeyBoardHandler - $$
+	push es					;保护现场
+	push ds
+	pushad					;将eax,ebx等所有的32位通用寄存器压入堆栈
+	mov eax, esp
+	push eax
+	
 	call intHandlerFromC
 	
+	pop eax
+	mov esp, eax
+	popad
+	pop ds
+	pop es
 	iretd
+
+
+;键盘中断处理函数
+_MouseHandler:
+mouseHandler equ _MouseHandler - $$
+	push es					;保护现场
+	push ds
+	pushad					;将eax,ebx等所有的32位通用寄存器压入堆栈
+	mov eax, esp
+	push eax
 	
+	call intHandlerForMouse
+	
+	pop eax
+	mov esp, eax
+	popad
+	pop ds
+	pop es
+	iretd
+;===================================================================================
+
 io_hlt:  					;void io_hlt(void);
     HLT
     RET

@@ -38,7 +38,7 @@ LABEL_IDT:
 %endrep
 
 .2ch:		;对应从8259A芯片IRQ4引脚，控制鼠标中断
-	Gate SelectorCode32, mouseHandler, 0, DA_386IGate
+	Gate SelectorCode32, MouseHandler, 0, DA_386IGate
 
 IdtLen	EQU 	$ - LABEL_IDT
 IdtPtr  DW  	IdtLen - 1
@@ -112,7 +112,7 @@ LABEL_BEGIN:
 	
 init8259A:
     mov  al, 011h
-    out  02h, al
+    out  020h, al		;!!!
     call io_delay
   
     out 0A0h, al
@@ -134,7 +134,7 @@ init8259A:
     out  0A1h, al
     call io_delay
 
-    mov  al, 003h
+    mov  al, 001h		;!!!
     out  021h, al
     call io_delay
 
@@ -203,7 +203,7 @@ KeyBoardHandler equ _KeyBoardHandler - $$
 
 ;键盘中断处理函数
 _MouseHandler:
-mouseHandler equ _MouseHandler - $$
+MouseHandler equ _MouseHandler - $$
 	push es					;保护现场
 	push ds
 	pushad					;将eax,ebx等所有的32位通用寄存器压入堆栈
