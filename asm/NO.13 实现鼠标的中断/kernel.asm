@@ -111,41 +111,41 @@ LABEL_BEGIN:
 	jmp dword SelectorCode32:0
 	
 init8259A:
-    mov  al, 011h
-    out  020h, al		;!!!
+    mov  al, 011h		;向主8259A 20h端口发送ICW1，00010001b，表示需要发送ICW4，级联，8字节中断向量，边沿触发
+    out  020h, al		
     call io_delay
   
-    out 0A0h, al
+    out 0A0h, al		;向从8259A a0h端口发送ICW1，00010001b，含义同上
     call io_delay
 
-    mov al, 020h
+    mov al, 020h		;向主8259A 21h端口发送ICW2，00100000b，表示IR0中断向量为20h
     out 021h, al
     call io_delay
 
-    mov  al, 028h
+    mov  al, 028h		;向从8259A a1h端口发送ICW2,00101000b，表示IR0中断向量为28h
     out  0A1h, al
     call io_delay
 
-    mov  al, 004h
+    mov  al, 04h		;向主8259A 21h端口发送ICW3，00000100b，表示主8259A通过IR2引脚连接到从8259A
     out  021h, al
     call io_delay
 
-    mov  al, 002h
+    mov  al, 02h		;向从8259A a1h端口发送ICW3，00000010b，表示从8259A是连接到主8259A的IR2引脚
     out  0A1h, al
     call io_delay
 
-    mov  al, 001h		;!!!
+    mov  al, 01h		;向主8259A 21h端口发送ICW4，00000001b，表示当前架构为80x86，非自动EOI(ICW4[1]=0)
     out  021h, al
     call io_delay
 
-    out  0A1h, al
+    out  0A1h, al		;同上
     call io_delay
 
-    mov  al, 11111001b 	;允许键盘中断，打开主8259A控制器的IRQ1和IRQ2号引脚
+    mov  al, 11111001b 	;向主8259A发送OCW1，只能写入奇地址端口，允许键盘中断，打开主8259A控制器的IRQ1和IRQ2号引脚
     out  21h, al
     call io_delay
 
-    mov  al, 11101111b	;允许鼠标中断，打开从8259A控制器的IRQ4号引脚
+    mov  al, 11101111b	;向从8259A发送OCW1，只能写入奇地址端口，允许鼠标中断，打开从8259A控制器的IRQ4号引脚
     out  0A1h, al
     call io_delay
 

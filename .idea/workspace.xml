@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/write_vga_desktop_mouse_move.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/write_vga_desktop_mouse_move.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/system.img" beforeDir="false" afterPath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/system.img" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asm/No.12 建立键盘中断并设立缓冲区/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.12 建立键盘中断并设立缓冲区/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/write_vga_desktop_mouse_enable.asm" beforeDir="false" afterPath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/write_vga_desktop_mouse_enable.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/write_vga_desktop_mouse_enable.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm/NO.13 实现鼠标的中断/write_vga_desktop_mouse_enable.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.asm" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mouse_enable.c" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -171,7 +177,8 @@
       <workItem from="1613816651933" duration="1009000" />
       <workItem from="1613826551489" duration="339000" />
       <workItem from="1613826934040" duration="605000" />
-      <workItem from="1613827593630" duration="1440000" />
+      <workItem from="1613827593630" duration="2144000" />
+      <workItem from="1614088763812" duration="535000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -257,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613827896451</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="No.14-1 重绘鼠标图形，使其更加逼真，并修改桌面背景色为Windows蓝">
+      <created>1613835981041</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1613835981042</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +302,7 @@
     <MESSAGE value="No.12 建立键盘中断并设立缓冲区" />
     <MESSAGE value="No.13 新增处理ASM文件的工具，及更新了README文档" />
     <MESSAGE value="No.14 实现鼠标中断，识别鼠标并获取鼠标移动信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.14 实现鼠标中断，识别鼠标并获取鼠标移动信息" />
+    <MESSAGE value="No.14-1 重绘鼠标图形，使其更加逼真，并修改桌面背景色为Windows蓝" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.14-1 重绘鼠标图形，使其更加逼真，并修改桌面背景色为Windows蓝" />
   </component>
 </project>

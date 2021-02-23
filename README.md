@@ -1,6 +1,8 @@
 boot 是引导程序，加载到软盘第0磁道第1扇区
 kernel 是内核程序，编译方式如下
+
 ## 编译 C 语言
+
 ```shell script
 gcc -m32 -fno-pic -fno-asynchronous-unwind-tables -s -c $cfile$.c -o $cfile$.o 
 ```
@@ -20,6 +22,7 @@ g++ -o objconv -O2 src/*cpp
 ```
 
 若出现以下报错信息：
+
 ```shell script
 g++ narrowing conversion of '2147483648' from 'unsigned int' to 'int' inside
 ```
@@ -39,6 +42,7 @@ g++ -o objconv -O2 src/*cpp --std=c++98
 最后将生成的 asm 文件放入 boot 和 kernel 同一个文件夹下
 
 ## 编译方法
+
 需要用 ProcessASMFile 工具（即ProcessASMFile.class字节码文件）
 将 ASM 文件中包含 `global`，`section`，`extern` 的行删除，代码如下：
 

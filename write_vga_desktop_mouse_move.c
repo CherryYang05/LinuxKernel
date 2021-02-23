@@ -12,8 +12,11 @@
 #define  COL8_848400  11    //暗黄
 #define  COL8_000084  12    //暗蓝
 #define  COL8_840084  13    //暗紫
-#define  COL8_008484  14    //浅暗蓝
+#define  COL8_0078D7  14    //Windows蓝
 #define  COL8_848484  15    //暗灰
+
+#define  FALSE        0
+#define  OK           1
 
 //主 8259A 芯片端口
 #define PIC_OCW2      0x20
@@ -88,18 +91,37 @@ static char keybuf[32];
 static char mousebuf[128];
 
 /**
- * @brief: 主函数
+ * 鼠标移动信息的结构体
+ * @param {buf} 鼠标信息缓冲区
+ *        {phase} 解读鼠标信息的步骤
+ *        {x, y} 鼠标位置的横纵坐标
+ *        {btn} 记录鼠标按下的键
  */
+struct MOUSE_DEC {
+    unsigned char buf[3], phase;
+    int x, y, btn;
+};
+
+static struct MOUSE_DEC mouse_move;
+static int mx = 0, my = 0;          //鼠标初始坐标
+
+int mouse_decode(struct MOUSE_DEC *mdec, unsigned char data);
+void computeMousePos(struct MOUSE_DEC *mdec);
+void eraseMouse(char *vram);
+void drawMouse(char *vram);
+
+//主函数
 void CMain(void) {
     initBootInfo(&bootInfo);
     char *vram = bootInfo.vgaRam;
-    int xsize = bootInfo.screenX, ysize = bootInfo.screenY;
+    int xsize = bootInfo.screenX;
+    int ysize = bootInfo.screenY;
     init_palette();
     init_keyboard();    //准备键盘
     //初始化键鼠缓冲区
     fifo8_init(&mouseInfo, 128, mousebuf);
     fifo8_init(&keyInfo, 32, keybuf);
-
+    init_mouse_cursor(mcursor, COL8_0078D7);
     io_sti();
     enable_mouse();     //准备鼠标
 
@@ -152,7 +174,7 @@ void init_palette(void) {
     };
  
     set_palette(0, 15, table_rgb);
-    boxfill8(vram, xsize, COL8_008484, 0, 0, xsize - 1, ysize - 29);
+    boxfill8(vram, xsize, COL8_0078D7, 0, 0, xsize - 1, ysize - 29);
     boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 28, xsize - 1, ysize - 28);
     boxfill8(vram, xsize, COL8_FFFFFF, 0, ysize - 27, xsize - 1, ysize - 27);
     boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 26, xsize - 1, ysize - 1);
@@ -169,8 +191,6 @@ void init_palette(void) {
     boxfill8(vram, xsize, COL8_FFFFFF, xsize - 47, ysize - 3, xsize - 4, ysize - 3);
     boxfill8(vram, xsize, COL8_FFFFFF, xsize - 3,  ysize - 24, xsize - 3, ysize - 3);
 
-    init_mouse_cursor(mcursor, COL8_008484);
-    putblock(vram, xsize, 16, 16, 80, 80, mcursor, 16);
     return;
 }
 
@@ -222,8 +242,13 @@ void showFont8(char *vram, int xsize, int x, int y, char c, char* font) {
 }
 
 void init_mouse_cursor(char *mouse, char bc) {
-    static char cursor[16][16] = {
-		
+    char *vram = bootInfo.vgaRam;
+    int xsize = bootInfo.screenX;
+    int ysize = bootInfo.screenY;
+    mx = (xsize - 16) / 2;
+    my = (ysize - 16) / 2;
+
+    static char cursor[16][16] = {		
         "**..............",
 		"*O*.............",
 		"*OO*............",
@@ -240,25 +265,37 @@ void init_mouse_cursor(char *mouse, char bc) {
 		".....*OO*.......",
 		".....*OO*.......",
 		"......**........"
-
 	};
 
-      int x, y;
-      for (y = 0; y < 16; y++) {
-          for (x = 0; x < 16; x++) {
-             if (cursor[y][x] == '*') {
-                 mouse[y * 16 + x] = COL8_000000;
-             }
-             if (cursor[y][x] == 'O') {
+    int x, y;
+    for (y = 0; y < 16; y++) {
+        for (x = 0; x < 16; x++) {
+            if (cursor[y][x] == '*') {
+                mouse[y * 16 + x] = COL8_000000;
+            }
+            if (cursor[y][x] == 'O') {
                 mouse[y * 16 + x] = COL8_FFFFFF;
-             }
-             if (cursor[y][x] == '.') {
-                 mouse[y * 16 + x] = bc;
-             }
-          }
-      }
+            }
+            if (cursor[y][x] == '.') {
+                mouse[y * 16 + x] = bc;
+            }
+        }
+    }
+
+    putblock(vram, xsize, 16, 16, mx, my, mcursor, 16);
 }
 
+/**
+ * @param {char} *vram 显存地址
+ * @param {int} vxsize 屏幕的横向分辨率 
+ * @param {int} pxsize 所要绘制的区域的长
+ * @param {int} pysize 所要绘制的区域的宽
+ * @param {int} px0    绘制图像的起始横坐标
+ * @param {int} py0    绘制图像的起始纵坐标
+ * @param {char} *buf  所要绘制的图形数组指针
+ * @param {int} bxsize buf的行数
+ * @return {*}
+ */
 void putblock(char *vram, int vxsize, int pxsize, int pysize, int px0, int py0, char *buf, int bxsize) {
     int x, y;
     for (y = 0; y < pysize; y++)
@@ -287,7 +324,7 @@ void intHandlerFromC() {
         下次键盘再向 CPU发送信号时，CPU就不会接收，要想让 CPU再次接收信号，
         必须向主 PIC的端口再次发送键盘中断的中断向量号。
     */
-    io_out8(PIC_OCW2, 0x21);        //io_out8(PIC_OCW2, 0x20)也能正确运行？？？？
+    io_out8(PIC_OCW2, 0x20);        //io_out8(PIC_OCW2, 0x20)也能正确运行？？？？
     unsigned char data = 0;
     data = io_in8(PORT_KEYDAT);
     fifo8_put(&keyInfo, data);
@@ -346,14 +383,11 @@ void enable_mouse() {
 }
 
 /**
- * 处理鼠标中断,需要放入中断向量为 0x2c处(从 8259A芯片 IRQ4引脚)
- * 0x20 表示将 OCW[5]设置成 1，表明中断结束
+ * 处理鼠标中断,需要放入中断向量为 0x2c处(从 8259A芯片 IR4引脚)
+ * 0x20 表示将 OCW[5]设置成 1，表明中断结束，要接收新的中断
  * @param {char} *esp
  */
 void intHandlerForMouse(char *esp) {
-    char *vram = bootInfo.vgaRam;
-    int xsize = bootInfo.screenX;
-    int ysize = bootInfo.screenY;
     unsigned char data = 0;
     io_out8(PIC_OCW2, 0x20);
     io_out8(PIC1_OCW2, 0x20);
@@ -397,7 +431,7 @@ int fifo8_put(struct FIFO8 *fifo, unsigned char data) {
         fifo->write = 0;
     }
     fifo->free--;
-    return 0;    
+    return OK;    
 }
 
 /**
@@ -452,24 +486,96 @@ void showKeyboardInfo() {
 }
 
 /**
- * 显示鼠标缓冲区内容
+ * 显示鼠标缓冲区内容，并重绘鼠标
  * @param {*}
  * @return {*}
  */
 void showMouseInfo() {
     io_sti();
     char *vram = bootInfo.vgaRam;
-    int xsize = bootInfo.screenX;
-    int ysize = bootInfo.screenY;
     unsigned char data = 0;
     data = fifo8_get(&mouseInfo);
-    char *p = charToHex(data);
-    static int mousePos = 0;
-    static int mouseLine = 16;
-    showString(vram, xsize, mousePos, mouseLine, COL8_FF0000, p);
-    mousePos += 32;
-    if (mousePos == xsize) {
-        mouseLine = (mouseLine == ysize) ? 0 : (mouseLine + 16);
-        mousePos = 0;
+    if (mouse_decode(&mouse_move, data) != 0) {
+        eraseMouse(vram);
+        computeMousePos(&mouse_move);
+        drawMouse(vram);
     }
+
+}
+
+/**
+ * 解读鼠标缓冲区,4个状态的状态机
+ * @param {structMOUSE_DEC} *mdec
+ * @param {unsignedchar} data
+ * @return {*}
+ */
+int mouse_decode(struct MOUSE_DEC *mdec, unsigned char data) {
+    if (mdec->phase == 0) {
+        if (data == 0xfa) {
+            mdec->phase = 1;
+        }
+        return OK;
+    }
+
+    if (mdec->phase == 1) {
+        if ((data | 0x37) == 0x3F) {    //确保 6.7位是 0，第 3位是 1，或者 (data & 0xc8 == 0x08)
+            mdec->buf[0] = data;
+            mdec->phase = 2;
+        }
+        return OK;
+    }
+
+    if (mdec->phase == 2) {
+        mdec->buf[1] = data;
+        mdec->phase = 3;
+        return OK;
+    }
+
+    if (mdec->phase == 3) {
+        mdec->buf[2] = data;
+        mdec->phase = 1;
+        mdec->btn = mdec->buf[0] & 0x07;    //记录哪个按键被按下
+        mdec->x = mdec->buf[1];
+        mdec->y = mdec->buf[2];
+        if ((mdec->buf[0] & 0x10) != 0) {   //第一字节的第 5个比特位为 1
+            mdec->x |= 0xffffff00;
+        }
+        if ((mdec->buf[0] & 0x20) != 0) {   //第一字节的第 6个比特位为 1
+            mdec->y |= 0xffffff00;
+        }
+        mdec->y = -mdec->y;                 //y轴翻转
+        return OK;
+    }
+    return FALSE;
+}
+
+/**
+ * 根据鼠标缓冲区数据计算鼠标坐标
+ * @param {structMOUSE_DEC} *mdec
+ */
+void computeMousePos(struct MOUSE_DEC *mdec) {
+    int xszie = bootInfo.screenX;
+    int ysize = bootInfo.screenY;
+    mx += (mdec->x) / 2;                    //调整鼠标移动速度
+    my += (mdec->y) / 2;
+    if (mx < 0) mx = 0;
+    if (my < 0) my = 0;
+    if (mx > xszie - 9) mx = xszie - 9;
+    if (my > ysize - 1) my = ysize - 1;
+}
+
+/**
+ * 移除鼠标
+ * @param {char} *vram
+ */
+void eraseMouse(char *vram) {
+    boxfill8(bootInfo.vgaRam, bootInfo.screenX, COL8_0078D7, mx, my, mx + 15, my + 15);
+}
+
+/**
+ * 重绘鼠标指针
+ * @param {char} *vram
+ */
+void drawMouse(char *vram) {
+    putblock(bootInfo.vgaRam, bootInfo.screenX, 16, 16, mx, my, mcursor, 16);
 }
