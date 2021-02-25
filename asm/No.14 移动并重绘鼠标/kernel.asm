@@ -53,37 +53,14 @@ LABEL_BEGIN:
 	mov es, ax
 	mov ss, ax
 	mov sp, 0100h
-
-;====== 检测内存 ========
-ComputeMem:
-	mov ebx, 0
-	mov di, MemCheckBuf
-.loop:
-	mov eax, 0E820h			;固定值
-	mov ecx, 20				;es:di内存大小为20字节
-	mov edx, 0534D4150h		;表示" SMAP"
-	int 15h
-	jc LABEL_MEM_CHECK_FAIL	;CF=1表示失败
-	add di, 20
-	inc dword [dwMCRNumber]
-	cmp ebx, 0				;ebx在内存检测过程中不能被修改，当ebx为0时表示检测完成
-	jne .loop
-	jmp LABEL_MEM_CHECK_OK
-	
-LABEL_MEM_CHECK_FAIL:
-	mov dword [dwMCRNumber], 0
-
-;========================
-
-LABEL_MEM_CHECK_OK:
 	
 	;设置显示器模式
-	mov al, 0x13			;al的值表示640×480 256色
-	mov ah, 0				;ah寄存器的值表示设置显示器模式
-	int 0x10				;调用系统中断的显示服务
+	mov al, 0x13		;al的值表示640×480 256色
+	mov ah, 0			;ah寄存器的值表示设置显示器模式
+	int 0x10			;调用系统中断的显示服务
 	
 	;起始地址写入byte2,3,4,7
-	xor eax, eax			;清零
+	xor eax, eax		;清零
 	mov ax, cs
 	shl	eax, 4
 	add eax, LABEL_SEG_CODE32
@@ -196,7 +173,7 @@ LABEL_SEG_CODE32:
 	mov gs, ax
 	sti
 
-	%include "write_vga_desktop_mem_check.asm"
+	%include "write_vga_desktop_mouse_move.asm"
 	
 	jmp $
 	
@@ -315,19 +292,13 @@ io_store_eflags:
 	popfd
 	ret
 	
-;导出到C语言的接口，返回写入的地址范围描述符个数
-get_memory_block_count:
-	mov eax, [dwMCRNumber]		;函数返回值一般存放在eax中
-	ret
-
 %include "fontData.inc"			;导入字体二进制数据
 
 SegCode32Len   equ  $ - LABEL_SEG_CODE32
 
-MemCheckBuf: times 256 db 0
-dwMCRNumber: dd 0				;记录BIOS总共向内存中写入多少个数据结构
 [SECTION .gs]
 ALIGN 32
 [BITS 32]
-LABEL_STACK: times 512  db 0
+LABEL_STACK:
+times 512  db 0
 TopOfStack  equ  $ - LABEL_STACK
