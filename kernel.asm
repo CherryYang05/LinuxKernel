@@ -320,6 +320,11 @@ get_memory_block_count:
 	mov eax, [dwMCRNumber]		;函数返回值一般存放在eax中
 	ret
 
+;导出到C语言的接口，返回地址范围描述符缓冲区地址
+get_addr_buffer:
+	mov eax, MemCheckBuf
+	ret
+
 %include "fontData.inc"			;导入字体二进制数据
 
 SegCode32Len   equ  $ - LABEL_SEG_CODE32

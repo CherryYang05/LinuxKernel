@@ -119,10 +119,11 @@ struct MemRangeDesc {
     unsigned int type;          //内存块类型，1为可被使用，2为已被占用，3为留给将来使用
 };
 
-static struct MemRangeDesc Mem;
-
 int get_memory_block_count();
 char *intToHexStr(unsigned int data);
+
+char *get_addr_buffer();
+void showMemInfo(struct MemRangeDesc *desc, char *vram, int page, int xsize, int color);
 
 //======================================= 主函数 ===================================================
 void CMain(void) {
@@ -137,19 +138,30 @@ void CMain(void) {
     fifo8_init(&keyInfo, 32, keybuf);
     init_mouse_cursor(mcursor, COL8_0078D7);
     io_sti();
-    enable_mouse();  //准备鼠标
+    enable_mouse(&mouse_move);  //准备鼠标
 
+    struct MemRangeDesc *memDesc = (struct MemRangeDesc*)get_addr_buffer();
     //显示内存
-    int memCount = get_memory_block_count();
-    char *p = intToHexStr(memCount);
-    showString(vram, xsize, 0, 0, COL8_00FFFF, p);
-
+    int memCnt = get_memory_block_count();
+    char *p = intToHexStr(memCnt);
+    //showString(vram, xsize, 0, 0, COL8_00FFFF, p);
+    int cnt = 0;
+    unsigned char data = 0;
     for (;;) {
         io_cli();
         if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) == 0) {
             io_stihlt();
         } else if (fifo8_status(&keyInfo)) {  //键盘缓冲有数据
-            showKeyboardInfo();
+            //showKeyboardInfo();
+            io_sti();     
+            data = fifo8_get(&keyInfo);
+            if (data == 0x1C) {               //如果按下回车键(0x1C)，显示地址范围描述符信息
+                showMemInfo(memDesc + cnt, vram, cnt, xsize, COL8_FFFFFF);
+                cnt++;
+                if (cnt >= memCnt) {
+                    cnt = 0;
+                }
+            }
         } else if (fifo8_status(&mouseInfo)) {  //鼠标缓冲有数据
             showMouseInfo();
         }
@@ -279,8 +291,8 @@ void init_mouse_cursor(char *mouse, char bc) {
     char *vram = bootInfo.vgaRam;
     int xsize = bootInfo.screenX;
     int ysize = bootInfo.screenY;
-    mx = (xsize - 16) / 2;
-    my = (ysize - 16) / 2;
+    mx = (xsize - 16);
+    my = (ysize - 16);
 
     static char cursor[16][16] = {
         "**..............",
@@ -298,7 +310,8 @@ void init_mouse_cursor(char *mouse, char bc) {
         "....*OO*........",
         ".....*OO*.......",
         ".....*OO*.......",
-        "......**........"};
+        "......**........"
+    };
 
     int x, y;
     for (y = 0; y < 16; y++) {
@@ -337,9 +350,9 @@ void putblock(char *vram, int vxsize, int pxsize, int pysize, int px0, int py0, 
         }
 }
 
-#define PORT_KEYDAT 0x60
-#define PORT_KEYSTA 0x64
-#define PORT_KEYCMD 0x64
+#define PORT_KEYDAT 0x0060
+#define PORT_KEYSTA 0x0064
+#define PORT_KEYCMD 0x0064
 #define KEYSTA_SEND_NOTREADY 0x02
 #define KEYCMD_WRITE_MODE 0x60
 #define KBC_MODE 0x47
@@ -434,11 +447,12 @@ void init_keyboard() {
  * 向键盘电路板发送数据，将相关数据传送给鼠标元器件
  * 0x64状态控制端口， 0x60数据读写端口
  */
-void enable_mouse() {
+void enable_mouse(struct MOUSE_DEC *mdec) {
     wait_KBC_sendReady();
     io_out8(PORT_KEYCMD, KEYCMD_SENDTO_MOUSE);  //进入鼠标工作模式
     wait_KBC_sendReady();
     io_out8(PORT_KEYDAT, MOUSECMD_ENABLE);  //进行鼠标中断
+	mdec->phase = 0;
     return;
 }
 
@@ -449,8 +463,8 @@ void enable_mouse() {
  */
 void intHandlerForMouse(char *esp) {
     unsigned char data = 0;
+	io_out8(PIC1_OCW2, 0x20);
     io_out8(PIC_OCW2, 0x20);
-    io_out8(PIC1_OCW2, 0x20);
     data = io_in8(PORT_KEYDAT);
     fifo8_put(&mouseInfo, data);
 }
@@ -615,8 +629,8 @@ int mouse_decode(struct MOUSE_DEC *mdec, unsigned char data) {
 void computeMousePos(struct MOUSE_DEC *mdec) {
     int xszie = bootInfo.screenX;
     int ysize = bootInfo.screenY;
-    mx += (mdec->x) / 3;  //调整鼠标移动速度
-    my += (mdec->y) / 3;
+    mx += (mdec->x) / 2;  //调整鼠标移动速度
+    my += (mdec->y) / 2;
     if (mx < 0) mx = 0;
     if (my < 0) my = 0;
     if (mx > xszie - 9) mx = xszie - 9;
@@ -637,4 +651,42 @@ void eraseMouse(char *vram) {
  */
 void drawMouse(char *vram) {
     putblock(bootInfo.vgaRam, bootInfo.screenX, 16, 16, mx, my, mcursor, 16);
+}
+
+/**
+ * 打印地址范围描述符内容
+ * @param {structMemRangeDesc} *desc
+ * @param {char} *vram
+ * @param {int} page
+ * @param {int} xsize
+ * @param {int} color
+ * @return {*}
+ */
+void showMemInfo(struct MemRangeDesc *desc, char *vram, int page, int xsize, int color) {
+    int x = 0, y = 0, gap = 14 * 8, strlen = 10 * 8;
+    boxfill8(vram, xsize, COL8_0078D7, 0, 0, xsize, 100);
+    showString(vram, xsize, x, y, color, "Page is: ");
+    char *pageCnt = intToHexStr(page);
+    showString(vram, xsize, gap, y, color, pageCnt);
+    y += 16;
+    showString(vram, xsize, x, y, color, "BaseAddrLow: ");
+    char *baseAddrLow = intToHexStr(desc->baseAddrLow);
+    showString(vram, xsize, gap, y, color, baseAddrLow);
+    y += 16;
+    showString(vram, xsize, x, y, color, "BaseAddrHigh: ");
+    char *baseAddrHigh = intToHexStr(desc->baseAddrHigh);
+    showString(vram, xsize, gap, y, color, baseAddrHigh);
+    y += 16;
+    showString(vram, xsize, x, y, color, "LengthLow: ");
+    char *lengthLow = intToHexStr(desc->lengthLow);
+    showString(vram, xsize, gap, y, color, lengthLow);
+    y += 16;
+    showString(vram, xsize, x, y, color, "LengthHigh: ");
+    char *lengthHigh = intToHexStr(desc->lengthHigh);
+    showString(vram, xsize, gap, y, color, lengthHigh);
+    y += 16;
+    showString(vram, xsize, x, y, color, "Type: ");
+    char *type = intToHexStr(desc->type);
+    showString(vram, xsize, gap, y, color, type);
+    y += 16;
 }

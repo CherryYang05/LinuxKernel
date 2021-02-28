@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/ProcessASMFile.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/boot.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/system.img" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/write_vga_desktop_mouse_move.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.14 移动并重绘鼠标/write_vga_desktop_mouse_move.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,6 +49,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="F:/Software/Open Sources/Jar/junit/4.12/org.hamcrest.core_1.3.0.v201303031735.jar!/" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -74,6 +64,11 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Code\Java\Java4LinuxOS\src" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ipconfig" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -179,6 +174,7 @@
       <workItem from="1613826934040" duration="605000" />
       <workItem from="1613827593630" duration="2144000" />
       <workItem from="1614088763812" duration="1260000" />
+      <workItem from="1614241449148" duration="1745000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -278,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614089512245</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="No.15 实现了内存空间检测">
+      <created>1614241520415</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1614241520415</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +314,7 @@
     <MESSAGE value="No.14 实现鼠标中断，识别鼠标并获取鼠标移动信息" />
     <MESSAGE value="No.14-1 重绘鼠标图形，使其更加逼真，并修改桌面背景色为Windows蓝" />
     <MESSAGE value="No.14-2 实现鼠标的移动" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.14-2 实现鼠标的移动" />
+    <MESSAGE value="No.15 实现了内存空间检测" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.15 实现了内存空间检测" />
   </component>
 </project>
