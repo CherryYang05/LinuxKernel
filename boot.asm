@@ -25,17 +25,17 @@ entry:
 ;出口参数：CF＝0——操作成功，AH＝00H，AL＝传输的扇区数，否则，AH＝状态代码，参见功能号01H中的说明
 
     mov  bx, LOAD_ADDR  ;ES:BX 数据存储缓冲区
+	mov  ch, 1        	;CH 用来存储柱面号
+    mov  dh, 0        	;DH 用来存储磁头号
 	
 readFloppy:
 	cmp  byte [load_count], 0
 	je   beginLoad
 	
-    mov  ch, 1        	;CH 用来存储柱面号
-    mov  dh, 0        	;DH 用来存储磁头号
     mov  cl, 1        	;CL 用来存储扇区号
 
     mov  ah, 0x02      	;AH = 02 表示要做的是读盘操作
-    mov  al, 25        	;AL 表示要连续读取几个扇区
+    mov  al, 28        	;AL 表示要连续读取几个扇区
     mov  dl, 0         	;驱动器编号，只有一个软盘驱动器，所以写死为0
     int  13h          	;调用BIOS中断实现磁盘读取功能
 	
@@ -43,6 +43,7 @@ readFloppy:
 	dec  byte [load_count]
 	
     jc   fin
+	add  bx, 512 * 18	;!!!
 	jmp  readFloppy
 	
 beginLoad:

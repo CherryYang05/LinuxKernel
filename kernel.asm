@@ -6,12 +6,12 @@ jmp LABEL_BEGIN
 
 [SECTION .GDT]
 ;全局描述符表
-;                             		  段基址          段界限               属性
-LABEL_GDT:				Descriptor		0,				0,					0
-LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C + DA_32	;结构体初始化时只能传入常量
-LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFh,			  DA_DRW		;0B8000h是显存地址，设置该数据段属性为可读写
-LABEL_DESC_VRAM:		Descriptor	    0,			0FFFFFFFFh,			  DA_DRW		;4G显存，为了C语言开发方便，全部设置为可读写
-LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,		   DA_DRWA + DA_32
+;                             		  段基址          段界限               		属性
+LABEL_GDT:				Descriptor		0,				0,						 0
+LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C | DA_32 | DA_LIMIT_4K	;结构体初始化时只能传入常量
+LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFh,			      DA_DRW				;0B8000h是显存地址，设置该数据段属性为可读写
+LABEL_DESC_VRAM:		Descriptor	    0,			0FFFFFh,			  DA_DRW | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
+LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,		      DA_DRWA | DA_32
 
 GDTLen	EQU	$ - LABEL_GDT
 GDTPtr	DW	GDTLen - 1
@@ -196,7 +196,7 @@ LABEL_SEG_CODE32:
 	mov gs, ax
 	sti
 
-	%include "write_vga_desktop_mem_check.asm"
+	%include "ckernel.asm"
 	
 	jmp $
 	
@@ -325,7 +325,9 @@ get_addr_buffer:
 	mov eax, MemCheckBuf
 	ret
 
-%include "fontData.inc"			;导入字体二进制数据
+get_addr_buffer_int:
+	mov eax, MemCheckBuf
+	ret
 
 SegCode32Len   equ  $ - LABEL_SEG_CODE32
 
@@ -336,3 +338,8 @@ ALIGN 32
 [BITS 32]
 LABEL_STACK: times 512  db 0
 TopOfStack  equ  $ - LABEL_STACK
+
+LABEL_SYSTEM_FONT:
+%include "fontData.inc"
+
+SystemFontLength equ $ - LABEL_SYSTEM_FONT		;导入字体二进制数据

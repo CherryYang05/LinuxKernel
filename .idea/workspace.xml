@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/asm/NO.16 内存管理算法的实现/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/NO.16 内存管理算法的实现/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.6 C语言结合汇编/编译命令.txt" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.6 C语言结合汇编/编译命令.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot" beforeDir="false" afterPath="$PROJECT_DIR$/boot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mem_util.c" beforeDir="false" afterPath="$PROJECT_DIR$/mem_util.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mem_util.h" beforeDir="false" afterPath="$PROJECT_DIR$/mem_util.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pm.inc" beforeDir="false" afterPath="$PROJECT_DIR$/pm.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mem_check.asm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mem_check.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_mem_check.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -175,6 +191,7 @@
       <workItem from="1613827593630" duration="2144000" />
       <workItem from="1614088763812" duration="1260000" />
       <workItem from="1614241449148" duration="1745000" />
+      <workItem from="1615455670528" duration="962000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>

@@ -4,7 +4,13 @@
  * @Description: 内存管理模块相关函数声明
  * @FilePath: \Java4LinuxOS\mem_util.h
  */
-#define MAXMAN_FREES 4096
+#define MEMMAN_FREES 4096
+#define FREE 0
+#define BUSY 1
+#define OK 1
+#define ERROR -1
+
+
 
 /**
  * 用来描述可用内存块的数据结构
@@ -24,7 +30,7 @@ struct FREEINFO {
  */
 struct MEMMANAGER {
     int frees, maxfrees, lostsize, losts;
-    struct FREEINFO free[MAXMAN_FREES];
+    struct FREEINFO free[MEMMAN_FREES];     //最多4096个内存块
 };
 
 

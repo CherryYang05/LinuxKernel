@@ -1,3 +1,5 @@
+#include "mem_util.h"
+
 #define COL8_000000 0   //全黑
 #define COL8_FF0000 1   //亮红
 #define COL8_00FF00 2   //亮绿
@@ -123,7 +125,12 @@ int get_memory_block_count();
 char *intToHexStr(unsigned int data);
 
 char *get_addr_buffer();
+int get_addr_buffer_int();
+
 void showMemInfo(struct MemRangeDesc *desc, char *vram, int page, int xsize, int color);
+
+//内存管理器，以 0x100000地址那块内存为例
+static struct MEMMANAGER *memman = (struct MEMMANAGER*)0x00100000;
 
 //======================================= 主函数 ===================================================
 void CMain(void) {
@@ -140,11 +147,26 @@ void CMain(void) {
     io_sti();
     enable_mouse(&mouse_move);  //准备鼠标
 
+    // int memAddr = get_addr_buffer_int();
+    // char *pp = intToHexStr(memAddr);
+    // showString(vram, xsize, 0, 0, COL8_FFFF00, pp);
+
     struct MemRangeDesc *memDesc = (struct MemRangeDesc*)get_addr_buffer();
-    //显示内存
+    //可用内存块数量
     int memCnt = get_memory_block_count();
     char *p = intToHexStr(memCnt);
-    //showString(vram, xsize, 0, 0, COL8_00FFFF, p);
+ 
+    memman_init(memman);
+    memman_free(memman, 0x00108000, 0x3FEE8000);
+    int memTotal = memman_total(memman) / (1024 * 1024);
+    char *pMemTotal = intToHexStr(memTotal);
+    showString(vram, xsize, 0, 0, COL8_FFFF00, "Total Mem Size is: "); 
+    showString(vram, xsize, 19 * 8, 0, COL8_FFFF00, pMemTotal); 
+    showString(vram, xsize, 30 * 8, 0, COL8_FFFF00, "MB"); 
+
+    
+
+
     int cnt = 0;
     unsigned char data = 0;
     for (;;) {
@@ -291,8 +313,8 @@ void init_mouse_cursor(char *mouse, char bc) {
     char *vram = bootInfo.vgaRam;
     int xsize = bootInfo.screenX;
     int ysize = bootInfo.screenY;
-    mx = (xsize - 16);
-    my = (ysize - 16);
+    mx = (xsize - 16) / 2;
+    my = (ysize - 16) / 2;
 
     static char cursor[16][16] = {
         "**..............",
