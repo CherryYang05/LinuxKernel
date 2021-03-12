@@ -1,4 +1,5 @@
 #include "mem_util.h"
+#include "win_sheet.h"
 
 #define COL8_000000 0   //全黑
 #define COL8_FF0000 1   //亮红
@@ -59,7 +60,6 @@ void intHandlerFromC(void);
 void init_keyboard();
 void enable_mouse();
 
-static char mcursor[256];
 static struct BOOTINFO bootInfo;
 static char keyVal[5] = {'0', 'x', 0, 0, 0};  //键盘扫描码和断码
 char charToVal(char c);
@@ -87,6 +87,7 @@ void showKeyboardInfo();
 
 static struct FIFO8 keyInfo;
 static struct FIFO8 mouseInfo;
+//键鼠缓冲区
 static char keybuf[32];
 static char mousebuf[128];
 
@@ -130,33 +131,43 @@ int get_addr_buffer_int();
 void showMemInfo(struct MemRangeDesc *desc, char *vram, int page, int xsize, int color);
 
 //内存管理器，以 0x100000地址那块内存为例
-static struct MEMMANAGER *memman = (struct MEMMANAGER*)0x00100000;
+static struct MEMMANAGER *memman = (struct MEMMANAGER*)0x100000;
 
-//======================================= 主函数 ===================================================
+void init_screen8(char *vram, int x, int y);
+
+static unsigned char *buf_back, buf_mouse[256];
+#define COLOR_INVISIBLE  99
+
+//======================================== 主函数 ===================================================
 void CMain(void) {
     initBootInfo(&bootInfo);
     char *vram = bootInfo.vgaRam;
     int xsize = bootInfo.screenX;
     int ysize = bootInfo.screenY;
-    init_palette();
-    init_keyboard();  //准备键盘
+    struct SHTCTL *shtctl;              //图层控制器
+    struct SHEET *sheet_back = 0;       //桌面图层
+    struct SHEET *sheet_mouse = 0;      //鼠标图层
+
     //初始化键鼠缓冲区
     fifo8_init(&mouseInfo, 128, mousebuf);
     fifo8_init(&keyInfo, 32, keybuf);
-    init_mouse_cursor(mcursor, COL8_0078D7);
-    io_sti();
-    enable_mouse(&mouse_move);  //准备鼠标
+    init_palette();
+    init_keyboard();                    //准备键盘
+    
 
     // int memAddr = get_addr_buffer_int();
     // char *pp = intToHexStr(memAddr);
     // showString(vram, xsize, 0, 0, COL8_FFFF00, pp);
 
     struct MemRangeDesc *memDesc = (struct MemRangeDesc*)get_addr_buffer();
+
     //可用内存块数量
     int memCnt = get_memory_block_count();
-    char *p = intToHexStr(memCnt);
+    //char *p = intToHexStr(memCnt);
  
+    //初始化内存管理器
     memman_init(memman);
+    //回收内存块
     memman_free(memman, 0x00108000, 0x3FEE8000);
     int memTotal = memman_total(memman) / (1024 * 1024);
     char *pMemTotal = intToHexStr(memTotal);
@@ -164,28 +175,46 @@ void CMain(void) {
     showString(vram, xsize, 19 * 8, 0, COL8_FFFF00, pMemTotal); 
     showString(vram, xsize, 30 * 8, 0, COL8_FFFF00, "MB"); 
 
-    
 
+    //=============== 图层操作 ===============
+    shtctl = shtctl_init(memman, vram, xsize, ysize);
+    sheet_back = sheet_alloc(shtctl);
+    sheet_mouse = sheet_alloc(shtctl);
+    buf_back = (unsigned char*)memman_alloc_4K(memman, xsize * ysize);
+    init_screen8(buf_back, xsize, ysize);
+    sheet_setbuf(sheet_back, buf_back, xsize, ysize, COLOR_INVISIBLE);
+    sheet_setbuf(sheet_mouse, buf_mouse, 16, 16, COLOR_INVISIBLE);
+    init_mouse_cursor(buf_mouse, COLOR_INVISIBLE);
 
+    sheet_slide(shtctl, sheet_back, 0, 0);
+    mx = (xsize - 16) / 2;
+    my = (ysize - 28 - 16) / 2;
+    sheet_slide(shtctl, sheet_mouse, mx, my);
+    sheet_level_updown(shtctl, sheet_mouse, 1);     //调整鼠标图层为1
+    sheet_level_updown(shtctl, sheet_back, 0);      //调整桌面图层为0
+    //=======================================
+
+    io_sti();
+    enable_mouse(&mouse_move);                      //准备鼠标
     int cnt = 0;
     unsigned char data = 0;
     for (;;) {
         io_cli();
         if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) == 0) {
             io_stihlt();
-        } else if (fifo8_status(&keyInfo)) {  //键盘缓冲有数据
+        } else if (fifo8_status(&keyInfo)) {        //键盘缓冲有数据
             //showKeyboardInfo();
             io_sti();     
             data = fifo8_get(&keyInfo);
-            if (data == 0x1C) {               //如果按下回车键(0x1C)，显示地址范围描述符信息
-                showMemInfo(memDesc + cnt, vram, cnt, xsize, COL8_FFFFFF);
+            if (data == 0x1C) {                     //如果按下回车键(0x1C)，显示地址范围描述符信息
+                showMemInfo(memDesc + cnt, buf_back, cnt, xsize, COL8_FFFFFF);
                 cnt++;
                 if (cnt >= memCnt) {
                     cnt = 0;
                 }
             }
-        } else if (fifo8_status(&mouseInfo)) {  //鼠标缓冲有数据
-            showMouseInfo();
+        } else if (fifo8_status(&mouseInfo)) {      //鼠标缓冲有数据
+            showMouseInfo(shtctl, sheet_mouse);
         }
     }
 }
@@ -201,6 +230,25 @@ void showString(char *vram, int xsize, int x, int y, char color, unsigned char *
         showFont8(vram, xsize, x, y, color, systemFont + *s * 16);
         x += 8;
     }
+}
+
+void init_screen8(char* vram, int xsize, int ysize) {
+    boxfill8(vram, xsize, COL8_0078D7, 0, 0, xsize - 1, ysize - 29);
+    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 28, xsize - 1, ysize - 28);
+    boxfill8(vram, xsize, COL8_FFFFFF, 0, ysize - 27, xsize - 1, ysize - 27);
+    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 26, xsize - 1, ysize - 1);
+
+    boxfill8(vram, xsize, COL8_FFFFFF, 3, ysize - 24, 59, ysize - 24);
+    boxfill8(vram, xsize, COL8_FFFFFF, 2, ysize - 24, 2, ysize - 4);
+    boxfill8(vram, xsize, COL8_848484, 3, ysize - 4, 59, ysize - 4);
+    boxfill8(vram, xsize, COL8_848484, 59, ysize - 23, 59, ysize - 5);
+    boxfill8(vram, xsize, COL8_000000, 2, ysize - 3, 59, ysize - 3);
+    boxfill8(vram, xsize, COL8_000000, 60, ysize - 24, 60, ysize - 3);
+
+    boxfill8(vram, xsize, COL8_848484, xsize - 47, ysize - 24, xsize - 4, ysize - 24);
+    boxfill8(vram, xsize, COL8_848484, xsize - 47, ysize - 23, xsize - 47, ysize - 4);
+    boxfill8(vram, xsize, COL8_FFFFFF, xsize - 47, ysize - 3, xsize - 4, ysize - 3);
+    boxfill8(vram, xsize, COL8_FFFFFF, xsize - 3, ysize - 24, xsize - 3, ysize - 3);
 }
 
 void init_palette(void) {
@@ -225,25 +273,7 @@ void init_palette(void) {
         0x00, 0x78, 0xd7,  //windows蓝
         0x84, 0x84, 0x84,  //暗灰
     };
-
     set_palette(0, 15, table_rgb);
-    boxfill8(vram, xsize, COL8_0078D7, 0, 0, xsize - 1, ysize - 29);
-    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 28, xsize - 1, ysize - 28);
-    boxfill8(vram, xsize, COL8_FFFFFF, 0, ysize - 27, xsize - 1, ysize - 27);
-    boxfill8(vram, xsize, COL8_C6C6C6, 0, ysize - 26, xsize - 1, ysize - 1);
-
-    boxfill8(vram, xsize, COL8_FFFFFF, 3, ysize - 24, 59, ysize - 24);
-    boxfill8(vram, xsize, COL8_FFFFFF, 2, ysize - 24, 2, ysize - 4);
-    boxfill8(vram, xsize, COL8_848484, 3, ysize - 4, 59, ysize - 4);
-    boxfill8(vram, xsize, COL8_848484, 59, ysize - 23, 59, ysize - 5);
-    boxfill8(vram, xsize, COL8_000000, 2, ysize - 3, 59, ysize - 3);
-    boxfill8(vram, xsize, COL8_000000, 60, ysize - 24, 60, ysize - 3);
-
-    boxfill8(vram, xsize, COL8_848484, xsize - 47, ysize - 24, xsize - 4, ysize - 24);
-    boxfill8(vram, xsize, COL8_848484, xsize - 47, ysize - 23, xsize - 47, ysize - 4);
-    boxfill8(vram, xsize, COL8_FFFFFF, xsize - 47, ysize - 3, xsize - 4, ysize - 3);
-    boxfill8(vram, xsize, COL8_FFFFFF, xsize - 3, ysize - 24, xsize - 3, ysize - 3);
-
     return;
 }
 
@@ -310,11 +340,9 @@ void showFont8(char *vram, int xsize, int x, int y, char c, char *font) {
 }
 
 void init_mouse_cursor(char *mouse, char bc) {
-    char *vram = bootInfo.vgaRam;
-    int xsize = bootInfo.screenX;
-    int ysize = bootInfo.screenY;
-    mx = (xsize - 16) / 2;
-    my = (ysize - 16) / 2;
+    // char *vram = bootInfo.vgaRam;
+    // int xsize = bootInfo.screenX;
+    // int ysize = bootInfo.screenY;
 
     static char cursor[16][16] = {
         "**..............",
@@ -350,7 +378,7 @@ void init_mouse_cursor(char *mouse, char bc) {
         }
     }
 
-    putblock(vram, xsize, 16, 16, mx, my, mcursor, 16);
+    //putblock(vram, xsize, 16, 16, mx, my, buf_mouse, 16);
 }
 
 /**
@@ -583,18 +611,20 @@ void showKeyboardInfo() {
 
 /**
  * 显示鼠标缓冲区内容，并重绘鼠标
- * @param {*}
+ * @param {struct SHTCTL *ctl} 图层控制器
+ *        {struct SHEET *sheet} 鼠标图层
  * @return {*}
  */
-void showMouseInfo() {
+void showMouseInfo(struct SHTCTL *ctl, struct SHEET *sheet) {
     io_sti();
-    char *vram = bootInfo.vgaRam;
+    char *vram = buf_back;
     unsigned char data = 0;
     data = fifo8_get(&mouseInfo);
     if (mouse_decode(&mouse_move, data) != 0) {
-        eraseMouse(vram);
+        //eraseMouse(vram);
         computeMousePos(&mouse_move);
-        drawMouse(vram);
+        //drawMouse(vram);
+        sheet_slide(ctl, sheet, mx, my);
     }
 }
 
@@ -649,31 +679,33 @@ int mouse_decode(struct MOUSE_DEC *mdec, unsigned char data) {
  * @param {structMOUSE_DEC} *mdec
  */
 void computeMousePos(struct MOUSE_DEC *mdec) {
-    int xszie = bootInfo.screenX;
+    int xsize = bootInfo.screenX;
     int ysize = bootInfo.screenY;
     mx += (mdec->x) / 2;  //调整鼠标移动速度
     my += (mdec->y) / 2;
     if (mx < 0) mx = 0;
     if (my < 0) my = 0;
-    if (mx > xszie - 9) mx = xszie - 9;
+    if (mx > xsize - 9) mx = xsize - 9;
     if (my > ysize - 1) my = ysize - 1;
+    //boxfill8(buf_back, xsize, COL8_0078D7, 0, 0, 79, 15);
+    showString(buf_back, xsize, 0, 0, COL8_FFFF00, "mouse move");
 }
 
-/**
- * 移除鼠标
- * @param {char} *vram
- */
-void eraseMouse(char *vram) {
-    boxfill8(bootInfo.vgaRam, bootInfo.screenX, COL8_0078D7, mx, my, mx + 15, my + 15);
-}
+// /**
+//  * 移除鼠标
+//  * @param {char} *vram
+//  */
+// void eraseMouse(char *vram) {
+//     boxfill8(bootInfo.vgaRam, bootInfo.screenX, COL8_0078D7, mx, my, mx + 15, my + 15);
+// }
 
-/**
- * 重绘鼠标指针
- * @param {char} *vram
- */
-void drawMouse(char *vram) {
-    putblock(bootInfo.vgaRam, bootInfo.screenX, 16, 16, mx, my, mcursor, 16);
-}
+// /**
+//  * 重绘鼠标指针
+//  * @param {char} *vram
+//  */
+// void drawMouse(char *vram) {
+//     putblock(bootInfo.vgaRam, bootInfo.screenX, 16, 16, mx, my, buf_mouse, 16);
+// }
 
 /**
  * 打印地址范围描述符内容

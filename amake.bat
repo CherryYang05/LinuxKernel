@@ -9,9 +9,9 @@ nasm kernel.asm -o kernel
 cd src
 javac OS.java
 java OS
-del OS.class
-del Floppy.class
-del Floppy$MAGNETIC_HEAD.class
+::del OS.class
+::del Floppy.class
+::del Floppy$MAGNETIC_HEAD.class
 ::del boot
 ::del kernel
 move system.img ../

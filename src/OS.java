@@ -14,7 +14,7 @@ public class OS {
 
     private Floppy floppyDisk = new Floppy();
 
-    private static final String FILENAME = "../boot";
+    private static final String FILENAME = "./boot";
 
     private static int MAX_SECTOR_NUM = 18;
 
@@ -47,7 +47,7 @@ public class OS {
             while (in.read(data) > 0) {
                 //将内核读入到磁盘第0面，第0柱面，第1个扇区
                 floppyDisk.writeFloppy(Floppy.MAGNETIC_HEAD.MAGNETIC_HEAD_0, cylinder, sector, data);
-                System.out.println("Load file " + fileName.substring(3, fileName.length()) + " to floppy with cylinder:" +
+                System.out.println("Load file " + fileName.substring(2, fileName.length()) + " to floppy with cylinder:" +
                         cylinder + " and sector:" + sector);
                 sector++;
                 if (sector > MAX_SECTOR_NUM) {
@@ -64,11 +64,21 @@ public class OS {
     public void makeFloppy() {
         //String s = "This is Cylinder 1 and Sector 2...";
         //floppyDisk.writeFloppy(Floppy.MAGNETIC_HEAD.MAGNETIC_HEAD_0, 1, 2, s.getBytes());
-        writeFileToFloppy("../kernel", false, 1, 1);
+        writeFileToFloppy("./kernel", false, 1, 1);
         floppyDisk.makeFloppy("system.img");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        ProcessASMFile processASMFile = new ProcessASMFile(args[0]);    //用于命令行输入参数执行
+        if (ProcessASMFile.isRename) {
+            processASMFile.processASM();
+            System.out.println(ProcessASMFile.bakFile.getName() +
+                    " delete " + ProcessASMFile.bakFile.delete());
+            System.out.println("ASM file modified done!");
+        } else {
+            System.out.println("ASM file modified failed!");
+        }
+        processASMFile.runNASM();
         OS os = new OS(FILENAME);
         os.makeFloppy();
     }
