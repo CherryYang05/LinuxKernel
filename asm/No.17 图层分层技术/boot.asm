@@ -50,7 +50,7 @@ readFloppy:
 beginLoad:
     jmp  LOAD_ADDR
 
-load_count db 3			;表示连续读取几个磁道(柱面)
+load_count db 2			;表示连续读取几个磁道(柱面)
 fin:
     HLT
     jmp  fin

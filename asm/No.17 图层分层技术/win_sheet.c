@@ -107,7 +107,7 @@ int sheet_refresh(struct SHTCTL *ctl) {
     int vx, vy;
     unsigned char *buf, c, *vram = ctl->vram;
     struct SHEET *sheet;
-    for (int i = 0; i < ctl->top; ++i) {
+    for (int i = 0; i <= ctl->top; ++i) {
         sheet = ctl->sheets[i];
         buf = sheet->buf;
         for (int by = 0; by < sheet->bysize; ++by) {
@@ -121,6 +121,7 @@ int sheet_refresh(struct SHTCTL *ctl) {
             }
         }
     }
+    return 0;
 }
 
 /**

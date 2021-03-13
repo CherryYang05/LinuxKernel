@@ -72,4 +72,15 @@ public class TestDemo {
         File file = new File("123.txt");
         FileWriter fileWriter = new FileWriter(file);
     }
+
+    @Test
+    public void Test2() {
+        int cnt = 0;
+        int b = -1;
+        for (int i = 0; i < 10; ++i) {
+            cnt = cnt++;
+        }
+        System.out.println(b);
+        System.out.println(cnt);
+    }
 }

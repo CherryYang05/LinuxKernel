@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="No.17 实现了编译，处理asm文件和生成镜像自动化（makefile文件）">
-      <change afterPath="$PROJECT_DIR$/asm/NO.16 内存管理算法的实现/system.img" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/ProcessASMFile.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/ckernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/mem_util.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/mem_util.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/write_vga_desktop_win.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProcessASMFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amake.bat" beforeDir="false" afterPath="$PROJECT_DIR$/amake.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/TestDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/boot.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/ckernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/log" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/mem_util.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/mem_util.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/win_sheet.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/win_sheet.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/No.17 图层分层技术/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/write_vga_desktop_win.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boot" beforeDir="false" afterPath="$PROJECT_DIR$/boot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log" beforeDir="false" afterPath="$PROJECT_DIR$/log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mem_util.c" beforeDir="false" afterPath="$PROJECT_DIR$/mem_util.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mem_util.h" beforeDir="false" afterPath="$PROJECT_DIR$/mem_util.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProcessASMFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProcessASMFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_mem_check.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/OS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java4Linux_kernel/ProcessASMFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java4Linux_kernel/ProcessASMFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Java4Linux_kernel/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/Java4Linux_kernel/TestDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +101,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MakeFont">
+  <component name="RunManager" selected="JUnit.TestDemo.Test2">
     <configuration name="MakeFont" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MakeFont" />
       <module name="Java4Linux_kernel" />
@@ -132,11 +116,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileOutputStreamTest.Test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestDemo.Test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Java4Linux_kernel" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="FileOutputStreamTest" />
-      <option name="METHOD_NAME" value="Test1" />
+      <option name="MAIN_CLASS_NAME" value="TestDemo" />
+      <option name="METHOD_NAME" value="Test2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,11 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestDemo.Test2" />
         <item itemvalue="Application.MakeFont" />
         <item itemvalue="JUnit.TestDemo.makeFile" />
         <item itemvalue="Application.ProcessASMFile" />
         <item itemvalue="JUnit.TestDemo.writeToBinary" />
-        <item itemvalue="JUnit.FileOutputStreamTest.Test1" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +196,7 @@
       <workItem from="1614241449148" duration="1745000" />
       <workItem from="1615455670528" duration="2218000" />
       <workItem from="1615560698983" duration="326000" />
-      <workItem from="1615561801310" duration="8231000" />
+      <workItem from="1615561801310" duration="10319000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -326,7 +310,21 @@
       <option name="project" value="LOCAL" />
       <updated>1615458194375</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="No.17 实现了编译，处理asm文件和生成镜像自动化（makefile文件）">
+      <created>1615570315492</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1615570315492</updated>
+    </task>
+    <task id="LOCAL-00018" summary="No.17 实现了编译，处理asm文件和生成镜像自动化（makefile文件）">
+      <created>1615570407785</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1615570407785</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -33,10 +33,11 @@ unsigned int memman_total(struct MEMMANAGER *man) {
  * @return {addr} 可分配的内存首址
  */
 unsigned int memman_alloc_FF(struct MEMMANAGER *man, unsigned int size) {
-    unsigned int addr = 0;                      //记录可分配内存区域的起始地址
+    unsigned int addr;                      //记录可分配内存区域的起始地址
     for (int i = 0; i < man->frees; ++i) {
         if (man->free[i].size >= size) {
             addr = man->free[i].addr;
+            man->free[i].addr += size;      //(遗漏)bug
             man->free[i].size -= size;
             if (man->free[i].size == 0) {
                 man->frees--;
