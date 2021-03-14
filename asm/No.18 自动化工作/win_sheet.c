@@ -79,7 +79,7 @@ void sheet_level_updown(struct SHTCTL *ctl, struct SHEET *sheet, int level) {
             }
             ctl->top--;                     //=======???最小化的窗口若要再显示该怎么办???========
         }
-        sheet_refresh_new(ctl, sheet->vx0, sheet->vy0, sheet->vx0 + sheet->bxsize, sheet->vy0 + sheet->bysize);
+        sheet_refresh(ctl);
 
     } else if (old_level < level) {         //窗口层级增加(up)
         if (old_level >= 0) {               //若窗口层级较低但仍然显示
@@ -96,59 +96,41 @@ void sheet_level_updown(struct SHTCTL *ctl, struct SHEET *sheet, int level) {
             ctl->sheets[level] = sheet;
             ctl->top++;
         }
-        sheet_refresh_new(ctl, sheet->vx0, sheet->vy0, sheet->vx0 + sheet->bxsize, sheet->vy0 + sheet->bysize);
+        sheet_refresh(ctl);
     }
 }
 
 /**
- * 刷新当前图层，从 bx0 by0 到 bx1 by1
- * 这里基于 sheet->buf 进行重绘
+ * 刷新所有图层
  */
-int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1) {
-    if (sheet->level >= 0) {
-        sheet_refresh_new(ctl, sheet->vx0 + bx0, sheet->vy0 + by0, sheet->vx0 + bx1, sheet->vy0 + by1);
+int sheet_refresh(struct SHTCTL *ctl) {
+    int vx, vy;
+    unsigned char *buf, c, *vram = ctl->vram;
+    struct SHEET *sheet;
+    for (int i = 0; i <= ctl->top; ++i) {
+        sheet = ctl->sheets[i];
+        buf = sheet->buf;
+        for (int by = 0; by < sheet->bysize; ++by) {
+            vy = sheet->vy0 + by;                       //当前要绘制窗口左上角的纵坐标
+            for (int bx = 0; bx < sheet->bxsize; ++bx) {
+                vx = sheet->vx0 + bx;
+                c = buf[by * sheet->bxsize + bx];       //当前像素点在buf中的颜色
+                if (c != sheet->col_inv) {
+                    vram[vy * ctl->xsize + vx] = c;
+                }
+            }
+        }
     }
     return 0;
 }
 
 /**
- * 窗口移动时，重新绘制移动前区域内所有图层和移动后区域内所有图层
+ * 窗口移动时，重新刷新所有窗口，很消耗CPU资源
  */
 void sheet_slide(struct SHTCTL *ctl, struct SHEET *sheet, int vx0, int vy0) {
-    int old_vx = sheet->vx0, old_vy = sheet->vy0;
     sheet->vx0 = vx0;
     sheet->vy0 = vy0;
     if (sheet->level >= 0) {
-        sheet_refresh_new(ctl, old_vx, old_vy, old_vx + sheet->bxsize, old_vy + sheet->bysize);
-        sheet_refresh_new(ctl, vx0, vy0, vx0 + sheet->bxsize, vy0 + sheet->bysize);
+        sheet_refresh(ctl);
     }
-}
-
-/**
- * 重绘当前区域的所有图层，优化算法，只需重绘鼠标原来的256像素和移动后的256像素
- * 这里的重绘是基于 vram
- * @param {vx0, vy0} 窗口左上角坐标
- *        {vx1, vy1} 窗口右下角坐标
- */
-void sheet_refresh_new(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1) {
-    int vx, vy;
-    unsigned char *buf, c, *vram = ctl->vram;
-    struct SHEET *sheet;
-    for (int i = 0; i <=ctl->top; ++i) {
-        sheet = ctl->sheets[i];
-        buf = sheet->buf;
-        for (int by = 0; by < sheet->bysize; ++by) {
-            vy = sheet->vy0 + by;
-            for (int bx = 0; bx < sheet->bxsize; ++bx) {
-                vx = sheet->vx0 + bx;
-                if (vx0 <= vx && vx < vx1 && vy0 <= vy && vy < vy1) {
-                    c = buf[by * sheet->bxsize + bx];
-                    if (c != sheet->col_inv) {
-                        vram[vy * ctl->xsize + vx] = c;
-                    }
-                }
-            }
-        }
-    }
-    return;
 }

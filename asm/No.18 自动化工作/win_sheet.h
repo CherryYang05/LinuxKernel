@@ -53,18 +53,10 @@ void sheet_setbuf(struct SHEET *sheet, unsigned char *buf, int xsize, int ysize,
 void sheet_level_updown(struct SHTCTL *ctl, struct SHEET *sheet, int level); 
 
 /**
- * 刷新当前图层，从 bx0 by0 到 bx1 by1
+ * 刷新所有图层
  */
-int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1); 
-
+int sheet_refresh(struct SHTCTL *ctl); 
 /**
  * 窗口移动时，重新刷新所有窗口，很消耗CPU资源
  */ 
 void sheet_slide(struct SHTCTL *ctl, struct SHEET *sht, int vx0, int vy0);
-
-/**
- * 重绘当前区域的所有图层，优化算法，只需重绘鼠标原来的256像素和移动后的256像素
- * @param {vx0, vy0} 窗口左上角坐标
- *        {vx1, vy1} 窗口右下角坐标
- */
-void sheet_refresh_new(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1);

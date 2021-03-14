@@ -8,7 +8,7 @@ import java.io.*;
  * @Time 15:54
  * @Brief
  */
-public class TestDemo {
+public class TestDemo implements Glass {
     public static void main(String[] args) throws IOException {
         //FileOutputStream out = new FileOutputStream(new File("test.txt"));
         //DataOutputStream out = new DataOutputStream(new FileOutputStream("test.aaa"));
@@ -82,5 +82,10 @@ public class TestDemo {
         }
         System.out.println(b);
         System.out.println(cnt);
+    }
+
+    @Override
+    public void setColor() {
+
     }
 }
