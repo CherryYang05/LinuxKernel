@@ -60,7 +60,7 @@ int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int
 /**
  * 窗口移动时，重新刷新所有窗口，很消耗CPU资源
  */ 
-void sheet_slide(struct SHTCTL *ctl, struct SHEET *sht, int vx0, int vy0);
+void sheet_slide(struct SHTCTL *ctl, struct SHEET *sheet, int vx0, int vy0);
 
 /**
  * 重绘当前区域的所有图层，优化算法，只需重绘鼠标原来的256像素和移动后的256像素

@@ -135,6 +135,9 @@ void init_screen8(char *vram, int x, int y);
 static unsigned char *buf_back, buf_mouse[256];
 #define COLOR_INVISIBLE  99
 
+void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title);
+void messageBox(struct SHTCTL *ctl, char *title);
+
 //======================================== 主函数 ===================================================
 void CMain(void) {
     initBootInfo(&bootInfo);
@@ -186,10 +189,11 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    sheet_level_updown(shtctl, sheet_mouse, 1);     //调整鼠标图层为1
+    messageBox(shtctl, "NEUQ");                     //调整窗口图层为1
     sheet_level_updown(shtctl, sheet_back, 0);      //调整桌面图层为0
+    sheet_level_updown(shtctl, sheet_mouse, 100);   //调整鼠标图层为100
     //========================================
-
+    
     showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
     showString(shtctl, sheet_back, 0, 32, COL8_00FF00, intToHexStr((int)buf_back));
     showString(shtctl, sheet_back, 0, 48, COL8_00FF00, intToHexStr((int)shtctl->vram));
@@ -692,7 +696,7 @@ void computeMousePos(struct SHTCTL *ctl, struct SHEET *sheet, struct MOUSE_DEC *
     if (my > ysize - 1) my = ysize - 1;
     boxfill8(buf_back, xsize, COL8_0078D7, 0, 0, 79, 15);
     //showString(buf_back, xsize, 0, 0, COL8_FFFF00, "mouse move");
-    showString(ctl, sheet, 0, 0, COL8_FFFF00, "mouse move");
+    showString(ctl, sheet, 0, 0, COL8_FFFF00, "The mouse is moving...");
 }
 
 /**
@@ -731,4 +735,76 @@ void showMemInfo(struct SHTCTL *ctl, struct SHEET *sheet, struct MemRangeDesc *d
     char *type = intToHexStr(desc->type);
     showString(ctl, sheet, gap, y, color, type);
     y += 16;
+}
+
+/**
+ * 新建窗体图层并绘制窗体
+ */
+void messageBox(struct SHTCTL *ctl, char *title) {
+    struct SHEET *sheet_win;
+    unsigned char *buf_win;
+    buf_win = (unsigned char*)memman_alloc_4K(memman, 160 * 75);
+    sheet_win = sheet_alloc(ctl);
+    sheet_setbuf(sheet_win, buf_win, 160, 75, COLOR_INVISIBLE);
+    make_window8(ctl, sheet_win, title);
+    showString(ctl, sheet_win, 5 + 0, 6 + 16, COL8_000000, "This is BMY...");
+    showString(ctl, sheet_win, 5 + 0, 6 + 32, COL8_0000FF, "20178013");
+    sheet_slide(ctl, sheet_win, 60, 100);
+    sheet_level_updown(ctl, sheet_win, 1);
+}
+
+/**
+ * 绘制Windows8风格窗体
+ */ 
+void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title) {
+    //右上角关闭按钮
+    static char closebtn[14][16] = {
+		"OOOOOOOOOOOOOOO@", 
+		"OQQQQQQQQQQQQQ$@",
+		"OQQQQQQQQQQQQQ$@",
+		"OQQQ@@QQQQ@@QQ$@",
+		"OQQQQ@@QQ@@QQQ$@",
+		"OQQQQQ@@@@QQQQ$@",
+		"OQQQQQQ@@QQQQQ$@",
+		"OQQQQQ@@@@QQQQ$@",
+		"OQQQQ@@QQ@@QQQ$@",
+		"OQQQ@@QQQQ@@QQ$@",
+		"OQQQQQQQQQQQQQ$@",
+		"OQQQQQQQQQQQQQ$@",
+		"O$$$$$$$$$$$$$$@",
+		"@@@@@@@@@@@@@@@@"
+	};
+
+    int x, y;
+    char c;
+    int bxsize = sheet->bxsize;
+    int bysize = sheet->bysize;
+    boxfill8(sheet->buf, bxsize, COL8_C6C6C6, 0, 0, bxsize - 1, 0);
+    boxfill8(sheet->buf, bxsize, COL8_FFFFFF, 1, 1, bxsize - 2, 1);
+    boxfill8(sheet->buf, bxsize, COL8_C6C6C6, 0, 0, 0, bysize - 1);
+    boxfill8(sheet->buf, bxsize, COL8_FFFFFF, 1, 1, 1, bysize - 1);
+    boxfill8(sheet->buf, bxsize, COL8_848484, bxsize - 2, 1, bxsize - 2, bysize - 2);
+    boxfill8(sheet->buf, bxsize, COL8_000000, bxsize - 1, 0, bxsize - 1, bysize - 1);
+    boxfill8(sheet->buf, bxsize, COL8_C6C6C6, 2, 2, bxsize - 3, bysize - 3);
+    boxfill8(sheet->buf, bxsize, COL8_000084, 3, 3, bxsize - 4, 20);
+    boxfill8(sheet->buf, bxsize, COL8_848484, 1, bysize - 2, bxsize - 2, bysize - 2);
+    boxfill8(sheet->buf, bxsize, COL8_000000, 0, bysize - 1, bxsize - 1, bysize - 1);
+    
+    showString(ctl, sheet, 5, 4, COL8_FFFFFF, title);
+
+    //绘制右上角关闭按钮
+    for (int y = 0; y < 14; ++y) {
+        for (int x = 0; x < 16; ++x) {
+            c = closebtn[y][x];
+            if (c == '@') {
+                c = COL8_000000;
+            } else if (c == '$') {
+                c = COL8_848484;
+            } else if (c == 'Q') {
+                c = COL8_C6C6C6;
+            }
+            //绘制到窗口图层的数据缓冲区中（基于该sheet的buf）
+            sheet->buf[(5 + y) * sheet->bxsize + (sheet->bxsize - 21 + x)] = c;
+        }
+    }
 }

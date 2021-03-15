@@ -3,6 +3,17 @@
 
 #define SHEET_NOT_USE 0
 
+/*
+    新建一个图层的步骤：
+    1. 新建一个图层对象，struct SHEET sheet
+    2. 新建图层数据缓冲区buf，unsigned char *buf,并申请内存 memman_alloc_4K()
+    3. 在图层管理器中分配空间，sheet = sheet_alloc(shtctl)
+    4. 将数据缓冲写入图层,sheet_setbuf(sheet, buf, xsize, ysize, COL_INVISIBLE)
+    5. 在图层绘制窗口make_window8并在图层上写入字符
+    6. 移动窗体到合适的区域sheet_slide(ctl, sheet, mx, my)
+    7. 设置图层层级sheet_level_updown(ctl, sheet, level)
+/
+
 /**
  * 初始化图层管理器
  */

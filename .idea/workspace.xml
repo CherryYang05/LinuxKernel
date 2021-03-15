@@ -1,30 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="No.18 实现了图层分层技术，修改了部分bug">
-      <change afterPath="$PROJECT_DIR$/Test/Glass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.17 图层分层技术/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/ckernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/mem_util.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/mem_util.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.18 自动化工作/write_vga_desktop_win.c" afterDir="false" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/TestDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -202,6 +180,7 @@
       <workItem from="1615560698983" duration="326000" />
       <workItem from="1615561801310" duration="10446000" />
       <workItem from="1615634142177" duration="1994000" />
+      <workItem from="1615710628897" duration="1668000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -336,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615626444792</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="No.18-1 优化了图层分层技术，提升OS性能；字符串可以在不同图层上显示">
+      <created>1615710898537</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1615710898537</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +360,7 @@
     <MESSAGE value="No.16 实现了内存管理，修复了字体显示异常及boot扇区读取错误，新增了日志记录" />
     <MESSAGE value="No.17 实现了编译，处理asm文件和生成镜像自动化（makefile文件）" />
     <MESSAGE value="No.18 实现了图层分层技术，修改了部分bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.18 实现了图层分层技术，修改了部分bug" />
+    <MESSAGE value="No.18-1 优化了图层分层技术，提升OS性能；字符串可以在不同图层上显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.18-1 优化了图层分层技术，提升OS性能；字符串可以在不同图层上显示" />
   </component>
 </project>
