@@ -1,6 +1,6 @@
 %include "pm.inc"
 
-org	0x8000
+org	0x9000
 
 jmp LABEL_BEGIN
 
@@ -10,7 +10,7 @@ jmp LABEL_BEGIN
 LABEL_GDT:				Descriptor		0,				0,						 0
 LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C | DA_32 | DA_LIMIT_4K	;结构体初始化时只能传入常量
 LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFh,			      DA_DRW				;0B8000h是显存地址，设置该数据段属性为可读写
-LABEL_DESC_VRAM:		Descriptor	    0,			  0FFFFFh,			  DA_DRW | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
+LABEL_DESC_VRAM:		Descriptor	    0,			0FFFFFh,			  DA_DRW | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
 LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,		      DA_DRWA | DA_32
 
 GDTLen	EQU	$ - LABEL_GDT

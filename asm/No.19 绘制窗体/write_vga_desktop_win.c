@@ -136,7 +136,7 @@ static unsigned char *buf_back, buf_mouse[256];
 #define COLOR_INVISIBLE  99
 
 void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title);
-struct SHEET* messageBox(struct SHTCTL *ctl, char *title);
+void messageBox(struct SHTCTL *ctl, char *title);
 
 //======================================== 主函数 ===================================================
 void CMain(void) {
@@ -189,32 +189,28 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    struct SHEET *sheet_win = messageBox(shtctl, "Counter");   //新建窗口图层，调整窗口图层为1
-    sheet_level_updown(shtctl, sheet_back, 0);              //调整桌面图层为0
-    sheet_level_updown(shtctl, sheet_mouse, 100);           //调整鼠标图层为100
-    //========================================  
-    // showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
-    // showString(shtctl, sheet_back, 0, 32, COL8_00FF00, intToHexStr((int)buf_back));
-    // showString(shtctl, sheet_back, 0, 48, COL8_00FF00, intToHexStr((int)shtctl->vram));
+    messageBox(shtctl, "NEUQ");                     //调整窗口图层为1
+    sheet_level_updown(shtctl, sheet_back, 0);      //调整桌面图层为0
+    sheet_level_updown(shtctl, sheet_mouse, 100);   //调整鼠标图层为100
+    //========================================
+    
+    showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
+    showString(shtctl, sheet_back, 0, 32, COL8_00FF00, intToHexStr((int)buf_back));
+    showString(shtctl, sheet_back, 0, 48, COL8_00FF00, intToHexStr((int)shtctl->vram));
 
     io_sti();
-    enable_mouse(&mouse_move);                              //准备鼠标
+    enable_mouse(&mouse_move);                      //准备鼠标
     int cnt = 0;
-    int timer = 0;
     unsigned char data = 0;
     for (;;) {
-        char *p = intToHexStr(timer);
-        timer++;
-        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, 8, 22, 150, 38);
-        showString(shtctl, sheet_win, 8 + 0, 22 + 0, COL8_008400, p);
         io_cli();
         if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) == 0) {
-            io_sti();
-        } else if (fifo8_status(&keyInfo)) {                //键盘缓冲有数据
+            io_stihlt();
+        } else if (fifo8_status(&keyInfo)) {        //键盘缓冲有数据
             //showKeyboardInfo();
             io_sti();     
             data = fifo8_get(&keyInfo);
-            if (data == 0x1C) {                             //如果按下回车键(0x1C)，显示地址范围描述符信息
+            if (data == 0x1C) {                     //如果按下回车键(0x1C)，显示地址范围描述符信息
                 showMemInfo(shtctl, sheet_back, memDesc + cnt, buf_back, cnt, xsize, COL8_FFFFFF);
                 cnt++;
                 if (cnt >= memCnt) {
@@ -300,10 +296,10 @@ void set_palette(int start, int end, unsigned char *rgb) {
     int i, eflags;
     eflags = io_load_eflags();
     io_cli();
-    io_out8(0x03c8, start);             //设置调色板编号，端口 03c8
+    io_out8(0x03c8, start);  //设置调色板编号，端口 03c8
     for (i = start; i <= end; i++) {
-        io_out8(0x03c9, rgb[0] / 4);    //把调色板的RGB数值通过端口 0x3c9写入显存系统
-        io_out8(0x03c9, rgb[1] / 4);    //先压栈第二个参数，再压栈第一个参数
+        io_out8(0x03c9, rgb[0] / 4);  //把调色板的RGB数值通过端口 0x3c9写入显存系统
+        io_out8(0x03c9, rgb[1] / 4);  //先压栈第二个参数，再压栈第一个参数
         io_out8(0x03c9, rgb[2] / 4);
         rgb += 3;
     }
@@ -744,16 +740,17 @@ void showMemInfo(struct SHTCTL *ctl, struct SHEET *sheet, struct MemRangeDesc *d
 /**
  * 新建窗体图层并绘制窗体
  */
-struct SHEET* messageBox(struct SHTCTL *ctl, char *title) {
+void messageBox(struct SHTCTL *ctl, char *title) {
     struct SHEET *sheet_win;
     unsigned char *buf_win;
     buf_win = (unsigned char*)memman_alloc_4K(memman, 160 * 75);
     sheet_win = sheet_alloc(ctl);
     sheet_setbuf(sheet_win, buf_win, 160, 75, COLOR_INVISIBLE);
     make_window8(ctl, sheet_win, title);
-    sheet_slide(ctl, sheet_win, 100, 40);
+    showString(ctl, sheet_win, 5 + 0, 6 + 16, COL8_000000, "This is BMY...");
+    showString(ctl, sheet_win, 5 + 0, 6 + 32, COL8_0000FF, "20178013");
+    sheet_slide(ctl, sheet_win, 60, 100);
     sheet_level_updown(ctl, sheet_win, 1);
-    return sheet_win;
 }
 
 /**
@@ -793,7 +790,7 @@ void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title) {
     boxfill8(sheet->buf, bxsize, COL8_848484, 1, bysize - 2, bxsize - 2, bysize - 2);
     boxfill8(sheet->buf, bxsize, COL8_000000, 0, bysize - 1, bxsize - 1, bysize - 1);
     
-    showString(ctl, sheet, 8, 4, COL8_FFFFFF, title);
+    showString(ctl, sheet, 5, 4, COL8_FFFFFF, title);
 
     //绘制右上角关闭按钮
     for (int y = 0; y < 14; ++y) {

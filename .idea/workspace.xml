@@ -2,7 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/boot.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/ckernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/kernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/mem_util.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/mem_util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/objconv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/win_sheet.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/win_sheet.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/write_vga_desktop_win.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot" beforeDir="false" afterPath="$PROJECT_DIR$/boot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log" beforeDir="false" afterPath="$PROJECT_DIR$/log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -181,6 +204,8 @@
       <workItem from="1615561801310" duration="10446000" />
       <workItem from="1615634142177" duration="1994000" />
       <workItem from="1615710628897" duration="1668000" />
+      <workItem from="1615799963146" duration="616000" />
+      <workItem from="1615962988308" duration="600000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -322,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615710898537</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="No.18-2 实现了messageBox新建一个窗体">
+      <created>1615800052276</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1615800052276</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,6 +393,7 @@
     <MESSAGE value="No.17 实现了编译，处理asm文件和生成镜像自动化（makefile文件）" />
     <MESSAGE value="No.18 实现了图层分层技术，修改了部分bug" />
     <MESSAGE value="No.18-1 优化了图层分层技术，提升OS性能；字符串可以在不同图层上显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.18-1 优化了图层分层技术，提升OS性能；字符串可以在不同图层上显示" />
+    <MESSAGE value="No.18-2 实现了messageBox新建一个窗体" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.18-2 实现了messageBox新建一个窗体" />
   </component>
 </project>
