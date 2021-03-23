@@ -189,10 +189,9 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    struct SHEET *sheet_win = messageBox(shtctl, "Counter");//新建窗口图层，调整窗口图层为1
+    struct SHEET *sheet_win = messageBox(shtctl, "Counter");   //新建窗口图层，调整窗口图层为1
     sheet_level_updown(shtctl, sheet_back, 0);              //调整桌面图层为0
     sheet_level_updown(shtctl, sheet_mouse, 100);           //调整鼠标图层为100
-    //sheet_slide(shtctl, sheet_win, 10, 10);
     //========================================  
     // showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
     // showString(shtctl, sheet_back, 0, 32, COL8_00FF00, intToHexStr((int)buf_back));
@@ -245,7 +244,7 @@ void showString(struct SHTCTL *ctl, struct SHEET *sheet, int x, int y, char colo
         showFont8(sheet->buf, sheet->bxsize, x, y, color, systemFont + *s * 16);
         x += 8;
     }
-    sheet_refresh(ctl, sheet, begin, y, x, y + 16, sheet->level);
+    sheet_refresh(ctl, sheet, begin, y, x, y + 16);
 }
 
 void init_screen8(char* vram, int xsize, int ysize) {
@@ -752,7 +751,7 @@ struct SHEET* messageBox(struct SHTCTL *ctl, char *title) {
     sheet_win = sheet_alloc(ctl);
     sheet_setbuf(sheet_win, buf_win, 160, 75, COLOR_INVISIBLE);
     make_window8(ctl, sheet_win, title);
-    sheet_slide(ctl, sheet_win, 60, 40);
+    sheet_slide(ctl, sheet_win, 100, 40);
     sheet_level_updown(ctl, sheet_win, 1);
     return sheet_win;
 }

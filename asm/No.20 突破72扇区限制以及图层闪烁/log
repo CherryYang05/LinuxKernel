@@ -1,0 +1,10 @@
+[运行日志]
+2021.3.11:	运行镜像文件崩溃，原因是kernel.asm文件的全局描述符表的表项未添加DA_LIMIT_4K  EQU  8000h（段界限粒度为 4K 字节），具体原因未知
+2021.3.11:	上述问题解决后字符显示不完整，经排查，font字体文件无误，检查kernel.asm无误，检查boot.asm中读取软盘扇区错误
+2021.3.12:	编译win_sheet.c和win_sheet.h时，由于引用头文件mem_util.h顺序不对，导致编译错误，
+			在函数struct SHTCTL *shtctl_init(struct MEMMANAGER *memman, unsigned char *vram, int xsize, int ysize)
+			中因为先用到了mem_util.h中结构体，因此头文件应该先被引用
+2021.3.12:	运行镜像后桌面背景为黑色，无法显示桌面和鼠标，但是回车键的交互可以使用
+2021.3.12:	实现自动化时，在src/中运行OS.class时，无法读取pm.inc
+2021.3.13:	打印intToHexStr(shtctl->top)时显示0x0E0E0E0E
+2021.3.17:	

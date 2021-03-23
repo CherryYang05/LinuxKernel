@@ -17,14 +17,13 @@ struct SHEET {
 /**
  * 图层控制器（管理器）
  * @param {vram} 显存起始地址，为0xa0000
- *        {map} 记录像素点属于哪一个窗体
  *        {xsize, ysize} 当前屏幕像素
  *        {top} 要显示的图层数量
  *        {*sheets} 图层指针数组，用来指向下面图层数组中的对应图层对象
  *        {sheets0} 存储图层对象的数组
  */ 
 struct SHTCTL {
-    unsigned char *vram, *map;  
+    unsigned char *vram;  
     int xsize, ysize, top;
     struct SHEET *sheets[MAX_SHEET];
     struct SHEET sheets0[MAX_SHEET];
@@ -56,7 +55,7 @@ void sheet_level_updown(struct SHTCTL *ctl, struct SHEET *sheet, int level);
 /**
  * 刷新当前图层，从 bx0 by0 到 bx1 by1
  */
-int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1, int level); 
+int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1); 
 
 /**
  * 窗口移动时，重新刷新所有窗口，很消耗CPU资源
@@ -67,11 +66,5 @@ void sheet_slide(struct SHTCTL *ctl, struct SHEET *sheet, int vx0, int vy0);
  * 重绘当前区域的所有图层，优化算法，只需重绘鼠标原来的256像素和移动后的256像素
  * @param {vx0, vy0} 窗口左上角坐标
  *        {vx1, vy1} 窗口右下角坐标
- *        {level} 当前窗体对应的图层高度,避免刷新不必要的图层带来CPU消耗
  */
-void sheet_refresh_new(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1, int level, int level_0);
-
-/**
- * 更新当前屏幕所有像素点对应的窗体编号
- */
-void sheet_refreshmap(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1, int level);
+void sheet_refresh_new(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1);

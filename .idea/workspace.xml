@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/ckernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/mem_util.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/mem_util.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/system.img" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.19 绘制窗体/write_vga_desktop_win.c" afterDir="false" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="No.20 消除图层闪烁">
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/boot.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/ckernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/kernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/mem_util.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/mem_util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/objconv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/win_sheet.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/win_sheet.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/write_vga_desktop_win.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/boot.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/ckernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/kernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/mem_util.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/mem_util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/objconv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/win_sheet.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/win_sheet.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/write_vga_desktop_win.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot" beforeDir="false" afterPath="$PROJECT_DIR$/boot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot.asm" beforeDir="false" afterPath="$PROJECT_DIR$/boot.asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log" beforeDir="false" afterPath="$PROJECT_DIR$/log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/win_sheet.c" beforeDir="false" afterPath="$PROJECT_DIR$/win_sheet.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/win_sheet.h" beforeDir="false" afterPath="$PROJECT_DIR$/win_sheet.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,7 +89,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="F:/Software/Open Sources/Jar/junit/4.12/org.hamcrest.core_1.3.0.v201303031735.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -205,7 +222,10 @@
       <workItem from="1615634142177" duration="1994000" />
       <workItem from="1615710628897" duration="1668000" />
       <workItem from="1615799963146" duration="616000" />
-      <workItem from="1615962988308" duration="600000" />
+      <workItem from="1615962988308" duration="1118000" />
+      <workItem from="1616326918929" duration="37000" />
+      <workItem from="1616330383006" duration="566000" />
+      <workItem from="1616467754491" duration="653000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -354,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615800052276</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="No.19 突破内核连续读取72扇区的限制">
+      <created>1615975793558</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1615975793558</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,6 +421,8 @@
     <MESSAGE value="No.18 实现了图层分层技术，修改了部分bug" />
     <MESSAGE value="No.18-1 优化了图层分层技术，提升OS性能；字符串可以在不同图层上显示" />
     <MESSAGE value="No.18-2 实现了messageBox新建一个窗体" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.18-2 实现了messageBox新建一个窗体" />
+    <MESSAGE value="No.19 突破内核连续读取72扇区的限制" />
+    <MESSAGE value="No.20 消除图层闪烁" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.20 消除图层闪烁" />
   </component>
 </project>
