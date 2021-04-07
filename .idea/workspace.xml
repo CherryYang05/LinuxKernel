@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/global_define.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/global_define.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/global_define.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/timer.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/timer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/timer.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Java4Linux_kernel/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/Java4Linux_kernel/TestDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/timer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timer.o" beforeDir="false" afterPath="$PROJECT_DIR$/timer.o" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -201,7 +191,7 @@
       <workItem from="1616840866507" duration="1622000" />
       <workItem from="1616897861446" duration="5091000" />
       <workItem from="1617120806000" duration="401000" />
-      <workItem from="1617805614520" duration="609000" />
+      <workItem from="1617805614520" duration="1248000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -364,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616482837976</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="No.21 实现定时器功能">
+      <created>1617806774445</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1617806774445</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,6 +403,7 @@
     <MESSAGE value="No.18-2 实现了messageBox新建一个窗体" />
     <MESSAGE value="No.19 突破内核连续读取72扇区的限制" />
     <MESSAGE value="No.20 消除图层闪烁" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.20 消除图层闪烁" />
+    <MESSAGE value="No.21 实现定时器功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.21 实现定时器功能" />
   </component>
 </project>

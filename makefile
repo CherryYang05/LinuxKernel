@@ -1,7 +1,7 @@
 ckernel.asm : ckernel.o
 	./objconv -fnasm ckernel.o -o ckernel.asm
 ckernel.o : write_vga_desktop_win.o win_sheet.o mem_util.o timer.o global_define.o
-	ld -m elf_i386 -r write_vga_desktop_win.o mem_util.o win_sheet.o -o ckernel.o
+	ld -m elf_i386 -r write_vga_desktop_win.o mem_util.o win_sheet.o timer.o global_define.o -o ckernel.o
 write_vga_desktop_win.o : write_vga_desktop_win.c win_sheet.c win_sheet.h mem_util.c mem_util.h timer.c timer.h global_define.c global_define.o
 	gcc -m32 -fno-pic -fno-asynchronous-unwind-tables -s -c write_vga_desktop_win.c -o write_vga_desktop_win.o
 win_sheet.o : win_sheet.c win_sheet.h

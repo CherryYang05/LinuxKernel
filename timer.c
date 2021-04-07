@@ -3,19 +3,17 @@
 
 static struct TIMERCTL timerctl;
 
-void in_out8(int port, int data);
-
 void init_pit() {
-    in_out8(PIT_CTRL, 0x34);
-    in_out8(PIT_CNT0, 0x9c);
-    in_out8(PIT_CNT0, 0x2e);
+    io_out8(PIT_CTRL, 0x34);
+    io_out8(PIT_CNT0, 0x9c);
+    io_out8(PIT_CNT0, 0x2e);
 
     timerctl.count = 0;
     timerctl.timeout = 0;
 }
 
 void intHandlerForTimer(char *esp) {
-    in_out8(PIC0_OCW2, 0x60);       //重复进行中断
+    io_out8(PIC0_OCW2, 0x60);       //重复进行中断
     timerctl.count++;
     if (timerctl.timeout > 0) {
         timerctl.timeout--;
