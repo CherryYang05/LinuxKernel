@@ -1,47 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="No.20 消除图层闪烁">
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/ckernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/mem_util.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/mem_util.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/system.img" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.20 突破72扇区限制以及图层闪烁/write_vga_desktop_win.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/ckernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/mem_util.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/mem_util.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/system.img" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.21 消除图层闪烁/write_vga_desktop_win.c" afterDir="false" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/global_define.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global_define.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global_define.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timer.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timer.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/win_sheet.c" beforeDir="false" afterPath="$PROJECT_DIR$/win_sheet.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/win_sheet.h" beforeDir="false" afterPath="$PROJECT_DIR$/win_sheet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Java4Linux_kernel/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/Java4Linux_kernel/TestDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -123,7 +97,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestDemo.Test2">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Java4Linux_kernel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MakeFont" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MakeFont" />
       <module name="Java4Linux_kernel" />
@@ -158,23 +139,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDemo.writeToBinary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Java4Linux_kernel" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestDemo" />
-      <option name="METHOD_NAME" value="writeToBinary" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestDemo.Test2" />
         <item itemvalue="Application.MakeFont" />
         <item itemvalue="JUnit.TestDemo.makeFile" />
         <item itemvalue="Application.ProcessASMFile" />
-        <item itemvalue="JUnit.TestDemo.writeToBinary" />
       </list>
     </recent_temporary>
   </component>
@@ -225,7 +196,12 @@
       <workItem from="1615962988308" duration="1118000" />
       <workItem from="1616326918929" duration="37000" />
       <workItem from="1616330383006" duration="566000" />
-      <workItem from="1616467754491" duration="653000" />
+      <workItem from="1616467754491" duration="1356000" />
+      <workItem from="1616829415341" duration="1488000" />
+      <workItem from="1616840866507" duration="1622000" />
+      <workItem from="1616897861446" duration="5091000" />
+      <workItem from="1617120806000" duration="401000" />
+      <workItem from="1617805614520" duration="609000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -381,7 +357,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615975793558</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="No.20 消除图层闪烁">
+      <created>1616482837975</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1616482837976</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

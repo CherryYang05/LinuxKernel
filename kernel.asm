@@ -26,10 +26,12 @@ SelectorVram	EQU	LABEL_DESC_VRAM 	- 	LABEL_GDT
 ;中断描述符表
 LABEL_IDT:
 
-%rep 33
+%rep 32
 	Gate SelectorCode32, SpuriousHandler, 0, DA_386IGate
 %endrep
 
+.020h:		;对应主8259A芯片IRQ0引脚，控制时钟中断
+	Gate SelectorCode32, timerHandler, 0, DA_386IGate
 .021h:		;对应主8259A芯片IRQ1引脚，控制键盘中断
 	Gate SelectorCode32, KeyBoardHandler, 0, DA_386IGate
 
@@ -164,7 +166,7 @@ init8259A:
     out  0A1h, al		;同上
     call io_delay
 
-    mov  al, 11111001b 	;向主8259A发送OCW1，只能写入奇地址端口，允许键盘中断，打开主8259A控制器的IRQ1和IRQ2号引脚
+    mov  al, 11111000b 	;向主8259A发送OCW1，只能写入奇地址端口，允许键盘和时钟中断，打开主8259A控制器的IRQ1和IRQ2号引脚
     out  21h, al
     call io_delay
 
@@ -241,6 +243,25 @@ MouseHandler equ _MouseHandler - $$
 	pop ds
 	pop es
 	iretd
+	
+;时钟中断处理函数
+_timerHandler:
+timerHandler equ _timerHandler - $$
+	push es
+	push ds
+	pushad
+	mov eax, esp
+	push eax
+	
+	call intHandlerForTimer
+	
+	pop eax
+	mov esp, eax
+	popad
+	pop ds
+	pop es
+	iretd
+
 ;===================================================================================
 
 io_hlt:  					;void io_hlt(void);

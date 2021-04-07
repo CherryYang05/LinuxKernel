@@ -1,39 +1,8 @@
+#include "global_define.h"
 #include "mem_util.h"
 #include "win_sheet.h"
+#include "timer.h"
 
-#define COL8_000000 0   //全黑
-#define COL8_FF0000 1   //亮红
-#define COL8_00FF00 2   //亮绿
-#define COL8_FFFF00 3   //亮黄
-#define COL8_0000FF 4   //亮蓝
-#define COL8_FF00FF 5   //亮紫
-#define COL8_00FFFF 6   //浅亮
-#define COL8_FFFFFF 7   //全白
-#define COL8_C6C6C6 8   //亮灰
-#define COL8_840000 9   //暗红
-#define COL8_008400 10  //暗绿
-#define COL8_848400 11  //暗黄
-#define COL8_000084 12  //暗蓝
-#define COL8_840084 13  //暗紫
-#define COL8_0078D7 14  //Windows蓝
-#define COL8_848484 15  //暗灰
-
-#define FALSE 0
-#define OK 1
-
-//主 8259A 芯片端口
-#define PIC_OCW2 0x20
-//从 8259A 芯片端口
-#define PIC1_OCW2 0xa0
-
-void io_hlt(void);      //休眠
-void io_cli(void);      //关中断
-void io_sti(void);      //开中断
-void io_stihlt(void);   //开中断休眠
-char io_in8(int port);  //从端口读一个 8字节数据
-void io_out8(int port, int data);
-int io_load_eflags(void);
-void io_store_eflags(int eflags);
 void show_char(void);
 void init_palette(void);
 void set_palette(int start, int end, unsigned char *rgb);
@@ -62,23 +31,6 @@ static char keyVal[5] = {'0', 'x', 0, 0, 0};  //键盘扫描码和断码
 char charToVal(char c);
 char *charToHex(unsigned char c);
 
-/**
- * @brief: 数据缓冲区，若键盘使用大小设为 32B
- * @param {read} 读指针
- *        {write} 写指针
- *        {size} 缓冲区大小
- *        {free} 缓冲区空余大小
- *        {flags} 缓冲区状态
- */
-struct FIFO8 {
-    unsigned char *buf;
-    int read, write, size, free, flags;
-};
-
-void fifo8_init();
-int fifo8_put(struct FIFO8 *fifo, unsigned char data);
-int fifo8_get(struct FIFO8 *fifo);
-int fifo8_status(struct FIFO8 *fifo);
 void showMouseInfo(struct SHTCTL *ctl, struct SHEET *sheet_back, struct SHEET *sheet_mouse);
 void showKeyboardInfo(struct SHTCTL *ctl, struct SHEET *sheet);
 
@@ -138,6 +90,10 @@ static unsigned char *buf_back, buf_mouse[256];
 void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title);
 struct SHEET* messageBox(struct SHTCTL *ctl, char *title);
 
+//时钟中断相关
+static struct FIFO8 timerInfo;
+static char timerbuf[8];
+
 //======================================== 主函数 ===================================================
 void CMain(void) {
     initBootInfo(&bootInfo);
@@ -176,6 +132,12 @@ void CMain(void) {
     showString(shtctl, sheet_back, 30 * 8, 0, COL8_FFFF00, "MB"); 
     shtctl = shtctl_init(memman, vram, xsize, ysize);
 
+    //=============== 时钟中断操作 ===============
+    init_pit();
+    fifo8_init(&timerInfo, 8, timerbuf);
+    setTimer(500, &timerInfo, 1);
+    //=============== 时钟中断操作结束 ===============
+
     //=============== 图层操作 ===============
     sheet_back = sheet_alloc(shtctl);
     sheet_mouse = sheet_alloc(shtctl);
@@ -201,15 +163,14 @@ void CMain(void) {
     io_sti();
     enable_mouse(&mouse_move);                              //准备鼠标
     int cnt = 0;
-    int timer = 0;
     unsigned char data = 0;
+    struct TIMERCTL *timerctl = getTimerController();
     for (;;) {
-        char *p = intToHexStr(timer);
-        timer++;
+        char *p = intToHexStr(timerctl->timeout);
         boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, 8, 22, 150, 38);
         showString(shtctl, sheet_win, 8 + 0, 22 + 0, COL8_008400, p);
         io_cli();
-        if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) == 0) {
+        if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) + fifo8_status(&timerInfo) == 0) {
             io_sti();
         } else if (fifo8_status(&keyInfo)) {                //键盘缓冲有数据
             //showKeyboardInfo();
@@ -223,8 +184,11 @@ void CMain(void) {
                 }
                 //sheet_refresh(shtctl);
             }
-        } else if (fifo8_status(&mouseInfo)) {      //鼠标缓冲有数据
+        } else if (fifo8_status(&mouseInfo)) {              //鼠标缓冲有数据
             showMouseInfo(shtctl, sheet_back, sheet_mouse);
+        } else if (fifo8_status(&timerInfo)) {              //处理时钟中断
+            io_sti();
+            showString(shtctl, sheet_back, 0, 0, COL8_FF00FF, "5[secs]");
         }
     }
 }
@@ -434,7 +398,7 @@ void intHandlerFromC() {
         下次键盘再向 CPU发送信号时，CPU就不会接收，要想让 CPU再次接收信号，
         必须向主 PIC的端口再次发送键盘中断的中断向量号。
     */
-    io_out8(PIC_OCW2, 0x20);  //io_out8(PIC_OCW2, 0x20)也能正确运行？？？？
+    io_out8(PIC0_OCW2, 0x20);  //io_out8(PIC0_OCW2, 0x20)也能正确运行？？？？
     unsigned char data = 0;
     data = io_in8(PORT_KEYDAT);
     fifo8_put(&keyInfo, data);
@@ -529,76 +493,9 @@ void enable_mouse(struct MOUSE_DEC *mdec) {
 void intHandlerForMouse(char *esp) {
     unsigned char data = 0;
 	io_out8(PIC1_OCW2, 0x20);
-    io_out8(PIC_OCW2, 0x20);
+    io_out8(PIC0_OCW2, 0x20);
     data = io_in8(PORT_KEYDAT);
     fifo8_put(&mouseInfo, data);
-}
-
-/**
- * 初始化数据缓冲区
- * @param {structFIFO} *fifo
- * @param {int} size
- * @param {unsignedchar} *buf
- * @return {*}
- */
-void fifo8_init(struct FIFO8 *fifo, int size, unsigned char *buf) {
-    fifo->size = size;
-    fifo->buf = buf;
-    fifo->free = size;
-    fifo->read = 0;
-    fifo->write = 0;
-    fifo->flags = 0;
-    return;
-}
-
-#define FLAGS_OVERRUN 0x0001
-
-/**
- * 写缓冲
- * @param {structFIFO8} *fifo 缓冲区结构体
- * @param {unsignedchar} data 要写的缓冲区数据
- * @return {*}
- */
-int fifo8_put(struct FIFO8 *fifo, unsigned char data) {
-    if (fifo->free == 0) {
-        fifo->flags |= FLAGS_OVERRUN;
-        return -1;
-    }
-    fifo->buf[fifo->write] = data;
-    fifo->write++;
-    if (fifo->write == fifo->size) {  //写指针满则从头部开始覆盖
-        fifo->write = 0;
-    }
-    fifo->free--;
-    return OK;
-}
-
-/**
- * 读缓冲
- * @param {structFIFO8} *fifo 缓冲区结构体
- * @return {*}
- */
-int fifo8_get(struct FIFO8 *fifo) {
-    int data;
-    if (fifo->free == fifo->size) {
-        return -1;
-    }
-    data = fifo->buf[fifo->read];
-    fifo->read++;
-    if (fifo->read == fifo->size) {  //写指针满则从头部开始覆盖
-        fifo->read = 0;
-    }
-    fifo->free++;
-    return data;
-}
-
-/**
- * 判断缓冲区状态
- * @param {structFIFO8} *fifo
- * @return {*}
- */
-int fifo8_status(struct FIFO8 *fifo) {
-    return fifo->size - fifo->free;
 }
 
 /**

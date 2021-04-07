@@ -36,9 +36,9 @@ public class OS {
             in = new FileInputStream(new File(fileName));
             byte[] data = new byte[512];
             /*
-            要想让机器将软盘的头512字节当做操作系统的内核加载到内存
-            前512字节的最后两个字节必须是55,aa(Intel公司规定)
-            否则无法加载内核
+                要想让机器将软盘的头512字节当做操作系统的内核加载到内存
+                前512字节的最后两个字节必须是55,aa(Intel公司规定)
+                否则无法加载内核
             */
             if (bootable) {
                 data[510] = 0x55;
