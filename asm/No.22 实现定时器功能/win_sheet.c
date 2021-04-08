@@ -134,7 +134,7 @@ void sheet_level_updown(struct SHTCTL *ctl, struct SHEET *sheet, int level) {
  * 刷新当前图层，从 bx0 by0 到 bx1 by1
  * 这里基于 sheet->buf 进行重绘
  */
-int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1) {
+int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1, int level) {
     if (sheet->level >= 0) {
         sheet_refresh_new(ctl, sheet->vx0 + bx0, sheet->vy0 + by0, 
                         sheet->vx0 + bx1, sheet->vy0 + by1, sheet->level, sheet->level);

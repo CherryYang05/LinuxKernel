@@ -1,6 +1,3 @@
-#define BOX_MARGIN_LEFT 8
-#define BOX_MARGIN_TOP 22
-
 /**
  * 图层结构体
  * @param {buf} 要显示的窗口的像素信息

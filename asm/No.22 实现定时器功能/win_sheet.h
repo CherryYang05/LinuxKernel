@@ -1,6 +1,3 @@
-#define BOX_MARGIN_LEFT 8
-#define BOX_MARGIN_TOP 22
-
 /**
  * 图层结构体
  * @param {buf} 要显示的窗口的像素信息
@@ -59,7 +56,7 @@ void sheet_level_updown(struct SHTCTL *ctl, struct SHEET *sheet, int level);
 /**
  * 刷新当前图层，从 bx0 by0 到 bx1 by1
  */
-int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1); 
+int sheet_refresh(struct SHTCTL *ctl, struct SHEET *sheet, int bx0, int by0, int bx1, int by1, int level); 
 
 /**
  * 窗口移动时，重新刷新所有窗口，很消耗CPU资源

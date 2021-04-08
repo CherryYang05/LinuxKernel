@@ -94,16 +94,6 @@ struct SHEET *messageBox(struct SHTCTL *ctl, char *title);
 static struct FIFO8 timerInfo;
 static char timerbuf[8];
 
-//键盘的扫描码对应表(10H - 30H)
-static char keytable[0x54] = {
-    0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '^', 0, 0,
-    'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '[', 0, 0, 'A', 'S',
-    'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', ':', 0, 0, ']', 'Z', 'X', 'C', 'V',
-    'B', 'N', 'M', ',', '.', '/', 0, '*', 0, ' ', 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, '7', '8', '9', '-', '4', '5', '6', '+', '1',
-    '2', '3', '0', '.'
-};
-
 //======================================== 主函数 ===================================================
 void CMain(void) {
     initBootInfo(&bootInfo);
@@ -191,49 +181,39 @@ void CMain(void) {
     enable_mouse(&mouse_move);  //准备鼠标
     int cnt = 0;
     unsigned char data = 0;
-    static int line = 0;
-    static int pos = 16;
     struct TIMERCTL *timerctl = getTimerController();
     for (;;) {
         char *p = intToHexStr(timer->timeout);
-        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 150, 38);
-        showString(shtctl, sheet_win, BOX_MARGIN_LEFT + 0, BOX_MARGIN_TOP + 0, COL8_008400, p);
+        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, 8, 22, 150, 38);
+        showString(shtctl, sheet_win, 8 + 0, 22 + 0, COL8_008400, p);
         io_cli();
         if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) + fifo8_status(&timerInfo) +
                 fifo8_status(&timerInfo2) + fifo8_status(&timerInfo3) ==
             0) {
             io_sti();
-        } else if (fifo8_status(&keyInfo)) {        //键盘缓冲有数据
-            //showKeyboardInfo(shtctl, sheet_back);
+        } else if (fifo8_status(&keyInfo)) {  //键盘缓冲有数据
+            //showKeyboardInfo();
             io_sti();
             data = fifo8_get(&keyInfo);
-            if (data == 0x1C) {                     //如果按下回车键(0x1C)，显示地址范围描述符信息
+            if (data == 0x1C) {  //如果按下回车键(0x1C)，显示地址范围描述符信息
                 showMemInfo(shtctl, sheet_back, memDesc + cnt, buf_back, cnt, xsize, COL8_FFFFFF);
                 cnt++;
                 if (cnt >= memCnt) {
                     cnt = 0;
                 }
                 //sheet_refresh(shtctl);
-            } else if (keytable[data] != 0 && data >= 0x10 && data <= 0x53) {       //打印键盘字符
-                char buf[2] = {keytable[data], 0};
-                showString(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos, COL8_FFFF00, buf);
-                line += 8;
-                if (line >= sheet_win->bxsize - 2 * BOX_MARGIN_LEFT) {
-                    pos += 16;
-                    line = 0;
-                }
             }
-        } else if (fifo8_status(&mouseInfo)) {      //鼠标缓冲有数据
+        } else if (fifo8_status(&mouseInfo)) {  //鼠标缓冲有数据
             showMouseInfo(shtctl, sheet_back, sheet_mouse);
-        } else if (fifo8_status(&timerInfo)) {      //处理时钟中断timer
+        } else if (fifo8_status(&timerInfo)) {  //处理时钟中断timer
             io_sti();
             fifo8_get(&timerInfo);
             showString(shtctl, sheet_back, 0, 0, COL8_FF00FF, "5[secs]");
-        } else if (fifo8_status(&timerInfo2)) {     //处理时钟中断timer2
+        } else if (fifo8_status(&timerInfo2)) {  //处理时钟中断timer2
             io_sti();
             fifo8_get(&timerInfo2);
             showString(shtctl, sheet_back, 0, 16, COL8_FF00FF, "3[secs]");
-        } else if (fifo8_status(&timerInfo3)) {     //处理时钟中断timer3
+        } else if (fifo8_status(&timerInfo3)) {  //处理时钟中断timer3
             io_sti();
             int key = fifo8_get(&timerInfo3);
             if (key != 0) {
@@ -251,9 +231,9 @@ void CMain(void) {
 //===================================== 主函数结束 ==============================================
 
 void initBootInfo(struct BOOTINFO *pBootInfo) {
-    pBootInfo->vgaRam = (char *)0xe0000000;
-    pBootInfo->screenX = 640;
-    pBootInfo->screenY = 480;
+    pBootInfo->vgaRam = (char *)0xa0000;
+    pBootInfo->screenX = 320;
+    pBootInfo->screenY = 200;
 }
 
 /**
@@ -700,11 +680,11 @@ void showMemInfo(struct SHTCTL *ctl, struct SHEET *sheet, struct MemRangeDesc *d
 struct SHEET *messageBox(struct SHTCTL *ctl, char *title) {
     struct SHEET *sheet_win;
     unsigned char *buf_win;
-    buf_win = (unsigned char *)memman_alloc_4K(memman, 300 * 125);
+    buf_win = (unsigned char *)memman_alloc_4K(memman, 160 * 75);
     sheet_win = sheet_alloc(ctl);
-    sheet_setbuf(sheet_win, buf_win, 300, 125, COLOR_INVISIBLE);
+    sheet_setbuf(sheet_win, buf_win, 160, 75, COLOR_INVISIBLE);
     make_window8(ctl, sheet_win, title);
-    sheet_slide(ctl, sheet_win, 200, 120);
+    sheet_slide(ctl, sheet_win, 60, 40);
     sheet_level_updown(ctl, sheet_win, 1);
     return sheet_win;
 }
@@ -745,7 +725,7 @@ void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title) {
     boxfill8(sheet->buf, bxsize, COL8_848484, 1, bysize - 2, bxsize - 2, bysize - 2);
     boxfill8(sheet->buf, bxsize, COL8_000000, 0, bysize - 1, bxsize - 1, bysize - 1);
 
-    showString(ctl, sheet, BOX_MARGIN_LEFT, 4, COL8_FFFFFF, title);
+    showString(ctl, sheet, 8, 4, COL8_FFFFFF, title);
 
     //绘制右上角关闭按钮
     for (int y = 0; y < 14; ++y) {

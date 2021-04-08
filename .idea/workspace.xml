@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/boot.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/ckernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/global_define.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/global_define.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/global_define.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/kernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/mem_util.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/mem_util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/objconv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/timer.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/timer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/timer.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/win_sheet.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/win_sheet.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.22 实现定时器功能/write_vga_desktop_win.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/timer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timer.o" beforeDir="false" afterPath="$PROJECT_DIR$/timer.o" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -191,7 +210,7 @@
       <workItem from="1616840866507" duration="1622000" />
       <workItem from="1616897861446" duration="5091000" />
       <workItem from="1617120806000" duration="401000" />
-      <workItem from="1617805614520" duration="1248000" />
+      <workItem from="1617805614520" duration="1678000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -361,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617806774445</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="No.21 实现定时器功能">
+      <created>1617807613907</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1617807613907</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
