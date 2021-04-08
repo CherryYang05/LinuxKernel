@@ -2,7 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/asm/No.24 更改屏幕分辨率和按键响应/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/boot.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/ckernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/global_define.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/global_define.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/global_define.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/kernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/mem_util.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/mem_util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/objconv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/timer.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/timer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/timer.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/win_sheet.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/win_sheet.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.25 鼠标移动窗体和input文本框/write_vga_desktop_win.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/global_define.c" beforeDir="false" afterPath="$PROJECT_DIR$/global_define.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/global_define.o" beforeDir="false" afterPath="$PROJECT_DIR$/global_define.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +215,7 @@
       <workItem from="1616897861446" duration="5091000" />
       <workItem from="1617120806000" duration="401000" />
       <workItem from="1617805614520" duration="1678000" />
-      <workItem from="1617865895880" duration="722000" />
+      <workItem from="1617865895880" duration="785000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -372,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617865997337</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="No.23 实现文本输入框和光标闪烁并用鼠标移动窗体">
+      <created>1617871961778</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1617871961778</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,6 +450,7 @@
     <MESSAGE value="No.20 消除图层闪烁" />
     <MESSAGE value="No.21 实现定时器功能" />
     <MESSAGE value="No.22 更改屏幕分辨率并增加按键响应" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.22 更改屏幕分辨率并增加按键响应" />
+    <MESSAGE value="No.23 实现文本输入框和光标闪烁并用鼠标移动窗体" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.23 实现文本输入框和光标闪烁并用鼠标移动窗体" />
   </component>
 </project>

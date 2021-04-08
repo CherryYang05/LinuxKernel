@@ -80,7 +80,7 @@ int get_addr_buffer_int();
 void showMemInfo(struct SHTCTL *ctl, struct SHEET *sheet, struct MemRangeDesc *desc, char *vram, int page, int xsize, int color);
 
 //内存管理器，以 0x100000地址那块内存为例
-static struct MEMMANAGER *memman = (struct MEMMANAGER*)0x100000;
+static struct MEMMANAGER *memman = (struct MEMMANAGER *)0x100000;
 
 void init_screen8(char *vram, int x, int y);
 
@@ -141,8 +141,8 @@ void CMain(void) {
 
     //=============== 时钟中断操作结束 ===============
     //初始化键鼠缓冲区
-    fifo8_init(&keyInfo, 32, keybuf);
     fifo8_init(&mouseInfo, 128, mousebuf);
+    fifo8_init(&keyInfo, 32, keybuf);
     init_palette();
     init_keyboard();  //准备键盘
 
@@ -180,9 +180,9 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    sheet_win = messageBox(shtctl, "Counter");                  //新建窗口图层，调整窗口图层为1
-    sheet_level_updown(shtctl, sheet_back, 0);                  //调整桌面图层为0
-    sheet_level_updown(shtctl, sheet_mouse, 50);                //调整鼠标图层为100
+    sheet_win = messageBox(shtctl, "Counter");  //新建窗口图层，调整窗口图层为1
+    sheet_level_updown(shtctl, sheet_back, 0);                //调整桌面图层为0
+    sheet_level_updown(shtctl, sheet_mouse, 50);              //调整鼠标图层为100
     //sheet_slide(shtctl, sheet_win, 10, 10);
     //========================================
     // showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
@@ -192,50 +192,37 @@ void CMain(void) {
 
     io_sti();
     enable_mouse(&mouse_move);  //准备鼠标
-    static int cnt = 0;
+    int cnt = 0;
     unsigned char data = 0;
     struct TIMERCTL *timerctl = getTimerController();
     int cursor_c = COL8_FFFFFF;
     static int line = 0;        //横坐标
     static int pos = 16;        //纵坐标
-    //boxfill8(sheet_back->buf, sheet_back->bxsize, COL8_FFFF00, 0, 0, 10, 10);
     for (;;) {
         char *p = intToHexStr(timer->timeout);
         boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 150, 38);
-        showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
-
-        //显示键盘缓冲状态
-        char *ketbuf_p = intToHexStr(fifo8_status(&keyInfo));
-        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, 100, 76);
-        showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, COL8_008400, ketbuf_p);
-
-        //显示鼠标缓冲状态
-        char *mouse_p = intToHexStr(fifo8_status(&mouseInfo));
-        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, 100, 92);
-        showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, COL8_008400, mouse_p);
-        //sheet_refresh(shtctl, sheet_back, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, 100, 92);
-
+        showString(shtctl, sheet_win, BOX_MARGIN_LEFT + 0, BOX_MARGIN_TOP + 0, COL8_008400, p);
         io_cli();
         if (fifo8_status(&keyInfo) + fifo8_status(&mouseInfo) + fifo8_status(&timerInfo) +
-                fifo8_status(&timerInfo2) + fifo8_status(&timerInfo3) == 0) {
+                fifo8_status(&timerInfo2) + fifo8_status(&timerInfo3) ==
+            0) {
             io_sti();
-        } else if (fifo8_status(&keyInfo)) {    //键盘缓冲有数据
+        } else if (fifo8_status(&keyInfo)) {  //键盘缓冲有数据
             //showKeyboardInfo(shtctl, sheet_back);
             io_sti();
             data = fifo8_get(&keyInfo);
-            if (data == 0x1C) {                 //如果按下回车键(0x1C)，显示地址范围描述符信息
-                showMemInfo(shtctl, sheet_back, memDesc, sheet_back->buf, cnt, xsize, COL8_FFFFFF);
+            if (data == 0x1C) {  //如果按下回车键(0x1C)，显示地址范围描述符信息
+                showMemInfo(shtctl, sheet_back, memDesc + cnt, buf_back, cnt, xsize, COL8_FFFFFF);
                 cnt++;
                 if (cnt >= memCnt) {
                     cnt = 0;
                 }
                 //sheet_refresh(shtctl);
-            } else if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142) {        //打印键盘字符
-                //闪烁光标的位置,先变成白的，防止当闪烁到黑色是写入字符而变黑
-                boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
-                        BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
+            } else if (keytable[data] != 0 && data >= 0x10 && data <= 0x53) {  //打印键盘字符
+                boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line,    //闪烁光标的位置
+                         BOX_MARGIN_TOP + pos + 3, BOX_MARGIN_LEFT + line + 7, BOX_MARGIN_TOP + pos + 3 + 15);
                 sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                              BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                              BOX_MARGIN_LEFT + line + 7, BOX_MARGIN_TOP + pos + 3 + 15);
                 char buf[2] = {keytable[data], 0};
                 showString(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
                 line += 8;
@@ -265,10 +252,10 @@ void CMain(void) {
                 cursor_c = COL8_FFFFFF;
             }
             timer_setTime(timer3, 50);          //实现光标闪烁
-            boxfill8(sheet_win->buf, sheet_win->bxsize, cursor_c, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
-                    BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);
+            boxfill8(sheet_win->buf, sheet_win->bxsize, cursor_c, BOX_MARGIN_LEFT + line,
+                         BOX_MARGIN_TOP + pos + 3, BOX_MARGIN_LEFT + line + 7, BOX_MARGIN_TOP + pos + 3 + 15);
             sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                    BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                          BOX_MARGIN_LEFT + line + 7, BOX_MARGIN_TOP + pos + 3 + 15);
         }
     }
 }
@@ -356,7 +343,8 @@ void set_palette(int start, int end, unsigned char *rgb) {
     return;
 }
 
-void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, int x1, int y1) {
+void boxfill8(unsigned char *vram, int xsize, unsigned char c,
+              int x0, int y0, int x1, int y1) {
     int x, y;
     for (y = y0; y <= y1; y++) {
         for (x = x0; x <= x1; x++) {
@@ -696,8 +684,9 @@ void computeMousePos(struct SHTCTL *ctl, struct SHEET *sheet, struct MOUSE_DEC *
     if (my < 0) my = 0;
     if (mx > xsize - 9) mx = xsize - 9;
     if (my > ysize - 1) my = ysize - 1;
-    //boxfill8(sheet->buf, xsize, COL8_0078D7, 0, 0, 79, 15);
-    //showString(ctl, sheet, 0, 0, COL8_FFFF00, "The mouse is moving...");
+    boxfill8(buf_back, xsize, COL8_0078D7, 0, 0, 79, 15);
+    //showString(buf_back, xsize, 0, 0, COL8_FFFF00, "mouse move");
+    showString(ctl, sheet, 0, 0, COL8_FFFF00, "The mouse is moving...");
 }
 
 /**

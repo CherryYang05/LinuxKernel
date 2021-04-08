@@ -12,7 +12,6 @@ LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C | DA_32 | DA_LIMIT_
 LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFh,			      DA_DRW				;0B8000h是显存地址，设置该数据段属性为可读写
 LABEL_DESC_VRAM:		Descriptor	    0,			  0FFFFFh,			  DA_DRW | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
 LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,		      DA_DRWA | DA_32
-LABEL_DESC_FONT:    	Descriptor      0,           0fffffh,   		DA_DRW | DA_LIMIT_4K  
 
 GDTLen	EQU	$ - LABEL_GDT
 GDTPtr	DW	GDTLen - 1
@@ -23,7 +22,6 @@ SelectorCode32	EQU LABEL_DESC_CODE_32 	- 	LABEL_GDT
 SelectorShow	EQU LABEL_DESC_SHOW 	- 	LABEL_GDT
 SelectorStack   EQU LABEL_DESC_STACK  	-  	LABEL_GDT
 SelectorVram	EQU	LABEL_DESC_VRAM 	- 	LABEL_GDT
-SelectorFont    EQU LABEL_DESC_FONT - LABEL_GDT
 
 ;中断描述符表
 LABEL_IDT:
@@ -34,7 +32,6 @@ LABEL_IDT:
 
 .020h:		;对应主8259A芯片IRQ0引脚，控制时钟中断
 	Gate SelectorCode32, timerHandler, 0, DA_386IGate
-	
 .021h:		;对应主8259A芯片IRQ1引脚，控制键盘中断
 	Gate SelectorCode32, KeyBoardHandler, 0, DA_386IGate
 
@@ -114,14 +111,6 @@ LABEL_MEM_CHECK_OK:
     ;mov byte [LABEL_DESC_STACK + 4], al
     ;mov byte [LABEL_DESC_STACK + 7], ah
 	
-	xor   eax, eax
-    mov   ax,  cs
-    shl   eax, 4
-    add   eax, LABEL_SYSTEM_FONT
-    mov   word [LABEL_DESC_FONT + 2], ax
-    shr   eax, 16
-    mov   byte [LABEL_DESC_FONT + 4], al
-    mov   byte [LABEL_DESC_FONT + 7], ah
 	
 	xor eax, eax
 	mov ax, ds

@@ -1,5 +1,5 @@
 #define BOX_MARGIN_LEFT 8
-#define BOX_MARGIN_TOP 23
+#define BOX_MARGIN_TOP 22
 
 /**
  * 图层结构体

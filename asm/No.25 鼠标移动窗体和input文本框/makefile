@@ -21,6 +21,6 @@ all : ckernel.asm
 	@echo "镜像已移动到虚拟机根目下"
 	@mv system.img /home/cherry/Bochs
 	@echo "镜像已移动到Bochs根目下"
-	@rm ckernel.o write_vga_desktop_win.o win_sheet.o mem_util.o timer.o global_define.o
+	@rm ckernel.o write_vga_desktop_win.o win_sheet.o mem_util.o
 clean:
 	rm ckernel.o write_vga_desktop_win.o win_sheet.o mem_util.o timer.o global_define.o
