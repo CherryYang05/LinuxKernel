@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/kernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log" beforeDir="false" afterPath="$PROJECT_DIR$/log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pm.inc" beforeDir="false" afterPath="$PROJECT_DIR$/pm.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
-    </list>
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +81,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.OS">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Java4Linux_kernel" />
@@ -106,8 +96,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProcessASMFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ProcessASMFile" />
+    <configuration name="OS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="OS" />
       <module name="Java4Linux_kernel" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -135,11 +125,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.OS" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestDemo.Test2" />
         <item itemvalue="Application.MakeFont" />
         <item itemvalue="JUnit.TestDemo.makeFile" />
-        <item itemvalue="Application.ProcessASMFile" />
       </list>
     </recent_temporary>
   </component>
@@ -201,6 +191,7 @@
       <workItem from="1618238451245" duration="215000" />
       <workItem from="1619158599250" duration="681000" />
       <workItem from="1619248157885" duration="665000" />
+      <workItem from="1620124433358" duration="214000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -398,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617889761948</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="No.23-2 新增键盘输入删除功能">
+      <created>1620124613887</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1620124613887</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,7 +417,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="No.2 实现内核加载器" />
     <MESSAGE value="No.3 实模式与保护模式" />
     <MESSAGE value="No.8 调色板绘制系统界面" />
     <MESSAGE value="增加了 README.md 说明文件" />
@@ -444,6 +441,7 @@
     <MESSAGE value="No.22 更改屏幕分辨率并增加按键响应" />
     <MESSAGE value="No.23 实现文本输入框和光标闪烁并用鼠标移动窗体" />
     <MESSAGE value="No.23-1 优化窗体显示，修改了系统崩溃的bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.23-1 优化窗体显示，修改了系统崩溃的bug" />
+    <MESSAGE value="No.23-2 新增键盘输入删除功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.23-2 新增键盘输入删除功能" />
   </component>
 </project>
