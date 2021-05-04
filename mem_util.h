@@ -23,10 +23,10 @@ struct FREEINFO {
 
 /**
  * 内存管理器
- * @param {frees}
- *        {maxfrees}
- *        {lostsize}
- *        {losts}
+ * @param {frees}       可用内存对应的结构体
+ *        {maxfrees}    当前内存管理器最多可容纳多少个结构体
+ *        {lostsize}    不能被内存管理器回收的碎片大小
+ *        {losts}       碎片数量
  */
 struct MEMMANAGER {
     int frees, maxfrees, lostsize, losts;

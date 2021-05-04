@@ -8,11 +8,17 @@ jmp LABEL_BEGIN
 ;全局描述符表
 ;                             		  段基址          段界限               		属性
 LABEL_GDT:				Descriptor		0,				0,						 0
-LABEL_DESC_CODE_32:		Descriptor		0,			SegCode32Len - 1,	DA_C | DA_32 | DA_LIMIT_4K	;结构体初始化时只能传入常量
-LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFh,			      DA_DRW				;0B8000h是显存地址，设置该数据段属性为可读写
-LABEL_DESC_VRAM:		Descriptor	    0,			  0FFFFFh,			  DA_DRW | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
-LABEL_DESC_STACK:		Descriptor		0,			TopOfStack,		      DA_DRWA | DA_32
-LABEL_DESC_FONT:    	Descriptor      0,           0fffffh,   		DA_DRW | DA_LIMIT_4K  
+LABEL_DESC_CODE_32:		Descriptor		0,			  0FFFFFh,		 DA_CR | DA_32 | DA_LIMIT_4K	;结构体初始化时只能传入常量
+LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFFh,			       DA_DRW				;0B8000h是显存地址，设置该数据段属性为可读写
+LABEL_DESC_VRAM:		Descriptor	    0,			  0FFFFFh,			  DA_DRWA | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
+LABEL_DESC_STACK:		Descriptor		0,		LenOfStackSection,		  DA_DRWA | DA_32
+LABEL_DESC_FONT:    	Descriptor      0,           0fffffh,   		   DA_DRW | DA_LIMIT_4K  
+
+;
+LABEL_DESC_6:			Descriptor		0,			 0fffffh,					0409Ah
+LABEL_DESC_7:			Descriptor		0,			 	0,						0
+LABEL_DESC_8:			Descriptor		0,			 	0,						0
+LABEL_DESC_9:			Descriptor		0,			 	0,						0
 
 GDTLen	EQU	$ - LABEL_GDT
 GDTPtr	DW	GDTLen - 1
@@ -23,7 +29,7 @@ SelectorCode32	EQU LABEL_DESC_CODE_32 	- 	LABEL_GDT
 SelectorShow	EQU LABEL_DESC_SHOW 	- 	LABEL_GDT
 SelectorStack   EQU LABEL_DESC_STACK  	-  	LABEL_GDT
 SelectorVram	EQU	LABEL_DESC_VRAM 	- 	LABEL_GDT
-SelectorFont    EQU LABEL_DESC_FONT - LABEL_GDT
+SelectorFont    EQU LABEL_DESC_FONT 	- 	LABEL_GDT
 
 ;中断描述符表
 LABEL_IDT:
@@ -49,8 +55,8 @@ IdtLen	EQU 	$ - LABEL_IDT
 IdtPtr  DW  	IdtLen - 1
         DD  	0
 
-[SECTION  .s16]
-[BITS  16]
+[SECTION .s16]
+[BITS 16]
 
 LABEL_BEGIN:
 	mov	ax, cs		;初始化
@@ -151,8 +157,10 @@ LABEL_MEM_CHECK_OK:
 	or  eax, 1
 	mov cr0, eax		;设置cr0的PE位为1，进入保护模式
 
-	jmp dword SelectorCode32:0
-	
+	;jmp dword SelectorCode32:0
+	cli
+	jmp dword 1*8:0
+
 init8259A:
     mov  al, 011h		;向主8259A 20h端口发送ICW1，00010001b，表示需要发送ICW4，级联，8字节中断向量，边沿触发
     out  020h, al		
@@ -207,7 +215,7 @@ io_delay:
 LABEL_SEG_CODE32:
 	mov ax, SelectorStack
     mov ss, ax
-    mov esp, TopOfStack
+    mov esp, TopOfStack1
 
     mov ax, SelectorVram
     mov ds, ax
@@ -281,6 +289,16 @@ timerHandler equ _timerHandler - $$
 	iretd
 
 ;===================================================================================
+get_font_data:
+    mov ax, SelectorFont
+    mov es, ax
+    xor edi, edi
+    mov edi, [esp + 4] ;char
+    shl edi, 4
+    add edi, [esp + 8]
+    xor eax, eax
+    mov al, byte [es:edi]
+    ret
 
 io_hlt:  					;void io_hlt(void);
     HLT
@@ -368,6 +386,37 @@ get_addr_buffer_int:
 	mov eax, MemCheckBuf
 	ret
 
+;导出到C语言的接口，返回全局描述符表首地址
+get_addr_gdt:
+    mov  eax, LABEL_GDT
+    ret
+
+;导出到C语言的接口，返回代码段首地址
+get_code32_addr:
+    mov  eax, LABEL_SEG_CODE32
+    ret
+
+;导出到C语言的接口，
+load_tr:
+    LTR  [esp + 4]
+    ret
+
+taskswitch6:
+    jmp  6*8:0
+    ret
+
+taskswitch7:
+    jmp  7*8:0
+    ret
+
+taskswitch8:
+    jmp  8*8:0
+    ret
+
+taskswitch9:
+    jmp  9*8:0
+    ret
+
 SegCode32Len   equ  $ - LABEL_SEG_CODE32
 
 MemCheckBuf: times 256 db 0
@@ -375,8 +424,12 @@ dwMCRNumber: dd 0				;记录BIOS总共向内存中写入多少个数据结构
 [SECTION .gs]
 ALIGN 32
 [BITS 32]
-LABEL_STACK: times 512  db 0
-TopOfStack  equ  $ - LABEL_STACK
+LABEL_STACK: 
+times 512  db 0
+TopOfStack1  		equ  $ - LABEL_STACK
+times 512 db 0
+TopOfStack2  		equ  $ - LABEL_STACK
+LenOfStackSection   equ  $ - LABEL_STACK
 
 LABEL_SYSTEM_FONT:
 %include "fontData.inc"
