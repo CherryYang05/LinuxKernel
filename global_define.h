@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 //主8259A控制器端口
 #define PIC0_OCW2 0x20
 //从8259A控制器端口
@@ -99,3 +101,13 @@ char io_in8(int port);  //从端口读一个 8字节数据
 void io_out8(int port, int data);
 int io_load_eflags(void);
 void io_store_eflags(int eflags);
+
+void taskswitch6();
+void taskswitch7();
+void taskswitch8();
+void taskswitch9();
+void task_b_main();
+int get_code32_addr();
+int get_addr_gdt();
+void load_tr(int);
+void farjmp(int, int);

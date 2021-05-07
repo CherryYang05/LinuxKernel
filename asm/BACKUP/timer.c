@@ -1,5 +1,7 @@
 #include "global_define.h"
 #include "timer.h"
+#include "multi_task.h"
+
 #define  PIC0_OCW2     0x20
 #define  PIC1_OCW2    0xA0
 #define  TIMER_FLAGS_ALLOC  1
@@ -7,7 +9,6 @@
 
 static struct TIMERCTL timerctl;
 
-void io_out8(int, int);
 
 void  init_pit(void) {
     io_out8(PIT_CTRL, 0x34);
@@ -44,28 +45,37 @@ void timer_init(struct TIMER *timer, struct FIFO8 *fifo, unsigned char data) {
     return;
 }
 
-void timer_setTime(struct TIMER *timer, unsigned int timeout) {
+void timer_settime(struct TIMER *timer, unsigned int timeout) {
     timer->timeout = timeout;
     timer->flags = TIMER_FLAGS_USING;
     return;
 }
 
 
-
 void intHandlerForTimer(char *esp) {
-    io_out8(PIC0_OCW2, 0x60);
-    timerctl.count++;
+    io_out8(PIC0_OCW2, 0x20);
 
+    timerctl.count++;
     int i;
+    char ts = 0;
+
     for (i = 0; i < MAX_TIMER; i++) {
         if (timerctl.timer[i].flags == TIMER_FLAGS_USING) {
             timerctl.timer[i].timeout--;
             if (timerctl.timer[i].timeout == 0) {
                 timerctl.timer[i].flags = TIMER_FLAGS_ALLOC;
                 fifo8_put(timerctl.timer[i].fifo, timerctl.timer[i].data);
+                if (&timerctl.timer[i] == getTaskTimer()) {
+                    ts = 1;
+                }
             }
         }
+ 
+        if (ts != 0) {
+           task_switch();
+        }
     }
+
 
     return;
 }

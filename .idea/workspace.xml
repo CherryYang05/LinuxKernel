@@ -191,7 +191,7 @@
       <workItem from="1618238451245" duration="215000" />
       <workItem from="1619158599250" duration="681000" />
       <workItem from="1619248157885" duration="665000" />
-      <workItem from="1620124433358" duration="214000" />
+      <workItem from="1620124433358" duration="308000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -396,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620124613887</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="No.23-2 新增键盘输入删除功能">
+      <created>1620124743263</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1620124743263</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

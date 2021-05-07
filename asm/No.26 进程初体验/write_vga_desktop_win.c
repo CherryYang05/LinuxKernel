@@ -90,7 +90,7 @@ static unsigned char *buf_back, buf_mouse[256];
 #define COLOR_INVISIBLE 99
 
 void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title);
-struct SHEET *messageBox(struct SHTCTL *ctl, char *title);
+struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int x, int y, int level);
 
 //时钟中断相关
 static struct FIFO8 timerInfo;
@@ -109,6 +109,7 @@ void make_textbox8(struct SHEET *sheet, int x0, int y0, int sx, int sy, int c);
 
 static struct SHTCTL *shtctl;           //图层控制器
 static struct SHEET *sheet_win;
+static struct SHEET *sheet_win2;
 static struct SHEET *sheet_back;        //桌面图层
 static struct SHEET *sheet_mouse;       //鼠标图层
 
@@ -171,10 +172,8 @@ void CMain(void) {
     memman_free(memman, 0x00108000, 0x3FEE8000);
     int memTotal = memman_total(memman) / (1024 * 1024);
     char *pMemTotal = intToHexStr(memTotal);
-    showString(shtctl, sheet_back, 0, 0, COL8_FFFF00, "Total Mem Size is: ");
-    showString(shtctl, sheet_back, 19 * 8, 0, COL8_FFFF00, pMemTotal);
-    showString(shtctl, sheet_back, 30 * 8, 0, COL8_FFFF00, "MB");
     shtctl = shtctl_init(memman, vram, xsize, ysize);
+    
 
     //======================== 图层操作 ===========================
     sheet_back = sheet_alloc(shtctl);
@@ -189,7 +188,8 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    sheet_win = messageBox(shtctl, "Counter");                  //新建窗口图层，调整窗口图层为1
+    sheet_win = messageBox(shtctl, "Counter", 200, 100, 2);     //新建窗口图层，调整窗口图层为1
+    sheet_win2 = messageBox(shtctl, "WIN_SHEET", 230, 120, 1);
     sheet_level_updown(shtctl, sheet_back, 0);                  //调整桌面图层为0
     sheet_level_updown(shtctl, sheet_mouse, 50);                //调整鼠标图层为100
     //sheet_slide(shtctl, sheet_win, 10, 10);
@@ -198,7 +198,9 @@ void CMain(void) {
     // showString(shtctl, sheet_back, 0, 32, COL8_00FF00, intToHexStr((int)buf_back));
     // showString(shtctl, sheet_back, 0, 48, COL8_00FF00, intToHexStr((int)shtctl->vram));
     //======================== 图层操作结束 ========================
-
+    showString(shtctl, sheet_back, 0, 0, COL8_FFFF00, "Total Mem Size is: ");
+    showString(shtctl, sheet_back, 19 * 8, 0, COL8_FFFF00, pMemTotal);
+    showString(shtctl, sheet_back, 30 * 8, 0, COL8_FFFF00, "MB");
     
     //======================== 进程操作开始 ========================
     static struct TSS32 tss_a, tss_b;
@@ -249,12 +251,12 @@ void CMain(void) {
 	tss_b.ecx = 0;
 	tss_b.edx = 0;
 	tss_b.ebx = 0;
-	tss_b.esp = 1024;//tss_a.esp;
+	tss_b.esp = 1024;           //tss_a.esp;
 	tss_b.ebp = 0;
 	tss_b.esi = 0;
 	tss_b.edi = 0;
 	tss_b.es = tss_a.es;
-	tss_b.cs = tss_a.cs;//6 * 8;
+	tss_b.cs = tss_a.cs;        //6 * 8;
 	tss_b.ss = tss_a.ss;
 	tss_b.ds = tss_a.ds;
 	tss_b.fs = tss_a.fs;
@@ -300,23 +302,35 @@ void CMain(void) {
                     cnt = 0;
                 }
                 //sheet_refresh(shtctl);
-            } else if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142) {        //打印键盘字符
-                //闪烁光标的位置,先变成白的，防止当闪烁到黑色是写入字符而变黑
-                boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
-                        BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
-                sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                              BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
-                char buf[2] = {keytable[data], 0};
-                showString(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
-                line += 8;
-                if (line >= sheet_win->bxsize - 2 * BOX_MARGIN_LEFT) {
-                    pos += 16;
-                    line = 0;
-                }
+            } else if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142 || data == 0x0E && line >= 8) {        //打印键盘字符
+                if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142) {
+                    //闪烁光标的位置,先变成白的，防止当闪烁到黑色是写入字符而变黑
+                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
+                            BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
+                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    char buf[2] = {keytable[data], 0};
+                    showString(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
+                    line += 8;
+                    if (line >= sheet_win->bxsize - 2 * BOX_MARGIN_LEFT) {
+                        pos += 16;
+                        line = 0;
+                    }
+                } else if (data == 0x0E && line >= 8) {     //删除键
+                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
+                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    line -= 8;
+                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
+                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                }      
             }
-        } else if (fifo8_status(&mouseInfo)) {          //鼠标缓冲有数据
+        } else if (fifo8_status(&mouseInfo)) {              //鼠标缓冲有数据
             showMouseInfo(shtctl, sheet_back, sheet_mouse);
-        } else if (fifo8_status(&timerInfo)) {          //处理时钟中断timer
+        } else if (fifo8_status(&timerInfo)) {              //处理时钟中断timer
             io_sti();
             int key = fifo8_get(&timerInfo);
             if (key == 10) {
@@ -332,7 +346,7 @@ void CMain(void) {
                     timer_init(timer3, &timerInfo, 1);
                     cursor_c = COL8_FFFFFF;
                 }
-                timer_setTime(timer3, 50);          //实现光标闪烁
+                timer_setTime(timer3, 50);              //实现光标闪烁
                 boxfill8(sheet_win->buf, sheet_win->bxsize, cursor_c, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
                         BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);
                 sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
@@ -843,7 +857,7 @@ void showMemInfo(struct SHTCTL *ctl, struct SHEET *sheet, struct MemRangeDesc *d
 /**
  * 新建窗体图层并绘制窗体
  */
-struct SHEET *messageBox(struct SHTCTL *ctl, char *title) {
+struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int x, int y, int level) {
     struct SHEET *sheet_win;
     unsigned char *buf_win;
     buf_win = (unsigned char *)memman_alloc_4K(memman, 300 * 125);
@@ -851,8 +865,8 @@ struct SHEET *messageBox(struct SHTCTL *ctl, char *title) {
     sheet_setbuf(sheet_win, buf_win, 300, 125, COLOR_INVISIBLE);
     make_window8(ctl, sheet_win, title);
     make_textbox8(sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 19, 150, 16, COL8_FFFFFF);
-    sheet_slide(ctl, sheet_win, 200, 120);
-    sheet_level_updown(ctl, sheet_win, 1);
+    sheet_slide(ctl, sheet_win, x, y);
+    sheet_level_updown(ctl, sheet_win, level);
     return sheet_win;
 }
 

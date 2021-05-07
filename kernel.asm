@@ -222,7 +222,7 @@ LABEL_SEG_CODE32:
 	
 	mov ax, SelectorShow
 	mov gs, ax
-	sti
+	cli
 
 	%include "ckernel.asm"
 	
@@ -273,19 +273,19 @@ MouseHandler equ _MouseHandler - $$
 ;时钟中断处理函数
 _timerHandler:
 timerHandler equ _timerHandler - $$
+	pushad
 	push es
 	push ds
-	pushad
-	mov eax, esp
-	push eax
+	push fs
+	push gs
 	
 	call intHandlerForTimer
 	
-	pop eax
-	mov esp, eax
-	popad
+	pop gs
+	pop fs
 	pop ds
 	pop es
+	popad
 	iretd
 
 ;===================================================================================
@@ -396,7 +396,7 @@ get_code32_addr:
     mov  eax, LABEL_SEG_CODE32
     ret
 
-;导出到C语言的接口，
+;导出到C语言的接口，装载任务状态段寄存器TR
 load_tr:
     LTR  [esp + 4]
     ret
@@ -416,11 +416,19 @@ taskswitch8:
 taskswitch9:
     jmp  9*8:0
     ret
+farjmp:
+	jmp  FAR [esp + 4]			;写入eip
+	ret
 
 SegCode32Len   equ  $ - LABEL_SEG_CODE32
 
 MemCheckBuf: times 256 db 0
 dwMCRNumber: dd 0				;记录BIOS总共向内存中写入多少个数据结构
+
+LABEL_SYSTEM_FONT:
+%include "fontData.inc"
+SystemFontLength equ $ - LABEL_SYSTEM_FONT		;导入字体二进制数据
+
 [SECTION .gs]
 ALIGN 32
 [BITS 32]
@@ -431,7 +439,3 @@ times 512 db 0
 TopOfStack2  		equ  $ - LABEL_STACK
 LenOfStackSection   equ  $ - LABEL_STACK
 
-LABEL_SYSTEM_FONT:
-%include "fontData.inc"
-
-SystemFontLength equ $ - LABEL_SYSTEM_FONT		;导入字体二进制数据

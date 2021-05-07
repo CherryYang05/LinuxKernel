@@ -30,11 +30,11 @@ struct TIMER* timer_alloc();
 void timer_free(struct TIMER *timer);
 
 /**
- * 初始化时钟中断对象
- */
-void timer_init(struct TIMER *timer, struct FIFO8 *fifo, unsigned char data);
-
-/**
  * 设置超时时间片
  */
 void timer_setTime(struct TIMER *timer, unsigned int timeout);
+
+/**
+ * 初始化时钟中断对象
+ */
+void timer_init(struct TIMER *timer, struct FIFO8 *fifo, unsigned char data);
