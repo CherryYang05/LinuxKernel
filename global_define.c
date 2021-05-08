@@ -1,5 +1,5 @@
 #include "global_define.h"
-
+#include "multi_task.h"
 
 /**
  * 初始化数据缓冲区
@@ -8,13 +8,14 @@
  * @param {unsignedchar} *buf
  * @return {*}
  */
-void fifo8_init(struct FIFO8 *fifo, int size, unsigned char *buf) {
+void fifo8_init(struct FIFO8 *fifo, int size, unsigned char *buf, struct TASK *task) {
     fifo->size = size;
     fifo->buf = buf;
     fifo->free = size;
     fifo->read = 0;
     fifo->write = 0;
     fifo->flags = 0;
+    fifo->task = task;
     return;
 }
 
@@ -27,6 +28,8 @@ void fifo8_init(struct FIFO8 *fifo, int size, unsigned char *buf) {
  * @return {*}
  */
 int fifo8_put(struct FIFO8 *fifo, unsigned char data) {
+    if (fifo == 0) return -1;
+
     if (fifo->free == 0) {
         fifo->flags |= FLAGS_OVERRUN;
         return -1;
@@ -37,6 +40,11 @@ int fifo8_put(struct FIFO8 *fifo, unsigned char data) {
         fifo->write = 0;
     }
     fifo->free--;
+    if (fifo->task != 0) {
+        if (fifo->task->flags != 2) {
+            task_run(fifo->task);
+        }
+    }
     return OK;
 }
 

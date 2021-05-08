@@ -56,7 +56,7 @@ int getMulti_Task_tr();
 /**
  * 进程结构体
  * @param	{sel} 该进程的TSS32结构对应的段描述符下标
- * 			{flags} 进程状态（空闲或占用）
+ * 			{flags} 进程状态（0表示空闲，1表示挂起，2表示运行）
  */
 struct TASK {
 	int sel, flags;
@@ -70,7 +70,7 @@ struct TASK {
 /**
  * 进程管理控制器
  * @param	{running} 正在运行的进程数量
- * 			{now} 表示下一个将被切换到前台的进程编号
+ * 			{now} 表示当前正在运行的进程编号
  */
 struct TASKCTL {
 	int running;
@@ -94,3 +94,9 @@ void task_run(struct TASK *task);
  * 任务调度机制
  */
 void task_switch();
+
+/**
+ * 进程睡眠
+ */
+void task_sleep(struct TASK *task);
+

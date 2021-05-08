@@ -129,7 +129,7 @@ void CMain(void) {
 
     init_pit();
 
-    fifo8_init(&timerInfo, 8, timerbuf);
+    fifo8_init(&timerInfo, 8, timerbuf, 0);
     timer = timer_alloc();
     timer_init(timer, &timerInfo, 10);
     timer_setTime(timer, 100);
@@ -144,10 +144,11 @@ void CMain(void) {
 
     //===================== 时钟中断操作结束 =====================
     //初始化键鼠缓冲区
-    fifo8_init(&keyInfo, 32, keybuf);
-    fifo8_init(&mouseInfo, 128, mousebuf);
+    fifo8_init(&keyInfo, 32, keybuf, 0);
+    fifo8_init(&mouseInfo, 128, mousebuf, 0);
     init_palette();
     init_keyboard();  //准备键盘
+    io_sti();
     enable_mouse(&mouse_move);  //准备鼠标
 
     // int memAddr = get_addr_buffer_int();
@@ -263,6 +264,9 @@ void CMain(void) {
     //struct TSS32 *pTss = (struct TSS32*)memman_alloc_4K(memman, 103);
 
     task_a = task_init(memman);
+
+    keyInfo.task = task_a;          //***
+
     task_b = task_alloc();
     task_b->tss.ldtr = 0;
     task_b->tss.iomap = 0x40000000;
@@ -288,21 +292,23 @@ void CMain(void) {
     //multi_task_init();          //初始化任务调度时钟
     //showString(shtctl, sheet_back, 0, 192 + line, COL8_00FF00, intToHexStr(getMulti_Task_tr() / 8));
     //line += 8;
-    
+    showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 40, COL8_008400, "Copyright 2021 Cherry");
+
+    int stop_task_a = 0;
     for (;;) {
-        // io_sti();
+        io_sti();
         //显示时钟中断倒计时
         //char *p = intToHexStr(timer->timeout);
-        // char *p = intToHexStr(getTaskTimer()->timeout);
-        // boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 150, 38);
-        // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
-
-        // //显示键盘缓冲状态
-        // char *ketbuf_p = intToHexStr(fifo8_status(&keyInfo));
+        char *p = intToHexStr(getTaskTimer()->timeout);
+        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 150, 38);
+        showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
+        
+        //显示键盘缓冲状态
+        // char *keybuf_p = intToHexStr(fifo8_status(&keyInfo));
         // boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, 100, 76);
-        // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, COL8_008400, ketbuf_p);
+        // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, COL8_008400, "keybuf_p");
 
-        // //显示鼠标缓冲状态
+        //显示鼠标缓冲状态
         // char *mouse_p = intToHexStr(fifo8_status(&mouseInfo));
         // boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, 100, 92);
         // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, COL8_008400, mouse_p);
@@ -335,6 +341,7 @@ void CMain(void) {
                         pos += 16;
                         line = 0;
                     }
+                    stop_task_a = 0;
                 } else if (data == 0x0E && line >= 8) {     //删除键
                     boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
                             BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
@@ -359,6 +366,13 @@ void CMain(void) {
                 //taskswitch9();
                 timer_setTime(timer, 100);
                 xpos += 8;
+                //A进程休眠
+                stop_task_a++;
+                if (xpos >= 40 && stop_task_a == 5) {
+                    io_cli();
+                    task_sleep(task_a);
+                    io_sti();
+                }
             } else if (key == 2) {
                 showString(shtctl, sheet_back, 80, 32, COL8_FFFFFF, "3[sec]");
             } else {                                        //处理时钟中断timer，绘制闪烁光标
@@ -390,7 +404,7 @@ void task_b_main() {
 
     int i = 0;
  
-    fifo8_init(&timerinfo_b, 8, timerbuf_b);
+    fifo8_init(&timerinfo_b, 8, timerbuf_b, 0);
     timer_b = timer_alloc();
     timer_init(timer_b, &timerinfo_b, 123);
    

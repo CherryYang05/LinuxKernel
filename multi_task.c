@@ -136,7 +136,7 @@ struct TASK *task_alloc(void) {
  * 进程运行
  */
 void task_run(struct TASK *task) {
-    task->flags = 2;
+    task->flags = 2;        //运行
     taskctl->tasks[taskctl->running] = task;
     taskctl->running++;
     return;
@@ -156,3 +156,42 @@ void task_switch() {
     }
     return;
 }
+
+/**
+ * 进程睡眠
+ */
+void task_sleep(struct TASK *task) {
+    char ts = 0;
+    //若当前运行的进程正好是要挂起的进程
+    if (task->flags == 2) {
+        if (task == taskctl->tasks[taskctl->now]) {
+            ts = 1;
+        }
+    }
+    int i;
+    //循环找出这个进程
+    for (i = 0; i < taskctl->running; ++i) {
+        if (taskctl->tasks[i] == task) {
+            break;
+        }
+    }
+    taskctl->running--;
+    //???
+    if (i < taskctl->now) {
+        taskctl->now--;
+    }
+
+    for (; i < taskctl->running; ++i) {
+        taskctl->tasks[i] = taskctl->tasks[i + 1];
+    }
+
+    task->flags = 1;        //挂起
+    if (ts != 0) {
+        //若当前挂起的进程是正在运行的进程，则将第0个进程调度到前台运行
+        if (taskctl->now >= taskctl->running) {
+            taskctl->now = 0;
+        }
+        farjmp(0, taskctl->tasks[taskctl->now]->sel);
+    }
+}
+

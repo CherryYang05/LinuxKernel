@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="" />
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,6 +194,7 @@
       <workItem from="1619158599250" duration="681000" />
       <workItem from="1619248157885" duration="665000" />
       <workItem from="1620124433358" duration="308000" />
+      <workItem from="1620398545089" duration="409000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -403,7 +406,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620124743263</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="No.24 进程实现，手动切换进程">
+      <created>1620398619658</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1620398619658</updated>
+    </task>
+    <task id="LOCAL-00032" summary="No.24-1 实现进程自动切换">
+      <created>1620398687117</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1620398687117</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,8 +441,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="No.3 实模式与保护模式" />
-    <MESSAGE value="No.8 调色板绘制系统界面" />
     <MESSAGE value="增加了 README.md 说明文件" />
     <MESSAGE value="No.9 绘制系统字体，增加了 asm 处理程序" />
     <MESSAGE value="No.10 绘制鼠标指针" />
@@ -449,6 +464,8 @@
     <MESSAGE value="No.23 实现文本输入框和光标闪烁并用鼠标移动窗体" />
     <MESSAGE value="No.23-1 优化窗体显示，修改了系统崩溃的bug" />
     <MESSAGE value="No.23-2 新增键盘输入删除功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.23-2 新增键盘输入删除功能" />
+    <MESSAGE value="No.24 进程实现，手动切换进程" />
+    <MESSAGE value="No.24-1 实现进程自动切换" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.24-1 实现进程自动切换" />
   </component>
 </project>

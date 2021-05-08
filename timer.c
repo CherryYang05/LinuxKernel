@@ -10,7 +10,8 @@ void init_pit() {
     io_out8(PIT_CNT0, 0x2e);
     timerctl.count = 0;
     for (int i = 0; i < MAX_TIMER; ++i) {
-        timerctl.timer[i].flags = 0;  //未使用
+        timerctl.timer[i].flags = 0;    //未使用
+        timerctl.timer[i].fifo = 0;     //队列必须初始化为0
     }
 }
 

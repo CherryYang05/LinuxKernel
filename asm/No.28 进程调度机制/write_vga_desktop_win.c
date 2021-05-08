@@ -148,6 +148,7 @@ void CMain(void) {
     fifo8_init(&mouseInfo, 128, mousebuf);
     init_palette();
     init_keyboard();  //准备键盘
+    io_sti();
     enable_mouse(&mouse_move);  //准备鼠标
 
     // int memAddr = get_addr_buffer_int();
@@ -288,21 +289,21 @@ void CMain(void) {
     //multi_task_init();          //初始化任务调度时钟
     //showString(shtctl, sheet_back, 0, 192 + line, COL8_00FF00, intToHexStr(getMulti_Task_tr() / 8));
     //line += 8;
-    
+    showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 40, COL8_008400, "Copyright 2021 Cherry");
     for (;;) {
-        // io_sti();
+        io_sti();
         //显示时钟中断倒计时
         //char *p = intToHexStr(timer->timeout);
-        // char *p = intToHexStr(getTaskTimer()->timeout);
-        // boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 150, 38);
-        // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
-
-        // //显示键盘缓冲状态
-        // char *ketbuf_p = intToHexStr(fifo8_status(&keyInfo));
+        char *p = intToHexStr(getTaskTimer()->timeout);
+        boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 150, 38);
+        showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
+        
+        //显示键盘缓冲状态
+        // char *keybuf_p = intToHexStr(fifo8_status(&keyInfo));
         // boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, 100, 76);
-        // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, COL8_008400, ketbuf_p);
+        // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 38, COL8_008400, "keybuf_p");
 
-        // //显示鼠标缓冲状态
+        //显示鼠标缓冲状态
         // char *mouse_p = intToHexStr(fifo8_status(&mouseInfo));
         // boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, 100, 92);
         // showString(shtctl, sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 54, COL8_008400, mouse_p);
