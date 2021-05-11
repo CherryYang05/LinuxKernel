@@ -92,7 +92,7 @@ static unsigned char *buf_back, buf_mouse[256];
 void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title);
 
 struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int bx, int by, int x0, int y0, int level);
-struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, char *title, int bx, int by, int x0, int y0, int level);
+struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int priority, char *title, int bx, int by, int x0, int y0, int level);
 
 //时钟中断相关
 static struct FIFO8 timerInfo;
@@ -250,9 +250,9 @@ void CMain(void) {
 
     keyInfo.task = task_a;          //***
 
-    sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], "Task1", 150, 50, 150, 30, 3);
-    sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], "Task2", 150, 50, 300, 30, 2);
-    sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], "Task3", 150, 50, 450, 30, 1);
+    sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 5,  "Task1", 150, 50, 150, 30, 3);
+    sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 10, "Task2", 150, 50, 300, 30, 2);
+    sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 20, "Task3", 150, 50, 450, 30, 1);
     showString(shtctl, sheet_back, 0, 0, COL8_FFFFFF, intToHexStr(getTaskctl()->running));
     //======================== 进程操作结束 ========================
 
@@ -303,12 +303,12 @@ void CMain(void) {
             } else if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142 || data == 0x0E && line >= 8) {    //打印键盘字符
                 if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142) {
                     //闪烁光标的位置,先变成白的，防止当闪烁到黑色是写入字符而变黑
-                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
-                            BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
-                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2+ line, BOX_MARGIN_TOP + pos + 3, 
+                            BOX_MARGIN_LEFT + 2 + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
+                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
                     char buf[2] = {keytable[data], 0};
-                    showString(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
+                    showString(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
                     line += 8;
                     if (line >= sheet_win->bxsize - 2 * BOX_MARGIN_LEFT) {
                         pos += 16;
@@ -316,15 +316,15 @@ void CMain(void) {
                     }
                     stop_task_a = 0;
                 } else if (data == 0x0E && line >= 8) {     //删除键
-                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
-                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
+                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
                     line -= 8;
-                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
-                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
+                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
+                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
                 }      
             }
         } else if (fifo8_status(&mouseInfo)) {              //鼠标缓冲有数据
@@ -357,10 +357,10 @@ void CMain(void) {
                     cursor_c = COL8_FFFFFF;
                 }
                 timer_setTime(timer3, 50);                  //实现光标闪烁
-                boxfill8(sheet_win->buf, sheet_win->bxsize, cursor_c, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3, 
-                        BOX_MARGIN_LEFT + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);
-                sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + line, BOX_MARGIN_TOP + pos + 3,
-                        BOX_MARGIN_LEFT + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);           
+                boxfill8(sheet_win->buf, sheet_win->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, 
+                        BOX_MARGIN_LEFT + 2 + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);
+                sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
+                        BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);           
             }
         }
     }
@@ -888,7 +888,7 @@ struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int bx, int by, int x0
     sheet_win = sheet_alloc(ctl);
     sheet_setbuf(sheet_win, buf_win, bx, by, COLOR_INVISIBLE);
     make_window8(ctl, sheet_win, title);
-    make_textbox8(sheet_win, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 19, 150, 16, COL8_FFFFFF);
+    make_textbox8(sheet_win, BOX_MARGIN_LEFT + 2, BOX_MARGIN_TOP + 19, 150, 16, COL8_FFFFFF);
     sheet_slide(ctl, sheet_win, x0, y0);
     sheet_level_updown(ctl, sheet_win, level);
     return sheet_win;
@@ -903,7 +903,7 @@ struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int bx, int by, int x0
  *        {x0, y0}  窗口左上角坐标
  *        {level}   窗口层级
  */
-struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, char *title, int bx, int by, int x0, int y0, int level) {
+struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int priority, char *title, int bx, int by, int x0, int y0, int level) {
     struct SHEET *sheet_win;
     unsigned char *buf_win;
     buf_win = (unsigned char *)memman_alloc_4K(memman, bx * by);
@@ -917,7 +917,7 @@ struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, char *titl
     task->tss.iomap = 0x40000000;
     task->tss.eip =  (int)(task_b_main - get_code32_addr());
     task->tss.es = 0;
-    task->tss.cs = 1 * 8;             //6 * 8;
+    task->tss.cs = 1 * 8;             //6 * 8
     task->tss.ss = 4 * 8;
     task->tss.ds = 3 * 8;
     task->tss.fs = 0;
@@ -925,7 +925,7 @@ struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, char *titl
     task->tss.esp -= 8;
     //空出8字节存放其他信息，用4字节存放窗体信息
     *((int*)(task->tss.esp + 4)) = (int)sheet_win;
-    task_run(task);
+    task_run(task, priority);
 
     sheet_slide(ctl, sheet_win, x0, y0);
     sheet_level_updown(ctl, sheet_win, level);

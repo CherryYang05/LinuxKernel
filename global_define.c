@@ -42,7 +42,7 @@ int fifo8_put(struct FIFO8 *fifo, unsigned char data) {
     fifo->free--;
     if (fifo->task != 0) {
         if (fifo->task->flags != 2) {
-            task_run(fifo->task);
+            task_run(fifo->task, 0);
         }
     }
     return OK;

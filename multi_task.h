@@ -61,10 +61,12 @@ int getMulti_Task_tr();
 /**
  * 进程结构体(PCB)
  * @param	{sel} 该进程的TSS32结构对应的段描述符下标
+ *          {priority} 进程优先级，越大优先级越高
  * 			{flags} 进程状态（0表示空闲，1表示挂起，2表示运行）
  */
 struct TASK {
 	int sel, flags;
+    int priority;
 	struct TSS32 tss;
 };
 
@@ -91,9 +93,9 @@ struct TASK *task_init(struct MEMMANAGER *memman);
 struct TASK *task_alloc(void);
 
 /**
- * 进程运行
+ * 进程运行，根据优先级
  */
-void task_run(struct TASK *task);
+void task_run(struct TASK *task, int priority);
 
 /**
  * 任务调度机制

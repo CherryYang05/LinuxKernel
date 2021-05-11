@@ -93,6 +93,7 @@ struct TASK *task_init(struct MEMMANAGER *memman) {
     }
     task = task_alloc();
     task->flags = TASK_RUNNING;         //active
+    task->priority = 100;
     taskctl->running = 1;
     taskctl->now = 0;
     taskctl->tasks[0] = task;
@@ -135,7 +136,11 @@ struct TASK *task_alloc(void) {
 /**
  * 进程运行
  */
-void task_run(struct TASK *task) {
+void task_run(struct TASK *task, int priority) {
+    //传入0时不改变当前优先级
+    if (priority > 0) {
+        task->priority = priority;
+    }
     task->flags = TASK_RUNNING;        //运行
     taskctl->tasks[taskctl->running] = task;
     taskctl->running++;
@@ -146,12 +151,13 @@ void task_run(struct TASK *task) {
  * 任务调度机制
  */
 void task_switch() {
-    timer_setTime(task_timer, 100);
     if (taskctl->running >= 2) {
         taskctl->now++;
         if (taskctl->now == taskctl->running) {
             taskctl->now = 0;
         }
+        //设置时间片为当前进程的优先级
+        timer_setTime(task_timer, taskctl->tasks[taskctl->now]->priority);
         farjmp(0, taskctl->tasks[taskctl->now]->sel);
     }
     return;
