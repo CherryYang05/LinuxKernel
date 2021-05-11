@@ -16,29 +16,6 @@ void set_segmdesc(struct SEGMENT_DESCRIPTOR *sd, unsigned int limit, int base, i
 	sd->base_high    = (base >> 24) & 0xff;
 	return;
 }
-/*
-static int mt_tr;
-
-void mt_init(void) {
-    mt_timer = timer_alloc();
- 
-    timer_settime(mt_timer, 100);
-    mt_tr = 7*8;
-    return;
-}
-
-void mt_taskswitch() {
-    if (mt_tr == 7*8) {
-        mt_tr = 9*8;
-    } else {
-        mt_tr = 7 * 8;
-    }
-
-    timer_settime(mt_timer, 100);
-    farjmp(0, mt_tr);
-    return;
-}
-*/ 
 
 static struct TIMER *task_timer;
 static struct TASKCTL *taskctl;
@@ -52,7 +29,7 @@ struct TASK  *task_init(struct MEMMANAGER *memman) {
     struct TASK *task;
     struct SEGMENT_DESCRIPTOR *gdt = (struct SEGMENT_DESCRIPTOR *)get_addr_gdt();
     taskctl = (struct TASKCTL *)memman_alloc_4K(memman, SIZE_OF_TASKCTL);
-    for (i = 0; i < MAX_TASKS; i++) {
+    for (i = 0; i < 5; i++) {
         taskctl->tasks0[i].flags = 0;
         taskctl->tasks0[i].sel = (TASK_GDT0 + i) * 8;
         set_segmdesc(gdt + TASK_GDT0 + i, 103, (int)&taskctl->tasks0[i].tss,
@@ -73,7 +50,7 @@ struct TASK  *task_init(struct MEMMANAGER *memman) {
 struct TASK *task_alloc(void) {
     int i;
     struct TASK *task;
-    for (i = 0; i < MAX_TASKS; i++) {
+    for (i = 0; i < 5; i++) {
         if (taskctl->tasks0[i].flags == 0) {
             task = &taskctl->tasks0[i];
             task->flags = 1;
@@ -118,4 +95,41 @@ void task_switch(void) {
     }
 
     return;
+}
+
+void task_sleep(struct TASK *task) {
+   int  i;
+   char ts = 0;
+   if (task->flags == 2) {
+        if (task == taskctl->tasks[taskctl->now]) {
+            ts = 1;
+        }
+
+    for (i = 0; i < taskctl->running; i++) {
+        if (taskctl->tasks[i] == task) {
+            break;
+        }
+    }
+
+    taskctl->running--;
+    if (i < taskctl->now) {
+        taskctl->now--;
+    }
+
+    for(; i < taskctl->running; i++) {
+        taskctl->tasks[i] = taskctl->tasks[i+1];
+    }
+
+    task->flags = 1;
+    if (ts != 0) {
+        if (taskctl->now >= taskctl->running) {
+            taskctl->now = 0;
+        }
+
+       farjmp(0, taskctl->tasks[taskctl->now]->sel);
+    }
+
+   }
+
+   return;
 }

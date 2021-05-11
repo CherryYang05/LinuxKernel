@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +36,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="CherryYang05 &lt;754449629@qq.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1d7eJf5x09Ana060IB6wt3Ng99L" />
@@ -195,6 +198,7 @@
       <workItem from="1619248157885" duration="665000" />
       <workItem from="1620124433358" duration="308000" />
       <workItem from="1620398545089" duration="409000" />
+      <workItem from="1620456314283" duration="333000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -420,7 +424,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620398687117</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="No.24-2 实现进程的挂起与唤醒">
+      <created>1620456409440</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1620456409440</updated>
+    </task>
+    <task id="LOCAL-00034" summary="No.24-2 实现进程的挂起与唤醒">
+      <created>1620456467100</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1620456467100</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +459,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="增加了 README.md 说明文件" />
     <MESSAGE value="No.9 绘制系统字体，增加了 asm 处理程序" />
     <MESSAGE value="No.10 绘制鼠标指针" />
     <MESSAGE value="No.11 添加中断机制" />
@@ -466,6 +483,7 @@
     <MESSAGE value="No.23-2 新增键盘输入删除功能" />
     <MESSAGE value="No.24 进程实现，手动切换进程" />
     <MESSAGE value="No.24-1 实现进程自动切换" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.24-1 实现进程自动切换" />
+    <MESSAGE value="No.24-2 实现进程的挂起与唤醒" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.24-2 实现进程的挂起与唤醒" />
   </component>
 </project>

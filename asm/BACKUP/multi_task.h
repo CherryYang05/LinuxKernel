@@ -24,8 +24,10 @@ struct TASK {
     struct TSS32 tss;
 };
 
-#define  MAX_TASKS  2
+#define  MAX_TASKS  5
 #define  TASK_GDT0  7
+#define  SIZE_OF_TASK  112
+
 
 struct TASKCTL {
     int  running;
@@ -36,6 +38,6 @@ struct TASKCTL {
 
 struct TASK *task_init(struct MEMMANAGER *memman);
 
-#define SIZE_OF_TASKCTL  1168  
+#define SIZE_OF_TASKCTL  (4 + 4 + 4*MAX_TASKS + SIZE_OF_TASK*MAX_TASKS)
 
 struct TASK *task_alloc(void);

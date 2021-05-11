@@ -8,21 +8,17 @@ jmp LABEL_BEGIN
 ;全局描述符表
 ;                             		  段基址          段界限               		属性
 LABEL_GDT:				Descriptor		0,				0,						 0
-LABEL_DESC_CODE_32:		Descriptor		0,			  0FFFFFh,		DA_CR | DA_32 | DA_LIMIT_4K		;结构体初始化时只能传入常量
+LABEL_DESC_CODE_32:		Descriptor		0,			  0FFFFFh,		 DA_CR | DA_32 | DA_LIMIT_4K	;结构体初始化时只能传入常量
 LABEL_DESC_SHOW:		Descriptor	 0B8000h,		  0FFFFFh,			       DA_DRW				;0B8000h是显存地址，设置该数据段属性为可读写
 LABEL_DESC_VRAM:		Descriptor	    0,			  0FFFFFh,			  DA_DRWA | DA_LIMIT_4K		;4G显存，为了C语言开发方便，全部设置为可读写
-LABEL_DESC_STACK:		Descriptor		0,			  0FFFFFh,		  	  DA_DRWA | DA_32
-LABEL_DESC_FONT:    	Descriptor      0,            0FFFFFh,   		   DA_DRW | DA_LIMIT_4K  
+LABEL_DESC_STACK:		Descriptor		0,		LenOfStackSection,		  DA_DRWA | DA_32
+LABEL_DESC_FONT:    	Descriptor      0,           0fffffh,   		   DA_DRW | DA_LIMIT_4K  
 
 ;
 LABEL_DESC_6:			Descriptor		0,			 0fffffh,					0409Ah
 LABEL_DESC_7:			Descriptor		0,			 	0,						0
 LABEL_DESC_8:			Descriptor		0,			 	0,						0
 LABEL_DESC_9:			Descriptor		0,			 	0,						0
-LABEL_DESC_10:			Descriptor		0,			 	0,						0
-%rep  5
-Descriptor 0, 0, 0
-%endrep
 
 GDTLen	EQU	$ - LABEL_GDT
 GDTPtr	DW	GDTLen - 1
@@ -219,7 +215,7 @@ io_delay:
 LABEL_SEG_CODE32:
 	mov ax, SelectorStack
     mov ss, ax
-    mov esp, 4096		;change
+    mov esp, TopOfStack1
 
     mov ax, SelectorVram
     mov ds, ax
@@ -425,10 +421,6 @@ farjmp:
 	ret
 
 SegCode32Len   equ  $ - LABEL_SEG_CODE32
-
-[SECTION .data]
-ALIGN 32
-[BITS 32]
 
 MemCheckBuf: times 256 db 0
 dwMCRNumber: dd 0				;记录BIOS总共向内存中写入多少个数据结构

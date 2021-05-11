@@ -122,8 +122,8 @@ void CMain(void) {
     int ysize = bootInfo.screenY;
 
     //图层显示依赖于多个进程
-    struct SHEET *sheet_win_b[4];
-    static struct TASK *task_b[4];
+    struct SHEET *sheet_win_b[3];
+    static struct TASK *task_b[3];
 
     //===================== 时钟中断操作 =====================
     struct TIMERCTL *timerctl = getTimerController();
@@ -383,13 +383,9 @@ void task_b_main(struct SHEET *sheet) {
    
     timer_setTime(timer_b, 100);
     int xpos = 0;
-    unsigned int count = 0;
+    int count = 0;
     for(;;) {
         count++;
-        boxfill8(sheet->buf, sheet->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 100, 38);
-        //sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, BOX_MARGIN_LEFT + 100, BOX_MARGIN_TOP + 38);
-        char *p = intToHexStr(count);
-        showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
         io_cli();
         if (fifo8_status(&timerinfo_b) == 0) {
             io_sti();
@@ -403,7 +399,10 @@ void task_b_main(struct SHEET *sheet) {
                //farjmp(0, 7 * 8);
                timer_setTime(timer_b, 100);
                xpos += 8;
-               
+               boxfill8(sheet->buf, sheet->bxsize, COL8_C6C6C6, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 100, 38);
+               sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, BOX_MARGIN_LEFT + 100, BOX_MARGIN_TOP + 38);
+               char *p = intToHexStr(count);
+               showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP, COL8_008400, p);
            }
         }
     }
@@ -923,7 +922,6 @@ struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, char *titl
     task->tss.fs = 0;
     task->tss.gs = 2 * 8;
     task->tss.esp -= 8;
-    //空出8字节存放其他信息，用4字节存放窗体信息
     *((int*)(task->tss.esp + 4)) = (int)sheet_win;
     task_run(task);
 
