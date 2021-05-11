@@ -163,7 +163,7 @@ LABEL_MEM_CHECK_OK:
 
 	;jmp dword SelectorCode32:0
 	cli
-	jmp dword 1*8:0
+	jmp dword 1 * 8 : 0
 
 init8259A:
     mov  al, 011h		;向主8259A 20h端口发送ICW1，00010001b，表示需要发送ICW4，级联，8字节中断向量，边沿触发
