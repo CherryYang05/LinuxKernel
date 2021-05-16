@@ -1,5 +1,5 @@
 ; Disassembly of file: ckernel.o
-; Sun May 16 22:38:13 2021
+; Sun May 16 23:25:02 2021
 ; Mode: 32 bits
 ; Syntax: YASM/NASM
 ; Instruction set: 80386
@@ -257,8 +257,8 @@ CMain:  ; Function begin
         push    eax                                     ; 034A _ 50
         call    task_init                               ; 034B _ E8, FFFFFFFC(rel)
         add     esp, 16                                 ; 0350 _ 83. C4, 10
-        mov     dword [task_a.2271], eax                ; 0353 _ A3, 00000234(d)
-        mov     eax, dword [task_a.2271]                ; 0358 _ A1, 00000234(d)
+        mov     dword [task_a.2273], eax                ; 0353 _ A3, 00000234(d)
+        mov     eax, dword [task_a.2273]                ; 0358 _ A1, 00000234(d)
         mov     dword [?_220], eax                      ; 035D _ A3, 00000020(d)
         call    launch_console                          ; 0362 _ E8, FFFFFFFC(rel)
         mov     byte [ebp-71H], 0                       ; 0367 _ C6. 45, 8F, 00
@@ -312,7 +312,7 @@ CMain:  ; Function begin
         mov     byte [ebp-71H], al                      ; 041B _ 88. 45, 8F
         cmp     byte [ebp-71H], 28                      ; 041E _ 80. 7D, 8F, 1C
         jnz     ?_003                                   ; 0422 _ 75, 59
-        mov     ebx, dword [cnt.2272]                   ; 0424 _ 8B. 1D, 00000238(d)
+        mov     ebx, dword [cnt.2274]                   ; 0424 _ 8B. 1D, 00000238(d)
         mov     eax, dword [sheet_back]                 ; 042A _ A1, 0000022C(d)
         mov     ecx, dword [eax]                        ; 042F _ 8B. 08
         mov     edx, dword [sheet_back]                 ; 0431 _ 8B. 15, 0000022C(d)
@@ -327,13 +327,13 @@ CMain:  ; Function begin
         push    eax                                     ; 044A _ 50
         call    showMemInfo                             ; 044B _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 0450 _ 83. C4, 20
-        mov     eax, dword [cnt.2272]                   ; 0453 _ A1, 00000238(d)
+        mov     eax, dword [cnt.2274]                   ; 0453 _ A1, 00000238(d)
         add     eax, 1                                  ; 0458 _ 83. C0, 01
-        mov     dword [cnt.2272], eax                   ; 045B _ A3, 00000238(d)
-        mov     eax, dword [cnt.2272]                   ; 0460 _ A1, 00000238(d)
+        mov     dword [cnt.2274], eax                   ; 045B _ A3, 00000238(d)
+        mov     eax, dword [cnt.2274]                   ; 0460 _ A1, 00000238(d)
         cmp     dword [ebp-44H], eax                    ; 0465 _ 39. 45, BC
         jg      ?_001                                   ; 0468 _ 0F 8F, FFFFFF35
-        mov     dword [cnt.2272], 0                     ; 046E _ C7. 05, 00000238(d), 00000000
+        mov     dword [cnt.2274], 0                     ; 046E _ C7. 05, 00000238(d), 00000000
         jmp     ?_001                                   ; 0478 _ E9, FFFFFF26
 
 ?_003:  movzx   eax, byte [ebp-71H]                     ; 047D _ 0F B6. 45, 8F
@@ -344,12 +344,12 @@ CMain:  ; Function begin
         jbe     ?_004                                   ; 0490 _ 76, 12
         cmp     byte [ebp-71H], 83                      ; 0492 _ 80. 7D, 8F, 53
         ja      ?_004                                   ; 0496 _ 77, 0C
-        mov     eax, dword [line.2275]                  ; 0498 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0498 _ A1, 0000023C(d)
         cmp     eax, 142                                ; 049D _ 3D, 0000008E
         jle     ?_005                                   ; 04A2 _ 7E, 18
 ?_004:  cmp     byte [ebp-71H], 14                      ; 04A4 _ 80. 7D, 8F, 0E
         jne     ?_001                                   ; 04A8 _ 0F 85, FFFFFEF5
-        mov     eax, dword [line.2275]                  ; 04AE _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 04AE _ A1, 0000023C(d)
         cmp     eax, 7                                  ; 04B3 _ 83. F8, 07
         jle     ?_001                                   ; 04B6 _ 0F 8E, FFFFFEE7
 ?_005:  movzx   eax, byte [ebp-71H]                     ; 04BC _ 0F B6. 45, 8F
@@ -360,16 +360,16 @@ CMain:  ; Function begin
         jbe     ?_007                                   ; 04D3 _ 0F 86, 0000011E
         cmp     byte [ebp-71H], 83                      ; 04D9 _ 80. 7D, 8F, 53
         ja      ?_007                                   ; 04DD _ 0F 87, 00000114
-        mov     eax, dword [line.2275]                  ; 04E3 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 04E3 _ A1, 0000023C(d)
         cmp     eax, 142                                ; 04E8 _ 3D, 0000008E
         jg      ?_007                                   ; 04ED _ 0F 8F, 00000104
-        mov     eax, dword [pos.2276]                   ; 04F3 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 04F3 _ A1, 00000074(d)
         lea     edi, [eax+28H]                          ; 04F8 _ 8D. 78, 28
-        mov     eax, dword [line.2275]                  ; 04FB _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 04FB _ A1, 0000023C(d)
         lea     esi, [eax+10H]                          ; 0500 _ 8D. 70, 10
-        mov     eax, dword [pos.2276]                   ; 0503 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 0503 _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 0508 _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 050B _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 050B _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 0510 _ 8D. 48, 0A
         mov     eax, dword [sheet_win]                  ; 0513 _ A1, 00000228(d)
         mov     edx, dword [eax+4H]                     ; 0518 _ 8B. 50, 04
@@ -385,13 +385,13 @@ CMain:  ; Function begin
         push    eax                                     ; 052C _ 50
         call    boxfill8                                ; 052D _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 0532 _ 83. C4, 20
-        mov     eax, dword [pos.2276]                   ; 0535 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 0535 _ A1, 00000074(d)
         lea     edi, [eax+2AH]                          ; 053A _ 8D. 78, 2A
-        mov     eax, dword [line.2275]                  ; 053D _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 053D _ A1, 0000023C(d)
         lea     esi, [eax+12H]                          ; 0542 _ 8D. 70, 12
-        mov     eax, dword [pos.2276]                   ; 0545 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 0545 _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 054A _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 054D _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 054D _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 0552 _ 8D. 48, 0A
         mov     edx, dword [sheet_win]                  ; 0555 _ 8B. 15, 00000228(d)
         mov     eax, dword [shtctl]                     ; 055B _ A1, 00000224(d)
@@ -408,9 +408,9 @@ CMain:  ; Function begin
         movzx   eax, byte [keytable+eax]                ; 0575 _ 0F B6. 80, 00000020(d)
         mov     byte [ebp-1EH], al                      ; 057C _ 88. 45, E2
         mov     byte [ebp-1DH], 0                       ; 057F _ C6. 45, E3, 00
-        mov     eax, dword [pos.2276]                   ; 0583 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 0583 _ A1, 00000074(d)
         lea     esi, [eax+1AH]                          ; 0588 _ 8D. 70, 1A
-        mov     eax, dword [line.2275]                  ; 058B _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 058B _ A1, 0000023C(d)
         lea     ebx, [eax+0AH]                          ; 0590 _ 8D. 58, 0A
         mov     edx, dword [sheet_win]                  ; 0593 _ 8B. 15, 00000228(d)
         mov     eax, dword [shtctl]                     ; 0599 _ A1, 00000224(d)
@@ -424,34 +424,34 @@ CMain:  ; Function begin
         push    eax                                     ; 05AA _ 50
         call    showString                              ; 05AB _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 05B0 _ 83. C4, 20
-        mov     eax, dword [line.2275]                  ; 05B3 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 05B3 _ A1, 0000023C(d)
         add     eax, 8                                  ; 05B8 _ 83. C0, 08
-        mov     dword [line.2275], eax                  ; 05BB _ A3, 0000023C(d)
+        mov     dword [line.2277], eax                  ; 05BB _ A3, 0000023C(d)
         mov     eax, dword [sheet_win]                  ; 05C0 _ A1, 00000228(d)
         mov     eax, dword [eax+4H]                     ; 05C5 _ 8B. 40, 04
         lea     edx, [eax-10H]                          ; 05C8 _ 8D. 50, F0
-        mov     eax, dword [line.2275]                  ; 05CB _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 05CB _ A1, 0000023C(d)
         cmp     edx, eax                                ; 05D0 _ 39. C2
         jg      ?_006                                   ; 05D2 _ 7F, 17
-        mov     eax, dword [pos.2276]                   ; 05D4 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 05D4 _ A1, 00000074(d)
         add     eax, 16                                 ; 05D9 _ 83. C0, 10
-        mov     dword [pos.2276], eax                   ; 05DC _ A3, 00000074(d)
-        mov     dword [line.2275], 0                    ; 05E1 _ C7. 05, 0000023C(d), 00000000
+        mov     dword [pos.2278], eax                   ; 05DC _ A3, 00000074(d)
+        mov     dword [line.2277], 0                    ; 05E1 _ C7. 05, 0000023C(d), 00000000
 ?_006:  mov     dword [ebp-68H], 0                      ; 05EB _ C7. 45, 98, 00000000
         jmp     ?_014                                   ; 05F2 _ E9, 0000030D
 
 ?_007:  cmp     byte [ebp-71H], 14                      ; 05F7 _ 80. 7D, 8F, 0E
         jne     ?_001                                   ; 05FB _ 0F 85, FFFFFDA2
-        mov     eax, dword [line.2275]                  ; 0601 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0601 _ A1, 0000023C(d)
         cmp     eax, 7                                  ; 0606 _ 83. F8, 07
         jle     ?_001                                   ; 0609 _ 0F 8E, FFFFFD94
-        mov     eax, dword [pos.2276]                   ; 060F _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 060F _ A1, 00000074(d)
         lea     edi, [eax+28H]                          ; 0614 _ 8D. 78, 28
-        mov     eax, dword [line.2275]                  ; 0617 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0617 _ A1, 0000023C(d)
         lea     esi, [eax+12H]                          ; 061C _ 8D. 70, 12
-        mov     eax, dword [pos.2276]                   ; 061F _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 061F _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 0624 _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 0627 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0627 _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 062C _ 8D. 48, 0A
         mov     eax, dword [sheet_win]                  ; 062F _ A1, 00000228(d)
         mov     edx, dword [eax+4H]                     ; 0634 _ 8B. 50, 04
@@ -467,13 +467,13 @@ CMain:  ; Function begin
         push    eax                                     ; 0648 _ 50
         call    boxfill8                                ; 0649 _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 064E _ 83. C4, 20
-        mov     eax, dword [pos.2276]                   ; 0651 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 0651 _ A1, 00000074(d)
         lea     edi, [eax+2AH]                          ; 0656 _ 8D. 78, 2A
-        mov     eax, dword [line.2275]                  ; 0659 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0659 _ A1, 0000023C(d)
         lea     esi, [eax+12H]                          ; 065E _ 8D. 70, 12
-        mov     eax, dword [pos.2276]                   ; 0661 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 0661 _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 0666 _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 0669 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0669 _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 066E _ 8D. 48, 0A
         mov     edx, dword [sheet_win]                  ; 0671 _ 8B. 15, 00000228(d)
         mov     eax, dword [shtctl]                     ; 0677 _ A1, 00000224(d)
@@ -486,16 +486,16 @@ CMain:  ; Function begin
         push    eax                                     ; 0684 _ 50
         call    sheet_refresh                           ; 0685 _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 068A _ 83. C4, 20
-        mov     eax, dword [line.2275]                  ; 068D _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 068D _ A1, 0000023C(d)
         sub     eax, 8                                  ; 0692 _ 83. E8, 08
-        mov     dword [line.2275], eax                  ; 0695 _ A3, 0000023C(d)
-        mov     eax, dword [pos.2276]                   ; 069A _ A1, 00000074(d)
+        mov     dword [line.2277], eax                  ; 0695 _ A3, 0000023C(d)
+        mov     eax, dword [pos.2278]                   ; 069A _ A1, 00000074(d)
         lea     edi, [eax+28H]                          ; 069F _ 8D. 78, 28
-        mov     eax, dword [line.2275]                  ; 06A2 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 06A2 _ A1, 0000023C(d)
         lea     esi, [eax+12H]                          ; 06A7 _ 8D. 70, 12
-        mov     eax, dword [pos.2276]                   ; 06AA _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 06AA _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 06AF _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 06B2 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 06B2 _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 06B7 _ 8D. 48, 0A
         mov     eax, dword [sheet_win]                  ; 06BA _ A1, 00000228(d)
         mov     edx, dword [eax+4H]                     ; 06BF _ 8B. 50, 04
@@ -511,13 +511,13 @@ CMain:  ; Function begin
         push    eax                                     ; 06D3 _ 50
         call    boxfill8                                ; 06D4 _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 06D9 _ 83. C4, 20
-        mov     eax, dword [pos.2276]                   ; 06DC _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 06DC _ A1, 00000074(d)
         lea     edi, [eax+2AH]                          ; 06E1 _ 8D. 78, 2A
-        mov     eax, dword [line.2275]                  ; 06E4 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 06E4 _ A1, 0000023C(d)
         lea     esi, [eax+12H]                          ; 06E9 _ 8D. 70, 12
-        mov     eax, dword [pos.2276]                   ; 06EC _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 06EC _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 06F1 _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 06F4 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 06F4 _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 06F9 _ 8D. 48, 0A
         mov     edx, dword [sheet_win]                  ; 06FC _ 8B. 15, 00000228(d)
         mov     eax, dword [shtctl]                     ; 0702 _ A1, 00000224(d)
@@ -586,7 +586,7 @@ CMain:  ; Function begin
         cmp     dword [ebp-68H], 5                      ; 07D4 _ 83. 7D, 98, 05
         jne     ?_001                                   ; 07D8 _ 0F 85, FFFFFBC5
         call    io_cli                                  ; 07DE _ E8, FFFFFFFC(rel)
-        mov     eax, dword [task_a.2271]                ; 07E3 _ A1, 00000234(d)
+        mov     eax, dword [task_a.2273]                ; 07E3 _ A1, 00000234(d)
         sub     esp, 12                                 ; 07E8 _ 83. EC, 0C
         push    eax                                     ; 07EB _ 50
         call    task_sleep                              ; 07EC _ E8, FFFFFFFC(rel)
@@ -632,14 +632,14 @@ CMain:  ; Function begin
         push    dword [ebp-4CH]                         ; 0871 _ FF. 75, B4
         call    timer_setTime                           ; 0874 _ E8, FFFFFFFC(rel)
         add     esp, 16                                 ; 0879 _ 83. C4, 10
-        mov     eax, dword [pos.2276]                   ; 087C _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 087C _ A1, 00000074(d)
         add     eax, 40                                 ; 0881 _ 83. C0, 28
         mov     dword [ebp-7CH], eax                    ; 0884 _ 89. 45, 84
-        mov     eax, dword [line.2275]                  ; 0887 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0887 _ A1, 0000023C(d)
         lea     edi, [eax+10H]                          ; 088C _ 8D. 78, 10
-        mov     eax, dword [pos.2276]                   ; 088F _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 088F _ A1, 00000074(d)
         lea     esi, [eax+1AH]                          ; 0894 _ 8D. 70, 1A
-        mov     eax, dword [line.2275]                  ; 0897 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 0897 _ A1, 0000023C(d)
         lea     ebx, [eax+0AH]                          ; 089C _ 8D. 58, 0A
         mov     eax, dword [ebp-70H]                    ; 089F _ 8B. 45, 90
         movzx   ecx, al                                 ; 08A2 _ 0F B6. C8
@@ -657,13 +657,13 @@ CMain:  ; Function begin
         push    eax                                     ; 08BF _ 50
         call    boxfill8                                ; 08C0 _ E8, FFFFFFFC(rel)
         add     esp, 32                                 ; 08C5 _ 83. C4, 20
-        mov     eax, dword [pos.2276]                   ; 08C8 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 08C8 _ A1, 00000074(d)
         lea     edi, [eax+2AH]                          ; 08CD _ 8D. 78, 2A
-        mov     eax, dword [line.2275]                  ; 08D0 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 08D0 _ A1, 0000023C(d)
         lea     esi, [eax+12H]                          ; 08D5 _ 8D. 70, 12
-        mov     eax, dword [pos.2276]                   ; 08D8 _ A1, 00000074(d)
+        mov     eax, dword [pos.2278]                   ; 08D8 _ A1, 00000074(d)
         lea     ebx, [eax+1AH]                          ; 08DD _ 8D. 58, 1A
-        mov     eax, dword [line.2275]                  ; 08E0 _ A1, 0000023C(d)
+        mov     eax, dword [line.2277]                  ; 08E0 _ A1, 0000023C(d)
         lea     ecx, [eax+0AH]                          ; 08E5 _ 8D. 48, 0A
         mov     edx, dword [sheet_win]                  ; 08E8 _ 8B. 15, 00000228(d)
         mov     eax, dword [shtctl]                     ; 08EE _ A1, 00000224(d)
@@ -679,4472 +679,4472 @@ CMain:  ; Function begin
 ?_014:  jmp     ?_001                                   ; 0904 _ E9, FFFFFA9A
 ; CMain End of function
 
-console_task:; Function begin
+launch_console:; Function begin
         push    ebp                                     ; 0909 _ 55
         mov     ebp, esp                                ; 090A _ 89. E5
-        push    ebx                                     ; 090C _ 53
-        sub     esp, 212                                ; 090D _ 81. EC, 000000D4
-        mov     eax, dword [ebp+8H]                     ; 0913 _ 8B. 45, 08
-        mov     dword [ebp-0CCH], eax                   ; 0916 _ 89. 85, FFFFFF34
-; Note: Absolute memory address without relocation
-        mov     eax, dword [gs:14H]                     ; 091C _ 65: A1, 00000014
-        mov     dword [ebp-0CH], eax                    ; 0922 _ 89. 45, F4
-        xor     eax, eax                                ; 0925 _ 31. C0
-        call    task_now                                ; 0927 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0B8H], eax                   ; 092C _ 89. 85, FFFFFF48
-        mov     dword [ebp-0B4H], 8                     ; 0932 _ C7. 85, FFFFFF4C, 00000008
-        mov     dword [ebp-0BCH], 0                     ; 093C _ C7. 85, FFFFFF44, 00000000
-        push    dword [ebp-0B8H]                        ; 0946 _ FF. B5, FFFFFF48
-        lea     eax, [ebp-8CH]                          ; 094C _ 8D. 85, FFFFFF74
-        push    eax                                     ; 0952 _ 50
-        push    128                                     ; 0953 _ 68, 00000080
-        lea     eax, [ebp-0A8H]                         ; 0958 _ 8D. 85, FFFFFF58
-        push    eax                                     ; 095E _ 50
-        call    fifo8_init                              ; 095F _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0964 _ 83. C4, 10
-        call    timer_alloc                             ; 0967 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0B0H], eax                   ; 096C _ 89. 85, FFFFFF50
-        sub     esp, 4                                  ; 0972 _ 83. EC, 04
-        push    1                                       ; 0975 _ 6A, 01
-        lea     eax, [ebp-0A8H]                         ; 0977 _ 8D. 85, FFFFFF58
-        push    eax                                     ; 097D _ 50
-        push    dword [ebp-0B0H]                        ; 097E _ FF. B5, FFFFFF50
-        call    timer_init                              ; 0984 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0989 _ 83. C4, 10
-        sub     esp, 8                                  ; 098C _ 83. EC, 08
-        push    50                                      ; 098F _ 6A, 32
-        push    dword [ebp-0B0H]                        ; 0991 _ FF. B5, FFFFFF50
-        call    timer_setTime                           ; 0997 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 099C _ 83. C4, 10
-        mov     dword [ebp-0ACH], 0                     ; 099F _ C7. 85, FFFFFF54, 00000000
-?_015:  call    io_cli                                  ; 09A9 _ E8, FFFFFFFC(rel)
-        sub     esp, 12                                 ; 09AE _ 83. EC, 0C
-        lea     eax, [ebp-0A8H]                         ; 09B1 _ 8D. 85, FFFFFF58
-        push    eax                                     ; 09B7 _ 50
-        call    fifo8_status                            ; 09B8 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 09BD _ 83. C4, 10
-        test    eax, eax                                ; 09C0 _ 85. C0
-        jnz     ?_016                                   ; 09C2 _ 75, 07
-        call    io_sti                                  ; 09C4 _ E8, FFFFFFFC(rel)
-        jmp     ?_015                                   ; 09C9 _ EB, DE
-
-?_016:  sub     esp, 12                                 ; 09CB _ 83. EC, 0C
-        lea     eax, [ebp-0A8H]                         ; 09CE _ 8D. 85, FFFFFF58
-        push    eax                                     ; 09D4 _ 50
-        call    fifo8_get                               ; 09D5 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 09DA _ 83. C4, 10
-        mov     dword [ebp-0ACH], eax                   ; 09DD _ 89. 85, FFFFFF54
-        call    io_sti                                  ; 09E3 _ E8, FFFFFFFC(rel)
-        cmp     dword [ebp-0ACH], 1                     ; 09E8 _ 83. BD, FFFFFF54, 01
-        jg      ?_015                                   ; 09EF _ 7F, B8
-        cmp     dword [ebp-0ACH], 1                     ; 09F1 _ 83. BD, FFFFFF54, 01
-        jnz     ?_017                                   ; 09F8 _ 75, 26
-        sub     esp, 4                                  ; 09FA _ 83. EC, 04
-        push    0                                       ; 09FD _ 6A, 00
-        lea     eax, [ebp-0A8H]                         ; 09FF _ 8D. 85, FFFFFF58
-        push    eax                                     ; 0A05 _ 50
-        push    dword [ebp-0B0H]                        ; 0A06 _ FF. B5, FFFFFF50
-        call    timer_init                              ; 0A0C _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0A11 _ 83. C4, 10
-        mov     dword [ebp-0BCH], 7                     ; 0A14 _ C7. 85, FFFFFF44, 00000007
-        jmp     ?_018                                   ; 0A1E _ EB, 2D
-
-?_017:  cmp     dword [ebp-0ACH], 0                     ; 0A20 _ 83. BD, FFFFFF54, 00
-        jnz     ?_018                                   ; 0A27 _ 75, 24
-        sub     esp, 4                                  ; 0A29 _ 83. EC, 04
-        push    1                                       ; 0A2C _ 6A, 01
-        lea     eax, [ebp-0A8H]                         ; 0A2E _ 8D. 85, FFFFFF58
-        push    eax                                     ; 0A34 _ 50
-        push    dword [ebp-0B0H]                        ; 0A35 _ FF. B5, FFFFFF50
-        call    timer_init                              ; 0A3B _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0A40 _ 83. C4, 10
-        mov     dword [ebp-0BCH], 0                     ; 0A43 _ C7. 85, FFFFFF44, 00000000
-?_018:  sub     esp, 8                                  ; 0A4D _ 83. EC, 08
-        push    50                                      ; 0A50 _ 6A, 32
-        push    dword [ebp-0B0H]                        ; 0A52 _ FF. B5, FFFFFF50
-        call    timer_setTime                           ; 0A58 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0A5D _ 83. C4, 10
-        mov     eax, dword [ebp-0B4H]                   ; 0A60 _ 8B. 85, FFFFFF4C
-        lea     ebx, [eax+6H]                           ; 0A66 _ 8D. 58, 06
-        mov     eax, dword [ebp-0BCH]                   ; 0A69 _ 8B. 85, FFFFFF44
-        movzx   ecx, al                                 ; 0A6F _ 0F B6. C8
-        mov     eax, dword [ebp-0CCH]                   ; 0A72 _ 8B. 85, FFFFFF34
-        mov     edx, dword [eax+4H]                     ; 0A78 _ 8B. 50, 04
-        mov     eax, dword [ebp-0CCH]                   ; 0A7B _ 8B. 85, FFFFFF34
-        mov     eax, dword [eax]                        ; 0A81 _ 8B. 00
-        sub     esp, 4                                  ; 0A83 _ 83. EC, 04
-        push    43                                      ; 0A86 _ 6A, 2B
-        push    ebx                                     ; 0A88 _ 53
-        push    28                                      ; 0A89 _ 6A, 1C
-        push    dword [ebp-0B4H]                        ; 0A8B _ FF. B5, FFFFFF4C
-        push    ecx                                     ; 0A91 _ 51
-        push    edx                                     ; 0A92 _ 52
-        push    eax                                     ; 0A93 _ 50
-        call    boxfill8                                ; 0A94 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0A99 _ 83. C4, 20
-        mov     eax, dword [ebp-0B4H]                   ; 0A9C _ 8B. 85, FFFFFF4C
-        lea     edx, [eax+8H]                           ; 0AA2 _ 8D. 50, 08
-        mov     eax, dword [shtctl]                     ; 0AA5 _ A1, 00000224(d)
-        sub     esp, 8                                  ; 0AAA _ 83. EC, 08
-        push    44                                      ; 0AAD _ 6A, 2C
-        push    edx                                     ; 0AAF _ 52
-        push    28                                      ; 0AB0 _ 6A, 1C
-        push    dword [ebp-0B4H]                        ; 0AB2 _ FF. B5, FFFFFF4C
-        push    dword [ebp-0CCH]                        ; 0AB8 _ FF. B5, FFFFFF34
-        push    eax                                     ; 0ABE _ 50
-        call    sheet_refresh                           ; 0ABF _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0AC4 _ 83. C4, 20
-        jmp     ?_015                                   ; 0AC7 _ E9, FFFFFEDD
-; console_task End of function
-
-launch_console:; Function begin
-        push    ebp                                     ; 0ACC _ 55
-        mov     ebp, esp                                ; 0ACD _ 89. E5
-        sub     esp, 24                                 ; 0ACF _ 83. EC, 18
-        mov     eax, dword [shtctl]                     ; 0AD2 _ A1, 00000224(d)
-        sub     esp, 12                                 ; 0AD7 _ 83. EC, 0C
-        push    eax                                     ; 0ADA _ 50
-        call    sheet_alloc                             ; 0ADB _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0AE0 _ 83. C4, 10
-        mov     dword [ebp-18H], eax                    ; 0AE3 _ 89. 45, E8
-        mov     eax, dword [memman]                     ; 0AE6 _ A1, 00000008(d)
-        sub     esp, 8                                  ; 0AEB _ 83. EC, 08
-        push    46080                                   ; 0AEE _ 68, 0000B400
-        push    eax                                     ; 0AF3 _ 50
-        call    memman_alloc_4K                         ; 0AF4 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0AF9 _ 83. C4, 10
-        mov     dword [ebp-14H], eax                    ; 0AFC _ 89. 45, EC
-        sub     esp, 12                                 ; 0AFF _ 83. EC, 0C
-        push    99                                      ; 0B02 _ 6A, 63
-        push    180                                     ; 0B04 _ 68, 000000B4
-        push    256                                     ; 0B09 _ 68, 00000100
-        push    dword [ebp-14H]                         ; 0B0E _ FF. 75, EC
-        push    dword [ebp-18H]                         ; 0B11 _ FF. 75, E8
-        call    sheet_setbuf                            ; 0B14 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0B19 _ 83. C4, 20
-        mov     eax, dword [shtctl]                     ; 0B1C _ A1, 00000224(d)
-        sub     esp, 4                                  ; 0B21 _ 83. EC, 04
-        push    ?_207                                   ; 0B24 _ 68, 00000027(d)
-        push    dword [ebp-18H]                         ; 0B29 _ FF. 75, E8
-        push    eax                                     ; 0B2C _ 50
-        call    make_window8                            ; 0B2D _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0B32 _ 83. C4, 10
-        sub     esp, 8                                  ; 0B35 _ 83. EC, 08
-        push    0                                       ; 0B38 _ 6A, 00
-        push    144                                     ; 0B3A _ 68, 00000090
-        push    240                                     ; 0B3F _ 68, 000000F0
-        push    28                                      ; 0B44 _ 6A, 1C
-        push    8                                       ; 0B46 _ 6A, 08
-        push    dword [ebp-18H]                         ; 0B48 _ FF. 75, E8
-        call    make_textbox8                           ; 0B4B _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0B50 _ 83. C4, 20
-        call    task_alloc                              ; 0B53 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-10H], eax                    ; 0B58 _ 89. 45, F0
-        call    get_code32_addr                         ; 0B5B _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0CH], eax                    ; 0B60 _ 89. 45, F4
-        mov     eax, dword [ebp-10H]                    ; 0B63 _ 8B. 45, F0
-        mov     dword [eax+70H], 0                      ; 0B66 _ C7. 40, 70, 00000000
-        mov     eax, dword [ebp-10H]                    ; 0B6D _ 8B. 45, F0
-        mov     dword [eax+74H], 1073741824             ; 0B70 _ C7. 40, 74, 40000000
-        mov     eax, dword [ebp-0CH]                    ; 0B77 _ 8B. 45, F4
-        neg     eax                                     ; 0B7A _ F7. D8
-        add     eax, console_task                       ; 0B7C _ 05, 00000000(d)
-        mov     edx, eax                                ; 0B81 _ 89. C2
-        mov     eax, dword [ebp-10H]                    ; 0B83 _ 8B. 45, F0
-        mov     dword [eax+30H], edx                    ; 0B86 _ 89. 50, 30
-        mov     eax, dword [ebp-10H]                    ; 0B89 _ 8B. 45, F0
-        mov     dword [eax+58H], 0                      ; 0B8C _ C7. 40, 58, 00000000
-        mov     eax, dword [ebp-10H]                    ; 0B93 _ 8B. 45, F0
-        mov     dword [eax+5CH], 8                      ; 0B96 _ C7. 40, 5C, 00000008
-        mov     eax, dword [ebp-10H]                    ; 0B9D _ 8B. 45, F0
-        mov     dword [eax+60H], 32                     ; 0BA0 _ C7. 40, 60, 00000020
-        mov     eax, dword [ebp-10H]                    ; 0BA7 _ 8B. 45, F0
-        mov     dword [eax+64H], 24                     ; 0BAA _ C7. 40, 64, 00000018
-        mov     eax, dword [ebp-10H]                    ; 0BB1 _ 8B. 45, F0
-        mov     dword [eax+68H], 0                      ; 0BB4 _ C7. 40, 68, 00000000
-        mov     eax, dword [ebp-10H]                    ; 0BBB _ 8B. 45, F0
-        mov     dword [eax+6CH], 16                     ; 0BBE _ C7. 40, 6C, 00000010
-        mov     eax, dword [ebp-10H]                    ; 0BC5 _ 8B. 45, F0
-        mov     eax, dword [eax+48H]                    ; 0BC8 _ 8B. 40, 48
-        lea     edx, [eax-8H]                           ; 0BCB _ 8D. 50, F8
-        mov     eax, dword [ebp-10H]                    ; 0BCE _ 8B. 45, F0
-        mov     dword [eax+48H], edx                    ; 0BD1 _ 89. 50, 48
-        mov     eax, dword [ebp-10H]                    ; 0BD4 _ 8B. 45, F0
-        mov     eax, dword [eax+48H]                    ; 0BD7 _ 8B. 40, 48
-        add     eax, 4                                  ; 0BDA _ 83. C0, 04
-        mov     edx, eax                                ; 0BDD _ 89. C2
-        mov     eax, dword [ebp-18H]                    ; 0BDF _ 8B. 45, E8
-        mov     dword [edx], eax                        ; 0BE2 _ 89. 02
-        sub     esp, 4                                  ; 0BE4 _ 83. EC, 04
-        push    5                                       ; 0BE7 _ 6A, 05
-        push    1                                       ; 0BE9 _ 6A, 01
-        push    dword [ebp-10H]                         ; 0BEB _ FF. 75, F0
-        call    task_run                                ; 0BEE _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0BF3 _ 83. C4, 10
-        mov     eax, dword [shtctl]                     ; 0BF6 _ A1, 00000224(d)
-        push    16                                      ; 0BFB _ 6A, 10
-        push    32                                      ; 0BFD _ 6A, 20
-        push    dword [ebp-18H]                         ; 0BFF _ FF. 75, E8
-        push    eax                                     ; 0C02 _ 50
-        call    sheet_slide                             ; 0C03 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0C08 _ 83. C4, 10
-        mov     eax, dword [shtctl]                     ; 0C0B _ A1, 00000224(d)
-        sub     esp, 4                                  ; 0C10 _ 83. EC, 04
-        push    2                                       ; 0C13 _ 6A, 02
-        push    dword [ebp-18H]                         ; 0C15 _ FF. 75, E8
-        push    eax                                     ; 0C18 _ 50
-        call    sheet_level_updown                      ; 0C19 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0C1E _ 83. C4, 10
-        nop                                             ; 0C21 _ 90
-        leave                                           ; 0C22 _ C9
-        ret                                             ; 0C23 _ C3
+        sub     esp, 24                                 ; 090C _ 83. EC, 18
+        mov     eax, dword [shtctl]                     ; 090F _ A1, 00000224(d)
+        sub     esp, 12                                 ; 0914 _ 83. EC, 0C
+        push    eax                                     ; 0917 _ 50
+        call    sheet_alloc                             ; 0918 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 091D _ 83. C4, 10
+        mov     dword [ebp-18H], eax                    ; 0920 _ 89. 45, E8
+        mov     eax, dword [memman]                     ; 0923 _ A1, 00000008(d)
+        sub     esp, 8                                  ; 0928 _ 83. EC, 08
+        push    46080                                   ; 092B _ 68, 0000B400
+        push    eax                                     ; 0930 _ 50
+        call    memman_alloc_4K                         ; 0931 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0936 _ 83. C4, 10
+        mov     dword [ebp-14H], eax                    ; 0939 _ 89. 45, EC
+        sub     esp, 12                                 ; 093C _ 83. EC, 0C
+        push    99                                      ; 093F _ 6A, 63
+        push    180                                     ; 0941 _ 68, 000000B4
+        push    256                                     ; 0946 _ 68, 00000100
+        push    dword [ebp-14H]                         ; 094B _ FF. 75, EC
+        push    dword [ebp-18H]                         ; 094E _ FF. 75, E8
+        call    sheet_setbuf                            ; 0951 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0956 _ 83. C4, 20
+        mov     eax, dword [shtctl]                     ; 0959 _ A1, 00000224(d)
+        sub     esp, 4                                  ; 095E _ 83. EC, 04
+        push    ?_207                                   ; 0961 _ 68, 00000027(d)
+        push    dword [ebp-18H]                         ; 0966 _ FF. 75, E8
+        push    eax                                     ; 0969 _ 50
+        call    make_window8                            ; 096A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 096F _ 83. C4, 10
+        sub     esp, 8                                  ; 0972 _ 83. EC, 08
+        push    0                                       ; 0975 _ 6A, 00
+        push    144                                     ; 0977 _ 68, 00000090
+        push    240                                     ; 097C _ 68, 000000F0
+        push    28                                      ; 0981 _ 6A, 1C
+        push    8                                       ; 0983 _ 6A, 08
+        push    dword [ebp-18H]                         ; 0985 _ FF. 75, E8
+        call    make_textbox8                           ; 0988 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 098D _ 83. C4, 20
+        call    task_alloc                              ; 0990 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-10H], eax                    ; 0995 _ 89. 45, F0
+        call    get_code32_addr                         ; 0998 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0CH], eax                    ; 099D _ 89. 45, F4
+        mov     eax, dword [ebp-10H]                    ; 09A0 _ 8B. 45, F0
+        mov     dword [eax+70H], 0                      ; 09A3 _ C7. 40, 70, 00000000
+        mov     eax, dword [ebp-10H]                    ; 09AA _ 8B. 45, F0
+        mov     dword [eax+74H], 1073741824             ; 09AD _ C7. 40, 74, 40000000
+        mov     eax, dword [ebp-0CH]                    ; 09B4 _ 8B. 45, F4
+        neg     eax                                     ; 09B7 _ F7. D8
+        add     eax, console_task                       ; 09B9 _ 05, 00000000(d)
+        mov     edx, eax                                ; 09BE _ 89. C2
+        mov     eax, dword [ebp-10H]                    ; 09C0 _ 8B. 45, F0
+        mov     dword [eax+30H], edx                    ; 09C3 _ 89. 50, 30
+        mov     eax, dword [ebp-10H]                    ; 09C6 _ 8B. 45, F0
+        mov     dword [eax+58H], 0                      ; 09C9 _ C7. 40, 58, 00000000
+        mov     eax, dword [ebp-10H]                    ; 09D0 _ 8B. 45, F0
+        mov     dword [eax+5CH], 8                      ; 09D3 _ C7. 40, 5C, 00000008
+        mov     eax, dword [ebp-10H]                    ; 09DA _ 8B. 45, F0
+        mov     dword [eax+60H], 32                     ; 09DD _ C7. 40, 60, 00000020
+        mov     eax, dword [ebp-10H]                    ; 09E4 _ 8B. 45, F0
+        mov     dword [eax+64H], 24                     ; 09E7 _ C7. 40, 64, 00000018
+        mov     eax, dword [ebp-10H]                    ; 09EE _ 8B. 45, F0
+        mov     dword [eax+68H], 0                      ; 09F1 _ C7. 40, 68, 00000000
+        mov     eax, dword [ebp-10H]                    ; 09F8 _ 8B. 45, F0
+        mov     dword [eax+6CH], 16                     ; 09FB _ C7. 40, 6C, 00000010
+        mov     eax, dword [ebp-10H]                    ; 0A02 _ 8B. 45, F0
+        mov     eax, dword [eax+48H]                    ; 0A05 _ 8B. 40, 48
+        lea     edx, [eax-8H]                           ; 0A08 _ 8D. 50, F8
+        mov     eax, dword [ebp-10H]                    ; 0A0B _ 8B. 45, F0
+        mov     dword [eax+48H], edx                    ; 0A0E _ 89. 50, 48
+        mov     eax, dword [ebp-10H]                    ; 0A11 _ 8B. 45, F0
+        mov     eax, dword [eax+48H]                    ; 0A14 _ 8B. 40, 48
+        add     eax, 4                                  ; 0A17 _ 83. C0, 04
+        mov     edx, eax                                ; 0A1A _ 89. C2
+        mov     eax, dword [ebp-18H]                    ; 0A1C _ 8B. 45, E8
+        mov     dword [edx], eax                        ; 0A1F _ 89. 02
+        sub     esp, 4                                  ; 0A21 _ 83. EC, 04
+        push    5                                       ; 0A24 _ 6A, 05
+        push    1                                       ; 0A26 _ 6A, 01
+        push    dword [ebp-10H]                         ; 0A28 _ FF. 75, F0
+        call    task_run                                ; 0A2B _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0A30 _ 83. C4, 10
+        mov     eax, dword [shtctl]                     ; 0A33 _ A1, 00000224(d)
+        push    16                                      ; 0A38 _ 6A, 10
+        push    350                                     ; 0A3A _ 68, 0000015E
+        push    dword [ebp-18H]                         ; 0A3F _ FF. 75, E8
+        push    eax                                     ; 0A42 _ 50
+        call    sheet_slide                             ; 0A43 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0A48 _ 83. C4, 10
+        mov     eax, dword [shtctl]                     ; 0A4B _ A1, 00000224(d)
+        sub     esp, 4                                  ; 0A50 _ 83. EC, 04
+        push    2                                       ; 0A53 _ 6A, 02
+        push    dword [ebp-18H]                         ; 0A55 _ FF. 75, E8
+        push    eax                                     ; 0A58 _ 50
+        call    sheet_level_updown                      ; 0A59 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0A5E _ 83. C4, 10
+        nop                                             ; 0A61 _ 90
+        leave                                           ; 0A62 _ C9
+        ret                                             ; 0A63 _ C3
 ; launch_console End of function
 
-task_b_main:; Function begin
-        push    ebp                                     ; 0C24 _ 55
-        mov     ebp, esp                                ; 0C25 _ 89. E5
-        sub     esp, 88                                 ; 0C27 _ 83. EC, 58
-        mov     eax, dword [ebp+8H]                     ; 0C2A _ 8B. 45, 08
-        mov     dword [ebp-4CH], eax                    ; 0C2D _ 89. 45, B4
+console_task:; Function begin
+        push    ebp                                     ; 0A64 _ 55
+        mov     ebp, esp                                ; 0A65 _ 89. E5
+        push    ebx                                     ; 0A67 _ 53
+        sub     esp, 212                                ; 0A68 _ 81. EC, 000000D4
+        mov     eax, dword [ebp+8H]                     ; 0A6E _ 8B. 45, 08
+        mov     dword [ebp-0CCH], eax                   ; 0A71 _ 89. 85, FFFFFF34
 ; Note: Absolute memory address without relocation
-        mov     eax, dword [gs:14H]                     ; 0C30 _ 65: A1, 00000014
-        mov     dword [ebp-0CH], eax                    ; 0C36 _ 89. 45, F4
-        xor     eax, eax                                ; 0C39 _ 31. C0
-        mov     edx, dword [sheet_back]                 ; 0C3B _ 8B. 15, 0000022C(d)
-        mov     eax, dword [shtctl]                     ; 0C41 _ A1, 00000224(d)
-        sub     esp, 8                                  ; 0C46 _ 83. EC, 08
-        push    ?_208                                   ; 0C49 _ 68, 00000030(d)
-        push    7                                       ; 0C4E _ 6A, 07
-        push    144                                     ; 0C50 _ 68, 00000090
-        push    0                                       ; 0C55 _ 6A, 00
-        push    edx                                     ; 0C57 _ 52
-        push    eax                                     ; 0C58 _ 50
-        call    showString                              ; 0C59 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0C5E _ 83. C4, 20
-        mov     dword [ebp-3CH], 0                      ; 0C61 _ C7. 45, C4, 00000000
-        mov     dword [ebp-38H], 0                      ; 0C68 _ C7. 45, C8, 00000000
-        push    0                                       ; 0C6F _ 6A, 00
-        lea     eax, [ebp-14H]                          ; 0C71 _ 8D. 45, EC
-        push    eax                                     ; 0C74 _ 50
-        push    8                                       ; 0C75 _ 6A, 08
-        lea     eax, [ebp-30H]                          ; 0C77 _ 8D. 45, D0
-        push    eax                                     ; 0C7A _ 50
-        call    fifo8_init                              ; 0C7B _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0C80 _ 83. C4, 10
-        call    timer_alloc                             ; 0C83 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-3CH], eax                    ; 0C88 _ 89. 45, C4
-        sub     esp, 4                                  ; 0C8B _ 83. EC, 04
-        push    123                                     ; 0C8E _ 6A, 7B
-        lea     eax, [ebp-30H]                          ; 0C90 _ 8D. 45, D0
-        push    eax                                     ; 0C93 _ 50
-        push    dword [ebp-3CH]                         ; 0C94 _ FF. 75, C4
-        call    timer_init                              ; 0C97 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0C9C _ 83. C4, 10
-        sub     esp, 8                                  ; 0C9F _ 83. EC, 08
-        push    100                                     ; 0CA2 _ 6A, 64
-        push    dword [ebp-3CH]                         ; 0CA4 _ FF. 75, C4
-        call    timer_setTime                           ; 0CA7 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0CAC _ 83. C4, 10
-        mov     dword [ebp-44H], 0                      ; 0CAF _ C7. 45, BC, 00000000
-        mov     dword [ebp-40H], 0                      ; 0CB6 _ C7. 45, C0, 00000000
-?_019:  add     dword [ebp-40H], 1                      ; 0CBD _ 83. 45, C0, 01
-        mov     eax, dword [ebp-4CH]                    ; 0CC1 _ 8B. 45, B4
-        mov     edx, dword [eax+4H]                     ; 0CC4 _ 8B. 50, 04
-        mov     eax, dword [ebp-4CH]                    ; 0CC7 _ 8B. 45, B4
-        mov     eax, dword [eax]                        ; 0CCA _ 8B. 00
-        sub     esp, 4                                  ; 0CCC _ 83. EC, 04
-        push    38                                      ; 0CCF _ 6A, 26
-        push    100                                     ; 0CD1 _ 6A, 64
-        push    23                                      ; 0CD3 _ 6A, 17
-        push    8                                       ; 0CD5 _ 6A, 08
-        push    8                                       ; 0CD7 _ 6A, 08
-        push    edx                                     ; 0CD9 _ 52
-        push    eax                                     ; 0CDA _ 50
-        call    boxfill8                                ; 0CDB _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0CE0 _ 83. C4, 20
-        sub     esp, 12                                 ; 0CE3 _ 83. EC, 0C
-        push    dword [ebp-40H]                         ; 0CE6 _ FF. 75, C0
-        call    intToHexStr                             ; 0CE9 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0CEE _ 83. C4, 10
-        mov     dword [ebp-34H], eax                    ; 0CF1 _ 89. 45, CC
-        mov     eax, dword [shtctl]                     ; 0CF4 _ A1, 00000224(d)
-        sub     esp, 8                                  ; 0CF9 _ 83. EC, 08
-        push    dword [ebp-34H]                         ; 0CFC _ FF. 75, CC
-        push    10                                      ; 0CFF _ 6A, 0A
-        push    23                                      ; 0D01 _ 6A, 17
-        push    8                                       ; 0D03 _ 6A, 08
-        push    dword [ebp-4CH]                         ; 0D05 _ FF. 75, B4
-        push    eax                                     ; 0D08 _ 50
-        call    showString                              ; 0D09 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0D0E _ 83. C4, 20
-        call    io_cli                                  ; 0D11 _ E8, FFFFFFFC(rel)
-        sub     esp, 12                                 ; 0D16 _ 83. EC, 0C
-        lea     eax, [ebp-30H]                          ; 0D19 _ 8D. 45, D0
-        push    eax                                     ; 0D1C _ 50
-        call    fifo8_status                            ; 0D1D _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0D22 _ 83. C4, 10
-        test    eax, eax                                ; 0D25 _ 85. C0
-        jnz     ?_020                                   ; 0D27 _ 75, 07
-        call    io_sti                                  ; 0D29 _ E8, FFFFFFFC(rel)
-        jmp     ?_019                                   ; 0D2E _ EB, 8D
+        mov     eax, dword [gs:14H]                     ; 0A77 _ 65: A1, 00000014
+        mov     dword [ebp-0CH], eax                    ; 0A7D _ 89. 45, F4
+        xor     eax, eax                                ; 0A80 _ 31. C0
+        call    task_now                                ; 0A82 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0B8H], eax                   ; 0A87 _ 89. 85, FFFFFF48
+        mov     dword [ebp-0B4H], 8                     ; 0A8D _ C7. 85, FFFFFF4C, 00000008
+        mov     dword [ebp-0BCH], 0                     ; 0A97 _ C7. 85, FFFFFF44, 00000000
+        push    dword [ebp-0B8H]                        ; 0AA1 _ FF. B5, FFFFFF48
+        lea     eax, [ebp-8CH]                          ; 0AA7 _ 8D. 85, FFFFFF74
+        push    eax                                     ; 0AAD _ 50
+        push    128                                     ; 0AAE _ 68, 00000080
+        lea     eax, [ebp-0A8H]                         ; 0AB3 _ 8D. 85, FFFFFF58
+        push    eax                                     ; 0AB9 _ 50
+        call    fifo8_init                              ; 0ABA _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0ABF _ 83. C4, 10
+        call    timer_alloc                             ; 0AC2 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0B0H], eax                   ; 0AC7 _ 89. 85, FFFFFF50
+        sub     esp, 4                                  ; 0ACD _ 83. EC, 04
+        push    1                                       ; 0AD0 _ 6A, 01
+        lea     eax, [ebp-0A8H]                         ; 0AD2 _ 8D. 85, FFFFFF58
+        push    eax                                     ; 0AD8 _ 50
+        push    dword [ebp-0B0H]                        ; 0AD9 _ FF. B5, FFFFFF50
+        call    timer_init                              ; 0ADF _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0AE4 _ 83. C4, 10
+        sub     esp, 8                                  ; 0AE7 _ 83. EC, 08
+        push    50                                      ; 0AEA _ 6A, 32
+        push    dword [ebp-0B0H]                        ; 0AEC _ FF. B5, FFFFFF50
+        call    timer_setTime                           ; 0AF2 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0AF7 _ 83. C4, 10
+        mov     dword [ebp-0ACH], 0                     ; 0AFA _ C7. 85, FFFFFF54, 00000000
+?_015:  call    io_cli                                  ; 0B04 _ E8, FFFFFFFC(rel)
+        sub     esp, 12                                 ; 0B09 _ 83. EC, 0C
+        lea     eax, [ebp-0A8H]                         ; 0B0C _ 8D. 85, FFFFFF58
+        push    eax                                     ; 0B12 _ 50
+        call    fifo8_status                            ; 0B13 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0B18 _ 83. C4, 10
+        test    eax, eax                                ; 0B1B _ 85. C0
+        jnz     ?_016                                   ; 0B1D _ 75, 07
+        call    io_sti                                  ; 0B1F _ E8, FFFFFFFC(rel)
+        jmp     ?_015                                   ; 0B24 _ EB, DE
 
-?_020:  sub     esp, 12                                 ; 0D30 _ 83. EC, 0C
-        lea     eax, [ebp-30H]                          ; 0D33 _ 8D. 45, D0
-        push    eax                                     ; 0D36 _ 50
-        call    fifo8_get                               ; 0D37 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0D3C _ 83. C4, 10
-        mov     dword [ebp-38H], eax                    ; 0D3F _ 89. 45, C8
-        call    io_sti                                  ; 0D42 _ E8, FFFFFFFC(rel)
-        cmp     dword [ebp-38H], 123                    ; 0D47 _ 83. 7D, C8, 7B
-        jne     ?_019                                   ; 0D4B _ 0F 85, FFFFFF6C
-        mov     edx, dword [sheet_back]                 ; 0D51 _ 8B. 15, 0000022C(d)
-        mov     eax, dword [shtctl]                     ; 0D57 _ A1, 00000224(d)
-        sub     esp, 8                                  ; 0D5C _ 83. EC, 08
-        push    ?_209                                   ; 0D5F _ 68, 0000003D(d)
-        push    7                                       ; 0D64 _ 6A, 07
-        push    176                                     ; 0D66 _ 68, 000000B0
-        push    dword [ebp-44H]                         ; 0D6B _ FF. 75, BC
-        push    edx                                     ; 0D6E _ 52
-        push    eax                                     ; 0D6F _ 50
-        call    showString                              ; 0D70 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0D75 _ 83. C4, 20
-        sub     esp, 8                                  ; 0D78 _ 83. EC, 08
-        push    100                                     ; 0D7B _ 6A, 64
-        push    dword [ebp-3CH]                         ; 0D7D _ FF. 75, C4
-        call    timer_setTime                           ; 0D80 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 0D85 _ 83. C4, 10
-        add     dword [ebp-44H], 8                      ; 0D88 _ 83. 45, BC, 08
-        jmp     ?_019                                   ; 0D8C _ E9, FFFFFF2C
+?_016:  sub     esp, 12                                 ; 0B26 _ 83. EC, 0C
+        lea     eax, [ebp-0A8H]                         ; 0B29 _ 8D. 85, FFFFFF58
+        push    eax                                     ; 0B2F _ 50
+        call    fifo8_get                               ; 0B30 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0B35 _ 83. C4, 10
+        mov     dword [ebp-0ACH], eax                   ; 0B38 _ 89. 85, FFFFFF54
+        call    io_sti                                  ; 0B3E _ E8, FFFFFFFC(rel)
+        cmp     dword [ebp-0ACH], 1                     ; 0B43 _ 83. BD, FFFFFF54, 01
+        jg      ?_015                                   ; 0B4A _ 7F, B8
+        cmp     dword [ebp-0ACH], 1                     ; 0B4C _ 83. BD, FFFFFF54, 01
+        jnz     ?_017                                   ; 0B53 _ 75, 26
+        sub     esp, 4                                  ; 0B55 _ 83. EC, 04
+        push    0                                       ; 0B58 _ 6A, 00
+        lea     eax, [ebp-0A8H]                         ; 0B5A _ 8D. 85, FFFFFF58
+        push    eax                                     ; 0B60 _ 50
+        push    dword [ebp-0B0H]                        ; 0B61 _ FF. B5, FFFFFF50
+        call    timer_init                              ; 0B67 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0B6C _ 83. C4, 10
+        mov     dword [ebp-0BCH], 7                     ; 0B6F _ C7. 85, FFFFFF44, 00000007
+        jmp     ?_018                                   ; 0B79 _ EB, 2D
+
+?_017:  cmp     dword [ebp-0ACH], 0                     ; 0B7B _ 83. BD, FFFFFF54, 00
+        jnz     ?_018                                   ; 0B82 _ 75, 24
+        sub     esp, 4                                  ; 0B84 _ 83. EC, 04
+        push    1                                       ; 0B87 _ 6A, 01
+        lea     eax, [ebp-0A8H]                         ; 0B89 _ 8D. 85, FFFFFF58
+        push    eax                                     ; 0B8F _ 50
+        push    dword [ebp-0B0H]                        ; 0B90 _ FF. B5, FFFFFF50
+        call    timer_init                              ; 0B96 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0B9B _ 83. C4, 10
+        mov     dword [ebp-0BCH], 0                     ; 0B9E _ C7. 85, FFFFFF44, 00000000
+?_018:  sub     esp, 8                                  ; 0BA8 _ 83. EC, 08
+        push    50                                      ; 0BAB _ 6A, 32
+        push    dword [ebp-0B0H]                        ; 0BAD _ FF. B5, FFFFFF50
+        call    timer_setTime                           ; 0BB3 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0BB8 _ 83. C4, 10
+        mov     eax, dword [ebp-0B4H]                   ; 0BBB _ 8B. 85, FFFFFF4C
+        lea     ebx, [eax+6H]                           ; 0BC1 _ 8D. 58, 06
+        mov     eax, dword [ebp-0BCH]                   ; 0BC4 _ 8B. 85, FFFFFF44
+        movzx   ecx, al                                 ; 0BCA _ 0F B6. C8
+        mov     eax, dword [ebp-0CCH]                   ; 0BCD _ 8B. 85, FFFFFF34
+        mov     edx, dword [eax+4H]                     ; 0BD3 _ 8B. 50, 04
+        mov     eax, dword [ebp-0CCH]                   ; 0BD6 _ 8B. 85, FFFFFF34
+        mov     eax, dword [eax]                        ; 0BDC _ 8B. 00
+        sub     esp, 4                                  ; 0BDE _ 83. EC, 04
+        push    43                                      ; 0BE1 _ 6A, 2B
+        push    ebx                                     ; 0BE3 _ 53
+        push    28                                      ; 0BE4 _ 6A, 1C
+        push    dword [ebp-0B4H]                        ; 0BE6 _ FF. B5, FFFFFF4C
+        push    ecx                                     ; 0BEC _ 51
+        push    edx                                     ; 0BED _ 52
+        push    eax                                     ; 0BEE _ 50
+        call    boxfill8                                ; 0BEF _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0BF4 _ 83. C4, 20
+        mov     eax, dword [ebp-0B4H]                   ; 0BF7 _ 8B. 85, FFFFFF4C
+        lea     edx, [eax+8H]                           ; 0BFD _ 8D. 50, 08
+        mov     eax, dword [shtctl]                     ; 0C00 _ A1, 00000224(d)
+        sub     esp, 8                                  ; 0C05 _ 83. EC, 08
+        push    44                                      ; 0C08 _ 6A, 2C
+        push    edx                                     ; 0C0A _ 52
+        push    28                                      ; 0C0B _ 6A, 1C
+        push    dword [ebp-0B4H]                        ; 0C0D _ FF. B5, FFFFFF4C
+        push    dword [ebp-0CCH]                        ; 0C13 _ FF. B5, FFFFFF34
+        push    eax                                     ; 0C19 _ 50
+        call    sheet_refresh                           ; 0C1A _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0C1F _ 83. C4, 20
+        jmp     ?_015                                   ; 0C22 _ E9, FFFFFEDD
+; console_task End of function
+
+task_b_main:; Function begin
+        push    ebp                                     ; 0C27 _ 55
+        mov     ebp, esp                                ; 0C28 _ 89. E5
+        sub     esp, 88                                 ; 0C2A _ 83. EC, 58
+        mov     eax, dword [ebp+8H]                     ; 0C2D _ 8B. 45, 08
+        mov     dword [ebp-4CH], eax                    ; 0C30 _ 89. 45, B4
+; Note: Absolute memory address without relocation
+        mov     eax, dword [gs:14H]                     ; 0C33 _ 65: A1, 00000014
+        mov     dword [ebp-0CH], eax                    ; 0C39 _ 89. 45, F4
+        xor     eax, eax                                ; 0C3C _ 31. C0
+        mov     edx, dword [sheet_back]                 ; 0C3E _ 8B. 15, 0000022C(d)
+        mov     eax, dword [shtctl]                     ; 0C44 _ A1, 00000224(d)
+        sub     esp, 8                                  ; 0C49 _ 83. EC, 08
+        push    ?_208                                   ; 0C4C _ 68, 00000030(d)
+        push    7                                       ; 0C51 _ 6A, 07
+        push    144                                     ; 0C53 _ 68, 00000090
+        push    0                                       ; 0C58 _ 6A, 00
+        push    edx                                     ; 0C5A _ 52
+        push    eax                                     ; 0C5B _ 50
+        call    showString                              ; 0C5C _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0C61 _ 83. C4, 20
+        mov     dword [ebp-3CH], 0                      ; 0C64 _ C7. 45, C4, 00000000
+        mov     dword [ebp-38H], 0                      ; 0C6B _ C7. 45, C8, 00000000
+        push    0                                       ; 0C72 _ 6A, 00
+        lea     eax, [ebp-14H]                          ; 0C74 _ 8D. 45, EC
+        push    eax                                     ; 0C77 _ 50
+        push    8                                       ; 0C78 _ 6A, 08
+        lea     eax, [ebp-30H]                          ; 0C7A _ 8D. 45, D0
+        push    eax                                     ; 0C7D _ 50
+        call    fifo8_init                              ; 0C7E _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0C83 _ 83. C4, 10
+        call    timer_alloc                             ; 0C86 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-3CH], eax                    ; 0C8B _ 89. 45, C4
+        sub     esp, 4                                  ; 0C8E _ 83. EC, 04
+        push    123                                     ; 0C91 _ 6A, 7B
+        lea     eax, [ebp-30H]                          ; 0C93 _ 8D. 45, D0
+        push    eax                                     ; 0C96 _ 50
+        push    dword [ebp-3CH]                         ; 0C97 _ FF. 75, C4
+        call    timer_init                              ; 0C9A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0C9F _ 83. C4, 10
+        sub     esp, 8                                  ; 0CA2 _ 83. EC, 08
+        push    100                                     ; 0CA5 _ 6A, 64
+        push    dword [ebp-3CH]                         ; 0CA7 _ FF. 75, C4
+        call    timer_setTime                           ; 0CAA _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0CAF _ 83. C4, 10
+        mov     dword [ebp-44H], 0                      ; 0CB2 _ C7. 45, BC, 00000000
+        mov     dword [ebp-40H], 0                      ; 0CB9 _ C7. 45, C0, 00000000
+?_019:  add     dword [ebp-40H], 1                      ; 0CC0 _ 83. 45, C0, 01
+        mov     eax, dword [ebp-4CH]                    ; 0CC4 _ 8B. 45, B4
+        mov     edx, dword [eax+4H]                     ; 0CC7 _ 8B. 50, 04
+        mov     eax, dword [ebp-4CH]                    ; 0CCA _ 8B. 45, B4
+        mov     eax, dword [eax]                        ; 0CCD _ 8B. 00
+        sub     esp, 4                                  ; 0CCF _ 83. EC, 04
+        push    38                                      ; 0CD2 _ 6A, 26
+        push    100                                     ; 0CD4 _ 6A, 64
+        push    23                                      ; 0CD6 _ 6A, 17
+        push    8                                       ; 0CD8 _ 6A, 08
+        push    8                                       ; 0CDA _ 6A, 08
+        push    edx                                     ; 0CDC _ 52
+        push    eax                                     ; 0CDD _ 50
+        call    boxfill8                                ; 0CDE _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0CE3 _ 83. C4, 20
+        sub     esp, 12                                 ; 0CE6 _ 83. EC, 0C
+        push    dword [ebp-40H]                         ; 0CE9 _ FF. 75, C0
+        call    intToHexStr                             ; 0CEC _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0CF1 _ 83. C4, 10
+        mov     dword [ebp-34H], eax                    ; 0CF4 _ 89. 45, CC
+        mov     eax, dword [shtctl]                     ; 0CF7 _ A1, 00000224(d)
+        sub     esp, 8                                  ; 0CFC _ 83. EC, 08
+        push    dword [ebp-34H]                         ; 0CFF _ FF. 75, CC
+        push    10                                      ; 0D02 _ 6A, 0A
+        push    23                                      ; 0D04 _ 6A, 17
+        push    8                                       ; 0D06 _ 6A, 08
+        push    dword [ebp-4CH]                         ; 0D08 _ FF. 75, B4
+        push    eax                                     ; 0D0B _ 50
+        call    showString                              ; 0D0C _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0D11 _ 83. C4, 20
+        call    io_cli                                  ; 0D14 _ E8, FFFFFFFC(rel)
+        sub     esp, 12                                 ; 0D19 _ 83. EC, 0C
+        lea     eax, [ebp-30H]                          ; 0D1C _ 8D. 45, D0
+        push    eax                                     ; 0D1F _ 50
+        call    fifo8_status                            ; 0D20 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0D25 _ 83. C4, 10
+        test    eax, eax                                ; 0D28 _ 85. C0
+        jnz     ?_020                                   ; 0D2A _ 75, 07
+        call    io_sti                                  ; 0D2C _ E8, FFFFFFFC(rel)
+        jmp     ?_019                                   ; 0D31 _ EB, 8D
+
+?_020:  sub     esp, 12                                 ; 0D33 _ 83. EC, 0C
+        lea     eax, [ebp-30H]                          ; 0D36 _ 8D. 45, D0
+        push    eax                                     ; 0D39 _ 50
+        call    fifo8_get                               ; 0D3A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0D3F _ 83. C4, 10
+        mov     dword [ebp-38H], eax                    ; 0D42 _ 89. 45, C8
+        call    io_sti                                  ; 0D45 _ E8, FFFFFFFC(rel)
+        cmp     dword [ebp-38H], 123                    ; 0D4A _ 83. 7D, C8, 7B
+        jne     ?_019                                   ; 0D4E _ 0F 85, FFFFFF6C
+        mov     edx, dword [sheet_back]                 ; 0D54 _ 8B. 15, 0000022C(d)
+        mov     eax, dword [shtctl]                     ; 0D5A _ A1, 00000224(d)
+        sub     esp, 8                                  ; 0D5F _ 83. EC, 08
+        push    ?_209                                   ; 0D62 _ 68, 0000003D(d)
+        push    7                                       ; 0D67 _ 6A, 07
+        push    176                                     ; 0D69 _ 68, 000000B0
+        push    dword [ebp-44H]                         ; 0D6E _ FF. 75, BC
+        push    edx                                     ; 0D71 _ 52
+        push    eax                                     ; 0D72 _ 50
+        call    showString                              ; 0D73 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0D78 _ 83. C4, 20
+        sub     esp, 8                                  ; 0D7B _ 83. EC, 08
+        push    100                                     ; 0D7E _ 6A, 64
+        push    dword [ebp-3CH]                         ; 0D80 _ FF. 75, C4
+        call    timer_setTime                           ; 0D83 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 0D88 _ 83. C4, 10
+        add     dword [ebp-44H], 8                      ; 0D8B _ 83. 45, BC, 08
+        jmp     ?_019                                   ; 0D8F _ E9, FFFFFF2C
 ; task_b_main End of function
 
 initBootInfo:; Function begin
-        push    ebp                                     ; 0D91 _ 55
-        mov     ebp, esp                                ; 0D92 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 0D94 _ 8B. 45, 08
-        mov     dword [eax], -536870912                 ; 0D97 _ C7. 00, E0000000
-        mov     eax, dword [ebp+8H]                     ; 0D9D _ 8B. 45, 08
+        push    ebp                                     ; 0D94 _ 55
+        mov     ebp, esp                                ; 0D95 _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 0D97 _ 8B. 45, 08
+        mov     dword [eax], -536870912                 ; 0D9A _ C7. 00, E0000000
+        mov     eax, dword [ebp+8H]                     ; 0DA0 _ 8B. 45, 08
 ; Note: Length-changing prefix causes delay on Intel processors
-        mov     word [eax+4H], 640                      ; 0DA0 _ 66: C7. 40, 04, 0280
-        mov     eax, dword [ebp+8H]                     ; 0DA6 _ 8B. 45, 08
+        mov     word [eax+4H], 640                      ; 0DA3 _ 66: C7. 40, 04, 0280
+        mov     eax, dword [ebp+8H]                     ; 0DA9 _ 8B. 45, 08
 ; Note: Length-changing prefix causes delay on Intel processors
-        mov     word [eax+6H], 480                      ; 0DA9 _ 66: C7. 40, 06, 01E0
-        nop                                             ; 0DAF _ 90
-        pop     ebp                                     ; 0DB0 _ 5D
-        ret                                             ; 0DB1 _ C3
+        mov     word [eax+6H], 480                      ; 0DAC _ 66: C7. 40, 06, 01E0
+        nop                                             ; 0DB2 _ 90
+        pop     ebp                                     ; 0DB3 _ 5D
+        ret                                             ; 0DB4 _ C3
 ; initBootInfo End of function
 
 showString:; Function begin
-        push    ebp                                     ; 0DB2 _ 55
-        mov     ebp, esp                                ; 0DB3 _ 89. E5
-        push    ebx                                     ; 0DB5 _ 53
-        sub     esp, 36                                 ; 0DB6 _ 83. EC, 24
-        mov     eax, dword [ebp+18H]                    ; 0DB9 _ 8B. 45, 18
-        mov     byte [ebp-1CH], al                      ; 0DBC _ 88. 45, E4
-        mov     eax, dword [ebp+10H]                    ; 0DBF _ 8B. 45, 10
-        mov     dword [ebp-0CH], eax                    ; 0DC2 _ 89. 45, F4
-        jmp     ?_022                                   ; 0DC5 _ EB, 3E
+        push    ebp                                     ; 0DB5 _ 55
+        mov     ebp, esp                                ; 0DB6 _ 89. E5
+        push    ebx                                     ; 0DB8 _ 53
+        sub     esp, 36                                 ; 0DB9 _ 83. EC, 24
+        mov     eax, dword [ebp+18H]                    ; 0DBC _ 8B. 45, 18
+        mov     byte [ebp-1CH], al                      ; 0DBF _ 88. 45, E4
+        mov     eax, dword [ebp+10H]                    ; 0DC2 _ 8B. 45, 10
+        mov     dword [ebp-0CH], eax                    ; 0DC5 _ 89. 45, F4
+        jmp     ?_022                                   ; 0DC8 _ EB, 3E
 
-?_021:  mov     eax, dword [ebp+1CH]                    ; 0DC7 _ 8B. 45, 1C
-        movzx   eax, byte [eax]                         ; 0DCA _ 0F B6. 00
-        movzx   eax, al                                 ; 0DCD _ 0F B6. C0
-        shl     eax, 4                                  ; 0DD0 _ C1. E0, 04
-        lea     ebx, [systemFont+eax]                   ; 0DD3 _ 8D. 98, 00000000(d)
-        movsx   ecx, byte [ebp-1CH]                     ; 0DD9 _ 0F BE. 4D, E4
-        mov     eax, dword [ebp+0CH]                    ; 0DDD _ 8B. 45, 0C
-        mov     edx, dword [eax+4H]                     ; 0DE0 _ 8B. 50, 04
-        mov     eax, dword [ebp+0CH]                    ; 0DE3 _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 0DE6 _ 8B. 00
-        sub     esp, 8                                  ; 0DE8 _ 83. EC, 08
-        push    ebx                                     ; 0DEB _ 53
-        push    ecx                                     ; 0DEC _ 51
-        push    dword [ebp+14H]                         ; 0DED _ FF. 75, 14
-        push    dword [ebp+10H]                         ; 0DF0 _ FF. 75, 10
-        push    edx                                     ; 0DF3 _ 52
-        push    eax                                     ; 0DF4 _ 50
-        call    showFont8                               ; 0DF5 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0DFA _ 83. C4, 20
-        add     dword [ebp+10H], 8                      ; 0DFD _ 83. 45, 10, 08
-        add     dword [ebp+1CH], 1                      ; 0E01 _ 83. 45, 1C, 01
-?_022:  mov     eax, dword [ebp+1CH]                    ; 0E05 _ 8B. 45, 1C
-        movzx   eax, byte [eax]                         ; 0E08 _ 0F B6. 00
-        test    al, al                                  ; 0E0B _ 84. C0
-        jnz     ?_021                                   ; 0E0D _ 75, B8
-        mov     eax, dword [ebp+14H]                    ; 0E0F _ 8B. 45, 14
-        add     eax, 16                                 ; 0E12 _ 83. C0, 10
-        sub     esp, 8                                  ; 0E15 _ 83. EC, 08
-        push    eax                                     ; 0E18 _ 50
-        push    dword [ebp+10H]                         ; 0E19 _ FF. 75, 10
-        push    dword [ebp+14H]                         ; 0E1C _ FF. 75, 14
-        push    dword [ebp-0CH]                         ; 0E1F _ FF. 75, F4
-        push    dword [ebp+0CH]                         ; 0E22 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0E25 _ FF. 75, 08
-        call    sheet_refresh                           ; 0E28 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0E2D _ 83. C4, 20
-        nop                                             ; 0E30 _ 90
-        mov     ebx, dword [ebp-4H]                     ; 0E31 _ 8B. 5D, FC
-        leave                                           ; 0E34 _ C9
-        ret                                             ; 0E35 _ C3
+?_021:  mov     eax, dword [ebp+1CH]                    ; 0DCA _ 8B. 45, 1C
+        movzx   eax, byte [eax]                         ; 0DCD _ 0F B6. 00
+        movzx   eax, al                                 ; 0DD0 _ 0F B6. C0
+        shl     eax, 4                                  ; 0DD3 _ C1. E0, 04
+        lea     ebx, [systemFont+eax]                   ; 0DD6 _ 8D. 98, 00000000(d)
+        movsx   ecx, byte [ebp-1CH]                     ; 0DDC _ 0F BE. 4D, E4
+        mov     eax, dword [ebp+0CH]                    ; 0DE0 _ 8B. 45, 0C
+        mov     edx, dword [eax+4H]                     ; 0DE3 _ 8B. 50, 04
+        mov     eax, dword [ebp+0CH]                    ; 0DE6 _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 0DE9 _ 8B. 00
+        sub     esp, 8                                  ; 0DEB _ 83. EC, 08
+        push    ebx                                     ; 0DEE _ 53
+        push    ecx                                     ; 0DEF _ 51
+        push    dword [ebp+14H]                         ; 0DF0 _ FF. 75, 14
+        push    dword [ebp+10H]                         ; 0DF3 _ FF. 75, 10
+        push    edx                                     ; 0DF6 _ 52
+        push    eax                                     ; 0DF7 _ 50
+        call    showFont8                               ; 0DF8 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0DFD _ 83. C4, 20
+        add     dword [ebp+10H], 8                      ; 0E00 _ 83. 45, 10, 08
+        add     dword [ebp+1CH], 1                      ; 0E04 _ 83. 45, 1C, 01
+?_022:  mov     eax, dword [ebp+1CH]                    ; 0E08 _ 8B. 45, 1C
+        movzx   eax, byte [eax]                         ; 0E0B _ 0F B6. 00
+        test    al, al                                  ; 0E0E _ 84. C0
+        jnz     ?_021                                   ; 0E10 _ 75, B8
+        mov     eax, dword [ebp+14H]                    ; 0E12 _ 8B. 45, 14
+        add     eax, 16                                 ; 0E15 _ 83. C0, 10
+        sub     esp, 8                                  ; 0E18 _ 83. EC, 08
+        push    eax                                     ; 0E1B _ 50
+        push    dword [ebp+10H]                         ; 0E1C _ FF. 75, 10
+        push    dword [ebp+14H]                         ; 0E1F _ FF. 75, 14
+        push    dword [ebp-0CH]                         ; 0E22 _ FF. 75, F4
+        push    dword [ebp+0CH]                         ; 0E25 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0E28 _ FF. 75, 08
+        call    sheet_refresh                           ; 0E2B _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0E30 _ 83. C4, 20
+        nop                                             ; 0E33 _ 90
+        mov     ebx, dword [ebp-4H]                     ; 0E34 _ 8B. 5D, FC
+        leave                                           ; 0E37 _ C9
+        ret                                             ; 0E38 _ C3
 ; showString End of function
 
 init_screen8:; Function begin
-        push    ebp                                     ; 0E36 _ 55
-        mov     ebp, esp                                ; 0E37 _ 89. E5
-        push    ebx                                     ; 0E39 _ 53
-        sub     esp, 4                                  ; 0E3A _ 83. EC, 04
-        mov     eax, dword [ebp+10H]                    ; 0E3D _ 8B. 45, 10
-        lea     edx, [eax-19H]                          ; 0E40 _ 8D. 50, E7
-        mov     eax, dword [ebp+0CH]                    ; 0E43 _ 8B. 45, 0C
-        sub     eax, 1                                  ; 0E46 _ 83. E8, 01
-        sub     esp, 4                                  ; 0E49 _ 83. EC, 04
-        push    edx                                     ; 0E4C _ 52
-        push    eax                                     ; 0E4D _ 50
-        push    0                                       ; 0E4E _ 6A, 00
-        push    0                                       ; 0E50 _ 6A, 00
-        push    14                                      ; 0E52 _ 6A, 0E
-        push    dword [ebp+0CH]                         ; 0E54 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0E57 _ FF. 75, 08
-        call    boxfill8                                ; 0E5A _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0E5F _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0E62 _ 8B. 45, 10
-        lea     ecx, [eax-18H]                          ; 0E65 _ 8D. 48, E8
-        mov     eax, dword [ebp+0CH]                    ; 0E68 _ 8B. 45, 0C
-        lea     edx, [eax-1H]                           ; 0E6B _ 8D. 50, FF
-        mov     eax, dword [ebp+10H]                    ; 0E6E _ 8B. 45, 10
-        sub     eax, 24                                 ; 0E71 _ 83. E8, 18
-        sub     esp, 4                                  ; 0E74 _ 83. EC, 04
-        push    ecx                                     ; 0E77 _ 51
-        push    edx                                     ; 0E78 _ 52
-        push    eax                                     ; 0E79 _ 50
-        push    0                                       ; 0E7A _ 6A, 00
-        push    8                                       ; 0E7C _ 6A, 08
-        push    dword [ebp+0CH]                         ; 0E7E _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0E81 _ FF. 75, 08
-        call    boxfill8                                ; 0E84 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0E89 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0E8C _ 8B. 45, 10
-        lea     ecx, [eax-17H]                          ; 0E8F _ 8D. 48, E9
-        mov     eax, dword [ebp+0CH]                    ; 0E92 _ 8B. 45, 0C
-        lea     edx, [eax-1H]                           ; 0E95 _ 8D. 50, FF
-        mov     eax, dword [ebp+10H]                    ; 0E98 _ 8B. 45, 10
-        sub     eax, 23                                 ; 0E9B _ 83. E8, 17
-        sub     esp, 4                                  ; 0E9E _ 83. EC, 04
-        push    ecx                                     ; 0EA1 _ 51
-        push    edx                                     ; 0EA2 _ 52
-        push    eax                                     ; 0EA3 _ 50
-        push    0                                       ; 0EA4 _ 6A, 00
-        push    7                                       ; 0EA6 _ 6A, 07
-        push    dword [ebp+0CH]                         ; 0EA8 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0EAB _ FF. 75, 08
-        call    boxfill8                                ; 0EAE _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0EB3 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0EB6 _ 8B. 45, 10
-        lea     ecx, [eax-1H]                           ; 0EB9 _ 8D. 48, FF
-        mov     eax, dword [ebp+0CH]                    ; 0EBC _ 8B. 45, 0C
-        lea     edx, [eax-1H]                           ; 0EBF _ 8D. 50, FF
-        mov     eax, dword [ebp+10H]                    ; 0EC2 _ 8B. 45, 10
-        sub     eax, 22                                 ; 0EC5 _ 83. E8, 16
-        sub     esp, 4                                  ; 0EC8 _ 83. EC, 04
-        push    ecx                                     ; 0ECB _ 51
-        push    edx                                     ; 0ECC _ 52
-        push    eax                                     ; 0ECD _ 50
-        push    0                                       ; 0ECE _ 6A, 00
-        push    8                                       ; 0ED0 _ 6A, 08
-        push    dword [ebp+0CH]                         ; 0ED2 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0ED5 _ FF. 75, 08
-        call    boxfill8                                ; 0ED8 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0EDD _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0EE0 _ 8B. 45, 10
-        lea     edx, [eax-14H]                          ; 0EE3 _ 8D. 50, EC
-        mov     eax, dword [ebp+10H]                    ; 0EE6 _ 8B. 45, 10
-        sub     eax, 20                                 ; 0EE9 _ 83. E8, 14
-        sub     esp, 4                                  ; 0EEC _ 83. EC, 04
-        push    edx                                     ; 0EEF _ 52
-        push    51                                      ; 0EF0 _ 6A, 33
-        push    eax                                     ; 0EF2 _ 50
-        push    10                                      ; 0EF3 _ 6A, 0A
-        push    7                                       ; 0EF5 _ 6A, 07
-        push    dword [ebp+0CH]                         ; 0EF7 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0EFA _ FF. 75, 08
-        call    boxfill8                                ; 0EFD _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0F02 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0F05 _ 8B. 45, 10
-        lea     edx, [eax-4H]                           ; 0F08 _ 8D. 50, FC
-        mov     eax, dword [ebp+10H]                    ; 0F0B _ 8B. 45, 10
-        sub     eax, 20                                 ; 0F0E _ 83. E8, 14
-        sub     esp, 4                                  ; 0F11 _ 83. EC, 04
-        push    edx                                     ; 0F14 _ 52
-        push    9                                       ; 0F15 _ 6A, 09
-        push    eax                                     ; 0F17 _ 50
+        push    ebp                                     ; 0E39 _ 55
+        mov     ebp, esp                                ; 0E3A _ 89. E5
+        push    ebx                                     ; 0E3C _ 53
+        sub     esp, 4                                  ; 0E3D _ 83. EC, 04
+        mov     eax, dword [ebp+10H]                    ; 0E40 _ 8B. 45, 10
+        lea     edx, [eax-19H]                          ; 0E43 _ 8D. 50, E7
+        mov     eax, dword [ebp+0CH]                    ; 0E46 _ 8B. 45, 0C
+        sub     eax, 1                                  ; 0E49 _ 83. E8, 01
+        sub     esp, 4                                  ; 0E4C _ 83. EC, 04
+        push    edx                                     ; 0E4F _ 52
+        push    eax                                     ; 0E50 _ 50
+        push    0                                       ; 0E51 _ 6A, 00
+        push    0                                       ; 0E53 _ 6A, 00
+        push    14                                      ; 0E55 _ 6A, 0E
+        push    dword [ebp+0CH]                         ; 0E57 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0E5A _ FF. 75, 08
+        call    boxfill8                                ; 0E5D _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0E62 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0E65 _ 8B. 45, 10
+        lea     ecx, [eax-18H]                          ; 0E68 _ 8D. 48, E8
+        mov     eax, dword [ebp+0CH]                    ; 0E6B _ 8B. 45, 0C
+        lea     edx, [eax-1H]                           ; 0E6E _ 8D. 50, FF
+        mov     eax, dword [ebp+10H]                    ; 0E71 _ 8B. 45, 10
+        sub     eax, 24                                 ; 0E74 _ 83. E8, 18
+        sub     esp, 4                                  ; 0E77 _ 83. EC, 04
+        push    ecx                                     ; 0E7A _ 51
+        push    edx                                     ; 0E7B _ 52
+        push    eax                                     ; 0E7C _ 50
+        push    0                                       ; 0E7D _ 6A, 00
+        push    8                                       ; 0E7F _ 6A, 08
+        push    dword [ebp+0CH]                         ; 0E81 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0E84 _ FF. 75, 08
+        call    boxfill8                                ; 0E87 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0E8C _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0E8F _ 8B. 45, 10
+        lea     ecx, [eax-17H]                          ; 0E92 _ 8D. 48, E9
+        mov     eax, dword [ebp+0CH]                    ; 0E95 _ 8B. 45, 0C
+        lea     edx, [eax-1H]                           ; 0E98 _ 8D. 50, FF
+        mov     eax, dword [ebp+10H]                    ; 0E9B _ 8B. 45, 10
+        sub     eax, 23                                 ; 0E9E _ 83. E8, 17
+        sub     esp, 4                                  ; 0EA1 _ 83. EC, 04
+        push    ecx                                     ; 0EA4 _ 51
+        push    edx                                     ; 0EA5 _ 52
+        push    eax                                     ; 0EA6 _ 50
+        push    0                                       ; 0EA7 _ 6A, 00
+        push    7                                       ; 0EA9 _ 6A, 07
+        push    dword [ebp+0CH]                         ; 0EAB _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0EAE _ FF. 75, 08
+        call    boxfill8                                ; 0EB1 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0EB6 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0EB9 _ 8B. 45, 10
+        lea     ecx, [eax-1H]                           ; 0EBC _ 8D. 48, FF
+        mov     eax, dword [ebp+0CH]                    ; 0EBF _ 8B. 45, 0C
+        lea     edx, [eax-1H]                           ; 0EC2 _ 8D. 50, FF
+        mov     eax, dword [ebp+10H]                    ; 0EC5 _ 8B. 45, 10
+        sub     eax, 22                                 ; 0EC8 _ 83. E8, 16
+        sub     esp, 4                                  ; 0ECB _ 83. EC, 04
+        push    ecx                                     ; 0ECE _ 51
+        push    edx                                     ; 0ECF _ 52
+        push    eax                                     ; 0ED0 _ 50
+        push    0                                       ; 0ED1 _ 6A, 00
+        push    8                                       ; 0ED3 _ 6A, 08
+        push    dword [ebp+0CH]                         ; 0ED5 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0ED8 _ FF. 75, 08
+        call    boxfill8                                ; 0EDB _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0EE0 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0EE3 _ 8B. 45, 10
+        lea     edx, [eax-14H]                          ; 0EE6 _ 8D. 50, EC
+        mov     eax, dword [ebp+10H]                    ; 0EE9 _ 8B. 45, 10
+        sub     eax, 20                                 ; 0EEC _ 83. E8, 14
+        sub     esp, 4                                  ; 0EEF _ 83. EC, 04
+        push    edx                                     ; 0EF2 _ 52
+        push    51                                      ; 0EF3 _ 6A, 33
+        push    eax                                     ; 0EF5 _ 50
+        push    10                                      ; 0EF6 _ 6A, 0A
+        push    7                                       ; 0EF8 _ 6A, 07
+        push    dword [ebp+0CH]                         ; 0EFA _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0EFD _ FF. 75, 08
+        call    boxfill8                                ; 0F00 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0F05 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0F08 _ 8B. 45, 10
+        lea     edx, [eax-4H]                           ; 0F0B _ 8D. 50, FC
+        mov     eax, dword [ebp+10H]                    ; 0F0E _ 8B. 45, 10
+        sub     eax, 20                                 ; 0F11 _ 83. E8, 14
+        sub     esp, 4                                  ; 0F14 _ 83. EC, 04
+        push    edx                                     ; 0F17 _ 52
         push    9                                       ; 0F18 _ 6A, 09
-        push    7                                       ; 0F1A _ 6A, 07
-        push    dword [ebp+0CH]                         ; 0F1C _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0F1F _ FF. 75, 08
-        call    boxfill8                                ; 0F22 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0F27 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0F2A _ 8B. 45, 10
-        lea     edx, [eax-4H]                           ; 0F2D _ 8D. 50, FC
-        mov     eax, dword [ebp+10H]                    ; 0F30 _ 8B. 45, 10
-        sub     eax, 4                                  ; 0F33 _ 83. E8, 04
-        sub     esp, 4                                  ; 0F36 _ 83. EC, 04
-        push    edx                                     ; 0F39 _ 52
-        push    50                                      ; 0F3A _ 6A, 32
-        push    eax                                     ; 0F3C _ 50
-        push    10                                      ; 0F3D _ 6A, 0A
-        push    15                                      ; 0F3F _ 6A, 0F
-        push    dword [ebp+0CH]                         ; 0F41 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0F44 _ FF. 75, 08
-        call    boxfill8                                ; 0F47 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0F4C _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0F4F _ 8B. 45, 10
-        lea     edx, [eax-5H]                           ; 0F52 _ 8D. 50, FB
-        mov     eax, dword [ebp+10H]                    ; 0F55 _ 8B. 45, 10
-        sub     eax, 19                                 ; 0F58 _ 83. E8, 13
-        sub     esp, 4                                  ; 0F5B _ 83. EC, 04
-        push    edx                                     ; 0F5E _ 52
-        push    50                                      ; 0F5F _ 6A, 32
-        push    eax                                     ; 0F61 _ 50
+        push    eax                                     ; 0F1A _ 50
+        push    9                                       ; 0F1B _ 6A, 09
+        push    7                                       ; 0F1D _ 6A, 07
+        push    dword [ebp+0CH]                         ; 0F1F _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0F22 _ FF. 75, 08
+        call    boxfill8                                ; 0F25 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0F2A _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0F2D _ 8B. 45, 10
+        lea     edx, [eax-4H]                           ; 0F30 _ 8D. 50, FC
+        mov     eax, dword [ebp+10H]                    ; 0F33 _ 8B. 45, 10
+        sub     eax, 4                                  ; 0F36 _ 83. E8, 04
+        sub     esp, 4                                  ; 0F39 _ 83. EC, 04
+        push    edx                                     ; 0F3C _ 52
+        push    50                                      ; 0F3D _ 6A, 32
+        push    eax                                     ; 0F3F _ 50
+        push    10                                      ; 0F40 _ 6A, 0A
+        push    15                                      ; 0F42 _ 6A, 0F
+        push    dword [ebp+0CH]                         ; 0F44 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0F47 _ FF. 75, 08
+        call    boxfill8                                ; 0F4A _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0F4F _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0F52 _ 8B. 45, 10
+        lea     edx, [eax-5H]                           ; 0F55 _ 8D. 50, FB
+        mov     eax, dword [ebp+10H]                    ; 0F58 _ 8B. 45, 10
+        sub     eax, 19                                 ; 0F5B _ 83. E8, 13
+        sub     esp, 4                                  ; 0F5E _ 83. EC, 04
+        push    edx                                     ; 0F61 _ 52
         push    50                                      ; 0F62 _ 6A, 32
-        push    15                                      ; 0F64 _ 6A, 0F
-        push    dword [ebp+0CH]                         ; 0F66 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0F69 _ FF. 75, 08
-        call    boxfill8                                ; 0F6C _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0F71 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0F74 _ 8B. 45, 10
-        lea     edx, [eax-3H]                           ; 0F77 _ 8D. 50, FD
-        mov     eax, dword [ebp+10H]                    ; 0F7A _ 8B. 45, 10
-        sub     eax, 3                                  ; 0F7D _ 83. E8, 03
-        sub     esp, 4                                  ; 0F80 _ 83. EC, 04
-        push    edx                                     ; 0F83 _ 52
-        push    50                                      ; 0F84 _ 6A, 32
-        push    eax                                     ; 0F86 _ 50
-        push    10                                      ; 0F87 _ 6A, 0A
-        push    0                                       ; 0F89 _ 6A, 00
-        push    dword [ebp+0CH]                         ; 0F8B _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0F8E _ FF. 75, 08
-        call    boxfill8                                ; 0F91 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0F96 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0F99 _ 8B. 45, 10
-        lea     edx, [eax-3H]                           ; 0F9C _ 8D. 50, FD
-        mov     eax, dword [ebp+10H]                    ; 0F9F _ 8B. 45, 10
-        sub     eax, 20                                 ; 0FA2 _ 83. E8, 14
-        sub     esp, 4                                  ; 0FA5 _ 83. EC, 04
-        push    edx                                     ; 0FA8 _ 52
-        push    51                                      ; 0FA9 _ 6A, 33
-        push    eax                                     ; 0FAB _ 50
+        push    eax                                     ; 0F64 _ 50
+        push    50                                      ; 0F65 _ 6A, 32
+        push    15                                      ; 0F67 _ 6A, 0F
+        push    dword [ebp+0CH]                         ; 0F69 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0F6C _ FF. 75, 08
+        call    boxfill8                                ; 0F6F _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0F74 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0F77 _ 8B. 45, 10
+        lea     edx, [eax-3H]                           ; 0F7A _ 8D. 50, FD
+        mov     eax, dword [ebp+10H]                    ; 0F7D _ 8B. 45, 10
+        sub     eax, 3                                  ; 0F80 _ 83. E8, 03
+        sub     esp, 4                                  ; 0F83 _ 83. EC, 04
+        push    edx                                     ; 0F86 _ 52
+        push    50                                      ; 0F87 _ 6A, 32
+        push    eax                                     ; 0F89 _ 50
+        push    10                                      ; 0F8A _ 6A, 0A
+        push    0                                       ; 0F8C _ 6A, 00
+        push    dword [ebp+0CH]                         ; 0F8E _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0F91 _ FF. 75, 08
+        call    boxfill8                                ; 0F94 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0F99 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0F9C _ 8B. 45, 10
+        lea     edx, [eax-3H]                           ; 0F9F _ 8D. 50, FD
+        mov     eax, dword [ebp+10H]                    ; 0FA2 _ 8B. 45, 10
+        sub     eax, 20                                 ; 0FA5 _ 83. E8, 14
+        sub     esp, 4                                  ; 0FA8 _ 83. EC, 04
+        push    edx                                     ; 0FAB _ 52
         push    51                                      ; 0FAC _ 6A, 33
-        push    0                                       ; 0FAE _ 6A, 00
-        push    dword [ebp+0CH]                         ; 0FB0 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0FB3 _ FF. 75, 08
-        call    boxfill8                                ; 0FB6 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0FBB _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0FBE _ 8B. 45, 10
-        lea     ebx, [eax-14H]                          ; 0FC1 _ 8D. 58, EC
-        mov     eax, dword [ebp+0CH]                    ; 0FC4 _ 8B. 45, 0C
-        lea     ecx, [eax-4H]                           ; 0FC7 _ 8D. 48, FC
-        mov     eax, dword [ebp+10H]                    ; 0FCA _ 8B. 45, 10
-        lea     edx, [eax-14H]                          ; 0FCD _ 8D. 50, EC
-        mov     eax, dword [ebp+0CH]                    ; 0FD0 _ 8B. 45, 0C
-        sub     eax, 47                                 ; 0FD3 _ 83. E8, 2F
-        sub     esp, 4                                  ; 0FD6 _ 83. EC, 04
-        push    ebx                                     ; 0FD9 _ 53
-        push    ecx                                     ; 0FDA _ 51
-        push    edx                                     ; 0FDB _ 52
-        push    eax                                     ; 0FDC _ 50
-        push    15                                      ; 0FDD _ 6A, 0F
-        push    dword [ebp+0CH]                         ; 0FDF _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 0FE2 _ FF. 75, 08
-        call    boxfill8                                ; 0FE5 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 0FEA _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 0FED _ 8B. 45, 10
-        lea     ebx, [eax-3H]                           ; 0FF0 _ 8D. 58, FD
-        mov     eax, dword [ebp+0CH]                    ; 0FF3 _ 8B. 45, 0C
-        lea     ecx, [eax-2FH]                          ; 0FF6 _ 8D. 48, D1
-        mov     eax, dword [ebp+10H]                    ; 0FF9 _ 8B. 45, 10
-        lea     edx, [eax-14H]                          ; 0FFC _ 8D. 50, EC
-        mov     eax, dword [ebp+0CH]                    ; 0FFF _ 8B. 45, 0C
-        sub     eax, 47                                 ; 1002 _ 83. E8, 2F
-        sub     esp, 4                                  ; 1005 _ 83. EC, 04
-        push    ebx                                     ; 1008 _ 53
-        push    ecx                                     ; 1009 _ 51
-        push    edx                                     ; 100A _ 52
-        push    eax                                     ; 100B _ 50
-        push    15                                      ; 100C _ 6A, 0F
-        push    dword [ebp+0CH]                         ; 100E _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1011 _ FF. 75, 08
-        call    boxfill8                                ; 1014 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1019 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 101C _ 8B. 45, 10
-        lea     ebx, [eax-3H]                           ; 101F _ 8D. 58, FD
-        mov     eax, dword [ebp+0CH]                    ; 1022 _ 8B. 45, 0C
-        lea     ecx, [eax-4H]                           ; 1025 _ 8D. 48, FC
-        mov     eax, dword [ebp+10H]                    ; 1028 _ 8B. 45, 10
-        lea     edx, [eax-3H]                           ; 102B _ 8D. 50, FD
-        mov     eax, dword [ebp+0CH]                    ; 102E _ 8B. 45, 0C
-        sub     eax, 47                                 ; 1031 _ 83. E8, 2F
-        sub     esp, 4                                  ; 1034 _ 83. EC, 04
-        push    ebx                                     ; 1037 _ 53
-        push    ecx                                     ; 1038 _ 51
-        push    edx                                     ; 1039 _ 52
-        push    eax                                     ; 103A _ 50
-        push    7                                       ; 103B _ 6A, 07
-        push    dword [ebp+0CH]                         ; 103D _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1040 _ FF. 75, 08
-        call    boxfill8                                ; 1043 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1048 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 104B _ 8B. 45, 10
-        lea     ebx, [eax-3H]                           ; 104E _ 8D. 58, FD
-        mov     eax, dword [ebp+0CH]                    ; 1051 _ 8B. 45, 0C
-        lea     ecx, [eax-3H]                           ; 1054 _ 8D. 48, FD
-        mov     eax, dword [ebp+10H]                    ; 1057 _ 8B. 45, 10
-        lea     edx, [eax-14H]                          ; 105A _ 8D. 50, EC
-        mov     eax, dword [ebp+0CH]                    ; 105D _ 8B. 45, 0C
-        sub     eax, 3                                  ; 1060 _ 83. E8, 03
-        sub     esp, 4                                  ; 1063 _ 83. EC, 04
-        push    ebx                                     ; 1066 _ 53
-        push    ecx                                     ; 1067 _ 51
-        push    edx                                     ; 1068 _ 52
-        push    eax                                     ; 1069 _ 50
-        push    7                                       ; 106A _ 6A, 07
-        push    dword [ebp+0CH]                         ; 106C _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 106F _ FF. 75, 08
-        call    boxfill8                                ; 1072 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1077 _ 83. C4, 20
-        nop                                             ; 107A _ 90
-        mov     ebx, dword [ebp-4H]                     ; 107B _ 8B. 5D, FC
-        leave                                           ; 107E _ C9
-        ret                                             ; 107F _ C3
+        push    eax                                     ; 0FAE _ 50
+        push    51                                      ; 0FAF _ 6A, 33
+        push    0                                       ; 0FB1 _ 6A, 00
+        push    dword [ebp+0CH]                         ; 0FB3 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0FB6 _ FF. 75, 08
+        call    boxfill8                                ; 0FB9 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0FBE _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0FC1 _ 8B. 45, 10
+        lea     ebx, [eax-14H]                          ; 0FC4 _ 8D. 58, EC
+        mov     eax, dword [ebp+0CH]                    ; 0FC7 _ 8B. 45, 0C
+        lea     ecx, [eax-4H]                           ; 0FCA _ 8D. 48, FC
+        mov     eax, dword [ebp+10H]                    ; 0FCD _ 8B. 45, 10
+        lea     edx, [eax-14H]                          ; 0FD0 _ 8D. 50, EC
+        mov     eax, dword [ebp+0CH]                    ; 0FD3 _ 8B. 45, 0C
+        sub     eax, 47                                 ; 0FD6 _ 83. E8, 2F
+        sub     esp, 4                                  ; 0FD9 _ 83. EC, 04
+        push    ebx                                     ; 0FDC _ 53
+        push    ecx                                     ; 0FDD _ 51
+        push    edx                                     ; 0FDE _ 52
+        push    eax                                     ; 0FDF _ 50
+        push    15                                      ; 0FE0 _ 6A, 0F
+        push    dword [ebp+0CH]                         ; 0FE2 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 0FE5 _ FF. 75, 08
+        call    boxfill8                                ; 0FE8 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 0FED _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 0FF0 _ 8B. 45, 10
+        lea     ebx, [eax-3H]                           ; 0FF3 _ 8D. 58, FD
+        mov     eax, dword [ebp+0CH]                    ; 0FF6 _ 8B. 45, 0C
+        lea     ecx, [eax-2FH]                          ; 0FF9 _ 8D. 48, D1
+        mov     eax, dword [ebp+10H]                    ; 0FFC _ 8B. 45, 10
+        lea     edx, [eax-14H]                          ; 0FFF _ 8D. 50, EC
+        mov     eax, dword [ebp+0CH]                    ; 1002 _ 8B. 45, 0C
+        sub     eax, 47                                 ; 1005 _ 83. E8, 2F
+        sub     esp, 4                                  ; 1008 _ 83. EC, 04
+        push    ebx                                     ; 100B _ 53
+        push    ecx                                     ; 100C _ 51
+        push    edx                                     ; 100D _ 52
+        push    eax                                     ; 100E _ 50
+        push    15                                      ; 100F _ 6A, 0F
+        push    dword [ebp+0CH]                         ; 1011 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1014 _ FF. 75, 08
+        call    boxfill8                                ; 1017 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 101C _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 101F _ 8B. 45, 10
+        lea     ebx, [eax-3H]                           ; 1022 _ 8D. 58, FD
+        mov     eax, dword [ebp+0CH]                    ; 1025 _ 8B. 45, 0C
+        lea     ecx, [eax-4H]                           ; 1028 _ 8D. 48, FC
+        mov     eax, dword [ebp+10H]                    ; 102B _ 8B. 45, 10
+        lea     edx, [eax-3H]                           ; 102E _ 8D. 50, FD
+        mov     eax, dword [ebp+0CH]                    ; 1031 _ 8B. 45, 0C
+        sub     eax, 47                                 ; 1034 _ 83. E8, 2F
+        sub     esp, 4                                  ; 1037 _ 83. EC, 04
+        push    ebx                                     ; 103A _ 53
+        push    ecx                                     ; 103B _ 51
+        push    edx                                     ; 103C _ 52
+        push    eax                                     ; 103D _ 50
+        push    7                                       ; 103E _ 6A, 07
+        push    dword [ebp+0CH]                         ; 1040 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1043 _ FF. 75, 08
+        call    boxfill8                                ; 1046 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 104B _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 104E _ 8B. 45, 10
+        lea     ebx, [eax-3H]                           ; 1051 _ 8D. 58, FD
+        mov     eax, dword [ebp+0CH]                    ; 1054 _ 8B. 45, 0C
+        lea     ecx, [eax-3H]                           ; 1057 _ 8D. 48, FD
+        mov     eax, dword [ebp+10H]                    ; 105A _ 8B. 45, 10
+        lea     edx, [eax-14H]                          ; 105D _ 8D. 50, EC
+        mov     eax, dword [ebp+0CH]                    ; 1060 _ 8B. 45, 0C
+        sub     eax, 3                                  ; 1063 _ 83. E8, 03
+        sub     esp, 4                                  ; 1066 _ 83. EC, 04
+        push    ebx                                     ; 1069 _ 53
+        push    ecx                                     ; 106A _ 51
+        push    edx                                     ; 106B _ 52
+        push    eax                                     ; 106C _ 50
+        push    7                                       ; 106D _ 6A, 07
+        push    dword [ebp+0CH]                         ; 106F _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1072 _ FF. 75, 08
+        call    boxfill8                                ; 1075 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 107A _ 83. C4, 20
+        nop                                             ; 107D _ 90
+        mov     ebx, dword [ebp-4H]                     ; 107E _ 8B. 5D, FC
+        leave                                           ; 1081 _ C9
+        ret                                             ; 1082 _ C3
 ; init_screen8 End of function
 
 init_palette:; Function begin
-        push    ebp                                     ; 1080 _ 55
-        mov     ebp, esp                                ; 1081 _ 89. E5
-        sub     esp, 24                                 ; 1083 _ 83. EC, 18
-        mov     eax, dword [bootInfo]                   ; 1086 _ A1, 00000000(d)
-        mov     dword [ebp-14H], eax                    ; 108B _ 89. 45, EC
-        movzx   eax, word [?_218]                       ; 108E _ 0F B7. 05, 00000004(d)
-        cwde                                            ; 1095 _ 98
-        mov     dword [ebp-10H], eax                    ; 1096 _ 89. 45, F0
-        movzx   eax, word [?_219]                       ; 1099 _ 0F B7. 05, 00000006(d)
-        cwde                                            ; 10A0 _ 98
-        mov     dword [ebp-0CH], eax                    ; 10A1 _ 89. 45, F4
-        sub     esp, 4                                  ; 10A4 _ 83. EC, 04
-        push    table_rgb.2336                          ; 10A7 _ 68, 00000080(d)
-        push    15                                      ; 10AC _ 6A, 0F
-        push    0                                       ; 10AE _ 6A, 00
-        call    set_palette                             ; 10B0 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 10B5 _ 83. C4, 10
-        nop                                             ; 10B8 _ 90
-        leave                                           ; 10B9 _ C9
-        ret                                             ; 10BA _ C3
+        push    ebp                                     ; 1083 _ 55
+        mov     ebp, esp                                ; 1084 _ 89. E5
+        sub     esp, 24                                 ; 1086 _ 83. EC, 18
+        mov     eax, dword [bootInfo]                   ; 1089 _ A1, 00000000(d)
+        mov     dword [ebp-14H], eax                    ; 108E _ 89. 45, EC
+        movzx   eax, word [?_218]                       ; 1091 _ 0F B7. 05, 00000004(d)
+        cwde                                            ; 1098 _ 98
+        mov     dword [ebp-10H], eax                    ; 1099 _ 89. 45, F0
+        movzx   eax, word [?_219]                       ; 109C _ 0F B7. 05, 00000006(d)
+        cwde                                            ; 10A3 _ 98
+        mov     dword [ebp-0CH], eax                    ; 10A4 _ 89. 45, F4
+        sub     esp, 4                                  ; 10A7 _ 83. EC, 04
+        push    table_rgb.2338                          ; 10AA _ 68, 00000080(d)
+        push    15                                      ; 10AF _ 6A, 0F
+        push    0                                       ; 10B1 _ 6A, 00
+        call    set_palette                             ; 10B3 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 10B8 _ 83. C4, 10
+        nop                                             ; 10BB _ 90
+        leave                                           ; 10BC _ C9
+        ret                                             ; 10BD _ C3
 ; init_palette End of function
 
 set_palette:; Function begin
-        push    ebp                                     ; 10BB _ 55
-        mov     ebp, esp                                ; 10BC _ 89. E5
-        sub     esp, 24                                 ; 10BE _ 83. EC, 18
-        call    io_load_eflags                          ; 10C1 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0CH], eax                    ; 10C6 _ 89. 45, F4
-        call    io_cli                                  ; 10C9 _ E8, FFFFFFFC(rel)
-        sub     esp, 8                                  ; 10CE _ 83. EC, 08
-        push    dword [ebp+8H]                          ; 10D1 _ FF. 75, 08
-        push    968                                     ; 10D4 _ 68, 000003C8
-        call    io_out8                                 ; 10D9 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 10DE _ 83. C4, 10
-        mov     eax, dword [ebp+8H]                     ; 10E1 _ 8B. 45, 08
-        mov     dword [ebp-10H], eax                    ; 10E4 _ 89. 45, F0
-        jmp     ?_024                                   ; 10E7 _ EB, 65
+        push    ebp                                     ; 10BE _ 55
+        mov     ebp, esp                                ; 10BF _ 89. E5
+        sub     esp, 24                                 ; 10C1 _ 83. EC, 18
+        call    io_load_eflags                          ; 10C4 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0CH], eax                    ; 10C9 _ 89. 45, F4
+        call    io_cli                                  ; 10CC _ E8, FFFFFFFC(rel)
+        sub     esp, 8                                  ; 10D1 _ 83. EC, 08
+        push    dword [ebp+8H]                          ; 10D4 _ FF. 75, 08
+        push    968                                     ; 10D7 _ 68, 000003C8
+        call    io_out8                                 ; 10DC _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 10E1 _ 83. C4, 10
+        mov     eax, dword [ebp+8H]                     ; 10E4 _ 8B. 45, 08
+        mov     dword [ebp-10H], eax                    ; 10E7 _ 89. 45, F0
+        jmp     ?_024                                   ; 10EA _ EB, 65
 
-?_023:  mov     eax, dword [ebp+10H]                    ; 10E9 _ 8B. 45, 10
-        movzx   eax, byte [eax]                         ; 10EC _ 0F B6. 00
-        shr     al, 2                                   ; 10EF _ C0. E8, 02
-        movzx   eax, al                                 ; 10F2 _ 0F B6. C0
-        sub     esp, 8                                  ; 10F5 _ 83. EC, 08
-        push    eax                                     ; 10F8 _ 50
-        push    969                                     ; 10F9 _ 68, 000003C9
-        call    io_out8                                 ; 10FE _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1103 _ 83. C4, 10
-        mov     eax, dword [ebp+10H]                    ; 1106 _ 8B. 45, 10
-        add     eax, 1                                  ; 1109 _ 83. C0, 01
-        movzx   eax, byte [eax]                         ; 110C _ 0F B6. 00
-        shr     al, 2                                   ; 110F _ C0. E8, 02
-        movzx   eax, al                                 ; 1112 _ 0F B6. C0
-        sub     esp, 8                                  ; 1115 _ 83. EC, 08
-        push    eax                                     ; 1118 _ 50
-        push    969                                     ; 1119 _ 68, 000003C9
-        call    io_out8                                 ; 111E _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1123 _ 83. C4, 10
-        mov     eax, dword [ebp+10H]                    ; 1126 _ 8B. 45, 10
-        add     eax, 2                                  ; 1129 _ 83. C0, 02
-        movzx   eax, byte [eax]                         ; 112C _ 0F B6. 00
-        shr     al, 2                                   ; 112F _ C0. E8, 02
-        movzx   eax, al                                 ; 1132 _ 0F B6. C0
-        sub     esp, 8                                  ; 1135 _ 83. EC, 08
-        push    eax                                     ; 1138 _ 50
-        push    969                                     ; 1139 _ 68, 000003C9
-        call    io_out8                                 ; 113E _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1143 _ 83. C4, 10
-        add     dword [ebp+10H], 3                      ; 1146 _ 83. 45, 10, 03
-        add     dword [ebp-10H], 1                      ; 114A _ 83. 45, F0, 01
-?_024:  mov     eax, dword [ebp-10H]                    ; 114E _ 8B. 45, F0
-        cmp     eax, dword [ebp+0CH]                    ; 1151 _ 3B. 45, 0C
-        jle     ?_023                                   ; 1154 _ 7E, 93
-        sub     esp, 12                                 ; 1156 _ 83. EC, 0C
-        push    dword [ebp-0CH]                         ; 1159 _ FF. 75, F4
-        call    io_store_eflags                         ; 115C _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1161 _ 83. C4, 10
-        nop                                             ; 1164 _ 90
-        leave                                           ; 1165 _ C9
-        ret                                             ; 1166 _ C3
+?_023:  mov     eax, dword [ebp+10H]                    ; 10EC _ 8B. 45, 10
+        movzx   eax, byte [eax]                         ; 10EF _ 0F B6. 00
+        shr     al, 2                                   ; 10F2 _ C0. E8, 02
+        movzx   eax, al                                 ; 10F5 _ 0F B6. C0
+        sub     esp, 8                                  ; 10F8 _ 83. EC, 08
+        push    eax                                     ; 10FB _ 50
+        push    969                                     ; 10FC _ 68, 000003C9
+        call    io_out8                                 ; 1101 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1106 _ 83. C4, 10
+        mov     eax, dword [ebp+10H]                    ; 1109 _ 8B. 45, 10
+        add     eax, 1                                  ; 110C _ 83. C0, 01
+        movzx   eax, byte [eax]                         ; 110F _ 0F B6. 00
+        shr     al, 2                                   ; 1112 _ C0. E8, 02
+        movzx   eax, al                                 ; 1115 _ 0F B6. C0
+        sub     esp, 8                                  ; 1118 _ 83. EC, 08
+        push    eax                                     ; 111B _ 50
+        push    969                                     ; 111C _ 68, 000003C9
+        call    io_out8                                 ; 1121 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1126 _ 83. C4, 10
+        mov     eax, dword [ebp+10H]                    ; 1129 _ 8B. 45, 10
+        add     eax, 2                                  ; 112C _ 83. C0, 02
+        movzx   eax, byte [eax]                         ; 112F _ 0F B6. 00
+        shr     al, 2                                   ; 1132 _ C0. E8, 02
+        movzx   eax, al                                 ; 1135 _ 0F B6. C0
+        sub     esp, 8                                  ; 1138 _ 83. EC, 08
+        push    eax                                     ; 113B _ 50
+        push    969                                     ; 113C _ 68, 000003C9
+        call    io_out8                                 ; 1141 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1146 _ 83. C4, 10
+        add     dword [ebp+10H], 3                      ; 1149 _ 83. 45, 10, 03
+        add     dword [ebp-10H], 1                      ; 114D _ 83. 45, F0, 01
+?_024:  mov     eax, dword [ebp-10H]                    ; 1151 _ 8B. 45, F0
+        cmp     eax, dword [ebp+0CH]                    ; 1154 _ 3B. 45, 0C
+        jle     ?_023                                   ; 1157 _ 7E, 93
+        sub     esp, 12                                 ; 1159 _ 83. EC, 0C
+        push    dword [ebp-0CH]                         ; 115C _ FF. 75, F4
+        call    io_store_eflags                         ; 115F _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1164 _ 83. C4, 10
+        nop                                             ; 1167 _ 90
+        leave                                           ; 1168 _ C9
+        ret                                             ; 1169 _ C3
 ; set_palette End of function
 
 boxfill8:; Function begin
-        push    ebp                                     ; 1167 _ 55
-        mov     ebp, esp                                ; 1168 _ 89. E5
-        sub     esp, 20                                 ; 116A _ 83. EC, 14
-        mov     eax, dword [ebp+10H]                    ; 116D _ 8B. 45, 10
-        mov     byte [ebp-14H], al                      ; 1170 _ 88. 45, EC
-        mov     eax, dword [ebp+18H]                    ; 1173 _ 8B. 45, 18
-        mov     dword [ebp-4H], eax                     ; 1176 _ 89. 45, FC
-        jmp     ?_028                                   ; 1179 _ EB, 33
+        push    ebp                                     ; 116A _ 55
+        mov     ebp, esp                                ; 116B _ 89. E5
+        sub     esp, 20                                 ; 116D _ 83. EC, 14
+        mov     eax, dword [ebp+10H]                    ; 1170 _ 8B. 45, 10
+        mov     byte [ebp-14H], al                      ; 1173 _ 88. 45, EC
+        mov     eax, dword [ebp+18H]                    ; 1176 _ 8B. 45, 18
+        mov     dword [ebp-4H], eax                     ; 1179 _ 89. 45, FC
+        jmp     ?_028                                   ; 117C _ EB, 33
 
-?_025:  mov     eax, dword [ebp+14H]                    ; 117B _ 8B. 45, 14
-        mov     dword [ebp-8H], eax                     ; 117E _ 89. 45, F8
-        jmp     ?_027                                   ; 1181 _ EB, 1F
+?_025:  mov     eax, dword [ebp+14H]                    ; 117E _ 8B. 45, 14
+        mov     dword [ebp-8H], eax                     ; 1181 _ 89. 45, F8
+        jmp     ?_027                                   ; 1184 _ EB, 1F
 
-?_026:  mov     eax, dword [ebp-4H]                     ; 1183 _ 8B. 45, FC
-        imul    eax, dword [ebp+0CH]                    ; 1186 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 118A _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 118C _ 8B. 45, F8
-        add     eax, edx                                ; 118F _ 01. D0
-        mov     edx, eax                                ; 1191 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 1193 _ 8B. 45, 08
-        add     edx, eax                                ; 1196 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 1198 _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 119C _ 88. 02
-        add     dword [ebp-8H], 1                       ; 119E _ 83. 45, F8, 01
-?_027:  mov     eax, dword [ebp-8H]                     ; 11A2 _ 8B. 45, F8
-        cmp     eax, dword [ebp+1CH]                    ; 11A5 _ 3B. 45, 1C
-        jle     ?_026                                   ; 11A8 _ 7E, D9
-        add     dword [ebp-4H], 1                       ; 11AA _ 83. 45, FC, 01
-?_028:  mov     eax, dword [ebp-4H]                     ; 11AE _ 8B. 45, FC
-        cmp     eax, dword [ebp+20H]                    ; 11B1 _ 3B. 45, 20
-        jle     ?_025                                   ; 11B4 _ 7E, C5
-        nop                                             ; 11B6 _ 90
-        leave                                           ; 11B7 _ C9
-        ret                                             ; 11B8 _ C3
+?_026:  mov     eax, dword [ebp-4H]                     ; 1186 _ 8B. 45, FC
+        imul    eax, dword [ebp+0CH]                    ; 1189 _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 118D _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 118F _ 8B. 45, F8
+        add     eax, edx                                ; 1192 _ 01. D0
+        mov     edx, eax                                ; 1194 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 1196 _ 8B. 45, 08
+        add     edx, eax                                ; 1199 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 119B _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 119F _ 88. 02
+        add     dword [ebp-8H], 1                       ; 11A1 _ 83. 45, F8, 01
+?_027:  mov     eax, dword [ebp-8H]                     ; 11A5 _ 8B. 45, F8
+        cmp     eax, dword [ebp+1CH]                    ; 11A8 _ 3B. 45, 1C
+        jle     ?_026                                   ; 11AB _ 7E, D9
+        add     dword [ebp-4H], 1                       ; 11AD _ 83. 45, FC, 01
+?_028:  mov     eax, dword [ebp-4H]                     ; 11B1 _ 8B. 45, FC
+        cmp     eax, dword [ebp+20H]                    ; 11B4 _ 3B. 45, 20
+        jle     ?_025                                   ; 11B7 _ 7E, C5
+        nop                                             ; 11B9 _ 90
+        leave                                           ; 11BA _ C9
+        ret                                             ; 11BB _ C3
 ; boxfill8 End of function
 
 make_textbox8:; Function begin
-        push    ebp                                     ; 11B9 _ 55
-        mov     ebp, esp                                ; 11BA _ 89. E5
-        push    edi                                     ; 11BC _ 57
-        push    esi                                     ; 11BD _ 56
-        push    ebx                                     ; 11BE _ 53
-        sub     esp, 16                                 ; 11BF _ 83. EC, 10
-        mov     edx, dword [ebp+0CH]                    ; 11C2 _ 8B. 55, 0C
-        mov     eax, dword [ebp+14H]                    ; 11C5 _ 8B. 45, 14
-        add     eax, edx                                ; 11C8 _ 01. D0
-        mov     dword [ebp-14H], eax                    ; 11CA _ 89. 45, EC
-        mov     edx, dword [ebp+10H]                    ; 11CD _ 8B. 55, 10
-        mov     eax, dword [ebp+18H]                    ; 11D0 _ 8B. 45, 18
-        add     eax, edx                                ; 11D3 _ 01. D0
-        mov     dword [ebp-10H], eax                    ; 11D5 _ 89. 45, F0
-        mov     eax, dword [ebp+10H]                    ; 11D8 _ 8B. 45, 10
-        lea     edi, [eax-3H]                           ; 11DB _ 8D. 78, FD
-        mov     eax, dword [ebp-14H]                    ; 11DE _ 8B. 45, EC
-        lea     esi, [eax+1H]                           ; 11E1 _ 8D. 70, 01
-        mov     eax, dword [ebp+10H]                    ; 11E4 _ 8B. 45, 10
-        lea     ebx, [eax-3H]                           ; 11E7 _ 8D. 58, FD
-        mov     eax, dword [ebp+0CH]                    ; 11EA _ 8B. 45, 0C
-        lea     ecx, [eax-2H]                           ; 11ED _ 8D. 48, FE
-        mov     eax, dword [ebp+8H]                     ; 11F0 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 11F3 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 11F6 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 11F9 _ 8B. 00
-        push    edi                                     ; 11FB _ 57
-        push    esi                                     ; 11FC _ 56
-        push    ebx                                     ; 11FD _ 53
-        push    ecx                                     ; 11FE _ 51
-        push    15                                      ; 11FF _ 6A, 0F
-        push    edx                                     ; 1201 _ 52
-        push    eax                                     ; 1202 _ 50
-        call    boxfill8                                ; 1203 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 1208 _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 120B _ 8B. 45, F0
-        lea     edi, [eax+1H]                           ; 120E _ 8D. 78, 01
-        mov     eax, dword [ebp+0CH]                    ; 1211 _ 8B. 45, 0C
-        lea     esi, [eax-3H]                           ; 1214 _ 8D. 70, FD
-        mov     eax, dword [ebp+10H]                    ; 1217 _ 8B. 45, 10
-        lea     ebx, [eax-3H]                           ; 121A _ 8D. 58, FD
-        mov     eax, dword [ebp+0CH]                    ; 121D _ 8B. 45, 0C
-        lea     ecx, [eax-3H]                           ; 1220 _ 8D. 48, FD
-        mov     eax, dword [ebp+8H]                     ; 1223 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 1226 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 1229 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 122C _ 8B. 00
-        push    edi                                     ; 122E _ 57
-        push    esi                                     ; 122F _ 56
-        push    ebx                                     ; 1230 _ 53
-        push    ecx                                     ; 1231 _ 51
-        push    15                                      ; 1232 _ 6A, 0F
-        push    edx                                     ; 1234 _ 52
-        push    eax                                     ; 1235 _ 50
-        call    boxfill8                                ; 1236 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 123B _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 123E _ 8B. 45, F0
-        lea     edi, [eax+2H]                           ; 1241 _ 8D. 78, 02
-        mov     eax, dword [ebp-14H]                    ; 1244 _ 8B. 45, EC
-        lea     esi, [eax+1H]                           ; 1247 _ 8D. 70, 01
-        mov     eax, dword [ebp-10H]                    ; 124A _ 8B. 45, F0
-        lea     ebx, [eax+2H]                           ; 124D _ 8D. 58, 02
-        mov     eax, dword [ebp+0CH]                    ; 1250 _ 8B. 45, 0C
-        lea     ecx, [eax-3H]                           ; 1253 _ 8D. 48, FD
-        mov     eax, dword [ebp+8H]                     ; 1256 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 1259 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 125C _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 125F _ 8B. 00
-        push    edi                                     ; 1261 _ 57
-        push    esi                                     ; 1262 _ 56
-        push    ebx                                     ; 1263 _ 53
-        push    ecx                                     ; 1264 _ 51
-        push    7                                       ; 1265 _ 6A, 07
-        push    edx                                     ; 1267 _ 52
-        push    eax                                     ; 1268 _ 50
-        call    boxfill8                                ; 1269 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 126E _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 1271 _ 8B. 45, F0
-        lea     edi, [eax+2H]                           ; 1274 _ 8D. 78, 02
-        mov     eax, dword [ebp-14H]                    ; 1277 _ 8B. 45, EC
-        lea     esi, [eax+2H]                           ; 127A _ 8D. 70, 02
-        mov     eax, dword [ebp+10H]                    ; 127D _ 8B. 45, 10
-        lea     ebx, [eax-3H]                           ; 1280 _ 8D. 58, FD
-        mov     eax, dword [ebp-14H]                    ; 1283 _ 8B. 45, EC
-        lea     ecx, [eax+2H]                           ; 1286 _ 8D. 48, 02
-        mov     eax, dword [ebp+8H]                     ; 1289 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 128C _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 128F _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 1292 _ 8B. 00
-        push    edi                                     ; 1294 _ 57
-        push    esi                                     ; 1295 _ 56
-        push    ebx                                     ; 1296 _ 53
-        push    ecx                                     ; 1297 _ 51
-        push    7                                       ; 1298 _ 6A, 07
-        push    edx                                     ; 129A _ 52
-        push    eax                                     ; 129B _ 50
-        call    boxfill8                                ; 129C _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 12A1 _ 83. C4, 1C
-        mov     eax, dword [ebp+10H]                    ; 12A4 _ 8B. 45, 10
-        lea     esi, [eax-2H]                           ; 12A7 _ 8D. 70, FE
-        mov     eax, dword [ebp+10H]                    ; 12AA _ 8B. 45, 10
-        lea     ebx, [eax-2H]                           ; 12AD _ 8D. 58, FE
-        mov     eax, dword [ebp+0CH]                    ; 12B0 _ 8B. 45, 0C
-        lea     ecx, [eax-1H]                           ; 12B3 _ 8D. 48, FF
-        mov     eax, dword [ebp+8H]                     ; 12B6 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 12B9 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 12BC _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 12BF _ 8B. 00
-        push    esi                                     ; 12C1 _ 56
-        push    dword [ebp-14H]                         ; 12C2 _ FF. 75, EC
-        push    ebx                                     ; 12C5 _ 53
-        push    ecx                                     ; 12C6 _ 51
-        push    0                                       ; 12C7 _ 6A, 00
-        push    edx                                     ; 12C9 _ 52
-        push    eax                                     ; 12CA _ 50
-        call    boxfill8                                ; 12CB _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 12D0 _ 83. C4, 1C
-        mov     eax, dword [ebp+0CH]                    ; 12D3 _ 8B. 45, 0C
-        lea     esi, [eax-2H]                           ; 12D6 _ 8D. 70, FE
-        mov     eax, dword [ebp+10H]                    ; 12D9 _ 8B. 45, 10
-        lea     ebx, [eax-2H]                           ; 12DC _ 8D. 58, FE
-        mov     eax, dword [ebp+0CH]                    ; 12DF _ 8B. 45, 0C
-        lea     ecx, [eax-2H]                           ; 12E2 _ 8D. 48, FE
-        mov     eax, dword [ebp+8H]                     ; 12E5 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 12E8 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 12EB _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 12EE _ 8B. 00
-        push    dword [ebp-10H]                         ; 12F0 _ FF. 75, F0
-        push    esi                                     ; 12F3 _ 56
-        push    ebx                                     ; 12F4 _ 53
-        push    ecx                                     ; 12F5 _ 51
-        push    0                                       ; 12F6 _ 6A, 00
-        push    edx                                     ; 12F8 _ 52
-        push    eax                                     ; 12F9 _ 50
-        call    boxfill8                                ; 12FA _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 12FF _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 1302 _ 8B. 45, F0
-        lea     esi, [eax+1H]                           ; 1305 _ 8D. 70, 01
-        mov     eax, dword [ebp-10H]                    ; 1308 _ 8B. 45, F0
-        lea     ebx, [eax+1H]                           ; 130B _ 8D. 58, 01
-        mov     eax, dword [ebp+0CH]                    ; 130E _ 8B. 45, 0C
-        lea     ecx, [eax-2H]                           ; 1311 _ 8D. 48, FE
-        mov     eax, dword [ebp+8H]                     ; 1314 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 1317 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 131A _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 131D _ 8B. 00
-        push    esi                                     ; 131F _ 56
-        push    dword [ebp-14H]                         ; 1320 _ FF. 75, EC
-        push    ebx                                     ; 1323 _ 53
-        push    ecx                                     ; 1324 _ 51
-        push    8                                       ; 1325 _ 6A, 08
-        push    edx                                     ; 1327 _ 52
-        push    eax                                     ; 1328 _ 50
-        call    boxfill8                                ; 1329 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 132E _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 1331 _ 8B. 45, F0
-        lea     edi, [eax+1H]                           ; 1334 _ 8D. 78, 01
-        mov     eax, dword [ebp-14H]                    ; 1337 _ 8B. 45, EC
-        lea     esi, [eax+1H]                           ; 133A _ 8D. 70, 01
-        mov     eax, dword [ebp+10H]                    ; 133D _ 8B. 45, 10
-        lea     ebx, [eax-2H]                           ; 1340 _ 8D. 58, FE
-        mov     eax, dword [ebp-14H]                    ; 1343 _ 8B. 45, EC
-        lea     ecx, [eax+1H]                           ; 1346 _ 8D. 48, 01
-        mov     eax, dword [ebp+8H]                     ; 1349 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 134C _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 134F _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 1352 _ 8B. 00
-        push    edi                                     ; 1354 _ 57
-        push    esi                                     ; 1355 _ 56
-        push    ebx                                     ; 1356 _ 53
-        push    ecx                                     ; 1357 _ 51
-        push    8                                       ; 1358 _ 6A, 08
-        push    edx                                     ; 135A _ 52
-        push    eax                                     ; 135B _ 50
-        call    boxfill8                                ; 135C _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 1361 _ 83. C4, 1C
-        mov     eax, dword [ebp+10H]                    ; 1364 _ 8B. 45, 10
-        lea     esi, [eax-1H]                           ; 1367 _ 8D. 70, FF
-        mov     eax, dword [ebp+0CH]                    ; 136A _ 8B. 45, 0C
-        lea     ebx, [eax-1H]                           ; 136D _ 8D. 58, FF
-        mov     eax, dword [ebp+1CH]                    ; 1370 _ 8B. 45, 1C
-        movzx   ecx, al                                 ; 1373 _ 0F B6. C8
-        mov     eax, dword [ebp+8H]                     ; 1376 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 1379 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 137C _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 137F _ 8B. 00
-        push    dword [ebp-10H]                         ; 1381 _ FF. 75, F0
-        push    dword [ebp-14H]                         ; 1384 _ FF. 75, EC
-        push    esi                                     ; 1387 _ 56
-        push    ebx                                     ; 1388 _ 53
-        push    ecx                                     ; 1389 _ 51
-        push    edx                                     ; 138A _ 52
-        push    eax                                     ; 138B _ 50
-        call    boxfill8                                ; 138C _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 1391 _ 83. C4, 1C
-        nop                                             ; 1394 _ 90
-        lea     esp, [ebp-0CH]                          ; 1395 _ 8D. 65, F4
-        pop     ebx                                     ; 1398 _ 5B
-        pop     esi                                     ; 1399 _ 5E
-        pop     edi                                     ; 139A _ 5F
-        pop     ebp                                     ; 139B _ 5D
-        ret                                             ; 139C _ C3
+        push    ebp                                     ; 11BC _ 55
+        mov     ebp, esp                                ; 11BD _ 89. E5
+        push    edi                                     ; 11BF _ 57
+        push    esi                                     ; 11C0 _ 56
+        push    ebx                                     ; 11C1 _ 53
+        sub     esp, 16                                 ; 11C2 _ 83. EC, 10
+        mov     edx, dword [ebp+0CH]                    ; 11C5 _ 8B. 55, 0C
+        mov     eax, dword [ebp+14H]                    ; 11C8 _ 8B. 45, 14
+        add     eax, edx                                ; 11CB _ 01. D0
+        mov     dword [ebp-14H], eax                    ; 11CD _ 89. 45, EC
+        mov     edx, dword [ebp+10H]                    ; 11D0 _ 8B. 55, 10
+        mov     eax, dword [ebp+18H]                    ; 11D3 _ 8B. 45, 18
+        add     eax, edx                                ; 11D6 _ 01. D0
+        mov     dword [ebp-10H], eax                    ; 11D8 _ 89. 45, F0
+        mov     eax, dword [ebp+10H]                    ; 11DB _ 8B. 45, 10
+        lea     edi, [eax-3H]                           ; 11DE _ 8D. 78, FD
+        mov     eax, dword [ebp-14H]                    ; 11E1 _ 8B. 45, EC
+        lea     esi, [eax+1H]                           ; 11E4 _ 8D. 70, 01
+        mov     eax, dword [ebp+10H]                    ; 11E7 _ 8B. 45, 10
+        lea     ebx, [eax-3H]                           ; 11EA _ 8D. 58, FD
+        mov     eax, dword [ebp+0CH]                    ; 11ED _ 8B. 45, 0C
+        lea     ecx, [eax-2H]                           ; 11F0 _ 8D. 48, FE
+        mov     eax, dword [ebp+8H]                     ; 11F3 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 11F6 _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 11F9 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 11FC _ 8B. 00
+        push    edi                                     ; 11FE _ 57
+        push    esi                                     ; 11FF _ 56
+        push    ebx                                     ; 1200 _ 53
+        push    ecx                                     ; 1201 _ 51
+        push    15                                      ; 1202 _ 6A, 0F
+        push    edx                                     ; 1204 _ 52
+        push    eax                                     ; 1205 _ 50
+        call    boxfill8                                ; 1206 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 120B _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 120E _ 8B. 45, F0
+        lea     edi, [eax+1H]                           ; 1211 _ 8D. 78, 01
+        mov     eax, dword [ebp+0CH]                    ; 1214 _ 8B. 45, 0C
+        lea     esi, [eax-3H]                           ; 1217 _ 8D. 70, FD
+        mov     eax, dword [ebp+10H]                    ; 121A _ 8B. 45, 10
+        lea     ebx, [eax-3H]                           ; 121D _ 8D. 58, FD
+        mov     eax, dword [ebp+0CH]                    ; 1220 _ 8B. 45, 0C
+        lea     ecx, [eax-3H]                           ; 1223 _ 8D. 48, FD
+        mov     eax, dword [ebp+8H]                     ; 1226 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 1229 _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 122C _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 122F _ 8B. 00
+        push    edi                                     ; 1231 _ 57
+        push    esi                                     ; 1232 _ 56
+        push    ebx                                     ; 1233 _ 53
+        push    ecx                                     ; 1234 _ 51
+        push    15                                      ; 1235 _ 6A, 0F
+        push    edx                                     ; 1237 _ 52
+        push    eax                                     ; 1238 _ 50
+        call    boxfill8                                ; 1239 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 123E _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 1241 _ 8B. 45, F0
+        lea     edi, [eax+2H]                           ; 1244 _ 8D. 78, 02
+        mov     eax, dword [ebp-14H]                    ; 1247 _ 8B. 45, EC
+        lea     esi, [eax+1H]                           ; 124A _ 8D. 70, 01
+        mov     eax, dword [ebp-10H]                    ; 124D _ 8B. 45, F0
+        lea     ebx, [eax+2H]                           ; 1250 _ 8D. 58, 02
+        mov     eax, dword [ebp+0CH]                    ; 1253 _ 8B. 45, 0C
+        lea     ecx, [eax-3H]                           ; 1256 _ 8D. 48, FD
+        mov     eax, dword [ebp+8H]                     ; 1259 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 125C _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 125F _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 1262 _ 8B. 00
+        push    edi                                     ; 1264 _ 57
+        push    esi                                     ; 1265 _ 56
+        push    ebx                                     ; 1266 _ 53
+        push    ecx                                     ; 1267 _ 51
+        push    7                                       ; 1268 _ 6A, 07
+        push    edx                                     ; 126A _ 52
+        push    eax                                     ; 126B _ 50
+        call    boxfill8                                ; 126C _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 1271 _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 1274 _ 8B. 45, F0
+        lea     edi, [eax+2H]                           ; 1277 _ 8D. 78, 02
+        mov     eax, dword [ebp-14H]                    ; 127A _ 8B. 45, EC
+        lea     esi, [eax+2H]                           ; 127D _ 8D. 70, 02
+        mov     eax, dword [ebp+10H]                    ; 1280 _ 8B. 45, 10
+        lea     ebx, [eax-3H]                           ; 1283 _ 8D. 58, FD
+        mov     eax, dword [ebp-14H]                    ; 1286 _ 8B. 45, EC
+        lea     ecx, [eax+2H]                           ; 1289 _ 8D. 48, 02
+        mov     eax, dword [ebp+8H]                     ; 128C _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 128F _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 1292 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 1295 _ 8B. 00
+        push    edi                                     ; 1297 _ 57
+        push    esi                                     ; 1298 _ 56
+        push    ebx                                     ; 1299 _ 53
+        push    ecx                                     ; 129A _ 51
+        push    7                                       ; 129B _ 6A, 07
+        push    edx                                     ; 129D _ 52
+        push    eax                                     ; 129E _ 50
+        call    boxfill8                                ; 129F _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 12A4 _ 83. C4, 1C
+        mov     eax, dword [ebp+10H]                    ; 12A7 _ 8B. 45, 10
+        lea     esi, [eax-2H]                           ; 12AA _ 8D. 70, FE
+        mov     eax, dword [ebp+10H]                    ; 12AD _ 8B. 45, 10
+        lea     ebx, [eax-2H]                           ; 12B0 _ 8D. 58, FE
+        mov     eax, dword [ebp+0CH]                    ; 12B3 _ 8B. 45, 0C
+        lea     ecx, [eax-1H]                           ; 12B6 _ 8D. 48, FF
+        mov     eax, dword [ebp+8H]                     ; 12B9 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 12BC _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 12BF _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 12C2 _ 8B. 00
+        push    esi                                     ; 12C4 _ 56
+        push    dword [ebp-14H]                         ; 12C5 _ FF. 75, EC
+        push    ebx                                     ; 12C8 _ 53
+        push    ecx                                     ; 12C9 _ 51
+        push    0                                       ; 12CA _ 6A, 00
+        push    edx                                     ; 12CC _ 52
+        push    eax                                     ; 12CD _ 50
+        call    boxfill8                                ; 12CE _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 12D3 _ 83. C4, 1C
+        mov     eax, dword [ebp+0CH]                    ; 12D6 _ 8B. 45, 0C
+        lea     esi, [eax-2H]                           ; 12D9 _ 8D. 70, FE
+        mov     eax, dword [ebp+10H]                    ; 12DC _ 8B. 45, 10
+        lea     ebx, [eax-2H]                           ; 12DF _ 8D. 58, FE
+        mov     eax, dword [ebp+0CH]                    ; 12E2 _ 8B. 45, 0C
+        lea     ecx, [eax-2H]                           ; 12E5 _ 8D. 48, FE
+        mov     eax, dword [ebp+8H]                     ; 12E8 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 12EB _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 12EE _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 12F1 _ 8B. 00
+        push    dword [ebp-10H]                         ; 12F3 _ FF. 75, F0
+        push    esi                                     ; 12F6 _ 56
+        push    ebx                                     ; 12F7 _ 53
+        push    ecx                                     ; 12F8 _ 51
+        push    0                                       ; 12F9 _ 6A, 00
+        push    edx                                     ; 12FB _ 52
+        push    eax                                     ; 12FC _ 50
+        call    boxfill8                                ; 12FD _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 1302 _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 1305 _ 8B. 45, F0
+        lea     esi, [eax+1H]                           ; 1308 _ 8D. 70, 01
+        mov     eax, dword [ebp-10H]                    ; 130B _ 8B. 45, F0
+        lea     ebx, [eax+1H]                           ; 130E _ 8D. 58, 01
+        mov     eax, dword [ebp+0CH]                    ; 1311 _ 8B. 45, 0C
+        lea     ecx, [eax-2H]                           ; 1314 _ 8D. 48, FE
+        mov     eax, dword [ebp+8H]                     ; 1317 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 131A _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 131D _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 1320 _ 8B. 00
+        push    esi                                     ; 1322 _ 56
+        push    dword [ebp-14H]                         ; 1323 _ FF. 75, EC
+        push    ebx                                     ; 1326 _ 53
+        push    ecx                                     ; 1327 _ 51
+        push    8                                       ; 1328 _ 6A, 08
+        push    edx                                     ; 132A _ 52
+        push    eax                                     ; 132B _ 50
+        call    boxfill8                                ; 132C _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 1331 _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 1334 _ 8B. 45, F0
+        lea     edi, [eax+1H]                           ; 1337 _ 8D. 78, 01
+        mov     eax, dword [ebp-14H]                    ; 133A _ 8B. 45, EC
+        lea     esi, [eax+1H]                           ; 133D _ 8D. 70, 01
+        mov     eax, dword [ebp+10H]                    ; 1340 _ 8B. 45, 10
+        lea     ebx, [eax-2H]                           ; 1343 _ 8D. 58, FE
+        mov     eax, dword [ebp-14H]                    ; 1346 _ 8B. 45, EC
+        lea     ecx, [eax+1H]                           ; 1349 _ 8D. 48, 01
+        mov     eax, dword [ebp+8H]                     ; 134C _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 134F _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 1352 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 1355 _ 8B. 00
+        push    edi                                     ; 1357 _ 57
+        push    esi                                     ; 1358 _ 56
+        push    ebx                                     ; 1359 _ 53
+        push    ecx                                     ; 135A _ 51
+        push    8                                       ; 135B _ 6A, 08
+        push    edx                                     ; 135D _ 52
+        push    eax                                     ; 135E _ 50
+        call    boxfill8                                ; 135F _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 1364 _ 83. C4, 1C
+        mov     eax, dword [ebp+10H]                    ; 1367 _ 8B. 45, 10
+        lea     esi, [eax-1H]                           ; 136A _ 8D. 70, FF
+        mov     eax, dword [ebp+0CH]                    ; 136D _ 8B. 45, 0C
+        lea     ebx, [eax-1H]                           ; 1370 _ 8D. 58, FF
+        mov     eax, dword [ebp+1CH]                    ; 1373 _ 8B. 45, 1C
+        movzx   ecx, al                                 ; 1376 _ 0F B6. C8
+        mov     eax, dword [ebp+8H]                     ; 1379 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 137C _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 137F _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 1382 _ 8B. 00
+        push    dword [ebp-10H]                         ; 1384 _ FF. 75, F0
+        push    dword [ebp-14H]                         ; 1387 _ FF. 75, EC
+        push    esi                                     ; 138A _ 56
+        push    ebx                                     ; 138B _ 53
+        push    ecx                                     ; 138C _ 51
+        push    edx                                     ; 138D _ 52
+        push    eax                                     ; 138E _ 50
+        call    boxfill8                                ; 138F _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 1394 _ 83. C4, 1C
+        nop                                             ; 1397 _ 90
+        lea     esp, [ebp-0CH]                          ; 1398 _ 8D. 65, F4
+        pop     ebx                                     ; 139B _ 5B
+        pop     esi                                     ; 139C _ 5E
+        pop     edi                                     ; 139D _ 5F
+        pop     ebp                                     ; 139E _ 5D
+        ret                                             ; 139F _ C3
 ; make_textbox8 End of function
 
 showFont8:; Function begin
-        push    ebp                                     ; 139D _ 55
-        mov     ebp, esp                                ; 139E _ 89. E5
-        sub     esp, 20                                 ; 13A0 _ 83. EC, 14
-        mov     eax, dword [ebp+18H]                    ; 13A3 _ 8B. 45, 18
-        mov     byte [ebp-14H], al                      ; 13A6 _ 88. 45, EC
-        mov     dword [ebp-4H], 0                       ; 13A9 _ C7. 45, FC, 00000000
-        jmp     ?_038                                   ; 13B0 _ E9, 0000016C
+        push    ebp                                     ; 13A0 _ 55
+        mov     ebp, esp                                ; 13A1 _ 89. E5
+        sub     esp, 20                                 ; 13A3 _ 83. EC, 14
+        mov     eax, dword [ebp+18H]                    ; 13A6 _ 8B. 45, 18
+        mov     byte [ebp-14H], al                      ; 13A9 _ 88. 45, EC
+        mov     dword [ebp-4H], 0                       ; 13AC _ C7. 45, FC, 00000000
+        jmp     ?_038                                   ; 13B3 _ E9, 0000016C
 
-?_029:  mov     edx, dword [ebp-4H]                     ; 13B5 _ 8B. 55, FC
-        mov     eax, dword [ebp+1CH]                    ; 13B8 _ 8B. 45, 1C
-        add     eax, edx                                ; 13BB _ 01. D0
-        movzx   eax, byte [eax]                         ; 13BD _ 0F B6. 00
-        mov     byte [ebp-5H], al                       ; 13C0 _ 88. 45, FB
-        cmp     byte [ebp-5H], 0                        ; 13C3 _ 80. 7D, FB, 00
-        jns     ?_030                                   ; 13C7 _ 79, 20
-        mov     edx, dword [ebp+14H]                    ; 13C9 _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 13CC _ 8B. 45, FC
-        add     eax, edx                                ; 13CF _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 13D1 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 13D5 _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 13D7 _ 8B. 45, 10
-        add     eax, edx                                ; 13DA _ 01. D0
-        mov     edx, eax                                ; 13DC _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 13DE _ 8B. 45, 08
-        add     edx, eax                                ; 13E1 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 13E3 _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 13E7 _ 88. 02
-?_030:  movsx   eax, byte [ebp-5H]                      ; 13E9 _ 0F BE. 45, FB
-        and     eax, 40H                                ; 13ED _ 83. E0, 40
-        test    eax, eax                                ; 13F0 _ 85. C0
-        jz      ?_031                                   ; 13F2 _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 13F4 _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 13F7 _ 8B. 45, FC
-        add     eax, edx                                ; 13FA _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 13FC _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 1400 _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 1402 _ 8B. 45, 10
-        add     eax, edx                                ; 1405 _ 01. D0
-        lea     edx, [eax+1H]                           ; 1407 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 140A _ 8B. 45, 08
-        add     edx, eax                                ; 140D _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 140F _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 1413 _ 88. 02
-?_031:  movsx   eax, byte [ebp-5H]                      ; 1415 _ 0F BE. 45, FB
-        and     eax, 20H                                ; 1419 _ 83. E0, 20
-        test    eax, eax                                ; 141C _ 85. C0
-        jz      ?_032                                   ; 141E _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 1420 _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 1423 _ 8B. 45, FC
-        add     eax, edx                                ; 1426 _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 1428 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 142C _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 142E _ 8B. 45, 10
-        add     eax, edx                                ; 1431 _ 01. D0
-        lea     edx, [eax+2H]                           ; 1433 _ 8D. 50, 02
-        mov     eax, dword [ebp+8H]                     ; 1436 _ 8B. 45, 08
-        add     edx, eax                                ; 1439 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 143B _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 143F _ 88. 02
-?_032:  movsx   eax, byte [ebp-5H]                      ; 1441 _ 0F BE. 45, FB
-        and     eax, 10H                                ; 1445 _ 83. E0, 10
-        test    eax, eax                                ; 1448 _ 85. C0
-        jz      ?_033                                   ; 144A _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 144C _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 144F _ 8B. 45, FC
-        add     eax, edx                                ; 1452 _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 1454 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 1458 _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 145A _ 8B. 45, 10
-        add     eax, edx                                ; 145D _ 01. D0
-        lea     edx, [eax+3H]                           ; 145F _ 8D. 50, 03
-        mov     eax, dword [ebp+8H]                     ; 1462 _ 8B. 45, 08
-        add     edx, eax                                ; 1465 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 1467 _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 146B _ 88. 02
-?_033:  movsx   eax, byte [ebp-5H]                      ; 146D _ 0F BE. 45, FB
-        and     eax, 08H                                ; 1471 _ 83. E0, 08
-        test    eax, eax                                ; 1474 _ 85. C0
-        jz      ?_034                                   ; 1476 _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 1478 _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 147B _ 8B. 45, FC
-        add     eax, edx                                ; 147E _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 1480 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 1484 _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 1486 _ 8B. 45, 10
-        add     eax, edx                                ; 1489 _ 01. D0
-        lea     edx, [eax+4H]                           ; 148B _ 8D. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 148E _ 8B. 45, 08
-        add     edx, eax                                ; 1491 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 1493 _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 1497 _ 88. 02
-?_034:  movsx   eax, byte [ebp-5H]                      ; 1499 _ 0F BE. 45, FB
-        and     eax, 04H                                ; 149D _ 83. E0, 04
-        test    eax, eax                                ; 14A0 _ 85. C0
-        jz      ?_035                                   ; 14A2 _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 14A4 _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 14A7 _ 8B. 45, FC
-        add     eax, edx                                ; 14AA _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 14AC _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 14B0 _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 14B2 _ 8B. 45, 10
-        add     eax, edx                                ; 14B5 _ 01. D0
-        lea     edx, [eax+5H]                           ; 14B7 _ 8D. 50, 05
-        mov     eax, dword [ebp+8H]                     ; 14BA _ 8B. 45, 08
-        add     edx, eax                                ; 14BD _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 14BF _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 14C3 _ 88. 02
-?_035:  movsx   eax, byte [ebp-5H]                      ; 14C5 _ 0F BE. 45, FB
-        and     eax, 02H                                ; 14C9 _ 83. E0, 02
-        test    eax, eax                                ; 14CC _ 85. C0
-        jz      ?_036                                   ; 14CE _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 14D0 _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 14D3 _ 8B. 45, FC
-        add     eax, edx                                ; 14D6 _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 14D8 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 14DC _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 14DE _ 8B. 45, 10
-        add     eax, edx                                ; 14E1 _ 01. D0
-        lea     edx, [eax+6H]                           ; 14E3 _ 8D. 50, 06
-        mov     eax, dword [ebp+8H]                     ; 14E6 _ 8B. 45, 08
-        add     edx, eax                                ; 14E9 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 14EB _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 14EF _ 88. 02
-?_036:  movsx   eax, byte [ebp-5H]                      ; 14F1 _ 0F BE. 45, FB
-        and     eax, 01H                                ; 14F5 _ 83. E0, 01
-        test    eax, eax                                ; 14F8 _ 85. C0
-        jz      ?_037                                   ; 14FA _ 74, 21
-        mov     edx, dword [ebp+14H]                    ; 14FC _ 8B. 55, 14
-        mov     eax, dword [ebp-4H]                     ; 14FF _ 8B. 45, FC
-        add     eax, edx                                ; 1502 _ 01. D0
-        imul    eax, dword [ebp+0CH]                    ; 1504 _ 0F AF. 45, 0C
-        mov     edx, eax                                ; 1508 _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 150A _ 8B. 45, 10
-        add     eax, edx                                ; 150D _ 01. D0
-        lea     edx, [eax+7H]                           ; 150F _ 8D. 50, 07
-        mov     eax, dword [ebp+8H]                     ; 1512 _ 8B. 45, 08
-        add     edx, eax                                ; 1515 _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 1517 _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 151B _ 88. 02
-?_037:  add     dword [ebp-4H], 1                       ; 151D _ 83. 45, FC, 01
-?_038:  cmp     dword [ebp-4H], 15                      ; 1521 _ 83. 7D, FC, 0F
-        jle     ?_029                                   ; 1525 _ 0F 8E, FFFFFE8A
-        nop                                             ; 152B _ 90
-        leave                                           ; 152C _ C9
-        ret                                             ; 152D _ C3
+?_029:  mov     edx, dword [ebp-4H]                     ; 13B8 _ 8B. 55, FC
+        mov     eax, dword [ebp+1CH]                    ; 13BB _ 8B. 45, 1C
+        add     eax, edx                                ; 13BE _ 01. D0
+        movzx   eax, byte [eax]                         ; 13C0 _ 0F B6. 00
+        mov     byte [ebp-5H], al                       ; 13C3 _ 88. 45, FB
+        cmp     byte [ebp-5H], 0                        ; 13C6 _ 80. 7D, FB, 00
+        jns     ?_030                                   ; 13CA _ 79, 20
+        mov     edx, dword [ebp+14H]                    ; 13CC _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 13CF _ 8B. 45, FC
+        add     eax, edx                                ; 13D2 _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 13D4 _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 13D8 _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 13DA _ 8B. 45, 10
+        add     eax, edx                                ; 13DD _ 01. D0
+        mov     edx, eax                                ; 13DF _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 13E1 _ 8B. 45, 08
+        add     edx, eax                                ; 13E4 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 13E6 _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 13EA _ 88. 02
+?_030:  movsx   eax, byte [ebp-5H]                      ; 13EC _ 0F BE. 45, FB
+        and     eax, 40H                                ; 13F0 _ 83. E0, 40
+        test    eax, eax                                ; 13F3 _ 85. C0
+        jz      ?_031                                   ; 13F5 _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 13F7 _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 13FA _ 8B. 45, FC
+        add     eax, edx                                ; 13FD _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 13FF _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 1403 _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 1405 _ 8B. 45, 10
+        add     eax, edx                                ; 1408 _ 01. D0
+        lea     edx, [eax+1H]                           ; 140A _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 140D _ 8B. 45, 08
+        add     edx, eax                                ; 1410 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 1412 _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 1416 _ 88. 02
+?_031:  movsx   eax, byte [ebp-5H]                      ; 1418 _ 0F BE. 45, FB
+        and     eax, 20H                                ; 141C _ 83. E0, 20
+        test    eax, eax                                ; 141F _ 85. C0
+        jz      ?_032                                   ; 1421 _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 1423 _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 1426 _ 8B. 45, FC
+        add     eax, edx                                ; 1429 _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 142B _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 142F _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 1431 _ 8B. 45, 10
+        add     eax, edx                                ; 1434 _ 01. D0
+        lea     edx, [eax+2H]                           ; 1436 _ 8D. 50, 02
+        mov     eax, dword [ebp+8H]                     ; 1439 _ 8B. 45, 08
+        add     edx, eax                                ; 143C _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 143E _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 1442 _ 88. 02
+?_032:  movsx   eax, byte [ebp-5H]                      ; 1444 _ 0F BE. 45, FB
+        and     eax, 10H                                ; 1448 _ 83. E0, 10
+        test    eax, eax                                ; 144B _ 85. C0
+        jz      ?_033                                   ; 144D _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 144F _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 1452 _ 8B. 45, FC
+        add     eax, edx                                ; 1455 _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 1457 _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 145B _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 145D _ 8B. 45, 10
+        add     eax, edx                                ; 1460 _ 01. D0
+        lea     edx, [eax+3H]                           ; 1462 _ 8D. 50, 03
+        mov     eax, dword [ebp+8H]                     ; 1465 _ 8B. 45, 08
+        add     edx, eax                                ; 1468 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 146A _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 146E _ 88. 02
+?_033:  movsx   eax, byte [ebp-5H]                      ; 1470 _ 0F BE. 45, FB
+        and     eax, 08H                                ; 1474 _ 83. E0, 08
+        test    eax, eax                                ; 1477 _ 85. C0
+        jz      ?_034                                   ; 1479 _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 147B _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 147E _ 8B. 45, FC
+        add     eax, edx                                ; 1481 _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 1483 _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 1487 _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 1489 _ 8B. 45, 10
+        add     eax, edx                                ; 148C _ 01. D0
+        lea     edx, [eax+4H]                           ; 148E _ 8D. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 1491 _ 8B. 45, 08
+        add     edx, eax                                ; 1494 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 1496 _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 149A _ 88. 02
+?_034:  movsx   eax, byte [ebp-5H]                      ; 149C _ 0F BE. 45, FB
+        and     eax, 04H                                ; 14A0 _ 83. E0, 04
+        test    eax, eax                                ; 14A3 _ 85. C0
+        jz      ?_035                                   ; 14A5 _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 14A7 _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 14AA _ 8B. 45, FC
+        add     eax, edx                                ; 14AD _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 14AF _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 14B3 _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 14B5 _ 8B. 45, 10
+        add     eax, edx                                ; 14B8 _ 01. D0
+        lea     edx, [eax+5H]                           ; 14BA _ 8D. 50, 05
+        mov     eax, dword [ebp+8H]                     ; 14BD _ 8B. 45, 08
+        add     edx, eax                                ; 14C0 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 14C2 _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 14C6 _ 88. 02
+?_035:  movsx   eax, byte [ebp-5H]                      ; 14C8 _ 0F BE. 45, FB
+        and     eax, 02H                                ; 14CC _ 83. E0, 02
+        test    eax, eax                                ; 14CF _ 85. C0
+        jz      ?_036                                   ; 14D1 _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 14D3 _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 14D6 _ 8B. 45, FC
+        add     eax, edx                                ; 14D9 _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 14DB _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 14DF _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 14E1 _ 8B. 45, 10
+        add     eax, edx                                ; 14E4 _ 01. D0
+        lea     edx, [eax+6H]                           ; 14E6 _ 8D. 50, 06
+        mov     eax, dword [ebp+8H]                     ; 14E9 _ 8B. 45, 08
+        add     edx, eax                                ; 14EC _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 14EE _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 14F2 _ 88. 02
+?_036:  movsx   eax, byte [ebp-5H]                      ; 14F4 _ 0F BE. 45, FB
+        and     eax, 01H                                ; 14F8 _ 83. E0, 01
+        test    eax, eax                                ; 14FB _ 85. C0
+        jz      ?_037                                   ; 14FD _ 74, 21
+        mov     edx, dword [ebp+14H]                    ; 14FF _ 8B. 55, 14
+        mov     eax, dword [ebp-4H]                     ; 1502 _ 8B. 45, FC
+        add     eax, edx                                ; 1505 _ 01. D0
+        imul    eax, dword [ebp+0CH]                    ; 1507 _ 0F AF. 45, 0C
+        mov     edx, eax                                ; 150B _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 150D _ 8B. 45, 10
+        add     eax, edx                                ; 1510 _ 01. D0
+        lea     edx, [eax+7H]                           ; 1512 _ 8D. 50, 07
+        mov     eax, dword [ebp+8H]                     ; 1515 _ 8B. 45, 08
+        add     edx, eax                                ; 1518 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 151A _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 151E _ 88. 02
+?_037:  add     dword [ebp-4H], 1                       ; 1520 _ 83. 45, FC, 01
+?_038:  cmp     dword [ebp-4H], 15                      ; 1524 _ 83. 7D, FC, 0F
+        jle     ?_029                                   ; 1528 _ 0F 8E, FFFFFE8A
+        nop                                             ; 152E _ 90
+        leave                                           ; 152F _ C9
+        ret                                             ; 1530 _ C3
 ; showFont8 End of function
 
 init_mouse_cursor:; Function begin
-        push    ebp                                     ; 152E _ 55
-        mov     ebp, esp                                ; 152F _ 89. E5
-        sub     esp, 20                                 ; 1531 _ 83. EC, 14
-        mov     eax, dword [ebp+0CH]                    ; 1534 _ 8B. 45, 0C
-        mov     byte [ebp-14H], al                      ; 1537 _ 88. 45, EC
-        mov     dword [ebp-4H], 0                       ; 153A _ C7. 45, FC, 00000000
-        jmp     ?_045                                   ; 1541 _ E9, 000000B1
+        push    ebp                                     ; 1531 _ 55
+        mov     ebp, esp                                ; 1532 _ 89. E5
+        sub     esp, 20                                 ; 1534 _ 83. EC, 14
+        mov     eax, dword [ebp+0CH]                    ; 1537 _ 8B. 45, 0C
+        mov     byte [ebp-14H], al                      ; 153A _ 88. 45, EC
+        mov     dword [ebp-4H], 0                       ; 153D _ C7. 45, FC, 00000000
+        jmp     ?_045                                   ; 1544 _ E9, 000000B1
 
-?_039:  mov     dword [ebp-8H], 0                       ; 1546 _ C7. 45, F8, 00000000
-        jmp     ?_044                                   ; 154D _ E9, 00000097
+?_039:  mov     dword [ebp-8H], 0                       ; 1549 _ C7. 45, F8, 00000000
+        jmp     ?_044                                   ; 1550 _ E9, 00000097
 
-?_040:  mov     eax, dword [ebp-4H]                     ; 1552 _ 8B. 45, FC
-        shl     eax, 4                                  ; 1555 _ C1. E0, 04
-        mov     edx, eax                                ; 1558 _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 155A _ 8B. 45, F8
-        add     eax, edx                                ; 155D _ 01. D0
-        add     eax, cursor.2391                        ; 155F _ 05, 000000C0(d)
-        movzx   eax, byte [eax]                         ; 1564 _ 0F B6. 00
-        cmp     al, 42                                  ; 1567 _ 3C, 2A
-        jnz     ?_041                                   ; 1569 _ 75, 17
-        mov     eax, dword [ebp-4H]                     ; 156B _ 8B. 45, FC
-        shl     eax, 4                                  ; 156E _ C1. E0, 04
-        mov     edx, eax                                ; 1571 _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 1573 _ 8B. 45, F8
-        add     eax, edx                                ; 1576 _ 01. D0
-        mov     edx, eax                                ; 1578 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 157A _ 8B. 45, 08
-        add     eax, edx                                ; 157D _ 01. D0
-        mov     byte [eax], 0                           ; 157F _ C6. 00, 00
-?_041:  mov     eax, dword [ebp-4H]                     ; 1582 _ 8B. 45, FC
-        shl     eax, 4                                  ; 1585 _ C1. E0, 04
-        mov     edx, eax                                ; 1588 _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 158A _ 8B. 45, F8
-        add     eax, edx                                ; 158D _ 01. D0
-        add     eax, cursor.2391                        ; 158F _ 05, 000000C0(d)
-        movzx   eax, byte [eax]                         ; 1594 _ 0F B6. 00
-        cmp     al, 79                                  ; 1597 _ 3C, 4F
-        jnz     ?_042                                   ; 1599 _ 75, 17
-        mov     eax, dword [ebp-4H]                     ; 159B _ 8B. 45, FC
-        shl     eax, 4                                  ; 159E _ C1. E0, 04
-        mov     edx, eax                                ; 15A1 _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 15A3 _ 8B. 45, F8
-        add     eax, edx                                ; 15A6 _ 01. D0
-        mov     edx, eax                                ; 15A8 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 15AA _ 8B. 45, 08
-        add     eax, edx                                ; 15AD _ 01. D0
-        mov     byte [eax], 7                           ; 15AF _ C6. 00, 07
-?_042:  mov     eax, dword [ebp-4H]                     ; 15B2 _ 8B. 45, FC
-        shl     eax, 4                                  ; 15B5 _ C1. E0, 04
-        mov     edx, eax                                ; 15B8 _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 15BA _ 8B. 45, F8
-        add     eax, edx                                ; 15BD _ 01. D0
-        add     eax, cursor.2391                        ; 15BF _ 05, 000000C0(d)
-        movzx   eax, byte [eax]                         ; 15C4 _ 0F B6. 00
-        cmp     al, 46                                  ; 15C7 _ 3C, 2E
-        jnz     ?_043                                   ; 15C9 _ 75, 1A
-        mov     eax, dword [ebp-4H]                     ; 15CB _ 8B. 45, FC
-        shl     eax, 4                                  ; 15CE _ C1. E0, 04
-        mov     edx, eax                                ; 15D1 _ 89. C2
-        mov     eax, dword [ebp-8H]                     ; 15D3 _ 8B. 45, F8
-        add     eax, edx                                ; 15D6 _ 01. D0
-        mov     edx, eax                                ; 15D8 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 15DA _ 8B. 45, 08
-        add     edx, eax                                ; 15DD _ 01. C2
-        movzx   eax, byte [ebp-14H]                     ; 15DF _ 0F B6. 45, EC
-        mov     byte [edx], al                          ; 15E3 _ 88. 02
-?_043:  add     dword [ebp-8H], 1                       ; 15E5 _ 83. 45, F8, 01
-?_044:  cmp     dword [ebp-8H], 15                      ; 15E9 _ 83. 7D, F8, 0F
-        jle     ?_040                                   ; 15ED _ 0F 8E, FFFFFF5F
-        add     dword [ebp-4H], 1                       ; 15F3 _ 83. 45, FC, 01
-?_045:  cmp     dword [ebp-4H], 15                      ; 15F7 _ 83. 7D, FC, 0F
-        jle     ?_039                                   ; 15FB _ 0F 8E, FFFFFF45
-        nop                                             ; 1601 _ 90
-        leave                                           ; 1602 _ C9
-        ret                                             ; 1603 _ C3
+?_040:  mov     eax, dword [ebp-4H]                     ; 1555 _ 8B. 45, FC
+        shl     eax, 4                                  ; 1558 _ C1. E0, 04
+        mov     edx, eax                                ; 155B _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 155D _ 8B. 45, F8
+        add     eax, edx                                ; 1560 _ 01. D0
+        add     eax, cursor.2393                        ; 1562 _ 05, 000000C0(d)
+        movzx   eax, byte [eax]                         ; 1567 _ 0F B6. 00
+        cmp     al, 42                                  ; 156A _ 3C, 2A
+        jnz     ?_041                                   ; 156C _ 75, 17
+        mov     eax, dword [ebp-4H]                     ; 156E _ 8B. 45, FC
+        shl     eax, 4                                  ; 1571 _ C1. E0, 04
+        mov     edx, eax                                ; 1574 _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 1576 _ 8B. 45, F8
+        add     eax, edx                                ; 1579 _ 01. D0
+        mov     edx, eax                                ; 157B _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 157D _ 8B. 45, 08
+        add     eax, edx                                ; 1580 _ 01. D0
+        mov     byte [eax], 0                           ; 1582 _ C6. 00, 00
+?_041:  mov     eax, dword [ebp-4H]                     ; 1585 _ 8B. 45, FC
+        shl     eax, 4                                  ; 1588 _ C1. E0, 04
+        mov     edx, eax                                ; 158B _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 158D _ 8B. 45, F8
+        add     eax, edx                                ; 1590 _ 01. D0
+        add     eax, cursor.2393                        ; 1592 _ 05, 000000C0(d)
+        movzx   eax, byte [eax]                         ; 1597 _ 0F B6. 00
+        cmp     al, 79                                  ; 159A _ 3C, 4F
+        jnz     ?_042                                   ; 159C _ 75, 17
+        mov     eax, dword [ebp-4H]                     ; 159E _ 8B. 45, FC
+        shl     eax, 4                                  ; 15A1 _ C1. E0, 04
+        mov     edx, eax                                ; 15A4 _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 15A6 _ 8B. 45, F8
+        add     eax, edx                                ; 15A9 _ 01. D0
+        mov     edx, eax                                ; 15AB _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 15AD _ 8B. 45, 08
+        add     eax, edx                                ; 15B0 _ 01. D0
+        mov     byte [eax], 7                           ; 15B2 _ C6. 00, 07
+?_042:  mov     eax, dword [ebp-4H]                     ; 15B5 _ 8B. 45, FC
+        shl     eax, 4                                  ; 15B8 _ C1. E0, 04
+        mov     edx, eax                                ; 15BB _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 15BD _ 8B. 45, F8
+        add     eax, edx                                ; 15C0 _ 01. D0
+        add     eax, cursor.2393                        ; 15C2 _ 05, 000000C0(d)
+        movzx   eax, byte [eax]                         ; 15C7 _ 0F B6. 00
+        cmp     al, 46                                  ; 15CA _ 3C, 2E
+        jnz     ?_043                                   ; 15CC _ 75, 1A
+        mov     eax, dword [ebp-4H]                     ; 15CE _ 8B. 45, FC
+        shl     eax, 4                                  ; 15D1 _ C1. E0, 04
+        mov     edx, eax                                ; 15D4 _ 89. C2
+        mov     eax, dword [ebp-8H]                     ; 15D6 _ 8B. 45, F8
+        add     eax, edx                                ; 15D9 _ 01. D0
+        mov     edx, eax                                ; 15DB _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 15DD _ 8B. 45, 08
+        add     edx, eax                                ; 15E0 _ 01. C2
+        movzx   eax, byte [ebp-14H]                     ; 15E2 _ 0F B6. 45, EC
+        mov     byte [edx], al                          ; 15E6 _ 88. 02
+?_043:  add     dword [ebp-8H], 1                       ; 15E8 _ 83. 45, F8, 01
+?_044:  cmp     dword [ebp-8H], 15                      ; 15EC _ 83. 7D, F8, 0F
+        jle     ?_040                                   ; 15F0 _ 0F 8E, FFFFFF5F
+        add     dword [ebp-4H], 1                       ; 15F6 _ 83. 45, FC, 01
+?_045:  cmp     dword [ebp-4H], 15                      ; 15FA _ 83. 7D, FC, 0F
+        jle     ?_039                                   ; 15FE _ 0F 8E, FFFFFF45
+        nop                                             ; 1604 _ 90
+        leave                                           ; 1605 _ C9
+        ret                                             ; 1606 _ C3
 ; init_mouse_cursor End of function
 
 putblock:; Function begin
-        push    ebp                                     ; 1604 _ 55
-        mov     ebp, esp                                ; 1605 _ 89. E5
-        push    ebx                                     ; 1607 _ 53
-        sub     esp, 16                                 ; 1608 _ 83. EC, 10
-        mov     dword [ebp-8H], 0                       ; 160B _ C7. 45, F8, 00000000
-        jmp     ?_049                                   ; 1612 _ EB, 50
+        push    ebp                                     ; 1607 _ 55
+        mov     ebp, esp                                ; 1608 _ 89. E5
+        push    ebx                                     ; 160A _ 53
+        sub     esp, 16                                 ; 160B _ 83. EC, 10
+        mov     dword [ebp-8H], 0                       ; 160E _ C7. 45, F8, 00000000
+        jmp     ?_049                                   ; 1615 _ EB, 50
 
-?_046:  mov     dword [ebp-0CH], 0                      ; 1614 _ C7. 45, F4, 00000000
-        jmp     ?_048                                   ; 161B _ EB, 3B
+?_046:  mov     dword [ebp-0CH], 0                      ; 1617 _ C7. 45, F4, 00000000
+        jmp     ?_048                                   ; 161E _ EB, 3B
 
-?_047:  mov     eax, dword [ebp-8H]                     ; 161D _ 8B. 45, F8
-        imul    eax, dword [ebp+24H]                    ; 1620 _ 0F AF. 45, 24
-        mov     edx, eax                                ; 1624 _ 89. C2
-        mov     eax, dword [ebp-0CH]                    ; 1626 _ 8B. 45, F4
-        add     eax, edx                                ; 1629 _ 01. D0
-        mov     edx, eax                                ; 162B _ 89. C2
-        mov     eax, dword [ebp+20H]                    ; 162D _ 8B. 45, 20
-        add     eax, edx                                ; 1630 _ 01. D0
-        mov     ecx, dword [ebp+1CH]                    ; 1632 _ 8B. 4D, 1C
-        mov     edx, dword [ebp-8H]                     ; 1635 _ 8B. 55, F8
-        add     edx, ecx                                ; 1638 _ 01. CA
-        imul    edx, dword [ebp+0CH]                    ; 163A _ 0F AF. 55, 0C
-        mov     ebx, dword [ebp+18H]                    ; 163E _ 8B. 5D, 18
-        mov     ecx, dword [ebp-0CH]                    ; 1641 _ 8B. 4D, F4
-        add     ecx, ebx                                ; 1644 _ 01. D9
-        add     edx, ecx                                ; 1646 _ 01. CA
-        mov     ecx, edx                                ; 1648 _ 89. D1
-        mov     edx, dword [ebp+8H]                     ; 164A _ 8B. 55, 08
-        add     edx, ecx                                ; 164D _ 01. CA
-        movzx   eax, byte [eax]                         ; 164F _ 0F B6. 00
-        mov     byte [edx], al                          ; 1652 _ 88. 02
-        add     dword [ebp-0CH], 1                      ; 1654 _ 83. 45, F4, 01
-?_048:  mov     eax, dword [ebp-0CH]                    ; 1658 _ 8B. 45, F4
-        cmp     eax, dword [ebp+10H]                    ; 165B _ 3B. 45, 10
-        jl      ?_047                                   ; 165E _ 7C, BD
-        add     dword [ebp-8H], 1                       ; 1660 _ 83. 45, F8, 01
-?_049:  mov     eax, dword [ebp-8H]                     ; 1664 _ 8B. 45, F8
-        cmp     eax, dword [ebp+14H]                    ; 1667 _ 3B. 45, 14
-        jl      ?_046                                   ; 166A _ 7C, A8
-        nop                                             ; 166C _ 90
-        add     esp, 16                                 ; 166D _ 83. C4, 10
-        pop     ebx                                     ; 1670 _ 5B
-        pop     ebp                                     ; 1671 _ 5D
-        ret                                             ; 1672 _ C3
+?_047:  mov     eax, dword [ebp-8H]                     ; 1620 _ 8B. 45, F8
+        imul    eax, dword [ebp+24H]                    ; 1623 _ 0F AF. 45, 24
+        mov     edx, eax                                ; 1627 _ 89. C2
+        mov     eax, dword [ebp-0CH]                    ; 1629 _ 8B. 45, F4
+        add     eax, edx                                ; 162C _ 01. D0
+        mov     edx, eax                                ; 162E _ 89. C2
+        mov     eax, dword [ebp+20H]                    ; 1630 _ 8B. 45, 20
+        add     eax, edx                                ; 1633 _ 01. D0
+        mov     ecx, dword [ebp+1CH]                    ; 1635 _ 8B. 4D, 1C
+        mov     edx, dword [ebp-8H]                     ; 1638 _ 8B. 55, F8
+        add     edx, ecx                                ; 163B _ 01. CA
+        imul    edx, dword [ebp+0CH]                    ; 163D _ 0F AF. 55, 0C
+        mov     ebx, dword [ebp+18H]                    ; 1641 _ 8B. 5D, 18
+        mov     ecx, dword [ebp-0CH]                    ; 1644 _ 8B. 4D, F4
+        add     ecx, ebx                                ; 1647 _ 01. D9
+        add     edx, ecx                                ; 1649 _ 01. CA
+        mov     ecx, edx                                ; 164B _ 89. D1
+        mov     edx, dword [ebp+8H]                     ; 164D _ 8B. 55, 08
+        add     edx, ecx                                ; 1650 _ 01. CA
+        movzx   eax, byte [eax]                         ; 1652 _ 0F B6. 00
+        mov     byte [edx], al                          ; 1655 _ 88. 02
+        add     dword [ebp-0CH], 1                      ; 1657 _ 83. 45, F4, 01
+?_048:  mov     eax, dword [ebp-0CH]                    ; 165B _ 8B. 45, F4
+        cmp     eax, dword [ebp+10H]                    ; 165E _ 3B. 45, 10
+        jl      ?_047                                   ; 1661 _ 7C, BD
+        add     dword [ebp-8H], 1                       ; 1663 _ 83. 45, F8, 01
+?_049:  mov     eax, dword [ebp-8H]                     ; 1667 _ 8B. 45, F8
+        cmp     eax, dword [ebp+14H]                    ; 166A _ 3B. 45, 14
+        jl      ?_046                                   ; 166D _ 7C, A8
+        nop                                             ; 166F _ 90
+        add     esp, 16                                 ; 1670 _ 83. C4, 10
+        pop     ebx                                     ; 1673 _ 5B
+        pop     ebp                                     ; 1674 _ 5D
+        ret                                             ; 1675 _ C3
 ; putblock End of function
 
 intHandlerFromC:; Function begin
-        push    ebp                                     ; 1673 _ 55
-        mov     ebp, esp                                ; 1674 _ 89. E5
-        sub     esp, 24                                 ; 1676 _ 83. EC, 18
-        mov     eax, dword [bootInfo]                   ; 1679 _ A1, 00000000(d)
-        mov     dword [ebp-14H], eax                    ; 167E _ 89. 45, EC
-        movzx   eax, word [?_218]                       ; 1681 _ 0F B7. 05, 00000004(d)
-        cwde                                            ; 1688 _ 98
-        mov     dword [ebp-10H], eax                    ; 1689 _ 89. 45, F0
-        movzx   eax, word [?_219]                       ; 168C _ 0F B7. 05, 00000006(d)
-        cwde                                            ; 1693 _ 98
-        mov     dword [ebp-0CH], eax                    ; 1694 _ 89. 45, F4
-        sub     esp, 8                                  ; 1697 _ 83. EC, 08
-        push    32                                      ; 169A _ 6A, 20
-        push    32                                      ; 169C _ 6A, 20
-        call    io_out8                                 ; 169E _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 16A3 _ 83. C4, 10
-        mov     byte [ebp-15H], 0                       ; 16A6 _ C6. 45, EB, 00
-        sub     esp, 12                                 ; 16AA _ 83. EC, 0C
-        push    96                                      ; 16AD _ 6A, 60
-        call    io_in8                                  ; 16AF _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 16B4 _ 83. C4, 10
-        mov     byte [ebp-15H], al                      ; 16B7 _ 88. 45, EB
-        movzx   eax, byte [ebp-15H]                     ; 16BA _ 0F B6. 45, EB
-        sub     esp, 8                                  ; 16BE _ 83. EC, 08
-        push    eax                                     ; 16C1 _ 50
-        push    keyInfo                                 ; 16C2 _ 68, 00000008(d)
-        call    fifo8_put                               ; 16C7 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 16CC _ 83. C4, 10
-        nop                                             ; 16CF _ 90
-        leave                                           ; 16D0 _ C9
-        ret                                             ; 16D1 _ C3
+        push    ebp                                     ; 1676 _ 55
+        mov     ebp, esp                                ; 1677 _ 89. E5
+        sub     esp, 24                                 ; 1679 _ 83. EC, 18
+        mov     eax, dword [bootInfo]                   ; 167C _ A1, 00000000(d)
+        mov     dword [ebp-14H], eax                    ; 1681 _ 89. 45, EC
+        movzx   eax, word [?_218]                       ; 1684 _ 0F B7. 05, 00000004(d)
+        cwde                                            ; 168B _ 98
+        mov     dword [ebp-10H], eax                    ; 168C _ 89. 45, F0
+        movzx   eax, word [?_219]                       ; 168F _ 0F B7. 05, 00000006(d)
+        cwde                                            ; 1696 _ 98
+        mov     dword [ebp-0CH], eax                    ; 1697 _ 89. 45, F4
+        sub     esp, 8                                  ; 169A _ 83. EC, 08
+        push    32                                      ; 169D _ 6A, 20
+        push    32                                      ; 169F _ 6A, 20
+        call    io_out8                                 ; 16A1 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 16A6 _ 83. C4, 10
+        mov     byte [ebp-15H], 0                       ; 16A9 _ C6. 45, EB, 00
+        sub     esp, 12                                 ; 16AD _ 83. EC, 0C
+        push    96                                      ; 16B0 _ 6A, 60
+        call    io_in8                                  ; 16B2 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 16B7 _ 83. C4, 10
+        mov     byte [ebp-15H], al                      ; 16BA _ 88. 45, EB
+        movzx   eax, byte [ebp-15H]                     ; 16BD _ 0F B6. 45, EB
+        sub     esp, 8                                  ; 16C1 _ 83. EC, 08
+        push    eax                                     ; 16C4 _ 50
+        push    keyInfo                                 ; 16C5 _ 68, 00000008(d)
+        call    fifo8_put                               ; 16CA _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 16CF _ 83. C4, 10
+        nop                                             ; 16D2 _ 90
+        leave                                           ; 16D3 _ C9
+        ret                                             ; 16D4 _ C3
 ; intHandlerFromC End of function
 
 charToHex:; Function begin
-        push    ebp                                     ; 16D2 _ 55
-        mov     ebp, esp                                ; 16D3 _ 89. E5
-        sub     esp, 40                                 ; 16D5 _ 83. EC, 28
-        mov     eax, dword [ebp+8H]                     ; 16D8 _ 8B. 45, 08
-        mov     byte [ebp-1CH], al                      ; 16DB _ 88. 45, E4
-        movzx   eax, byte [ebp-1CH]                     ; 16DE _ 0F B6. 45, E4
-        and     eax, 0FH                                ; 16E2 _ 83. E0, 0F
-        mov     byte [ebp-9H], al                       ; 16E5 _ 88. 45, F7
-        movsx   eax, byte [ebp-9H]                      ; 16E8 _ 0F BE. 45, F7
-        sub     esp, 12                                 ; 16EC _ 83. EC, 0C
-        push    eax                                     ; 16EF _ 50
-        call    charToVal                               ; 16F0 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 16F5 _ 83. C4, 10
-        mov     byte [?_217], al                        ; 16F8 _ A2, 00000003(d)
-        movzx   eax, byte [ebp-1CH]                     ; 16FD _ 0F B6. 45, E4
-        shr     al, 4                                   ; 1701 _ C0. E8, 04
-        mov     byte [ebp-1CH], al                      ; 1704 _ 88. 45, E4
-        movzx   eax, byte [ebp-1CH]                     ; 1707 _ 0F B6. 45, E4
-        movsx   eax, al                                 ; 170B _ 0F BE. C0
-        sub     esp, 12                                 ; 170E _ 83. EC, 0C
-        push    eax                                     ; 1711 _ 50
-        call    charToVal                               ; 1712 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1717 _ 83. C4, 10
-        mov     byte [?_216], al                        ; 171A _ A2, 00000002(d)
-        mov     eax, keyVal                             ; 171F _ B8, 00000000(d)
-        leave                                           ; 1724 _ C9
-        ret                                             ; 1725 _ C3
+        push    ebp                                     ; 16D5 _ 55
+        mov     ebp, esp                                ; 16D6 _ 89. E5
+        sub     esp, 40                                 ; 16D8 _ 83. EC, 28
+        mov     eax, dword [ebp+8H]                     ; 16DB _ 8B. 45, 08
+        mov     byte [ebp-1CH], al                      ; 16DE _ 88. 45, E4
+        movzx   eax, byte [ebp-1CH]                     ; 16E1 _ 0F B6. 45, E4
+        and     eax, 0FH                                ; 16E5 _ 83. E0, 0F
+        mov     byte [ebp-9H], al                       ; 16E8 _ 88. 45, F7
+        movsx   eax, byte [ebp-9H]                      ; 16EB _ 0F BE. 45, F7
+        sub     esp, 12                                 ; 16EF _ 83. EC, 0C
+        push    eax                                     ; 16F2 _ 50
+        call    charToVal                               ; 16F3 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 16F8 _ 83. C4, 10
+        mov     byte [?_217], al                        ; 16FB _ A2, 00000003(d)
+        movzx   eax, byte [ebp-1CH]                     ; 1700 _ 0F B6. 45, E4
+        shr     al, 4                                   ; 1704 _ C0. E8, 04
+        mov     byte [ebp-1CH], al                      ; 1707 _ 88. 45, E4
+        movzx   eax, byte [ebp-1CH]                     ; 170A _ 0F B6. 45, E4
+        movsx   eax, al                                 ; 170E _ 0F BE. C0
+        sub     esp, 12                                 ; 1711 _ 83. EC, 0C
+        push    eax                                     ; 1714 _ 50
+        call    charToVal                               ; 1715 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 171A _ 83. C4, 10
+        mov     byte [?_216], al                        ; 171D _ A2, 00000002(d)
+        mov     eax, keyVal                             ; 1722 _ B8, 00000000(d)
+        leave                                           ; 1727 _ C9
+        ret                                             ; 1728 _ C3
 ; charToHex End of function
 
 charToVal:; Function begin
-        push    ebp                                     ; 1726 _ 55
-        mov     ebp, esp                                ; 1727 _ 89. E5
-        sub     esp, 4                                  ; 1729 _ 83. EC, 04
-        mov     eax, dword [ebp+8H]                     ; 172C _ 8B. 45, 08
-        mov     byte [ebp-4H], al                       ; 172F _ 88. 45, FC
-        cmp     byte [ebp-4H], 9                        ; 1732 _ 80. 7D, FC, 09
-        jle     ?_050                                   ; 1736 _ 7E, 09
-        movzx   eax, byte [ebp-4H]                      ; 1738 _ 0F B6. 45, FC
-        add     eax, 55                                 ; 173C _ 83. C0, 37
-        jmp     ?_051                                   ; 173F _ EB, 07
+        push    ebp                                     ; 1729 _ 55
+        mov     ebp, esp                                ; 172A _ 89. E5
+        sub     esp, 4                                  ; 172C _ 83. EC, 04
+        mov     eax, dword [ebp+8H]                     ; 172F _ 8B. 45, 08
+        mov     byte [ebp-4H], al                       ; 1732 _ 88. 45, FC
+        cmp     byte [ebp-4H], 9                        ; 1735 _ 80. 7D, FC, 09
+        jle     ?_050                                   ; 1739 _ 7E, 09
+        movzx   eax, byte [ebp-4H]                      ; 173B _ 0F B6. 45, FC
+        add     eax, 55                                 ; 173F _ 83. C0, 37
+        jmp     ?_051                                   ; 1742 _ EB, 07
 
-?_050:  movzx   eax, byte [ebp-4H]                      ; 1741 _ 0F B6. 45, FC
-        add     eax, 48                                 ; 1745 _ 83. C0, 30
-?_051:  leave                                           ; 1748 _ C9
-        ret                                             ; 1749 _ C3
+?_050:  movzx   eax, byte [ebp-4H]                      ; 1744 _ 0F B6. 45, FC
+        add     eax, 48                                 ; 1748 _ 83. C0, 30
+?_051:  leave                                           ; 174B _ C9
+        ret                                             ; 174C _ C3
 ; charToVal End of function
 
 intToHexStr:; Function begin
-        push    ebp                                     ; 174A _ 55
-        mov     ebp, esp                                ; 174B _ 89. E5
-        sub     esp, 16                                 ; 174D _ 83. EC, 10
-        mov     byte [str.2434], 48                     ; 1750 _ C6. 05, 00000250(d), 30
-        mov     byte [?_222], 120                       ; 1757 _ C6. 05, 00000251(d), 78
-        mov     byte [?_223], 0                         ; 175E _ C6. 05, 0000025A(d), 00
-        mov     dword [ebp-0CH], 2                      ; 1765 _ C7. 45, F4, 00000002
-        jmp     ?_053                                   ; 176C _ EB, 0F
+        push    ebp                                     ; 174D _ 55
+        mov     ebp, esp                                ; 174E _ 89. E5
+        sub     esp, 16                                 ; 1750 _ 83. EC, 10
+        mov     byte [str.2436], 48                     ; 1753 _ C6. 05, 00000250(d), 30
+        mov     byte [?_222], 120                       ; 175A _ C6. 05, 00000251(d), 78
+        mov     byte [?_223], 0                         ; 1761 _ C6. 05, 0000025A(d), 00
+        mov     dword [ebp-0CH], 2                      ; 1768 _ C7. 45, F4, 00000002
+        jmp     ?_053                                   ; 176F _ EB, 0F
 
-?_052:  mov     eax, dword [ebp-0CH]                    ; 176E _ 8B. 45, F4
-        add     eax, str.2434                           ; 1771 _ 05, 00000250(d)
-        mov     byte [eax], 48                          ; 1776 _ C6. 00, 30
-        add     dword [ebp-0CH], 1                      ; 1779 _ 83. 45, F4, 01
-?_053:  cmp     dword [ebp-0CH], 9                      ; 177D _ 83. 7D, F4, 09
-        jle     ?_052                                   ; 1781 _ 7E, EB
-        mov     dword [ebp-8H], 9                       ; 1783 _ C7. 45, F8, 00000009
-        jmp     ?_056                                   ; 178A _ EB, 48
+?_052:  mov     eax, dword [ebp-0CH]                    ; 1771 _ 8B. 45, F4
+        add     eax, str.2436                           ; 1774 _ 05, 00000250(d)
+        mov     byte [eax], 48                          ; 1779 _ C6. 00, 30
+        add     dword [ebp-0CH], 1                      ; 177C _ 83. 45, F4, 01
+?_053:  cmp     dword [ebp-0CH], 9                      ; 1780 _ 83. 7D, F4, 09
+        jle     ?_052                                   ; 1784 _ 7E, EB
+        mov     dword [ebp-8H], 9                       ; 1786 _ C7. 45, F8, 00000009
+        jmp     ?_056                                   ; 178D _ EB, 48
 
-?_054:  mov     eax, dword [ebp+8H]                     ; 178C _ 8B. 45, 08
-        and     eax, 0FH                                ; 178F _ 83. E0, 0F
-        mov     dword [ebp-4H], eax                     ; 1792 _ 89. 45, FC
-        mov     eax, dword [ebp+8H]                     ; 1795 _ 8B. 45, 08
-        shr     eax, 4                                  ; 1798 _ C1. E8, 04
-        mov     dword [ebp+8H], eax                     ; 179B _ 89. 45, 08
-        cmp     dword [ebp-4H], 9                       ; 179E _ 83. 7D, FC, 09
-        jle     ?_055                                   ; 17A2 _ 7E, 19
-        mov     eax, dword [ebp-4H]                     ; 17A4 _ 8B. 45, FC
-        lea     ecx, [eax+37H]                          ; 17A7 _ 8D. 48, 37
-        mov     eax, dword [ebp-8H]                     ; 17AA _ 8B. 45, F8
-        lea     edx, [eax-1H]                           ; 17AD _ 8D. 50, FF
-        mov     dword [ebp-8H], edx                     ; 17B0 _ 89. 55, F8
-        mov     edx, ecx                                ; 17B3 _ 89. CA
-        mov     byte [str.2434+eax], dl                 ; 17B5 _ 88. 90, 00000250(d)
-        jmp     ?_056                                   ; 17BB _ EB, 17
+?_054:  mov     eax, dword [ebp+8H]                     ; 178F _ 8B. 45, 08
+        and     eax, 0FH                                ; 1792 _ 83. E0, 0F
+        mov     dword [ebp-4H], eax                     ; 1795 _ 89. 45, FC
+        mov     eax, dword [ebp+8H]                     ; 1798 _ 8B. 45, 08
+        shr     eax, 4                                  ; 179B _ C1. E8, 04
+        mov     dword [ebp+8H], eax                     ; 179E _ 89. 45, 08
+        cmp     dword [ebp-4H], 9                       ; 17A1 _ 83. 7D, FC, 09
+        jle     ?_055                                   ; 17A5 _ 7E, 19
+        mov     eax, dword [ebp-4H]                     ; 17A7 _ 8B. 45, FC
+        lea     ecx, [eax+37H]                          ; 17AA _ 8D. 48, 37
+        mov     eax, dword [ebp-8H]                     ; 17AD _ 8B. 45, F8
+        lea     edx, [eax-1H]                           ; 17B0 _ 8D. 50, FF
+        mov     dword [ebp-8H], edx                     ; 17B3 _ 89. 55, F8
+        mov     edx, ecx                                ; 17B6 _ 89. CA
+        mov     byte [str.2436+eax], dl                 ; 17B8 _ 88. 90, 00000250(d)
+        jmp     ?_056                                   ; 17BE _ EB, 17
 
-?_055:  mov     eax, dword [ebp-4H]                     ; 17BD _ 8B. 45, FC
-        lea     ecx, [eax+30H]                          ; 17C0 _ 8D. 48, 30
-        mov     eax, dword [ebp-8H]                     ; 17C3 _ 8B. 45, F8
-        lea     edx, [eax-1H]                           ; 17C6 _ 8D. 50, FF
-        mov     dword [ebp-8H], edx                     ; 17C9 _ 89. 55, F8
-        mov     edx, ecx                                ; 17CC _ 89. CA
-        mov     byte [str.2434+eax], dl                 ; 17CE _ 88. 90, 00000250(d)
-?_056:  cmp     dword [ebp-8H], 1                       ; 17D4 _ 83. 7D, F8, 01
-        jle     ?_057                                   ; 17D8 _ 7E, 06
-        cmp     dword [ebp+8H], 0                       ; 17DA _ 83. 7D, 08, 00
-        jnz     ?_054                                   ; 17DE _ 75, AC
-?_057:  mov     eax, str.2434                           ; 17E0 _ B8, 00000250(d)
-        leave                                           ; 17E5 _ C9
-        ret                                             ; 17E6 _ C3
+?_055:  mov     eax, dword [ebp-4H]                     ; 17C0 _ 8B. 45, FC
+        lea     ecx, [eax+30H]                          ; 17C3 _ 8D. 48, 30
+        mov     eax, dword [ebp-8H]                     ; 17C6 _ 8B. 45, F8
+        lea     edx, [eax-1H]                           ; 17C9 _ 8D. 50, FF
+        mov     dword [ebp-8H], edx                     ; 17CC _ 89. 55, F8
+        mov     edx, ecx                                ; 17CF _ 89. CA
+        mov     byte [str.2436+eax], dl                 ; 17D1 _ 88. 90, 00000250(d)
+?_056:  cmp     dword [ebp-8H], 1                       ; 17D7 _ 83. 7D, F8, 01
+        jle     ?_057                                   ; 17DB _ 7E, 06
+        cmp     dword [ebp+8H], 0                       ; 17DD _ 83. 7D, 08, 00
+        jnz     ?_054                                   ; 17E1 _ 75, AC
+?_057:  mov     eax, str.2436                           ; 17E3 _ B8, 00000250(d)
+        leave                                           ; 17E8 _ C9
+        ret                                             ; 17E9 _ C3
 ; intToHexStr End of function
 
 wait_KBC_sendReady:; Function begin
-        push    ebp                                     ; 17E7 _ 55
-        mov     ebp, esp                                ; 17E8 _ 89. E5
-        sub     esp, 8                                  ; 17EA _ 83. EC, 08
-?_058:  sub     esp, 12                                 ; 17ED _ 83. EC, 0C
-        push    100                                     ; 17F0 _ 6A, 64
-        call    io_in8                                  ; 17F2 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 17F7 _ 83. C4, 10
-        movsx   eax, al                                 ; 17FA _ 0F BE. C0
-        and     eax, 02H                                ; 17FD _ 83. E0, 02
-        test    eax, eax                                ; 1800 _ 85. C0
-        jz      ?_059                                   ; 1802 _ 74, 02
-        jmp     ?_058                                   ; 1804 _ EB, E7
+        push    ebp                                     ; 17EA _ 55
+        mov     ebp, esp                                ; 17EB _ 89. E5
+        sub     esp, 8                                  ; 17ED _ 83. EC, 08
+?_058:  sub     esp, 12                                 ; 17F0 _ 83. EC, 0C
+        push    100                                     ; 17F3 _ 6A, 64
+        call    io_in8                                  ; 17F5 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 17FA _ 83. C4, 10
+        movsx   eax, al                                 ; 17FD _ 0F BE. C0
+        and     eax, 02H                                ; 1800 _ 83. E0, 02
+        test    eax, eax                                ; 1803 _ 85. C0
+        jz      ?_059                                   ; 1805 _ 74, 02
+        jmp     ?_058                                   ; 1807 _ EB, E7
 
-?_059:  nop                                             ; 1806 _ 90
-        nop                                             ; 1807 _ 90
-        leave                                           ; 1808 _ C9
-        ret                                             ; 1809 _ C3
+?_059:  nop                                             ; 1809 _ 90
+        nop                                             ; 180A _ 90
+        leave                                           ; 180B _ C9
+        ret                                             ; 180C _ C3
 ; wait_KBC_sendReady End of function
 
 init_keyboard:; Function begin
-        push    ebp                                     ; 180A _ 55
-        mov     ebp, esp                                ; 180B _ 89. E5
-        sub     esp, 8                                  ; 180D _ 83. EC, 08
-        call    wait_KBC_sendReady                      ; 1810 _ E8, FFFFFFFC(rel)
-        sub     esp, 8                                  ; 1815 _ 83. EC, 08
-        push    96                                      ; 1818 _ 6A, 60
-        push    100                                     ; 181A _ 6A, 64
-        call    io_out8                                 ; 181C _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1821 _ 83. C4, 10
-        call    wait_KBC_sendReady                      ; 1824 _ E8, FFFFFFFC(rel)
-        sub     esp, 8                                  ; 1829 _ 83. EC, 08
-        push    71                                      ; 182C _ 6A, 47
-        push    96                                      ; 182E _ 6A, 60
-        call    io_out8                                 ; 1830 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1835 _ 83. C4, 10
-        nop                                             ; 1838 _ 90
-        leave                                           ; 1839 _ C9
-        ret                                             ; 183A _ C3
+        push    ebp                                     ; 180D _ 55
+        mov     ebp, esp                                ; 180E _ 89. E5
+        sub     esp, 8                                  ; 1810 _ 83. EC, 08
+        call    wait_KBC_sendReady                      ; 1813 _ E8, FFFFFFFC(rel)
+        sub     esp, 8                                  ; 1818 _ 83. EC, 08
+        push    96                                      ; 181B _ 6A, 60
+        push    100                                     ; 181D _ 6A, 64
+        call    io_out8                                 ; 181F _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1824 _ 83. C4, 10
+        call    wait_KBC_sendReady                      ; 1827 _ E8, FFFFFFFC(rel)
+        sub     esp, 8                                  ; 182C _ 83. EC, 08
+        push    71                                      ; 182F _ 6A, 47
+        push    96                                      ; 1831 _ 6A, 60
+        call    io_out8                                 ; 1833 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1838 _ 83. C4, 10
+        nop                                             ; 183B _ 90
+        leave                                           ; 183C _ C9
+        ret                                             ; 183D _ C3
 ; init_keyboard End of function
 
 enable_mouse:; Function begin
-        push    ebp                                     ; 183B _ 55
-        mov     ebp, esp                                ; 183C _ 89. E5
-        sub     esp, 8                                  ; 183E _ 83. EC, 08
-        call    wait_KBC_sendReady                      ; 1841 _ E8, FFFFFFFC(rel)
-        sub     esp, 8                                  ; 1846 _ 83. EC, 08
-        push    212                                     ; 1849 _ 68, 000000D4
-        push    100                                     ; 184E _ 6A, 64
-        call    io_out8                                 ; 1850 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1855 _ 83. C4, 10
-        call    wait_KBC_sendReady                      ; 1858 _ E8, FFFFFFFC(rel)
-        sub     esp, 8                                  ; 185D _ 83. EC, 08
-        push    244                                     ; 1860 _ 68, 000000F4
-        push    96                                      ; 1865 _ 6A, 60
-        call    io_out8                                 ; 1867 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 186C _ 83. C4, 10
-        mov     eax, dword [ebp+8H]                     ; 186F _ 8B. 45, 08
-        mov     byte [eax+3H], 0                        ; 1872 _ C6. 40, 03, 00
-        nop                                             ; 1876 _ 90
-        leave                                           ; 1877 _ C9
-        ret                                             ; 1878 _ C3
+        push    ebp                                     ; 183E _ 55
+        mov     ebp, esp                                ; 183F _ 89. E5
+        sub     esp, 8                                  ; 1841 _ 83. EC, 08
+        call    wait_KBC_sendReady                      ; 1844 _ E8, FFFFFFFC(rel)
+        sub     esp, 8                                  ; 1849 _ 83. EC, 08
+        push    212                                     ; 184C _ 68, 000000D4
+        push    100                                     ; 1851 _ 6A, 64
+        call    io_out8                                 ; 1853 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1858 _ 83. C4, 10
+        call    wait_KBC_sendReady                      ; 185B _ E8, FFFFFFFC(rel)
+        sub     esp, 8                                  ; 1860 _ 83. EC, 08
+        push    244                                     ; 1863 _ 68, 000000F4
+        push    96                                      ; 1868 _ 6A, 60
+        call    io_out8                                 ; 186A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 186F _ 83. C4, 10
+        mov     eax, dword [ebp+8H]                     ; 1872 _ 8B. 45, 08
+        mov     byte [eax+3H], 0                        ; 1875 _ C6. 40, 03, 00
+        nop                                             ; 1879 _ 90
+        leave                                           ; 187A _ C9
+        ret                                             ; 187B _ C3
 ; enable_mouse End of function
 
 intHandlerForMouse:; Function begin
-        push    ebp                                     ; 1879 _ 55
-        mov     ebp, esp                                ; 187A _ 89. E5
-        sub     esp, 24                                 ; 187C _ 83. EC, 18
-        mov     byte [ebp-9H], 0                        ; 187F _ C6. 45, F7, 00
-        sub     esp, 8                                  ; 1883 _ 83. EC, 08
-        push    32                                      ; 1886 _ 6A, 20
-        push    160                                     ; 1888 _ 68, 000000A0
-        call    io_out8                                 ; 188D _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1892 _ 83. C4, 10
-        sub     esp, 8                                  ; 1895 _ 83. EC, 08
-        push    32                                      ; 1898 _ 6A, 20
-        push    32                                      ; 189A _ 6A, 20
-        call    io_out8                                 ; 189C _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 18A1 _ 83. C4, 10
-        sub     esp, 12                                 ; 18A4 _ 83. EC, 0C
-        push    96                                      ; 18A7 _ 6A, 60
-        call    io_in8                                  ; 18A9 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 18AE _ 83. C4, 10
-        mov     byte [ebp-9H], al                       ; 18B1 _ 88. 45, F7
-        movzx   eax, byte [ebp-9H]                      ; 18B4 _ 0F B6. 45, F7
-        sub     esp, 8                                  ; 18B8 _ 83. EC, 08
-        push    eax                                     ; 18BB _ 50
-        push    mouseInfo                               ; 18BC _ 68, 00000024(d)
-        call    fifo8_put                               ; 18C1 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 18C6 _ 83. C4, 10
-        nop                                             ; 18C9 _ 90
-        leave                                           ; 18CA _ C9
-        ret                                             ; 18CB _ C3
+        push    ebp                                     ; 187C _ 55
+        mov     ebp, esp                                ; 187D _ 89. E5
+        sub     esp, 24                                 ; 187F _ 83. EC, 18
+        mov     byte [ebp-9H], 0                        ; 1882 _ C6. 45, F7, 00
+        sub     esp, 8                                  ; 1886 _ 83. EC, 08
+        push    32                                      ; 1889 _ 6A, 20
+        push    160                                     ; 188B _ 68, 000000A0
+        call    io_out8                                 ; 1890 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1895 _ 83. C4, 10
+        sub     esp, 8                                  ; 1898 _ 83. EC, 08
+        push    32                                      ; 189B _ 6A, 20
+        push    32                                      ; 189D _ 6A, 20
+        call    io_out8                                 ; 189F _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 18A4 _ 83. C4, 10
+        sub     esp, 12                                 ; 18A7 _ 83. EC, 0C
+        push    96                                      ; 18AA _ 6A, 60
+        call    io_in8                                  ; 18AC _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 18B1 _ 83. C4, 10
+        mov     byte [ebp-9H], al                       ; 18B4 _ 88. 45, F7
+        movzx   eax, byte [ebp-9H]                      ; 18B7 _ 0F B6. 45, F7
+        sub     esp, 8                                  ; 18BB _ 83. EC, 08
+        push    eax                                     ; 18BE _ 50
+        push    mouseInfo                               ; 18BF _ 68, 00000024(d)
+        call    fifo8_put                               ; 18C4 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 18C9 _ 83. C4, 10
+        nop                                             ; 18CC _ 90
+        leave                                           ; 18CD _ C9
+        ret                                             ; 18CE _ C3
 ; intHandlerForMouse End of function
 
 showKeyboardInfo:; Function begin
-        push    ebp                                     ; 18CC _ 55
-        mov     ebp, esp                                ; 18CD _ 89. E5
-        sub     esp, 40                                 ; 18CF _ 83. EC, 28
-        call    io_sti                                  ; 18D2 _ E8, FFFFFFFC(rel)
-        mov     eax, dword [bootInfo]                   ; 18D7 _ A1, 00000000(d)
-        mov     dword [ebp-18H], eax                    ; 18DC _ 89. 45, E8
-        movzx   eax, word [?_218]                       ; 18DF _ 0F B7. 05, 00000004(d)
-        cwde                                            ; 18E6 _ 98
-        mov     dword [ebp-14H], eax                    ; 18E7 _ 89. 45, EC
-        movzx   eax, word [?_219]                       ; 18EA _ 0F B7. 05, 00000006(d)
-        cwde                                            ; 18F1 _ 98
-        mov     dword [ebp-10H], eax                    ; 18F2 _ 89. 45, F0
-        mov     byte [ebp-19H], 0                       ; 18F5 _ C6. 45, E7, 00
-        sub     esp, 12                                 ; 18F9 _ 83. EC, 0C
-        push    keyInfo                                 ; 18FC _ 68, 00000008(d)
-        call    fifo8_get                               ; 1901 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1906 _ 83. C4, 10
-        mov     byte [ebp-19H], al                      ; 1909 _ 88. 45, E7
-        movzx   eax, byte [ebp-19H]                     ; 190C _ 0F B6. 45, E7
-        sub     esp, 12                                 ; 1910 _ 83. EC, 0C
-        push    eax                                     ; 1913 _ 50
-        call    charToHex                               ; 1914 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1919 _ 83. C4, 10
-        mov     dword [ebp-0CH], eax                    ; 191C _ 89. 45, F4
-        mov     edx, dword [line.2467]                  ; 191F _ 8B. 15, 0000025C(d)
-        mov     eax, dword [pos.2466]                   ; 1925 _ A1, 00000260(d)
-        sub     esp, 8                                  ; 192A _ 83. EC, 08
-        push    dword [ebp-0CH]                         ; 192D _ FF. 75, F4
-        push    7                                       ; 1930 _ 6A, 07
-        push    edx                                     ; 1932 _ 52
-        push    eax                                     ; 1933 _ 50
-        push    dword [ebp+0CH]                         ; 1934 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1937 _ FF. 75, 08
-        call    showString                              ; 193A _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 193F _ 83. C4, 20
-        mov     eax, dword [pos.2466]                   ; 1942 _ A1, 00000260(d)
-        add     eax, 32                                 ; 1947 _ 83. C0, 20
-        mov     dword [pos.2466], eax                   ; 194A _ A3, 00000260(d)
-        mov     eax, dword [pos.2466]                   ; 194F _ A1, 00000260(d)
-        cmp     dword [ebp-14H], eax                    ; 1954 _ 39. 45, EC
-        jnz     ?_062                                   ; 1957 _ 75, 28
-        mov     eax, dword [line.2467]                  ; 1959 _ A1, 0000025C(d)
-        cmp     dword [ebp-10H], eax                    ; 195E _ 39. 45, F0
-        jz      ?_060                                   ; 1961 _ 74, 0A
-        mov     eax, dword [line.2467]                  ; 1963 _ A1, 0000025C(d)
-        add     eax, 16                                 ; 1968 _ 83. C0, 10
-        jmp     ?_061                                   ; 196B _ EB, 05
+        push    ebp                                     ; 18CF _ 55
+        mov     ebp, esp                                ; 18D0 _ 89. E5
+        sub     esp, 40                                 ; 18D2 _ 83. EC, 28
+        call    io_sti                                  ; 18D5 _ E8, FFFFFFFC(rel)
+        mov     eax, dword [bootInfo]                   ; 18DA _ A1, 00000000(d)
+        mov     dword [ebp-18H], eax                    ; 18DF _ 89. 45, E8
+        movzx   eax, word [?_218]                       ; 18E2 _ 0F B7. 05, 00000004(d)
+        cwde                                            ; 18E9 _ 98
+        mov     dword [ebp-14H], eax                    ; 18EA _ 89. 45, EC
+        movzx   eax, word [?_219]                       ; 18ED _ 0F B7. 05, 00000006(d)
+        cwde                                            ; 18F4 _ 98
+        mov     dword [ebp-10H], eax                    ; 18F5 _ 89. 45, F0
+        mov     byte [ebp-19H], 0                       ; 18F8 _ C6. 45, E7, 00
+        sub     esp, 12                                 ; 18FC _ 83. EC, 0C
+        push    keyInfo                                 ; 18FF _ 68, 00000008(d)
+        call    fifo8_get                               ; 1904 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1909 _ 83. C4, 10
+        mov     byte [ebp-19H], al                      ; 190C _ 88. 45, E7
+        movzx   eax, byte [ebp-19H]                     ; 190F _ 0F B6. 45, E7
+        sub     esp, 12                                 ; 1913 _ 83. EC, 0C
+        push    eax                                     ; 1916 _ 50
+        call    charToHex                               ; 1917 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 191C _ 83. C4, 10
+        mov     dword [ebp-0CH], eax                    ; 191F _ 89. 45, F4
+        mov     edx, dword [line.2469]                  ; 1922 _ 8B. 15, 0000025C(d)
+        mov     eax, dword [pos.2468]                   ; 1928 _ A1, 00000260(d)
+        sub     esp, 8                                  ; 192D _ 83. EC, 08
+        push    dword [ebp-0CH]                         ; 1930 _ FF. 75, F4
+        push    7                                       ; 1933 _ 6A, 07
+        push    edx                                     ; 1935 _ 52
+        push    eax                                     ; 1936 _ 50
+        push    dword [ebp+0CH]                         ; 1937 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 193A _ FF. 75, 08
+        call    showString                              ; 193D _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1942 _ 83. C4, 20
+        mov     eax, dword [pos.2468]                   ; 1945 _ A1, 00000260(d)
+        add     eax, 32                                 ; 194A _ 83. C0, 20
+        mov     dword [pos.2468], eax                   ; 194D _ A3, 00000260(d)
+        mov     eax, dword [pos.2468]                   ; 1952 _ A1, 00000260(d)
+        cmp     dword [ebp-14H], eax                    ; 1957 _ 39. 45, EC
+        jnz     ?_062                                   ; 195A _ 75, 28
+        mov     eax, dword [line.2469]                  ; 195C _ A1, 0000025C(d)
+        cmp     dword [ebp-10H], eax                    ; 1961 _ 39. 45, F0
+        jz      ?_060                                   ; 1964 _ 74, 0A
+        mov     eax, dword [line.2469]                  ; 1966 _ A1, 0000025C(d)
+        add     eax, 16                                 ; 196B _ 83. C0, 10
+        jmp     ?_061                                   ; 196E _ EB, 05
 
-?_060:  mov     eax, 0                                  ; 196D _ B8, 00000000
-?_061:  mov     dword [line.2467], eax                  ; 1972 _ A3, 0000025C(d)
-        mov     dword [pos.2466], 0                     ; 1977 _ C7. 05, 00000260(d), 00000000
-?_062:  nop                                             ; 1981 _ 90
-        leave                                           ; 1982 _ C9
-        ret                                             ; 1983 _ C3
+?_060:  mov     eax, 0                                  ; 1970 _ B8, 00000000
+?_061:  mov     dword [line.2469], eax                  ; 1975 _ A3, 0000025C(d)
+        mov     dword [pos.2468], 0                     ; 197A _ C7. 05, 00000260(d), 00000000
+?_062:  nop                                             ; 1984 _ 90
+        leave                                           ; 1985 _ C9
+        ret                                             ; 1986 _ C3
 ; showKeyboardInfo End of function
 
 showMouseInfo:; Function begin
-        push    ebp                                     ; 1984 _ 55
-        mov     ebp, esp                                ; 1985 _ 89. E5
-        sub     esp, 24                                 ; 1987 _ 83. EC, 18
-        call    io_sti                                  ; 198A _ E8, FFFFFFFC(rel)
-        mov     byte [ebp-9H], 0                        ; 198F _ C6. 45, F7, 00
-        sub     esp, 12                                 ; 1993 _ 83. EC, 0C
-        push    mouseInfo                               ; 1996 _ 68, 00000024(d)
-        call    fifo8_get                               ; 199B _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 19A0 _ 83. C4, 10
-        mov     byte [ebp-9H], al                       ; 19A3 _ 88. 45, F7
-        movzx   eax, byte [ebp-9H]                      ; 19A6 _ 0F B6. 45, F7
-        sub     esp, 8                                  ; 19AA _ 83. EC, 08
-        push    eax                                     ; 19AD _ 50
-        push    mouse_move                              ; 19AE _ 68, 000000E0(d)
-        call    mouse_decode                            ; 19B3 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 19B8 _ 83. C4, 10
-        test    eax, eax                                ; 19BB _ 85. C0
-        jz      ?_063                                   ; 19BD _ 74, 60
-        sub     esp, 4                                  ; 19BF _ 83. EC, 04
-        push    mouse_move                              ; 19C2 _ 68, 000000E0(d)
-        push    dword [ebp+0CH]                         ; 19C7 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 19CA _ FF. 75, 08
-        call    computeMousePos                         ; 19CD _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 19D2 _ 83. C4, 10
-        mov     edx, dword [my]                         ; 19D5 _ 8B. 15, 000000F4(d)
-        mov     eax, dword [mx]                         ; 19DB _ A1, 000000F0(d)
-        push    edx                                     ; 19E0 _ 52
-        push    eax                                     ; 19E1 _ 50
-        push    dword [ebp+10H]                         ; 19E2 _ FF. 75, 10
-        push    dword [ebp+8H]                          ; 19E5 _ FF. 75, 08
-        call    sheet_slide                             ; 19E8 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 19ED _ 83. C4, 10
-        mov     eax, dword [?_221]                      ; 19F0 _ A1, 000000EC(d)
-        and     eax, 01H                                ; 19F5 _ 83. E0, 01
-        test    eax, eax                                ; 19F8 _ 85. C0
-        jz      ?_063                                   ; 19FA _ 74, 23
-        mov     eax, dword [my]                         ; 19FC _ A1, 000000F4(d)
-        lea     ecx, [eax-8H]                           ; 1A01 _ 8D. 48, F8
-        mov     eax, dword [mx]                         ; 1A04 _ A1, 000000F0(d)
-        lea     edx, [eax-50H]                          ; 1A09 _ 8D. 50, B0
-        mov     eax, dword [sheet_win]                  ; 1A0C _ A1, 00000228(d)
-        push    ecx                                     ; 1A11 _ 51
-        push    edx                                     ; 1A12 _ 52
-        push    eax                                     ; 1A13 _ 50
-        push    dword [ebp+8H]                          ; 1A14 _ FF. 75, 08
-        call    sheet_slide                             ; 1A17 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1A1C _ 83. C4, 10
-?_063:  nop                                             ; 1A1F _ 90
-        leave                                           ; 1A20 _ C9
-        ret                                             ; 1A21 _ C3
+        push    ebp                                     ; 1987 _ 55
+        mov     ebp, esp                                ; 1988 _ 89. E5
+        sub     esp, 24                                 ; 198A _ 83. EC, 18
+        call    io_sti                                  ; 198D _ E8, FFFFFFFC(rel)
+        mov     byte [ebp-9H], 0                        ; 1992 _ C6. 45, F7, 00
+        sub     esp, 12                                 ; 1996 _ 83. EC, 0C
+        push    mouseInfo                               ; 1999 _ 68, 00000024(d)
+        call    fifo8_get                               ; 199E _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 19A3 _ 83. C4, 10
+        mov     byte [ebp-9H], al                       ; 19A6 _ 88. 45, F7
+        movzx   eax, byte [ebp-9H]                      ; 19A9 _ 0F B6. 45, F7
+        sub     esp, 8                                  ; 19AD _ 83. EC, 08
+        push    eax                                     ; 19B0 _ 50
+        push    mouse_move                              ; 19B1 _ 68, 000000E0(d)
+        call    mouse_decode                            ; 19B6 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 19BB _ 83. C4, 10
+        test    eax, eax                                ; 19BE _ 85. C0
+        jz      ?_063                                   ; 19C0 _ 74, 60
+        sub     esp, 4                                  ; 19C2 _ 83. EC, 04
+        push    mouse_move                              ; 19C5 _ 68, 000000E0(d)
+        push    dword [ebp+0CH]                         ; 19CA _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 19CD _ FF. 75, 08
+        call    computeMousePos                         ; 19D0 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 19D5 _ 83. C4, 10
+        mov     edx, dword [my]                         ; 19D8 _ 8B. 15, 000000F4(d)
+        mov     eax, dword [mx]                         ; 19DE _ A1, 000000F0(d)
+        push    edx                                     ; 19E3 _ 52
+        push    eax                                     ; 19E4 _ 50
+        push    dword [ebp+10H]                         ; 19E5 _ FF. 75, 10
+        push    dword [ebp+8H]                          ; 19E8 _ FF. 75, 08
+        call    sheet_slide                             ; 19EB _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 19F0 _ 83. C4, 10
+        mov     eax, dword [?_221]                      ; 19F3 _ A1, 000000EC(d)
+        and     eax, 01H                                ; 19F8 _ 83. E0, 01
+        test    eax, eax                                ; 19FB _ 85. C0
+        jz      ?_063                                   ; 19FD _ 74, 23
+        mov     eax, dword [my]                         ; 19FF _ A1, 000000F4(d)
+        lea     ecx, [eax-8H]                           ; 1A04 _ 8D. 48, F8
+        mov     eax, dword [mx]                         ; 1A07 _ A1, 000000F0(d)
+        lea     edx, [eax-50H]                          ; 1A0C _ 8D. 50, B0
+        mov     eax, dword [sheet_win]                  ; 1A0F _ A1, 00000228(d)
+        push    ecx                                     ; 1A14 _ 51
+        push    edx                                     ; 1A15 _ 52
+        push    eax                                     ; 1A16 _ 50
+        push    dword [ebp+8H]                          ; 1A17 _ FF. 75, 08
+        call    sheet_slide                             ; 1A1A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1A1F _ 83. C4, 10
+?_063:  nop                                             ; 1A22 _ 90
+        leave                                           ; 1A23 _ C9
+        ret                                             ; 1A24 _ C3
 ; showMouseInfo End of function
 
 mouse_decode:; Function begin
-        push    ebp                                     ; 1A22 _ 55
-        mov     ebp, esp                                ; 1A23 _ 89. E5
-        sub     esp, 4                                  ; 1A25 _ 83. EC, 04
-        mov     eax, dword [ebp+0CH]                    ; 1A28 _ 8B. 45, 0C
-        mov     byte [ebp-4H], al                       ; 1A2B _ 88. 45, FC
-        mov     eax, dword [ebp+8H]                     ; 1A2E _ 8B. 45, 08
-        movzx   eax, byte [eax+3H]                      ; 1A31 _ 0F B6. 40, 03
-        test    al, al                                  ; 1A35 _ 84. C0
-        jnz     ?_065                                   ; 1A37 _ 75, 17
-        cmp     byte [ebp-4H], -6                       ; 1A39 _ 80. 7D, FC, FA
-        jnz     ?_064                                   ; 1A3D _ 75, 07
-        mov     eax, dword [ebp+8H]                     ; 1A3F _ 8B. 45, 08
-        mov     byte [eax+3H], 1                        ; 1A42 _ C6. 40, 03, 01
-?_064:  mov     eax, 0                                  ; 1A46 _ B8, 00000000
-        jmp     ?_072                                   ; 1A4B _ E9, 0000010C
+        push    ebp                                     ; 1A25 _ 55
+        mov     ebp, esp                                ; 1A26 _ 89. E5
+        sub     esp, 4                                  ; 1A28 _ 83. EC, 04
+        mov     eax, dword [ebp+0CH]                    ; 1A2B _ 8B. 45, 0C
+        mov     byte [ebp-4H], al                       ; 1A2E _ 88. 45, FC
+        mov     eax, dword [ebp+8H]                     ; 1A31 _ 8B. 45, 08
+        movzx   eax, byte [eax+3H]                      ; 1A34 _ 0F B6. 40, 03
+        test    al, al                                  ; 1A38 _ 84. C0
+        jnz     ?_065                                   ; 1A3A _ 75, 17
+        cmp     byte [ebp-4H], -6                       ; 1A3C _ 80. 7D, FC, FA
+        jnz     ?_064                                   ; 1A40 _ 75, 07
+        mov     eax, dword [ebp+8H]                     ; 1A42 _ 8B. 45, 08
+        mov     byte [eax+3H], 1                        ; 1A45 _ C6. 40, 03, 01
+?_064:  mov     eax, 0                                  ; 1A49 _ B8, 00000000
+        jmp     ?_072                                   ; 1A4E _ E9, 0000010C
 
-?_065:  mov     eax, dword [ebp+8H]                     ; 1A50 _ 8B. 45, 08
-        movzx   eax, byte [eax+3H]                      ; 1A53 _ 0F B6. 40, 03
-        cmp     al, 1                                   ; 1A57 _ 3C, 01
-        jnz     ?_067                                   ; 1A59 _ 75, 25
-        movzx   eax, byte [ebp-4H]                      ; 1A5B _ 0F B6. 45, FC
-        or      eax, 37H                                ; 1A5F _ 83. C8, 37
-        cmp     al, 63                                  ; 1A62 _ 3C, 3F
-        jnz     ?_066                                   ; 1A64 _ 75, 10
-        mov     eax, dword [ebp+8H]                     ; 1A66 _ 8B. 45, 08
-        movzx   edx, byte [ebp-4H]                      ; 1A69 _ 0F B6. 55, FC
-        mov     byte [eax], dl                          ; 1A6D _ 88. 10
-        mov     eax, dword [ebp+8H]                     ; 1A6F _ 8B. 45, 08
-        mov     byte [eax+3H], 2                        ; 1A72 _ C6. 40, 03, 02
-?_066:  mov     eax, 0                                  ; 1A76 _ B8, 00000000
-        jmp     ?_072                                   ; 1A7B _ E9, 000000DC
+?_065:  mov     eax, dword [ebp+8H]                     ; 1A53 _ 8B. 45, 08
+        movzx   eax, byte [eax+3H]                      ; 1A56 _ 0F B6. 40, 03
+        cmp     al, 1                                   ; 1A5A _ 3C, 01
+        jnz     ?_067                                   ; 1A5C _ 75, 25
+        movzx   eax, byte [ebp-4H]                      ; 1A5E _ 0F B6. 45, FC
+        or      eax, 37H                                ; 1A62 _ 83. C8, 37
+        cmp     al, 63                                  ; 1A65 _ 3C, 3F
+        jnz     ?_066                                   ; 1A67 _ 75, 10
+        mov     eax, dword [ebp+8H]                     ; 1A69 _ 8B. 45, 08
+        movzx   edx, byte [ebp-4H]                      ; 1A6C _ 0F B6. 55, FC
+        mov     byte [eax], dl                          ; 1A70 _ 88. 10
+        mov     eax, dword [ebp+8H]                     ; 1A72 _ 8B. 45, 08
+        mov     byte [eax+3H], 2                        ; 1A75 _ C6. 40, 03, 02
+?_066:  mov     eax, 0                                  ; 1A79 _ B8, 00000000
+        jmp     ?_072                                   ; 1A7E _ E9, 000000DC
 
-?_067:  mov     eax, dword [ebp+8H]                     ; 1A80 _ 8B. 45, 08
-        movzx   eax, byte [eax+3H]                      ; 1A83 _ 0F B6. 40, 03
-        cmp     al, 2                                   ; 1A87 _ 3C, 02
-        jnz     ?_068                                   ; 1A89 _ 75, 1B
-        mov     eax, dword [ebp+8H]                     ; 1A8B _ 8B. 45, 08
-        movzx   edx, byte [ebp-4H]                      ; 1A8E _ 0F B6. 55, FC
-        mov     byte [eax+1H], dl                       ; 1A92 _ 88. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 1A95 _ 8B. 45, 08
-        mov     byte [eax+3H], 3                        ; 1A98 _ C6. 40, 03, 03
-        mov     eax, 0                                  ; 1A9C _ B8, 00000000
-        jmp     ?_072                                   ; 1AA1 _ E9, 000000B6
+?_067:  mov     eax, dword [ebp+8H]                     ; 1A83 _ 8B. 45, 08
+        movzx   eax, byte [eax+3H]                      ; 1A86 _ 0F B6. 40, 03
+        cmp     al, 2                                   ; 1A8A _ 3C, 02
+        jnz     ?_068                                   ; 1A8C _ 75, 1B
+        mov     eax, dword [ebp+8H]                     ; 1A8E _ 8B. 45, 08
+        movzx   edx, byte [ebp-4H]                      ; 1A91 _ 0F B6. 55, FC
+        mov     byte [eax+1H], dl                       ; 1A95 _ 88. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 1A98 _ 8B. 45, 08
+        mov     byte [eax+3H], 3                        ; 1A9B _ C6. 40, 03, 03
+        mov     eax, 0                                  ; 1A9F _ B8, 00000000
+        jmp     ?_072                                   ; 1AA4 _ E9, 000000B6
 
-?_068:  mov     eax, dword [ebp+8H]                     ; 1AA6 _ 8B. 45, 08
-        movzx   eax, byte [eax+3H]                      ; 1AA9 _ 0F B6. 40, 03
-        cmp     al, 3                                   ; 1AAD _ 3C, 03
-        jne     ?_071                                   ; 1AAF _ 0F 85, 000000A2
-        mov     eax, dword [ebp+8H]                     ; 1AB5 _ 8B. 45, 08
-        movzx   edx, byte [ebp-4H]                      ; 1AB8 _ 0F B6. 55, FC
-        mov     byte [eax+2H], dl                       ; 1ABC _ 88. 50, 02
-        mov     eax, dword [ebp+8H]                     ; 1ABF _ 8B. 45, 08
-        mov     byte [eax+3H], 1                        ; 1AC2 _ C6. 40, 03, 01
-        mov     eax, dword [ebp+8H]                     ; 1AC6 _ 8B. 45, 08
-        movzx   eax, byte [eax]                         ; 1AC9 _ 0F B6. 00
-        movzx   eax, al                                 ; 1ACC _ 0F B6. C0
-        and     eax, 07H                                ; 1ACF _ 83. E0, 07
-        mov     edx, eax                                ; 1AD2 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 1AD4 _ 8B. 45, 08
-        mov     dword [eax+0CH], edx                    ; 1AD7 _ 89. 50, 0C
-        mov     eax, dword [ebp+8H]                     ; 1ADA _ 8B. 45, 08
-        movzx   eax, byte [eax+1H]                      ; 1ADD _ 0F B6. 40, 01
-        movzx   edx, al                                 ; 1AE1 _ 0F B6. D0
-        mov     eax, dword [ebp+8H]                     ; 1AE4 _ 8B. 45, 08
-        mov     dword [eax+4H], edx                     ; 1AE7 _ 89. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 1AEA _ 8B. 45, 08
-        movzx   eax, byte [eax+2H]                      ; 1AED _ 0F B6. 40, 02
-        movzx   edx, al                                 ; 1AF1 _ 0F B6. D0
-        mov     eax, dword [ebp+8H]                     ; 1AF4 _ 8B. 45, 08
-        mov     dword [eax+8H], edx                     ; 1AF7 _ 89. 50, 08
-        mov     eax, dword [ebp+8H]                     ; 1AFA _ 8B. 45, 08
-        movzx   eax, byte [eax]                         ; 1AFD _ 0F B6. 00
-        movzx   eax, al                                 ; 1B00 _ 0F B6. C0
-        and     eax, 10H                                ; 1B03 _ 83. E0, 10
-        test    eax, eax                                ; 1B06 _ 85. C0
-        jz      ?_069                                   ; 1B08 _ 74, 13
-        mov     eax, dword [ebp+8H]                     ; 1B0A _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 1B0D _ 8B. 40, 04
-        or      eax, 0FFFFFF00H                         ; 1B10 _ 0D, FFFFFF00
-        mov     edx, eax                                ; 1B15 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 1B17 _ 8B. 45, 08
-        mov     dword [eax+4H], edx                     ; 1B1A _ 89. 50, 04
-?_069:  mov     eax, dword [ebp+8H]                     ; 1B1D _ 8B. 45, 08
-        movzx   eax, byte [eax]                         ; 1B20 _ 0F B6. 00
-        movzx   eax, al                                 ; 1B23 _ 0F B6. C0
-        and     eax, 20H                                ; 1B26 _ 83. E0, 20
-        test    eax, eax                                ; 1B29 _ 85. C0
-        jz      ?_070                                   ; 1B2B _ 74, 13
-        mov     eax, dword [ebp+8H]                     ; 1B2D _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 1B30 _ 8B. 40, 08
-        or      eax, 0FFFFFF00H                         ; 1B33 _ 0D, FFFFFF00
-        mov     edx, eax                                ; 1B38 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 1B3A _ 8B. 45, 08
-        mov     dword [eax+8H], edx                     ; 1B3D _ 89. 50, 08
-?_070:  mov     eax, dword [ebp+8H]                     ; 1B40 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 1B43 _ 8B. 40, 08
-        neg     eax                                     ; 1B46 _ F7. D8
-        mov     edx, eax                                ; 1B48 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 1B4A _ 8B. 45, 08
-        mov     dword [eax+8H], edx                     ; 1B4D _ 89. 50, 08
-        mov     eax, 1                                  ; 1B50 _ B8, 00000001
-        jmp     ?_072                                   ; 1B55 _ EB, 05
+?_068:  mov     eax, dword [ebp+8H]                     ; 1AA9 _ 8B. 45, 08
+        movzx   eax, byte [eax+3H]                      ; 1AAC _ 0F B6. 40, 03
+        cmp     al, 3                                   ; 1AB0 _ 3C, 03
+        jne     ?_071                                   ; 1AB2 _ 0F 85, 000000A2
+        mov     eax, dword [ebp+8H]                     ; 1AB8 _ 8B. 45, 08
+        movzx   edx, byte [ebp-4H]                      ; 1ABB _ 0F B6. 55, FC
+        mov     byte [eax+2H], dl                       ; 1ABF _ 88. 50, 02
+        mov     eax, dword [ebp+8H]                     ; 1AC2 _ 8B. 45, 08
+        mov     byte [eax+3H], 1                        ; 1AC5 _ C6. 40, 03, 01
+        mov     eax, dword [ebp+8H]                     ; 1AC9 _ 8B. 45, 08
+        movzx   eax, byte [eax]                         ; 1ACC _ 0F B6. 00
+        movzx   eax, al                                 ; 1ACF _ 0F B6. C0
+        and     eax, 07H                                ; 1AD2 _ 83. E0, 07
+        mov     edx, eax                                ; 1AD5 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 1AD7 _ 8B. 45, 08
+        mov     dword [eax+0CH], edx                    ; 1ADA _ 89. 50, 0C
+        mov     eax, dword [ebp+8H]                     ; 1ADD _ 8B. 45, 08
+        movzx   eax, byte [eax+1H]                      ; 1AE0 _ 0F B6. 40, 01
+        movzx   edx, al                                 ; 1AE4 _ 0F B6. D0
+        mov     eax, dword [ebp+8H]                     ; 1AE7 _ 8B. 45, 08
+        mov     dword [eax+4H], edx                     ; 1AEA _ 89. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 1AED _ 8B. 45, 08
+        movzx   eax, byte [eax+2H]                      ; 1AF0 _ 0F B6. 40, 02
+        movzx   edx, al                                 ; 1AF4 _ 0F B6. D0
+        mov     eax, dword [ebp+8H]                     ; 1AF7 _ 8B. 45, 08
+        mov     dword [eax+8H], edx                     ; 1AFA _ 89. 50, 08
+        mov     eax, dword [ebp+8H]                     ; 1AFD _ 8B. 45, 08
+        movzx   eax, byte [eax]                         ; 1B00 _ 0F B6. 00
+        movzx   eax, al                                 ; 1B03 _ 0F B6. C0
+        and     eax, 10H                                ; 1B06 _ 83. E0, 10
+        test    eax, eax                                ; 1B09 _ 85. C0
+        jz      ?_069                                   ; 1B0B _ 74, 13
+        mov     eax, dword [ebp+8H]                     ; 1B0D _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 1B10 _ 8B. 40, 04
+        or      eax, 0FFFFFF00H                         ; 1B13 _ 0D, FFFFFF00
+        mov     edx, eax                                ; 1B18 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 1B1A _ 8B. 45, 08
+        mov     dword [eax+4H], edx                     ; 1B1D _ 89. 50, 04
+?_069:  mov     eax, dword [ebp+8H]                     ; 1B20 _ 8B. 45, 08
+        movzx   eax, byte [eax]                         ; 1B23 _ 0F B6. 00
+        movzx   eax, al                                 ; 1B26 _ 0F B6. C0
+        and     eax, 20H                                ; 1B29 _ 83. E0, 20
+        test    eax, eax                                ; 1B2C _ 85. C0
+        jz      ?_070                                   ; 1B2E _ 74, 13
+        mov     eax, dword [ebp+8H]                     ; 1B30 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 1B33 _ 8B. 40, 08
+        or      eax, 0FFFFFF00H                         ; 1B36 _ 0D, FFFFFF00
+        mov     edx, eax                                ; 1B3B _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 1B3D _ 8B. 45, 08
+        mov     dword [eax+8H], edx                     ; 1B40 _ 89. 50, 08
+?_070:  mov     eax, dword [ebp+8H]                     ; 1B43 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 1B46 _ 8B. 40, 08
+        neg     eax                                     ; 1B49 _ F7. D8
+        mov     edx, eax                                ; 1B4B _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 1B4D _ 8B. 45, 08
+        mov     dword [eax+8H], edx                     ; 1B50 _ 89. 50, 08
+        mov     eax, 1                                  ; 1B53 _ B8, 00000001
+        jmp     ?_072                                   ; 1B58 _ EB, 05
 
-?_071:  mov     eax, 4294967295                         ; 1B57 _ B8, FFFFFFFF
-?_072:  leave                                           ; 1B5C _ C9
-        ret                                             ; 1B5D _ C3
+?_071:  mov     eax, 4294967295                         ; 1B5A _ B8, FFFFFFFF
+?_072:  leave                                           ; 1B5F _ C9
+        ret                                             ; 1B60 _ C3
 ; mouse_decode End of function
 
 computeMousePos:; Function begin
-        push    ebp                                     ; 1B5E _ 55
-        mov     ebp, esp                                ; 1B5F _ 89. E5
-        sub     esp, 16                                 ; 1B61 _ 83. EC, 10
-        movzx   eax, word [?_218]                       ; 1B64 _ 0F B7. 05, 00000004(d)
-        cwde                                            ; 1B6B _ 98
-        mov     dword [ebp-8H], eax                     ; 1B6C _ 89. 45, F8
-        movzx   eax, word [?_219]                       ; 1B6F _ 0F B7. 05, 00000006(d)
-        cwde                                            ; 1B76 _ 98
-        mov     dword [ebp-4H], eax                     ; 1B77 _ 89. 45, FC
-        mov     eax, dword [ebp+10H]                    ; 1B7A _ 8B. 45, 10
-        mov     edx, dword [eax+4H]                     ; 1B7D _ 8B. 50, 04
-        mov     eax, dword [mx]                         ; 1B80 _ A1, 000000F0(d)
-        add     eax, edx                                ; 1B85 _ 01. D0
-        mov     dword [mx], eax                         ; 1B87 _ A3, 000000F0(d)
-        mov     eax, dword [ebp+10H]                    ; 1B8C _ 8B. 45, 10
-        mov     edx, dword [eax+8H]                     ; 1B8F _ 8B. 50, 08
-        mov     eax, dword [my]                         ; 1B92 _ A1, 000000F4(d)
-        add     eax, edx                                ; 1B97 _ 01. D0
-        mov     dword [my], eax                         ; 1B99 _ A3, 000000F4(d)
-        mov     eax, dword [mx]                         ; 1B9E _ A1, 000000F0(d)
-        test    eax, eax                                ; 1BA3 _ 85. C0
-        jns     ?_073                                   ; 1BA5 _ 79, 0A
-        mov     dword [mx], 0                           ; 1BA7 _ C7. 05, 000000F0(d), 00000000
-?_073:  mov     eax, dword [my]                         ; 1BB1 _ A1, 000000F4(d)
-        test    eax, eax                                ; 1BB6 _ 85. C0
-        jns     ?_074                                   ; 1BB8 _ 79, 0A
-        mov     dword [my], 0                           ; 1BBA _ C7. 05, 000000F4(d), 00000000
-?_074:  mov     eax, dword [ebp-8H]                     ; 1BC4 _ 8B. 45, F8
-        lea     edx, [eax-9H]                           ; 1BC7 _ 8D. 50, F7
-        mov     eax, dword [mx]                         ; 1BCA _ A1, 000000F0(d)
-        cmp     edx, eax                                ; 1BCF _ 39. C2
-        jge     ?_075                                   ; 1BD1 _ 7D, 0B
-        mov     eax, dword [ebp-8H]                     ; 1BD3 _ 8B. 45, F8
-        sub     eax, 9                                  ; 1BD6 _ 83. E8, 09
-        mov     dword [mx], eax                         ; 1BD9 _ A3, 000000F0(d)
-?_075:  mov     eax, dword [ebp-4H]                     ; 1BDE _ 8B. 45, FC
-        lea     edx, [eax-1H]                           ; 1BE1 _ 8D. 50, FF
-        mov     eax, dword [my]                         ; 1BE4 _ A1, 000000F4(d)
-        cmp     edx, eax                                ; 1BE9 _ 39. C2
-        jge     ?_076                                   ; 1BEB _ 7D, 0B
-        mov     eax, dword [ebp-4H]                     ; 1BED _ 8B. 45, FC
-        sub     eax, 1                                  ; 1BF0 _ 83. E8, 01
-        mov     dword [my], eax                         ; 1BF3 _ A3, 000000F4(d)
-?_076:  nop                                             ; 1BF8 _ 90
-        leave                                           ; 1BF9 _ C9
-        ret                                             ; 1BFA _ C3
+        push    ebp                                     ; 1B61 _ 55
+        mov     ebp, esp                                ; 1B62 _ 89. E5
+        sub     esp, 16                                 ; 1B64 _ 83. EC, 10
+        movzx   eax, word [?_218]                       ; 1B67 _ 0F B7. 05, 00000004(d)
+        cwde                                            ; 1B6E _ 98
+        mov     dword [ebp-8H], eax                     ; 1B6F _ 89. 45, F8
+        movzx   eax, word [?_219]                       ; 1B72 _ 0F B7. 05, 00000006(d)
+        cwde                                            ; 1B79 _ 98
+        mov     dword [ebp-4H], eax                     ; 1B7A _ 89. 45, FC
+        mov     eax, dword [ebp+10H]                    ; 1B7D _ 8B. 45, 10
+        mov     edx, dword [eax+4H]                     ; 1B80 _ 8B. 50, 04
+        mov     eax, dword [mx]                         ; 1B83 _ A1, 000000F0(d)
+        add     eax, edx                                ; 1B88 _ 01. D0
+        mov     dword [mx], eax                         ; 1B8A _ A3, 000000F0(d)
+        mov     eax, dword [ebp+10H]                    ; 1B8F _ 8B. 45, 10
+        mov     edx, dword [eax+8H]                     ; 1B92 _ 8B. 50, 08
+        mov     eax, dword [my]                         ; 1B95 _ A1, 000000F4(d)
+        add     eax, edx                                ; 1B9A _ 01. D0
+        mov     dword [my], eax                         ; 1B9C _ A3, 000000F4(d)
+        mov     eax, dword [mx]                         ; 1BA1 _ A1, 000000F0(d)
+        test    eax, eax                                ; 1BA6 _ 85. C0
+        jns     ?_073                                   ; 1BA8 _ 79, 0A
+        mov     dword [mx], 0                           ; 1BAA _ C7. 05, 000000F0(d), 00000000
+?_073:  mov     eax, dword [my]                         ; 1BB4 _ A1, 000000F4(d)
+        test    eax, eax                                ; 1BB9 _ 85. C0
+        jns     ?_074                                   ; 1BBB _ 79, 0A
+        mov     dword [my], 0                           ; 1BBD _ C7. 05, 000000F4(d), 00000000
+?_074:  mov     eax, dword [ebp-8H]                     ; 1BC7 _ 8B. 45, F8
+        lea     edx, [eax-9H]                           ; 1BCA _ 8D. 50, F7
+        mov     eax, dword [mx]                         ; 1BCD _ A1, 000000F0(d)
+        cmp     edx, eax                                ; 1BD2 _ 39. C2
+        jge     ?_075                                   ; 1BD4 _ 7D, 0B
+        mov     eax, dword [ebp-8H]                     ; 1BD6 _ 8B. 45, F8
+        sub     eax, 9                                  ; 1BD9 _ 83. E8, 09
+        mov     dword [mx], eax                         ; 1BDC _ A3, 000000F0(d)
+?_075:  mov     eax, dword [ebp-4H]                     ; 1BE1 _ 8B. 45, FC
+        lea     edx, [eax-1H]                           ; 1BE4 _ 8D. 50, FF
+        mov     eax, dword [my]                         ; 1BE7 _ A1, 000000F4(d)
+        cmp     edx, eax                                ; 1BEC _ 39. C2
+        jge     ?_076                                   ; 1BEE _ 7D, 0B
+        mov     eax, dword [ebp-4H]                     ; 1BF0 _ 8B. 45, FC
+        sub     eax, 1                                  ; 1BF3 _ 83. E8, 01
+        mov     dword [my], eax                         ; 1BF6 _ A3, 000000F4(d)
+?_076:  nop                                             ; 1BFB _ 90
+        leave                                           ; 1BFC _ C9
+        ret                                             ; 1BFD _ C3
 ; computeMousePos End of function
 
 showMemInfo:; Function begin
-        push    ebp                                     ; 1BFB _ 55
-        mov     ebp, esp                                ; 1BFC _ 89. E5
-        sub     esp, 56                                 ; 1BFE _ 83. EC, 38
-        mov     dword [ebp-30H], 0                      ; 1C01 _ C7. 45, D0, 00000000
-        mov     dword [ebp-2CH], 0                      ; 1C08 _ C7. 45, D4, 00000000
-        mov     dword [ebp-28H], 112                    ; 1C0F _ C7. 45, D8, 00000070
-        mov     dword [ebp-24H], 80                     ; 1C16 _ C7. 45, DC, 00000050
-        push    100                                     ; 1C1D _ 6A, 64
-        push    dword [ebp+1CH]                         ; 1C1F _ FF. 75, 1C
-        push    0                                       ; 1C22 _ 6A, 00
-        push    0                                       ; 1C24 _ 6A, 00
-        push    14                                      ; 1C26 _ 6A, 0E
-        push    dword [ebp+1CH]                         ; 1C28 _ FF. 75, 1C
-        push    dword [ebp+14H]                         ; 1C2B _ FF. 75, 14
-        call    boxfill8                                ; 1C2E _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 1C33 _ 83. C4, 1C
-        mov     eax, dword [ebp+20H]                    ; 1C36 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1C39 _ 0F BE. C0
-        sub     esp, 8                                  ; 1C3C _ 83. EC, 08
-        push    ?_210                                   ; 1C3F _ 68, 0000003F(d)
-        push    eax                                     ; 1C44 _ 50
-        push    dword [ebp-2CH]                         ; 1C45 _ FF. 75, D4
-        push    dword [ebp-30H]                         ; 1C48 _ FF. 75, D0
-        push    dword [ebp+0CH]                         ; 1C4B _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1C4E _ FF. 75, 08
-        call    showString                              ; 1C51 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1C56 _ 83. C4, 20
-        mov     eax, dword [ebp+18H]                    ; 1C59 _ 8B. 45, 18
-        sub     esp, 12                                 ; 1C5C _ 83. EC, 0C
-        push    eax                                     ; 1C5F _ 50
-        call    intToHexStr                             ; 1C60 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1C65 _ 83. C4, 10
-        mov     dword [ebp-20H], eax                    ; 1C68 _ 89. 45, E0
-        mov     eax, dword [ebp+20H]                    ; 1C6B _ 8B. 45, 20
-        movsx   eax, al                                 ; 1C6E _ 0F BE. C0
-        sub     esp, 8                                  ; 1C71 _ 83. EC, 08
-        push    dword [ebp-20H]                         ; 1C74 _ FF. 75, E0
-        push    eax                                     ; 1C77 _ 50
-        push    dword [ebp-2CH]                         ; 1C78 _ FF. 75, D4
-        push    dword [ebp-28H]                         ; 1C7B _ FF. 75, D8
-        push    dword [ebp+0CH]                         ; 1C7E _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1C81 _ FF. 75, 08
-        call    showString                              ; 1C84 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1C89 _ 83. C4, 20
-        add     dword [ebp-2CH], 16                     ; 1C8C _ 83. 45, D4, 10
-        mov     eax, dword [ebp+20H]                    ; 1C90 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1C93 _ 0F BE. C0
-        sub     esp, 8                                  ; 1C96 _ 83. EC, 08
-        push    ?_211                                   ; 1C99 _ 68, 00000049(d)
-        push    eax                                     ; 1C9E _ 50
-        push    dword [ebp-2CH]                         ; 1C9F _ FF. 75, D4
-        push    dword [ebp-30H]                         ; 1CA2 _ FF. 75, D0
-        push    dword [ebp+0CH]                         ; 1CA5 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1CA8 _ FF. 75, 08
-        call    showString                              ; 1CAB _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1CB0 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 1CB3 _ 8B. 45, 10
-        mov     eax, dword [eax]                        ; 1CB6 _ 8B. 00
-        sub     esp, 12                                 ; 1CB8 _ 83. EC, 0C
-        push    eax                                     ; 1CBB _ 50
-        call    intToHexStr                             ; 1CBC _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1CC1 _ 83. C4, 10
-        mov     dword [ebp-1CH], eax                    ; 1CC4 _ 89. 45, E4
-        mov     eax, dword [ebp+20H]                    ; 1CC7 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1CCA _ 0F BE. C0
-        sub     esp, 8                                  ; 1CCD _ 83. EC, 08
-        push    dword [ebp-1CH]                         ; 1CD0 _ FF. 75, E4
-        push    eax                                     ; 1CD3 _ 50
-        push    dword [ebp-2CH]                         ; 1CD4 _ FF. 75, D4
-        push    dword [ebp-28H]                         ; 1CD7 _ FF. 75, D8
-        push    dword [ebp+0CH]                         ; 1CDA _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1CDD _ FF. 75, 08
-        call    showString                              ; 1CE0 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1CE5 _ 83. C4, 20
-        add     dword [ebp-2CH], 16                     ; 1CE8 _ 83. 45, D4, 10
-        mov     eax, dword [ebp+20H]                    ; 1CEC _ 8B. 45, 20
-        movsx   eax, al                                 ; 1CEF _ 0F BE. C0
-        sub     esp, 8                                  ; 1CF2 _ 83. EC, 08
-        push    ?_212                                   ; 1CF5 _ 68, 00000057(d)
-        push    eax                                     ; 1CFA _ 50
-        push    dword [ebp-2CH]                         ; 1CFB _ FF. 75, D4
-        push    dword [ebp-30H]                         ; 1CFE _ FF. 75, D0
-        push    dword [ebp+0CH]                         ; 1D01 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1D04 _ FF. 75, 08
-        call    showString                              ; 1D07 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1D0C _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 1D0F _ 8B. 45, 10
-        mov     eax, dword [eax+4H]                     ; 1D12 _ 8B. 40, 04
-        sub     esp, 12                                 ; 1D15 _ 83. EC, 0C
-        push    eax                                     ; 1D18 _ 50
-        call    intToHexStr                             ; 1D19 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1D1E _ 83. C4, 10
-        mov     dword [ebp-18H], eax                    ; 1D21 _ 89. 45, E8
-        mov     eax, dword [ebp+20H]                    ; 1D24 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1D27 _ 0F BE. C0
-        sub     esp, 8                                  ; 1D2A _ 83. EC, 08
-        push    dword [ebp-18H]                         ; 1D2D _ FF. 75, E8
-        push    eax                                     ; 1D30 _ 50
-        push    dword [ebp-2CH]                         ; 1D31 _ FF. 75, D4
-        push    dword [ebp-28H]                         ; 1D34 _ FF. 75, D8
-        push    dword [ebp+0CH]                         ; 1D37 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1D3A _ FF. 75, 08
-        call    showString                              ; 1D3D _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1D42 _ 83. C4, 20
-        add     dword [ebp-2CH], 16                     ; 1D45 _ 83. 45, D4, 10
-        mov     eax, dword [ebp+20H]                    ; 1D49 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1D4C _ 0F BE. C0
-        sub     esp, 8                                  ; 1D4F _ 83. EC, 08
-        push    ?_213                                   ; 1D52 _ 68, 00000066(d)
-        push    eax                                     ; 1D57 _ 50
-        push    dword [ebp-2CH]                         ; 1D58 _ FF. 75, D4
-        push    dword [ebp-30H]                         ; 1D5B _ FF. 75, D0
-        push    dword [ebp+0CH]                         ; 1D5E _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1D61 _ FF. 75, 08
-        call    showString                              ; 1D64 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1D69 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 1D6C _ 8B. 45, 10
-        mov     eax, dword [eax+8H]                     ; 1D6F _ 8B. 40, 08
-        sub     esp, 12                                 ; 1D72 _ 83. EC, 0C
-        push    eax                                     ; 1D75 _ 50
-        call    intToHexStr                             ; 1D76 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1D7B _ 83. C4, 10
-        mov     dword [ebp-14H], eax                    ; 1D7E _ 89. 45, EC
-        mov     eax, dword [ebp+20H]                    ; 1D81 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1D84 _ 0F BE. C0
-        sub     esp, 8                                  ; 1D87 _ 83. EC, 08
-        push    dword [ebp-14H]                         ; 1D8A _ FF. 75, EC
-        push    eax                                     ; 1D8D _ 50
-        push    dword [ebp-2CH]                         ; 1D8E _ FF. 75, D4
-        push    dword [ebp-28H]                         ; 1D91 _ FF. 75, D8
-        push    dword [ebp+0CH]                         ; 1D94 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1D97 _ FF. 75, 08
-        call    showString                              ; 1D9A _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1D9F _ 83. C4, 20
-        add     dword [ebp-2CH], 16                     ; 1DA2 _ 83. 45, D4, 10
-        mov     eax, dword [ebp+20H]                    ; 1DA6 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1DA9 _ 0F BE. C0
-        sub     esp, 8                                  ; 1DAC _ 83. EC, 08
-        push    ?_214                                   ; 1DAF _ 68, 00000072(d)
-        push    eax                                     ; 1DB4 _ 50
-        push    dword [ebp-2CH]                         ; 1DB5 _ FF. 75, D4
-        push    dword [ebp-30H]                         ; 1DB8 _ FF. 75, D0
-        push    dword [ebp+0CH]                         ; 1DBB _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1DBE _ FF. 75, 08
-        call    showString                              ; 1DC1 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1DC6 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 1DC9 _ 8B. 45, 10
-        mov     eax, dword [eax+0CH]                    ; 1DCC _ 8B. 40, 0C
-        sub     esp, 12                                 ; 1DCF _ 83. EC, 0C
-        push    eax                                     ; 1DD2 _ 50
-        call    intToHexStr                             ; 1DD3 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1DD8 _ 83. C4, 10
-        mov     dword [ebp-10H], eax                    ; 1DDB _ 89. 45, F0
-        mov     eax, dword [ebp+20H]                    ; 1DDE _ 8B. 45, 20
-        movsx   eax, al                                 ; 1DE1 _ 0F BE. C0
-        sub     esp, 8                                  ; 1DE4 _ 83. EC, 08
-        push    dword [ebp-10H]                         ; 1DE7 _ FF. 75, F0
-        push    eax                                     ; 1DEA _ 50
-        push    dword [ebp-2CH]                         ; 1DEB _ FF. 75, D4
-        push    dword [ebp-28H]                         ; 1DEE _ FF. 75, D8
-        push    dword [ebp+0CH]                         ; 1DF1 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1DF4 _ FF. 75, 08
-        call    showString                              ; 1DF7 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1DFC _ 83. C4, 20
-        add     dword [ebp-2CH], 16                     ; 1DFF _ 83. 45, D4, 10
-        mov     eax, dword [ebp+20H]                    ; 1E03 _ 8B. 45, 20
-        movsx   eax, al                                 ; 1E06 _ 0F BE. C0
-        sub     esp, 8                                  ; 1E09 _ 83. EC, 08
-        push    ?_215                                   ; 1E0C _ 68, 0000007F(d)
-        push    eax                                     ; 1E11 _ 50
-        push    dword [ebp-2CH]                         ; 1E12 _ FF. 75, D4
-        push    dword [ebp-30H]                         ; 1E15 _ FF. 75, D0
-        push    dword [ebp+0CH]                         ; 1E18 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1E1B _ FF. 75, 08
-        call    showString                              ; 1E1E _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1E23 _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 1E26 _ 8B. 45, 10
-        mov     eax, dword [eax+10H]                    ; 1E29 _ 8B. 40, 10
-        sub     esp, 12                                 ; 1E2C _ 83. EC, 0C
-        push    eax                                     ; 1E2F _ 50
-        call    intToHexStr                             ; 1E30 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1E35 _ 83. C4, 10
-        mov     dword [ebp-0CH], eax                    ; 1E38 _ 89. 45, F4
-        mov     eax, dword [ebp+20H]                    ; 1E3B _ 8B. 45, 20
-        movsx   eax, al                                 ; 1E3E _ 0F BE. C0
-        sub     esp, 8                                  ; 1E41 _ 83. EC, 08
-        push    dword [ebp-0CH]                         ; 1E44 _ FF. 75, F4
-        push    eax                                     ; 1E47 _ 50
-        push    dword [ebp-2CH]                         ; 1E48 _ FF. 75, D4
-        push    dword [ebp-28H]                         ; 1E4B _ FF. 75, D8
-        push    dword [ebp+0CH]                         ; 1E4E _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 1E51 _ FF. 75, 08
-        call    showString                              ; 1E54 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1E59 _ 83. C4, 20
-        add     dword [ebp-2CH], 16                     ; 1E5C _ 83. 45, D4, 10
-        nop                                             ; 1E60 _ 90
-        leave                                           ; 1E61 _ C9
-        ret                                             ; 1E62 _ C3
+        push    ebp                                     ; 1BFE _ 55
+        mov     ebp, esp                                ; 1BFF _ 89. E5
+        sub     esp, 56                                 ; 1C01 _ 83. EC, 38
+        mov     dword [ebp-30H], 0                      ; 1C04 _ C7. 45, D0, 00000000
+        mov     dword [ebp-2CH], 0                      ; 1C0B _ C7. 45, D4, 00000000
+        mov     dword [ebp-28H], 112                    ; 1C12 _ C7. 45, D8, 00000070
+        mov     dword [ebp-24H], 80                     ; 1C19 _ C7. 45, DC, 00000050
+        push    100                                     ; 1C20 _ 6A, 64
+        push    dword [ebp+1CH]                         ; 1C22 _ FF. 75, 1C
+        push    0                                       ; 1C25 _ 6A, 00
+        push    0                                       ; 1C27 _ 6A, 00
+        push    14                                      ; 1C29 _ 6A, 0E
+        push    dword [ebp+1CH]                         ; 1C2B _ FF. 75, 1C
+        push    dword [ebp+14H]                         ; 1C2E _ FF. 75, 14
+        call    boxfill8                                ; 1C31 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 1C36 _ 83. C4, 1C
+        mov     eax, dword [ebp+20H]                    ; 1C39 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1C3C _ 0F BE. C0
+        sub     esp, 8                                  ; 1C3F _ 83. EC, 08
+        push    ?_210                                   ; 1C42 _ 68, 0000003F(d)
+        push    eax                                     ; 1C47 _ 50
+        push    dword [ebp-2CH]                         ; 1C48 _ FF. 75, D4
+        push    dword [ebp-30H]                         ; 1C4B _ FF. 75, D0
+        push    dword [ebp+0CH]                         ; 1C4E _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1C51 _ FF. 75, 08
+        call    showString                              ; 1C54 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1C59 _ 83. C4, 20
+        mov     eax, dword [ebp+18H]                    ; 1C5C _ 8B. 45, 18
+        sub     esp, 12                                 ; 1C5F _ 83. EC, 0C
+        push    eax                                     ; 1C62 _ 50
+        call    intToHexStr                             ; 1C63 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1C68 _ 83. C4, 10
+        mov     dword [ebp-20H], eax                    ; 1C6B _ 89. 45, E0
+        mov     eax, dword [ebp+20H]                    ; 1C6E _ 8B. 45, 20
+        movsx   eax, al                                 ; 1C71 _ 0F BE. C0
+        sub     esp, 8                                  ; 1C74 _ 83. EC, 08
+        push    dword [ebp-20H]                         ; 1C77 _ FF. 75, E0
+        push    eax                                     ; 1C7A _ 50
+        push    dword [ebp-2CH]                         ; 1C7B _ FF. 75, D4
+        push    dword [ebp-28H]                         ; 1C7E _ FF. 75, D8
+        push    dword [ebp+0CH]                         ; 1C81 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1C84 _ FF. 75, 08
+        call    showString                              ; 1C87 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1C8C _ 83. C4, 20
+        add     dword [ebp-2CH], 16                     ; 1C8F _ 83. 45, D4, 10
+        mov     eax, dword [ebp+20H]                    ; 1C93 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1C96 _ 0F BE. C0
+        sub     esp, 8                                  ; 1C99 _ 83. EC, 08
+        push    ?_211                                   ; 1C9C _ 68, 00000049(d)
+        push    eax                                     ; 1CA1 _ 50
+        push    dword [ebp-2CH]                         ; 1CA2 _ FF. 75, D4
+        push    dword [ebp-30H]                         ; 1CA5 _ FF. 75, D0
+        push    dword [ebp+0CH]                         ; 1CA8 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1CAB _ FF. 75, 08
+        call    showString                              ; 1CAE _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1CB3 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 1CB6 _ 8B. 45, 10
+        mov     eax, dword [eax]                        ; 1CB9 _ 8B. 00
+        sub     esp, 12                                 ; 1CBB _ 83. EC, 0C
+        push    eax                                     ; 1CBE _ 50
+        call    intToHexStr                             ; 1CBF _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1CC4 _ 83. C4, 10
+        mov     dword [ebp-1CH], eax                    ; 1CC7 _ 89. 45, E4
+        mov     eax, dword [ebp+20H]                    ; 1CCA _ 8B. 45, 20
+        movsx   eax, al                                 ; 1CCD _ 0F BE. C0
+        sub     esp, 8                                  ; 1CD0 _ 83. EC, 08
+        push    dword [ebp-1CH]                         ; 1CD3 _ FF. 75, E4
+        push    eax                                     ; 1CD6 _ 50
+        push    dword [ebp-2CH]                         ; 1CD7 _ FF. 75, D4
+        push    dword [ebp-28H]                         ; 1CDA _ FF. 75, D8
+        push    dword [ebp+0CH]                         ; 1CDD _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1CE0 _ FF. 75, 08
+        call    showString                              ; 1CE3 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1CE8 _ 83. C4, 20
+        add     dword [ebp-2CH], 16                     ; 1CEB _ 83. 45, D4, 10
+        mov     eax, dword [ebp+20H]                    ; 1CEF _ 8B. 45, 20
+        movsx   eax, al                                 ; 1CF2 _ 0F BE. C0
+        sub     esp, 8                                  ; 1CF5 _ 83. EC, 08
+        push    ?_212                                   ; 1CF8 _ 68, 00000057(d)
+        push    eax                                     ; 1CFD _ 50
+        push    dword [ebp-2CH]                         ; 1CFE _ FF. 75, D4
+        push    dword [ebp-30H]                         ; 1D01 _ FF. 75, D0
+        push    dword [ebp+0CH]                         ; 1D04 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1D07 _ FF. 75, 08
+        call    showString                              ; 1D0A _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1D0F _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 1D12 _ 8B. 45, 10
+        mov     eax, dword [eax+4H]                     ; 1D15 _ 8B. 40, 04
+        sub     esp, 12                                 ; 1D18 _ 83. EC, 0C
+        push    eax                                     ; 1D1B _ 50
+        call    intToHexStr                             ; 1D1C _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1D21 _ 83. C4, 10
+        mov     dword [ebp-18H], eax                    ; 1D24 _ 89. 45, E8
+        mov     eax, dword [ebp+20H]                    ; 1D27 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1D2A _ 0F BE. C0
+        sub     esp, 8                                  ; 1D2D _ 83. EC, 08
+        push    dword [ebp-18H]                         ; 1D30 _ FF. 75, E8
+        push    eax                                     ; 1D33 _ 50
+        push    dword [ebp-2CH]                         ; 1D34 _ FF. 75, D4
+        push    dword [ebp-28H]                         ; 1D37 _ FF. 75, D8
+        push    dword [ebp+0CH]                         ; 1D3A _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1D3D _ FF. 75, 08
+        call    showString                              ; 1D40 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1D45 _ 83. C4, 20
+        add     dword [ebp-2CH], 16                     ; 1D48 _ 83. 45, D4, 10
+        mov     eax, dword [ebp+20H]                    ; 1D4C _ 8B. 45, 20
+        movsx   eax, al                                 ; 1D4F _ 0F BE. C0
+        sub     esp, 8                                  ; 1D52 _ 83. EC, 08
+        push    ?_213                                   ; 1D55 _ 68, 00000066(d)
+        push    eax                                     ; 1D5A _ 50
+        push    dword [ebp-2CH]                         ; 1D5B _ FF. 75, D4
+        push    dword [ebp-30H]                         ; 1D5E _ FF. 75, D0
+        push    dword [ebp+0CH]                         ; 1D61 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1D64 _ FF. 75, 08
+        call    showString                              ; 1D67 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1D6C _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 1D6F _ 8B. 45, 10
+        mov     eax, dword [eax+8H]                     ; 1D72 _ 8B. 40, 08
+        sub     esp, 12                                 ; 1D75 _ 83. EC, 0C
+        push    eax                                     ; 1D78 _ 50
+        call    intToHexStr                             ; 1D79 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1D7E _ 83. C4, 10
+        mov     dword [ebp-14H], eax                    ; 1D81 _ 89. 45, EC
+        mov     eax, dword [ebp+20H]                    ; 1D84 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1D87 _ 0F BE. C0
+        sub     esp, 8                                  ; 1D8A _ 83. EC, 08
+        push    dword [ebp-14H]                         ; 1D8D _ FF. 75, EC
+        push    eax                                     ; 1D90 _ 50
+        push    dword [ebp-2CH]                         ; 1D91 _ FF. 75, D4
+        push    dword [ebp-28H]                         ; 1D94 _ FF. 75, D8
+        push    dword [ebp+0CH]                         ; 1D97 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1D9A _ FF. 75, 08
+        call    showString                              ; 1D9D _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1DA2 _ 83. C4, 20
+        add     dword [ebp-2CH], 16                     ; 1DA5 _ 83. 45, D4, 10
+        mov     eax, dword [ebp+20H]                    ; 1DA9 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1DAC _ 0F BE. C0
+        sub     esp, 8                                  ; 1DAF _ 83. EC, 08
+        push    ?_214                                   ; 1DB2 _ 68, 00000072(d)
+        push    eax                                     ; 1DB7 _ 50
+        push    dword [ebp-2CH]                         ; 1DB8 _ FF. 75, D4
+        push    dword [ebp-30H]                         ; 1DBB _ FF. 75, D0
+        push    dword [ebp+0CH]                         ; 1DBE _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1DC1 _ FF. 75, 08
+        call    showString                              ; 1DC4 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1DC9 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 1DCC _ 8B. 45, 10
+        mov     eax, dword [eax+0CH]                    ; 1DCF _ 8B. 40, 0C
+        sub     esp, 12                                 ; 1DD2 _ 83. EC, 0C
+        push    eax                                     ; 1DD5 _ 50
+        call    intToHexStr                             ; 1DD6 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1DDB _ 83. C4, 10
+        mov     dword [ebp-10H], eax                    ; 1DDE _ 89. 45, F0
+        mov     eax, dword [ebp+20H]                    ; 1DE1 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1DE4 _ 0F BE. C0
+        sub     esp, 8                                  ; 1DE7 _ 83. EC, 08
+        push    dword [ebp-10H]                         ; 1DEA _ FF. 75, F0
+        push    eax                                     ; 1DED _ 50
+        push    dword [ebp-2CH]                         ; 1DEE _ FF. 75, D4
+        push    dword [ebp-28H]                         ; 1DF1 _ FF. 75, D8
+        push    dword [ebp+0CH]                         ; 1DF4 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1DF7 _ FF. 75, 08
+        call    showString                              ; 1DFA _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1DFF _ 83. C4, 20
+        add     dword [ebp-2CH], 16                     ; 1E02 _ 83. 45, D4, 10
+        mov     eax, dword [ebp+20H]                    ; 1E06 _ 8B. 45, 20
+        movsx   eax, al                                 ; 1E09 _ 0F BE. C0
+        sub     esp, 8                                  ; 1E0C _ 83. EC, 08
+        push    ?_215                                   ; 1E0F _ 68, 0000007F(d)
+        push    eax                                     ; 1E14 _ 50
+        push    dword [ebp-2CH]                         ; 1E15 _ FF. 75, D4
+        push    dword [ebp-30H]                         ; 1E18 _ FF. 75, D0
+        push    dword [ebp+0CH]                         ; 1E1B _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1E1E _ FF. 75, 08
+        call    showString                              ; 1E21 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1E26 _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 1E29 _ 8B. 45, 10
+        mov     eax, dword [eax+10H]                    ; 1E2C _ 8B. 40, 10
+        sub     esp, 12                                 ; 1E2F _ 83. EC, 0C
+        push    eax                                     ; 1E32 _ 50
+        call    intToHexStr                             ; 1E33 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1E38 _ 83. C4, 10
+        mov     dword [ebp-0CH], eax                    ; 1E3B _ 89. 45, F4
+        mov     eax, dword [ebp+20H]                    ; 1E3E _ 8B. 45, 20
+        movsx   eax, al                                 ; 1E41 _ 0F BE. C0
+        sub     esp, 8                                  ; 1E44 _ 83. EC, 08
+        push    dword [ebp-0CH]                         ; 1E47 _ FF. 75, F4
+        push    eax                                     ; 1E4A _ 50
+        push    dword [ebp-2CH]                         ; 1E4B _ FF. 75, D4
+        push    dword [ebp-28H]                         ; 1E4E _ FF. 75, D8
+        push    dword [ebp+0CH]                         ; 1E51 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 1E54 _ FF. 75, 08
+        call    showString                              ; 1E57 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1E5C _ 83. C4, 20
+        add     dword [ebp-2CH], 16                     ; 1E5F _ 83. 45, D4, 10
+        nop                                             ; 1E63 _ 90
+        leave                                           ; 1E64 _ C9
+        ret                                             ; 1E65 _ C3
 ; showMemInfo End of function
 
 messageBox:; Function begin
-        push    ebp                                     ; 1E63 _ 55
-        mov     ebp, esp                                ; 1E64 _ 89. E5
-        sub     esp, 24                                 ; 1E66 _ 83. EC, 18
-        mov     eax, dword [ebp+10H]                    ; 1E69 _ 8B. 45, 10
-        imul    eax, dword [ebp+14H]                    ; 1E6C _ 0F AF. 45, 14
-        mov     edx, eax                                ; 1E70 _ 89. C2
-        mov     eax, dword [memman]                     ; 1E72 _ A1, 00000008(d)
-        sub     esp, 8                                  ; 1E77 _ 83. EC, 08
-        push    edx                                     ; 1E7A _ 52
-        push    eax                                     ; 1E7B _ 50
-        call    memman_alloc_4K                         ; 1E7C _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1E81 _ 83. C4, 10
-        mov     dword [ebp-10H], eax                    ; 1E84 _ 89. 45, F0
-        sub     esp, 12                                 ; 1E87 _ 83. EC, 0C
-        push    dword [ebp+8H]                          ; 1E8A _ FF. 75, 08
-        call    sheet_alloc                             ; 1E8D _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1E92 _ 83. C4, 10
-        mov     dword [ebp-0CH], eax                    ; 1E95 _ 89. 45, F4
-        sub     esp, 12                                 ; 1E98 _ 83. EC, 0C
-        push    99                                      ; 1E9B _ 6A, 63
-        push    dword [ebp+14H]                         ; 1E9D _ FF. 75, 14
-        push    dword [ebp+10H]                         ; 1EA0 _ FF. 75, 10
-        push    dword [ebp-10H]                         ; 1EA3 _ FF. 75, F0
-        push    dword [ebp-0CH]                         ; 1EA6 _ FF. 75, F4
-        call    sheet_setbuf                            ; 1EA9 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1EAE _ 83. C4, 20
-        sub     esp, 4                                  ; 1EB1 _ 83. EC, 04
-        push    dword [ebp+0CH]                         ; 1EB4 _ FF. 75, 0C
-        push    dword [ebp-0CH]                         ; 1EB7 _ FF. 75, F4
-        push    dword [ebp+8H]                          ; 1EBA _ FF. 75, 08
-        call    make_window8                            ; 1EBD _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1EC2 _ 83. C4, 10
-        sub     esp, 8                                  ; 1EC5 _ 83. EC, 08
-        push    7                                       ; 1EC8 _ 6A, 07
-        push    16                                      ; 1ECA _ 6A, 10
-        push    150                                     ; 1ECC _ 68, 00000096
-        push    42                                      ; 1ED1 _ 6A, 2A
-        push    10                                      ; 1ED3 _ 6A, 0A
-        push    dword [ebp-0CH]                         ; 1ED5 _ FF. 75, F4
-        call    make_textbox8                           ; 1ED8 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1EDD _ 83. C4, 20
-        push    dword [ebp+1CH]                         ; 1EE0 _ FF. 75, 1C
-        push    dword [ebp+18H]                         ; 1EE3 _ FF. 75, 18
-        push    dword [ebp-0CH]                         ; 1EE6 _ FF. 75, F4
-        push    dword [ebp+8H]                          ; 1EE9 _ FF. 75, 08
-        call    sheet_slide                             ; 1EEC _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1EF1 _ 83. C4, 10
-        sub     esp, 4                                  ; 1EF4 _ 83. EC, 04
-        push    dword [ebp+20H]                         ; 1EF7 _ FF. 75, 20
-        push    dword [ebp-0CH]                         ; 1EFA _ FF. 75, F4
-        push    dword [ebp+8H]                          ; 1EFD _ FF. 75, 08
-        call    sheet_level_updown                      ; 1F00 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1F05 _ 83. C4, 10
-        mov     eax, dword [ebp-0CH]                    ; 1F08 _ 8B. 45, F4
-        leave                                           ; 1F0B _ C9
-        ret                                             ; 1F0C _ C3
+        push    ebp                                     ; 1E66 _ 55
+        mov     ebp, esp                                ; 1E67 _ 89. E5
+        sub     esp, 24                                 ; 1E69 _ 83. EC, 18
+        mov     eax, dword [ebp+10H]                    ; 1E6C _ 8B. 45, 10
+        imul    eax, dword [ebp+14H]                    ; 1E6F _ 0F AF. 45, 14
+        mov     edx, eax                                ; 1E73 _ 89. C2
+        mov     eax, dword [memman]                     ; 1E75 _ A1, 00000008(d)
+        sub     esp, 8                                  ; 1E7A _ 83. EC, 08
+        push    edx                                     ; 1E7D _ 52
+        push    eax                                     ; 1E7E _ 50
+        call    memman_alloc_4K                         ; 1E7F _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1E84 _ 83. C4, 10
+        mov     dword [ebp-10H], eax                    ; 1E87 _ 89. 45, F0
+        sub     esp, 12                                 ; 1E8A _ 83. EC, 0C
+        push    dword [ebp+8H]                          ; 1E8D _ FF. 75, 08
+        call    sheet_alloc                             ; 1E90 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1E95 _ 83. C4, 10
+        mov     dword [ebp-0CH], eax                    ; 1E98 _ 89. 45, F4
+        sub     esp, 12                                 ; 1E9B _ 83. EC, 0C
+        push    99                                      ; 1E9E _ 6A, 63
+        push    dword [ebp+14H]                         ; 1EA0 _ FF. 75, 14
+        push    dword [ebp+10H]                         ; 1EA3 _ FF. 75, 10
+        push    dword [ebp-10H]                         ; 1EA6 _ FF. 75, F0
+        push    dword [ebp-0CH]                         ; 1EA9 _ FF. 75, F4
+        call    sheet_setbuf                            ; 1EAC _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1EB1 _ 83. C4, 20
+        sub     esp, 4                                  ; 1EB4 _ 83. EC, 04
+        push    dword [ebp+0CH]                         ; 1EB7 _ FF. 75, 0C
+        push    dword [ebp-0CH]                         ; 1EBA _ FF. 75, F4
+        push    dword [ebp+8H]                          ; 1EBD _ FF. 75, 08
+        call    make_window8                            ; 1EC0 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1EC5 _ 83. C4, 10
+        sub     esp, 8                                  ; 1EC8 _ 83. EC, 08
+        push    7                                       ; 1ECB _ 6A, 07
+        push    16                                      ; 1ECD _ 6A, 10
+        push    150                                     ; 1ECF _ 68, 00000096
+        push    42                                      ; 1ED4 _ 6A, 2A
+        push    10                                      ; 1ED6 _ 6A, 0A
+        push    dword [ebp-0CH]                         ; 1ED8 _ FF. 75, F4
+        call    make_textbox8                           ; 1EDB _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1EE0 _ 83. C4, 20
+        push    dword [ebp+1CH]                         ; 1EE3 _ FF. 75, 1C
+        push    dword [ebp+18H]                         ; 1EE6 _ FF. 75, 18
+        push    dword [ebp-0CH]                         ; 1EE9 _ FF. 75, F4
+        push    dword [ebp+8H]                          ; 1EEC _ FF. 75, 08
+        call    sheet_slide                             ; 1EEF _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1EF4 _ 83. C4, 10
+        sub     esp, 4                                  ; 1EF7 _ 83. EC, 04
+        push    dword [ebp+20H]                         ; 1EFA _ FF. 75, 20
+        push    dword [ebp-0CH]                         ; 1EFD _ FF. 75, F4
+        push    dword [ebp+8H]                          ; 1F00 _ FF. 75, 08
+        call    sheet_level_updown                      ; 1F03 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1F08 _ 83. C4, 10
+        mov     eax, dword [ebp-0CH]                    ; 1F0B _ 8B. 45, F4
+        leave                                           ; 1F0E _ C9
+        ret                                             ; 1F0F _ C3
 ; messageBox End of function
 
 messageBoxToTask:; Function begin
-        push    ebp                                     ; 1F0D _ 55
-        mov     ebp, esp                                ; 1F0E _ 89. E5
-        sub     esp, 24                                 ; 1F10 _ 83. EC, 18
-        mov     eax, dword [ebp+1CH]                    ; 1F13 _ 8B. 45, 1C
-        imul    eax, dword [ebp+20H]                    ; 1F16 _ 0F AF. 45, 20
-        mov     edx, eax                                ; 1F1A _ 89. C2
-        mov     eax, dword [memman]                     ; 1F1C _ A1, 00000008(d)
-        sub     esp, 8                                  ; 1F21 _ 83. EC, 08
-        push    edx                                     ; 1F24 _ 52
-        push    eax                                     ; 1F25 _ 50
-        call    memman_alloc_4K                         ; 1F26 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1F2B _ 83. C4, 10
-        mov     dword [ebp-10H], eax                    ; 1F2E _ 89. 45, F0
-        sub     esp, 12                                 ; 1F31 _ 83. EC, 0C
-        push    dword [ebp+8H]                          ; 1F34 _ FF. 75, 08
-        call    sheet_alloc                             ; 1F37 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1F3C _ 83. C4, 10
-        mov     dword [ebp-0CH], eax                    ; 1F3F _ 89. 45, F4
-        sub     esp, 12                                 ; 1F42 _ 83. EC, 0C
-        push    99                                      ; 1F45 _ 6A, 63
-        push    dword [ebp+20H]                         ; 1F47 _ FF. 75, 20
-        push    dword [ebp+1CH]                         ; 1F4A _ FF. 75, 1C
-        push    dword [ebp-10H]                         ; 1F4D _ FF. 75, F0
-        push    dword [ebp-0CH]                         ; 1F50 _ FF. 75, F4
-        call    sheet_setbuf                            ; 1F53 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 1F58 _ 83. C4, 20
-        sub     esp, 4                                  ; 1F5B _ 83. EC, 04
-        push    dword [ebp+18H]                         ; 1F5E _ FF. 75, 18
-        push    dword [ebp-0CH]                         ; 1F61 _ FF. 75, F4
-        push    dword [ebp+8H]                          ; 1F64 _ FF. 75, 08
-        call    make_window8                            ; 1F67 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 1F6C _ 83. C4, 10
-        call    task_alloc                              ; 1F6F _ E8, FFFFFFFC(rel)
-        mov     dword [ebp+0CH], eax                    ; 1F74 _ 89. 45, 0C
-        mov     eax, dword [ebp+0CH]                    ; 1F77 _ 8B. 45, 0C
-        mov     dword [eax+70H], 0                      ; 1F7A _ C7. 40, 70, 00000000
-        mov     eax, dword [ebp+0CH]                    ; 1F81 _ 8B. 45, 0C
-        mov     dword [eax+74H], 1073741824             ; 1F84 _ C7. 40, 74, 40000000
-        call    get_code32_addr                         ; 1F8B _ E8, FFFFFFFC(rel)
-        neg     eax                                     ; 1F90 _ F7. D8
-        add     eax, task_b_main                        ; 1F92 _ 05, 00000000(d)
-        mov     edx, eax                                ; 1F97 _ 89. C2
-        mov     eax, dword [ebp+0CH]                    ; 1F99 _ 8B. 45, 0C
-        mov     dword [eax+30H], edx                    ; 1F9C _ 89. 50, 30
-        mov     eax, dword [ebp+0CH]                    ; 1F9F _ 8B. 45, 0C
-        mov     dword [eax+58H], 0                      ; 1FA2 _ C7. 40, 58, 00000000
-        mov     eax, dword [ebp+0CH]                    ; 1FA9 _ 8B. 45, 0C
-        mov     dword [eax+5CH], 8                      ; 1FAC _ C7. 40, 5C, 00000008
-        mov     eax, dword [ebp+0CH]                    ; 1FB3 _ 8B. 45, 0C
-        mov     dword [eax+60H], 32                     ; 1FB6 _ C7. 40, 60, 00000020
-        mov     eax, dword [ebp+0CH]                    ; 1FBD _ 8B. 45, 0C
-        mov     dword [eax+64H], 24                     ; 1FC0 _ C7. 40, 64, 00000018
-        mov     eax, dword [ebp+0CH]                    ; 1FC7 _ 8B. 45, 0C
-        mov     dword [eax+68H], 0                      ; 1FCA _ C7. 40, 68, 00000000
-        mov     eax, dword [ebp+0CH]                    ; 1FD1 _ 8B. 45, 0C
-        mov     dword [eax+6CH], 16                     ; 1FD4 _ C7. 40, 6C, 00000010
-        mov     eax, dword [ebp+0CH]                    ; 1FDB _ 8B. 45, 0C
-        mov     eax, dword [eax+48H]                    ; 1FDE _ 8B. 40, 48
-        lea     edx, [eax-8H]                           ; 1FE1 _ 8D. 50, F8
-        mov     eax, dword [ebp+0CH]                    ; 1FE4 _ 8B. 45, 0C
-        mov     dword [eax+48H], edx                    ; 1FE7 _ 89. 50, 48
-        mov     eax, dword [ebp+0CH]                    ; 1FEA _ 8B. 45, 0C
-        mov     eax, dword [eax+48H]                    ; 1FED _ 8B. 40, 48
-        add     eax, 4                                  ; 1FF0 _ 83. C0, 04
-        mov     edx, eax                                ; 1FF3 _ 89. C2
-        mov     eax, dword [ebp-0CH]                    ; 1FF5 _ 8B. 45, F4
-        mov     dword [edx], eax                        ; 1FF8 _ 89. 02
-        sub     esp, 4                                  ; 1FFA _ 83. EC, 04
-        push    dword [ebp+14H]                         ; 1FFD _ FF. 75, 14
-        push    dword [ebp+10H]                         ; 2000 _ FF. 75, 10
-        push    dword [ebp+0CH]                         ; 2003 _ FF. 75, 0C
-        call    task_run                                ; 2006 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 200B _ 83. C4, 10
-        push    dword [ebp+28H]                         ; 200E _ FF. 75, 28
-        push    dword [ebp+24H]                         ; 2011 _ FF. 75, 24
-        push    dword [ebp-0CH]                         ; 2014 _ FF. 75, F4
-        push    dword [ebp+8H]                          ; 2017 _ FF. 75, 08
-        call    sheet_slide                             ; 201A _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 201F _ 83. C4, 10
-        sub     esp, 4                                  ; 2022 _ 83. EC, 04
-        push    dword [ebp+2CH]                         ; 2025 _ FF. 75, 2C
-        push    dword [ebp-0CH]                         ; 2028 _ FF. 75, F4
-        push    dword [ebp+8H]                          ; 202B _ FF. 75, 08
-        call    sheet_level_updown                      ; 202E _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 2033 _ 83. C4, 10
-        mov     eax, dword [ebp-0CH]                    ; 2036 _ 8B. 45, F4
-        leave                                           ; 2039 _ C9
-        ret                                             ; 203A _ C3
+        push    ebp                                     ; 1F10 _ 55
+        mov     ebp, esp                                ; 1F11 _ 89. E5
+        sub     esp, 24                                 ; 1F13 _ 83. EC, 18
+        mov     eax, dword [ebp+1CH]                    ; 1F16 _ 8B. 45, 1C
+        imul    eax, dword [ebp+20H]                    ; 1F19 _ 0F AF. 45, 20
+        mov     edx, eax                                ; 1F1D _ 89. C2
+        mov     eax, dword [memman]                     ; 1F1F _ A1, 00000008(d)
+        sub     esp, 8                                  ; 1F24 _ 83. EC, 08
+        push    edx                                     ; 1F27 _ 52
+        push    eax                                     ; 1F28 _ 50
+        call    memman_alloc_4K                         ; 1F29 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1F2E _ 83. C4, 10
+        mov     dword [ebp-10H], eax                    ; 1F31 _ 89. 45, F0
+        sub     esp, 12                                 ; 1F34 _ 83. EC, 0C
+        push    dword [ebp+8H]                          ; 1F37 _ FF. 75, 08
+        call    sheet_alloc                             ; 1F3A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1F3F _ 83. C4, 10
+        mov     dword [ebp-0CH], eax                    ; 1F42 _ 89. 45, F4
+        sub     esp, 12                                 ; 1F45 _ 83. EC, 0C
+        push    99                                      ; 1F48 _ 6A, 63
+        push    dword [ebp+20H]                         ; 1F4A _ FF. 75, 20
+        push    dword [ebp+1CH]                         ; 1F4D _ FF. 75, 1C
+        push    dword [ebp-10H]                         ; 1F50 _ FF. 75, F0
+        push    dword [ebp-0CH]                         ; 1F53 _ FF. 75, F4
+        call    sheet_setbuf                            ; 1F56 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 1F5B _ 83. C4, 20
+        sub     esp, 4                                  ; 1F5E _ 83. EC, 04
+        push    dword [ebp+18H]                         ; 1F61 _ FF. 75, 18
+        push    dword [ebp-0CH]                         ; 1F64 _ FF. 75, F4
+        push    dword [ebp+8H]                          ; 1F67 _ FF. 75, 08
+        call    make_window8                            ; 1F6A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 1F6F _ 83. C4, 10
+        call    task_alloc                              ; 1F72 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp+0CH], eax                    ; 1F77 _ 89. 45, 0C
+        mov     eax, dword [ebp+0CH]                    ; 1F7A _ 8B. 45, 0C
+        mov     dword [eax+70H], 0                      ; 1F7D _ C7. 40, 70, 00000000
+        mov     eax, dword [ebp+0CH]                    ; 1F84 _ 8B. 45, 0C
+        mov     dword [eax+74H], 1073741824             ; 1F87 _ C7. 40, 74, 40000000
+        call    get_code32_addr                         ; 1F8E _ E8, FFFFFFFC(rel)
+        neg     eax                                     ; 1F93 _ F7. D8
+        add     eax, task_b_main                        ; 1F95 _ 05, 00000000(d)
+        mov     edx, eax                                ; 1F9A _ 89. C2
+        mov     eax, dword [ebp+0CH]                    ; 1F9C _ 8B. 45, 0C
+        mov     dword [eax+30H], edx                    ; 1F9F _ 89. 50, 30
+        mov     eax, dword [ebp+0CH]                    ; 1FA2 _ 8B. 45, 0C
+        mov     dword [eax+58H], 0                      ; 1FA5 _ C7. 40, 58, 00000000
+        mov     eax, dword [ebp+0CH]                    ; 1FAC _ 8B. 45, 0C
+        mov     dword [eax+5CH], 8                      ; 1FAF _ C7. 40, 5C, 00000008
+        mov     eax, dword [ebp+0CH]                    ; 1FB6 _ 8B. 45, 0C
+        mov     dword [eax+60H], 32                     ; 1FB9 _ C7. 40, 60, 00000020
+        mov     eax, dword [ebp+0CH]                    ; 1FC0 _ 8B. 45, 0C
+        mov     dword [eax+64H], 24                     ; 1FC3 _ C7. 40, 64, 00000018
+        mov     eax, dword [ebp+0CH]                    ; 1FCA _ 8B. 45, 0C
+        mov     dword [eax+68H], 0                      ; 1FCD _ C7. 40, 68, 00000000
+        mov     eax, dword [ebp+0CH]                    ; 1FD4 _ 8B. 45, 0C
+        mov     dword [eax+6CH], 16                     ; 1FD7 _ C7. 40, 6C, 00000010
+        mov     eax, dword [ebp+0CH]                    ; 1FDE _ 8B. 45, 0C
+        mov     eax, dword [eax+48H]                    ; 1FE1 _ 8B. 40, 48
+        lea     edx, [eax-8H]                           ; 1FE4 _ 8D. 50, F8
+        mov     eax, dword [ebp+0CH]                    ; 1FE7 _ 8B. 45, 0C
+        mov     dword [eax+48H], edx                    ; 1FEA _ 89. 50, 48
+        mov     eax, dword [ebp+0CH]                    ; 1FED _ 8B. 45, 0C
+        mov     eax, dword [eax+48H]                    ; 1FF0 _ 8B. 40, 48
+        add     eax, 4                                  ; 1FF3 _ 83. C0, 04
+        mov     edx, eax                                ; 1FF6 _ 89. C2
+        mov     eax, dword [ebp-0CH]                    ; 1FF8 _ 8B. 45, F4
+        mov     dword [edx], eax                        ; 1FFB _ 89. 02
+        sub     esp, 4                                  ; 1FFD _ 83. EC, 04
+        push    dword [ebp+14H]                         ; 2000 _ FF. 75, 14
+        push    dword [ebp+10H]                         ; 2003 _ FF. 75, 10
+        push    dword [ebp+0CH]                         ; 2006 _ FF. 75, 0C
+        call    task_run                                ; 2009 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 200E _ 83. C4, 10
+        push    dword [ebp+28H]                         ; 2011 _ FF. 75, 28
+        push    dword [ebp+24H]                         ; 2014 _ FF. 75, 24
+        push    dword [ebp-0CH]                         ; 2017 _ FF. 75, F4
+        push    dword [ebp+8H]                          ; 201A _ FF. 75, 08
+        call    sheet_slide                             ; 201D _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2022 _ 83. C4, 10
+        sub     esp, 4                                  ; 2025 _ 83. EC, 04
+        push    dword [ebp+2CH]                         ; 2028 _ FF. 75, 2C
+        push    dword [ebp-0CH]                         ; 202B _ FF. 75, F4
+        push    dword [ebp+8H]                          ; 202E _ FF. 75, 08
+        call    sheet_level_updown                      ; 2031 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2036 _ 83. C4, 10
+        mov     eax, dword [ebp-0CH]                    ; 2039 _ 8B. 45, F4
+        leave                                           ; 203C _ C9
+        ret                                             ; 203D _ C3
 ; messageBoxToTask End of function
 
 make_window8:; Function begin
-        push    ebp                                     ; 203B _ 55
-        mov     ebp, esp                                ; 203C _ 89. E5
-        push    ebx                                     ; 203E _ 53
-        sub     esp, 36                                 ; 203F _ 83. EC, 24
-        mov     eax, dword [ebp+0CH]                    ; 2042 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 2045 _ 8B. 40, 04
-        mov     dword [ebp-10H], eax                    ; 2048 _ 89. 45, F0
-        mov     eax, dword [ebp+0CH]                    ; 204B _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 204E _ 8B. 40, 08
-        mov     dword [ebp-0CH], eax                    ; 2051 _ 89. 45, F4
-        mov     eax, dword [ebp-10H]                    ; 2054 _ 8B. 45, F0
-        lea     edx, [eax-1H]                           ; 2057 _ 8D. 50, FF
-        mov     eax, dword [ebp+0CH]                    ; 205A _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 205D _ 8B. 00
-        push    0                                       ; 205F _ 6A, 00
-        push    edx                                     ; 2061 _ 52
+        push    ebp                                     ; 203E _ 55
+        mov     ebp, esp                                ; 203F _ 89. E5
+        push    ebx                                     ; 2041 _ 53
+        sub     esp, 36                                 ; 2042 _ 83. EC, 24
+        mov     eax, dword [ebp+0CH]                    ; 2045 _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2048 _ 8B. 40, 04
+        mov     dword [ebp-10H], eax                    ; 204B _ 89. 45, F0
+        mov     eax, dword [ebp+0CH]                    ; 204E _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 2051 _ 8B. 40, 08
+        mov     dword [ebp-0CH], eax                    ; 2054 _ 89. 45, F4
+        mov     eax, dword [ebp-10H]                    ; 2057 _ 8B. 45, F0
+        lea     edx, [eax-1H]                           ; 205A _ 8D. 50, FF
+        mov     eax, dword [ebp+0CH]                    ; 205D _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 2060 _ 8B. 00
         push    0                                       ; 2062 _ 6A, 00
-        push    0                                       ; 2064 _ 6A, 00
-        push    8                                       ; 2066 _ 6A, 08
-        push    dword [ebp-10H]                         ; 2068 _ FF. 75, F0
-        push    eax                                     ; 206B _ 50
-        call    boxfill8                                ; 206C _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 2071 _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 2074 _ 8B. 45, F0
-        lea     edx, [eax-2H]                           ; 2077 _ 8D. 50, FE
-        mov     eax, dword [ebp+0CH]                    ; 207A _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 207D _ 8B. 00
-        push    1                                       ; 207F _ 6A, 01
-        push    edx                                     ; 2081 _ 52
+        push    edx                                     ; 2064 _ 52
+        push    0                                       ; 2065 _ 6A, 00
+        push    0                                       ; 2067 _ 6A, 00
+        push    8                                       ; 2069 _ 6A, 08
+        push    dword [ebp-10H]                         ; 206B _ FF. 75, F0
+        push    eax                                     ; 206E _ 50
+        call    boxfill8                                ; 206F _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 2074 _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 2077 _ 8B. 45, F0
+        lea     edx, [eax-2H]                           ; 207A _ 8D. 50, FE
+        mov     eax, dword [ebp+0CH]                    ; 207D _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 2080 _ 8B. 00
         push    1                                       ; 2082 _ 6A, 01
-        push    1                                       ; 2084 _ 6A, 01
-        push    7                                       ; 2086 _ 6A, 07
-        push    dword [ebp-10H]                         ; 2088 _ FF. 75, F0
-        push    eax                                     ; 208B _ 50
-        call    boxfill8                                ; 208C _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 2091 _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 2094 _ 8B. 45, F4
-        lea     edx, [eax-1H]                           ; 2097 _ 8D. 50, FF
-        mov     eax, dword [ebp+0CH]                    ; 209A _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 209D _ 8B. 00
-        push    edx                                     ; 209F _ 52
-        push    0                                       ; 20A0 _ 6A, 00
-        push    0                                       ; 20A2 _ 6A, 00
-        push    0                                       ; 20A4 _ 6A, 00
-        push    8                                       ; 20A6 _ 6A, 08
-        push    dword [ebp-10H]                         ; 20A8 _ FF. 75, F0
-        push    eax                                     ; 20AB _ 50
-        call    boxfill8                                ; 20AC _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 20B1 _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 20B4 _ 8B. 45, F4
-        lea     edx, [eax-1H]                           ; 20B7 _ 8D. 50, FF
-        mov     eax, dword [ebp+0CH]                    ; 20BA _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 20BD _ 8B. 00
-        push    edx                                     ; 20BF _ 52
-        push    1                                       ; 20C0 _ 6A, 01
-        push    1                                       ; 20C2 _ 6A, 01
-        push    1                                       ; 20C4 _ 6A, 01
-        push    7                                       ; 20C6 _ 6A, 07
-        push    dword [ebp-10H]                         ; 20C8 _ FF. 75, F0
-        push    eax                                     ; 20CB _ 50
-        call    boxfill8                                ; 20CC _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 20D1 _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 20D4 _ 8B. 45, F4
-        lea     ebx, [eax-2H]                           ; 20D7 _ 8D. 58, FE
-        mov     eax, dword [ebp-10H]                    ; 20DA _ 8B. 45, F0
-        lea     ecx, [eax-2H]                           ; 20DD _ 8D. 48, FE
-        mov     eax, dword [ebp-10H]                    ; 20E0 _ 8B. 45, F0
-        lea     edx, [eax-2H]                           ; 20E3 _ 8D. 50, FE
-        mov     eax, dword [ebp+0CH]                    ; 20E6 _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 20E9 _ 8B. 00
-        push    ebx                                     ; 20EB _ 53
-        push    ecx                                     ; 20EC _ 51
-        push    1                                       ; 20ED _ 6A, 01
-        push    edx                                     ; 20EF _ 52
-        push    15                                      ; 20F0 _ 6A, 0F
-        push    dword [ebp-10H]                         ; 20F2 _ FF. 75, F0
-        push    eax                                     ; 20F5 _ 50
-        call    boxfill8                                ; 20F6 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 20FB _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 20FE _ 8B. 45, F4
-        lea     ebx, [eax-1H]                           ; 2101 _ 8D. 58, FF
-        mov     eax, dword [ebp-10H]                    ; 2104 _ 8B. 45, F0
-        lea     ecx, [eax-1H]                           ; 2107 _ 8D. 48, FF
-        mov     eax, dword [ebp-10H]                    ; 210A _ 8B. 45, F0
-        lea     edx, [eax-1H]                           ; 210D _ 8D. 50, FF
-        mov     eax, dword [ebp+0CH]                    ; 2110 _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 2113 _ 8B. 00
-        push    ebx                                     ; 2115 _ 53
-        push    ecx                                     ; 2116 _ 51
-        push    0                                       ; 2117 _ 6A, 00
-        push    edx                                     ; 2119 _ 52
+        push    edx                                     ; 2084 _ 52
+        push    1                                       ; 2085 _ 6A, 01
+        push    1                                       ; 2087 _ 6A, 01
+        push    7                                       ; 2089 _ 6A, 07
+        push    dword [ebp-10H]                         ; 208B _ FF. 75, F0
+        push    eax                                     ; 208E _ 50
+        call    boxfill8                                ; 208F _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 2094 _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 2097 _ 8B. 45, F4
+        lea     edx, [eax-1H]                           ; 209A _ 8D. 50, FF
+        mov     eax, dword [ebp+0CH]                    ; 209D _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 20A0 _ 8B. 00
+        push    edx                                     ; 20A2 _ 52
+        push    0                                       ; 20A3 _ 6A, 00
+        push    0                                       ; 20A5 _ 6A, 00
+        push    0                                       ; 20A7 _ 6A, 00
+        push    8                                       ; 20A9 _ 6A, 08
+        push    dword [ebp-10H]                         ; 20AB _ FF. 75, F0
+        push    eax                                     ; 20AE _ 50
+        call    boxfill8                                ; 20AF _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 20B4 _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 20B7 _ 8B. 45, F4
+        lea     edx, [eax-1H]                           ; 20BA _ 8D. 50, FF
+        mov     eax, dword [ebp+0CH]                    ; 20BD _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 20C0 _ 8B. 00
+        push    edx                                     ; 20C2 _ 52
+        push    1                                       ; 20C3 _ 6A, 01
+        push    1                                       ; 20C5 _ 6A, 01
+        push    1                                       ; 20C7 _ 6A, 01
+        push    7                                       ; 20C9 _ 6A, 07
+        push    dword [ebp-10H]                         ; 20CB _ FF. 75, F0
+        push    eax                                     ; 20CE _ 50
+        call    boxfill8                                ; 20CF _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 20D4 _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 20D7 _ 8B. 45, F4
+        lea     ebx, [eax-2H]                           ; 20DA _ 8D. 58, FE
+        mov     eax, dword [ebp-10H]                    ; 20DD _ 8B. 45, F0
+        lea     ecx, [eax-2H]                           ; 20E0 _ 8D. 48, FE
+        mov     eax, dword [ebp-10H]                    ; 20E3 _ 8B. 45, F0
+        lea     edx, [eax-2H]                           ; 20E6 _ 8D. 50, FE
+        mov     eax, dword [ebp+0CH]                    ; 20E9 _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 20EC _ 8B. 00
+        push    ebx                                     ; 20EE _ 53
+        push    ecx                                     ; 20EF _ 51
+        push    1                                       ; 20F0 _ 6A, 01
+        push    edx                                     ; 20F2 _ 52
+        push    15                                      ; 20F3 _ 6A, 0F
+        push    dword [ebp-10H]                         ; 20F5 _ FF. 75, F0
+        push    eax                                     ; 20F8 _ 50
+        call    boxfill8                                ; 20F9 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 20FE _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 2101 _ 8B. 45, F4
+        lea     ebx, [eax-1H]                           ; 2104 _ 8D. 58, FF
+        mov     eax, dword [ebp-10H]                    ; 2107 _ 8B. 45, F0
+        lea     ecx, [eax-1H]                           ; 210A _ 8D. 48, FF
+        mov     eax, dword [ebp-10H]                    ; 210D _ 8B. 45, F0
+        lea     edx, [eax-1H]                           ; 2110 _ 8D. 50, FF
+        mov     eax, dword [ebp+0CH]                    ; 2113 _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 2116 _ 8B. 00
+        push    ebx                                     ; 2118 _ 53
+        push    ecx                                     ; 2119 _ 51
         push    0                                       ; 211A _ 6A, 00
-        push    dword [ebp-10H]                         ; 211C _ FF. 75, F0
-        push    eax                                     ; 211F _ 50
-        call    boxfill8                                ; 2120 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 2125 _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 2128 _ 8B. 45, F4
-        lea     ecx, [eax-3H]                           ; 212B _ 8D. 48, FD
-        mov     eax, dword [ebp-10H]                    ; 212E _ 8B. 45, F0
-        lea     edx, [eax-3H]                           ; 2131 _ 8D. 50, FD
-        mov     eax, dword [ebp+0CH]                    ; 2134 _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 2137 _ 8B. 00
-        push    ecx                                     ; 2139 _ 51
-        push    edx                                     ; 213A _ 52
-        push    2                                       ; 213B _ 6A, 02
-        push    2                                       ; 213D _ 6A, 02
-        push    8                                       ; 213F _ 6A, 08
-        push    dword [ebp-10H]                         ; 2141 _ FF. 75, F0
-        push    eax                                     ; 2144 _ 50
-        call    boxfill8                                ; 2145 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 214A _ 83. C4, 1C
-        mov     eax, dword [ebp-10H]                    ; 214D _ 8B. 45, F0
-        lea     edx, [eax-4H]                           ; 2150 _ 8D. 50, FC
-        mov     eax, dword [ebp+0CH]                    ; 2153 _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 2156 _ 8B. 00
-        push    20                                      ; 2158 _ 6A, 14
-        push    edx                                     ; 215A _ 52
-        push    3                                       ; 215B _ 6A, 03
-        push    3                                       ; 215D _ 6A, 03
-        push    12                                      ; 215F _ 6A, 0C
-        push    dword [ebp-10H]                         ; 2161 _ FF. 75, F0
-        push    eax                                     ; 2164 _ 50
-        call    boxfill8                                ; 2165 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 216A _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 216D _ 8B. 45, F4
-        lea     ebx, [eax-2H]                           ; 2170 _ 8D. 58, FE
-        mov     eax, dword [ebp-10H]                    ; 2173 _ 8B. 45, F0
-        lea     ecx, [eax-2H]                           ; 2176 _ 8D. 48, FE
-        mov     eax, dword [ebp-0CH]                    ; 2179 _ 8B. 45, F4
-        lea     edx, [eax-2H]                           ; 217C _ 8D. 50, FE
-        mov     eax, dword [ebp+0CH]                    ; 217F _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 2182 _ 8B. 00
-        push    ebx                                     ; 2184 _ 53
-        push    ecx                                     ; 2185 _ 51
-        push    edx                                     ; 2186 _ 52
-        push    1                                       ; 2187 _ 6A, 01
-        push    15                                      ; 2189 _ 6A, 0F
-        push    dword [ebp-10H]                         ; 218B _ FF. 75, F0
-        push    eax                                     ; 218E _ 50
-        call    boxfill8                                ; 218F _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 2194 _ 83. C4, 1C
-        mov     eax, dword [ebp-0CH]                    ; 2197 _ 8B. 45, F4
-        lea     ebx, [eax-1H]                           ; 219A _ 8D. 58, FF
-        mov     eax, dword [ebp-10H]                    ; 219D _ 8B. 45, F0
-        lea     ecx, [eax-1H]                           ; 21A0 _ 8D. 48, FF
-        mov     eax, dword [ebp-0CH]                    ; 21A3 _ 8B. 45, F4
-        lea     edx, [eax-1H]                           ; 21A6 _ 8D. 50, FF
-        mov     eax, dword [ebp+0CH]                    ; 21A9 _ 8B. 45, 0C
-        mov     eax, dword [eax]                        ; 21AC _ 8B. 00
-        push    ebx                                     ; 21AE _ 53
-        push    ecx                                     ; 21AF _ 51
-        push    edx                                     ; 21B0 _ 52
-        push    0                                       ; 21B1 _ 6A, 00
-        push    0                                       ; 21B3 _ 6A, 00
-        push    dword [ebp-10H]                         ; 21B5 _ FF. 75, F0
-        push    eax                                     ; 21B8 _ 50
-        call    boxfill8                                ; 21B9 _ E8, FFFFFFFC(rel)
-        add     esp, 28                                 ; 21BE _ 83. C4, 1C
-        sub     esp, 8                                  ; 21C1 _ 83. EC, 08
-        push    dword [ebp+10H]                         ; 21C4 _ FF. 75, 10
-        push    7                                       ; 21C7 _ 6A, 07
-        push    4                                       ; 21C9 _ 6A, 04
-        push    8                                       ; 21CB _ 6A, 08
-        push    dword [ebp+0CH]                         ; 21CD _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 21D0 _ FF. 75, 08
-        call    showString                              ; 21D3 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 21D8 _ 83. C4, 20
-        mov     dword [ebp-18H], 0                      ; 21DB _ C7. 45, E8, 00000000
-        jmp     ?_083                                   ; 21E2 _ EB, 7D
+        push    edx                                     ; 211C _ 52
+        push    0                                       ; 211D _ 6A, 00
+        push    dword [ebp-10H]                         ; 211F _ FF. 75, F0
+        push    eax                                     ; 2122 _ 50
+        call    boxfill8                                ; 2123 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 2128 _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 212B _ 8B. 45, F4
+        lea     ecx, [eax-3H]                           ; 212E _ 8D. 48, FD
+        mov     eax, dword [ebp-10H]                    ; 2131 _ 8B. 45, F0
+        lea     edx, [eax-3H]                           ; 2134 _ 8D. 50, FD
+        mov     eax, dword [ebp+0CH]                    ; 2137 _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 213A _ 8B. 00
+        push    ecx                                     ; 213C _ 51
+        push    edx                                     ; 213D _ 52
+        push    2                                       ; 213E _ 6A, 02
+        push    2                                       ; 2140 _ 6A, 02
+        push    8                                       ; 2142 _ 6A, 08
+        push    dword [ebp-10H]                         ; 2144 _ FF. 75, F0
+        push    eax                                     ; 2147 _ 50
+        call    boxfill8                                ; 2148 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 214D _ 83. C4, 1C
+        mov     eax, dword [ebp-10H]                    ; 2150 _ 8B. 45, F0
+        lea     edx, [eax-4H]                           ; 2153 _ 8D. 50, FC
+        mov     eax, dword [ebp+0CH]                    ; 2156 _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 2159 _ 8B. 00
+        push    20                                      ; 215B _ 6A, 14
+        push    edx                                     ; 215D _ 52
+        push    3                                       ; 215E _ 6A, 03
+        push    3                                       ; 2160 _ 6A, 03
+        push    12                                      ; 2162 _ 6A, 0C
+        push    dword [ebp-10H]                         ; 2164 _ FF. 75, F0
+        push    eax                                     ; 2167 _ 50
+        call    boxfill8                                ; 2168 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 216D _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 2170 _ 8B. 45, F4
+        lea     ebx, [eax-2H]                           ; 2173 _ 8D. 58, FE
+        mov     eax, dword [ebp-10H]                    ; 2176 _ 8B. 45, F0
+        lea     ecx, [eax-2H]                           ; 2179 _ 8D. 48, FE
+        mov     eax, dword [ebp-0CH]                    ; 217C _ 8B. 45, F4
+        lea     edx, [eax-2H]                           ; 217F _ 8D. 50, FE
+        mov     eax, dword [ebp+0CH]                    ; 2182 _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 2185 _ 8B. 00
+        push    ebx                                     ; 2187 _ 53
+        push    ecx                                     ; 2188 _ 51
+        push    edx                                     ; 2189 _ 52
+        push    1                                       ; 218A _ 6A, 01
+        push    15                                      ; 218C _ 6A, 0F
+        push    dword [ebp-10H]                         ; 218E _ FF. 75, F0
+        push    eax                                     ; 2191 _ 50
+        call    boxfill8                                ; 2192 _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 2197 _ 83. C4, 1C
+        mov     eax, dword [ebp-0CH]                    ; 219A _ 8B. 45, F4
+        lea     ebx, [eax-1H]                           ; 219D _ 8D. 58, FF
+        mov     eax, dword [ebp-10H]                    ; 21A0 _ 8B. 45, F0
+        lea     ecx, [eax-1H]                           ; 21A3 _ 8D. 48, FF
+        mov     eax, dword [ebp-0CH]                    ; 21A6 _ 8B. 45, F4
+        lea     edx, [eax-1H]                           ; 21A9 _ 8D. 50, FF
+        mov     eax, dword [ebp+0CH]                    ; 21AC _ 8B. 45, 0C
+        mov     eax, dword [eax]                        ; 21AF _ 8B. 00
+        push    ebx                                     ; 21B1 _ 53
+        push    ecx                                     ; 21B2 _ 51
+        push    edx                                     ; 21B3 _ 52
+        push    0                                       ; 21B4 _ 6A, 00
+        push    0                                       ; 21B6 _ 6A, 00
+        push    dword [ebp-10H]                         ; 21B8 _ FF. 75, F0
+        push    eax                                     ; 21BB _ 50
+        call    boxfill8                                ; 21BC _ E8, FFFFFFFC(rel)
+        add     esp, 28                                 ; 21C1 _ 83. C4, 1C
+        sub     esp, 8                                  ; 21C4 _ 83. EC, 08
+        push    dword [ebp+10H]                         ; 21C7 _ FF. 75, 10
+        push    7                                       ; 21CA _ 6A, 07
+        push    4                                       ; 21CC _ 6A, 04
+        push    8                                       ; 21CE _ 6A, 08
+        push    dword [ebp+0CH]                         ; 21D0 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 21D3 _ FF. 75, 08
+        call    showString                              ; 21D6 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 21DB _ 83. C4, 20
+        mov     dword [ebp-18H], 0                      ; 21DE _ C7. 45, E8, 00000000
+        jmp     ?_083                                   ; 21E5 _ EB, 7D
 
-?_077:  mov     dword [ebp-14H], 0                      ; 21E4 _ C7. 45, EC, 00000000
-        jmp     ?_082                                   ; 21EB _ EB, 6A
+?_077:  mov     dword [ebp-14H], 0                      ; 21E7 _ C7. 45, EC, 00000000
+        jmp     ?_082                                   ; 21EE _ EB, 6A
 
-?_078:  mov     eax, dword [ebp-18H]                    ; 21ED _ 8B. 45, E8
-        shl     eax, 4                                  ; 21F0 _ C1. E0, 04
-        mov     edx, eax                                ; 21F3 _ 89. C2
-        mov     eax, dword [ebp-14H]                    ; 21F5 _ 8B. 45, EC
-        add     eax, edx                                ; 21F8 _ 01. D0
-        add     eax, closebtn.2534                      ; 21FA _ 05, 000001C0(d)
-        movzx   eax, byte [eax]                         ; 21FF _ 0F B6. 00
-        mov     byte [ebp-19H], al                      ; 2202 _ 88. 45, E7
-        cmp     byte [ebp-19H], 64                      ; 2205 _ 80. 7D, E7, 40
-        jnz     ?_079                                   ; 2209 _ 75, 06
-        mov     byte [ebp-19H], 0                       ; 220B _ C6. 45, E7, 00
-        jmp     ?_081                                   ; 220F _ EB, 16
+?_078:  mov     eax, dword [ebp-18H]                    ; 21F0 _ 8B. 45, E8
+        shl     eax, 4                                  ; 21F3 _ C1. E0, 04
+        mov     edx, eax                                ; 21F6 _ 89. C2
+        mov     eax, dword [ebp-14H]                    ; 21F8 _ 8B. 45, EC
+        add     eax, edx                                ; 21FB _ 01. D0
+        add     eax, closebtn.2536                      ; 21FD _ 05, 000001C0(d)
+        movzx   eax, byte [eax]                         ; 2202 _ 0F B6. 00
+        mov     byte [ebp-19H], al                      ; 2205 _ 88. 45, E7
+        cmp     byte [ebp-19H], 64                      ; 2208 _ 80. 7D, E7, 40
+        jnz     ?_079                                   ; 220C _ 75, 06
+        mov     byte [ebp-19H], 0                       ; 220E _ C6. 45, E7, 00
+        jmp     ?_081                                   ; 2212 _ EB, 16
 
-?_079:  cmp     byte [ebp-19H], 36                      ; 2211 _ 80. 7D, E7, 24
-        jnz     ?_080                                   ; 2215 _ 75, 06
-        mov     byte [ebp-19H], 15                      ; 2217 _ C6. 45, E7, 0F
-        jmp     ?_081                                   ; 221B _ EB, 0A
+?_079:  cmp     byte [ebp-19H], 36                      ; 2214 _ 80. 7D, E7, 24
+        jnz     ?_080                                   ; 2218 _ 75, 06
+        mov     byte [ebp-19H], 15                      ; 221A _ C6. 45, E7, 0F
+        jmp     ?_081                                   ; 221E _ EB, 0A
 
-?_080:  cmp     byte [ebp-19H], 81                      ; 221D _ 80. 7D, E7, 51
-        jnz     ?_081                                   ; 2221 _ 75, 04
-        mov     byte [ebp-19H], 8                       ; 2223 _ C6. 45, E7, 08
-?_081:  mov     eax, dword [ebp+0CH]                    ; 2227 _ 8B. 45, 0C
-        mov     edx, dword [eax]                        ; 222A _ 8B. 10
-        mov     eax, dword [ebp-18H]                    ; 222C _ 8B. 45, E8
-        lea     ecx, [eax+5H]                           ; 222F _ 8D. 48, 05
-        mov     eax, dword [ebp+0CH]                    ; 2232 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 2235 _ 8B. 40, 04
-        imul    ecx, eax                                ; 2238 _ 0F AF. C8
-        mov     eax, dword [ebp+0CH]                    ; 223B _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 223E _ 8B. 40, 04
-        lea     ebx, [eax-15H]                          ; 2241 _ 8D. 58, EB
-        mov     eax, dword [ebp-14H]                    ; 2244 _ 8B. 45, EC
-        add     eax, ebx                                ; 2247 _ 01. D8
-        add     eax, ecx                                ; 2249 _ 01. C8
-        add     edx, eax                                ; 224B _ 01. C2
-        movzx   eax, byte [ebp-19H]                     ; 224D _ 0F B6. 45, E7
-        mov     byte [edx], al                          ; 2251 _ 88. 02
-        add     dword [ebp-14H], 1                      ; 2253 _ 83. 45, EC, 01
-?_082:  cmp     dword [ebp-14H], 15                     ; 2257 _ 83. 7D, EC, 0F
-        jle     ?_078                                   ; 225B _ 7E, 90
-        add     dword [ebp-18H], 1                      ; 225D _ 83. 45, E8, 01
-?_083:  cmp     dword [ebp-18H], 13                     ; 2261 _ 83. 7D, E8, 0D
-        jle     ?_077                                   ; 2265 _ 0F 8E, FFFFFF79
-        nop                                             ; 226B _ 90
-        mov     ebx, dword [ebp-4H]                     ; 226C _ 8B. 5D, FC
-        leave                                           ; 226F _ C9
-        ret                                             ; 2270 _ C3
+?_080:  cmp     byte [ebp-19H], 81                      ; 2220 _ 80. 7D, E7, 51
+        jnz     ?_081                                   ; 2224 _ 75, 04
+        mov     byte [ebp-19H], 8                       ; 2226 _ C6. 45, E7, 08
+?_081:  mov     eax, dword [ebp+0CH]                    ; 222A _ 8B. 45, 0C
+        mov     edx, dword [eax]                        ; 222D _ 8B. 10
+        mov     eax, dword [ebp-18H]                    ; 222F _ 8B. 45, E8
+        lea     ecx, [eax+5H]                           ; 2232 _ 8D. 48, 05
+        mov     eax, dword [ebp+0CH]                    ; 2235 _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2238 _ 8B. 40, 04
+        imul    ecx, eax                                ; 223B _ 0F AF. C8
+        mov     eax, dword [ebp+0CH]                    ; 223E _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2241 _ 8B. 40, 04
+        lea     ebx, [eax-15H]                          ; 2244 _ 8D. 58, EB
+        mov     eax, dword [ebp-14H]                    ; 2247 _ 8B. 45, EC
+        add     eax, ebx                                ; 224A _ 01. D8
+        add     eax, ecx                                ; 224C _ 01. C8
+        add     edx, eax                                ; 224E _ 01. C2
+        movzx   eax, byte [ebp-19H]                     ; 2250 _ 0F B6. 45, E7
+        mov     byte [edx], al                          ; 2254 _ 88. 02
+        add     dword [ebp-14H], 1                      ; 2256 _ 83. 45, EC, 01
+?_082:  cmp     dword [ebp-14H], 15                     ; 225A _ 83. 7D, EC, 0F
+        jle     ?_078                                   ; 225E _ 7E, 90
+        add     dword [ebp-18H], 1                      ; 2260 _ 83. 45, E8, 01
+?_083:  cmp     dword [ebp-18H], 13                     ; 2264 _ 83. 7D, E8, 0D
+        jle     ?_077                                   ; 2268 _ 0F 8E, FFFFFF79
+        nop                                             ; 226E _ 90
+        mov     ebx, dword [ebp-4H]                     ; 226F _ 8B. 5D, FC
+        leave                                           ; 2272 _ C9
+        ret                                             ; 2273 _ C3
 ; make_window8 End of function
 
 memman_init:; Function begin
-        push    ebp                                     ; 2271 _ 55
-        mov     ebp, esp                                ; 2272 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 2274 _ 8B. 45, 08
-        mov     dword [eax], 0                          ; 2277 _ C7. 00, 00000000
-        mov     eax, dword [ebp+8H]                     ; 227D _ 8B. 45, 08
-        mov     dword [eax+4H], 0                       ; 2280 _ C7. 40, 04, 00000000
-        mov     eax, dword [ebp+8H]                     ; 2287 _ 8B. 45, 08
-        mov     dword [eax+8H], 0                       ; 228A _ C7. 40, 08, 00000000
-        mov     eax, dword [ebp+8H]                     ; 2291 _ 8B. 45, 08
-        mov     dword [eax+0CH], 0                      ; 2294 _ C7. 40, 0C, 00000000
-        nop                                             ; 229B _ 90
-        pop     ebp                                     ; 229C _ 5D
-        ret                                             ; 229D _ C3
+        push    ebp                                     ; 2274 _ 55
+        mov     ebp, esp                                ; 2275 _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 2277 _ 8B. 45, 08
+        mov     dword [eax], 0                          ; 227A _ C7. 00, 00000000
+        mov     eax, dword [ebp+8H]                     ; 2280 _ 8B. 45, 08
+        mov     dword [eax+4H], 0                       ; 2283 _ C7. 40, 04, 00000000
+        mov     eax, dword [ebp+8H]                     ; 228A _ 8B. 45, 08
+        mov     dword [eax+8H], 0                       ; 228D _ C7. 40, 08, 00000000
+        mov     eax, dword [ebp+8H]                     ; 2294 _ 8B. 45, 08
+        mov     dword [eax+0CH], 0                      ; 2297 _ C7. 40, 0C, 00000000
+        nop                                             ; 229E _ 90
+        pop     ebp                                     ; 229F _ 5D
+        ret                                             ; 22A0 _ C3
 ; memman_init End of function
 
 memman_total:; Function begin
-        push    ebp                                     ; 229E _ 55
-        mov     ebp, esp                                ; 229F _ 89. E5
-        sub     esp, 16                                 ; 22A1 _ 83. EC, 10
-        mov     dword [ebp-8H], 0                       ; 22A4 _ C7. 45, F8, 00000000
-        mov     dword [ebp-4H], 0                       ; 22AB _ C7. 45, FC, 00000000
-        jmp     ?_085                                   ; 22B2 _ EB, 14
+        push    ebp                                     ; 22A1 _ 55
+        mov     ebp, esp                                ; 22A2 _ 89. E5
+        sub     esp, 16                                 ; 22A4 _ 83. EC, 10
+        mov     dword [ebp-8H], 0                       ; 22A7 _ C7. 45, F8, 00000000
+        mov     dword [ebp-4H], 0                       ; 22AE _ C7. 45, FC, 00000000
+        jmp     ?_085                                   ; 22B5 _ EB, 14
 
-?_084:  mov     eax, dword [ebp+8H]                     ; 22B4 _ 8B. 45, 08
-        mov     edx, dword [ebp-4H]                     ; 22B7 _ 8B. 55, FC
-        add     edx, 2                                  ; 22BA _ 83. C2, 02
-        mov     eax, dword [eax+edx*8+4H]               ; 22BD _ 8B. 44 D0, 04
-        add     dword [ebp-8H], eax                     ; 22C1 _ 01. 45, F8
-        add     dword [ebp-4H], 1                       ; 22C4 _ 83. 45, FC, 01
-?_085:  mov     eax, dword [ebp+8H]                     ; 22C8 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 22CB _ 8B. 00
-        cmp     dword [ebp-4H], eax                     ; 22CD _ 39. 45, FC
-        jl      ?_084                                   ; 22D0 _ 7C, E2
-        mov     eax, dword [ebp-8H]                     ; 22D2 _ 8B. 45, F8
-        leave                                           ; 22D5 _ C9
-        ret                                             ; 22D6 _ C3
+?_084:  mov     eax, dword [ebp+8H]                     ; 22B7 _ 8B. 45, 08
+        mov     edx, dword [ebp-4H]                     ; 22BA _ 8B. 55, FC
+        add     edx, 2                                  ; 22BD _ 83. C2, 02
+        mov     eax, dword [eax+edx*8+4H]               ; 22C0 _ 8B. 44 D0, 04
+        add     dword [ebp-8H], eax                     ; 22C4 _ 01. 45, F8
+        add     dword [ebp-4H], 1                       ; 22C7 _ 83. 45, FC, 01
+?_085:  mov     eax, dword [ebp+8H]                     ; 22CB _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 22CE _ 8B. 00
+        cmp     dword [ebp-4H], eax                     ; 22D0 _ 39. 45, FC
+        jl      ?_084                                   ; 22D3 _ 7C, E2
+        mov     eax, dword [ebp-8H]                     ; 22D5 _ 8B. 45, F8
+        leave                                           ; 22D8 _ C9
+        ret                                             ; 22D9 _ C3
 ; memman_total End of function
 
 memman_alloc_FF:; Function begin
-        push    ebp                                     ; 22D7 _ 55
-        mov     ebp, esp                                ; 22D8 _ 89. E5
-        sub     esp, 16                                 ; 22DA _ 83. EC, 10
-        mov     dword [ebp-8H], 0                       ; 22DD _ C7. 45, F8, 00000000
-        jmp     ?_089                                   ; 22E4 _ E9, 00000085
+        push    ebp                                     ; 22DA _ 55
+        mov     ebp, esp                                ; 22DB _ 89. E5
+        sub     esp, 16                                 ; 22DD _ 83. EC, 10
+        mov     dword [ebp-8H], 0                       ; 22E0 _ C7. 45, F8, 00000000
+        jmp     ?_089                                   ; 22E7 _ E9, 00000085
 
-?_086:  mov     eax, dword [ebp+8H]                     ; 22E9 _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 22EC _ 8B. 55, F8
-        add     edx, 2                                  ; 22EF _ 83. C2, 02
-        mov     eax, dword [eax+edx*8+4H]               ; 22F2 _ 8B. 44 D0, 04
-        cmp     dword [ebp+0CH], eax                    ; 22F6 _ 39. 45, 0C
-        ja      ?_088                                   ; 22F9 _ 77, 6F
-        mov     eax, dword [ebp+8H]                     ; 22FB _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 22FE _ 8B. 55, F8
-        add     edx, 2                                  ; 2301 _ 83. C2, 02
-        mov     eax, dword [eax+edx*8]                  ; 2304 _ 8B. 04 D0
-        mov     dword [ebp-4H], eax                     ; 2307 _ 89. 45, FC
-        mov     eax, dword [ebp+8H]                     ; 230A _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 230D _ 8B. 55, F8
-        add     edx, 2                                  ; 2310 _ 83. C2, 02
-        mov     edx, dword [eax+edx*8]                  ; 2313 _ 8B. 14 D0
-        mov     eax, dword [ebp+0CH]                    ; 2316 _ 8B. 45, 0C
-        lea     ecx, [edx+eax]                          ; 2319 _ 8D. 0C 02
-        mov     eax, dword [ebp+8H]                     ; 231C _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 231F _ 8B. 55, F8
-        add     edx, 2                                  ; 2322 _ 83. C2, 02
-        mov     dword [eax+edx*8], ecx                  ; 2325 _ 89. 0C D0
-        mov     eax, dword [ebp+8H]                     ; 2328 _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 232B _ 8B. 55, F8
-        add     edx, 2                                  ; 232E _ 83. C2, 02
-        mov     eax, dword [eax+edx*8+4H]               ; 2331 _ 8B. 44 D0, 04
-        sub     eax, dword [ebp+0CH]                    ; 2335 _ 2B. 45, 0C
-        mov     edx, eax                                ; 2338 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 233A _ 8B. 45, 08
-        mov     ecx, dword [ebp-8H]                     ; 233D _ 8B. 4D, F8
-        add     ecx, 2                                  ; 2340 _ 83. C1, 02
-        mov     dword [eax+ecx*8+4H], edx               ; 2343 _ 89. 54 C8, 04
-        mov     eax, dword [ebp+8H]                     ; 2347 _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 234A _ 8B. 55, F8
-        add     edx, 2                                  ; 234D _ 83. C2, 02
-        mov     eax, dword [eax+edx*8+4H]               ; 2350 _ 8B. 44 D0, 04
-        test    eax, eax                                ; 2354 _ 85. C0
-        jnz     ?_087                                   ; 2356 _ 75, 0D
-        mov     eax, dword [ebp+8H]                     ; 2358 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 235B _ 8B. 00
-        lea     edx, [eax-1H]                           ; 235D _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 2360 _ 8B. 45, 08
-        mov     dword [eax], edx                        ; 2363 _ 89. 10
-?_087:  mov     eax, dword [ebp-4H]                     ; 2365 _ 8B. 45, FC
-        jmp     ?_090                                   ; 2368 _ EB, 17
+?_086:  mov     eax, dword [ebp+8H]                     ; 22EC _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 22EF _ 8B. 55, F8
+        add     edx, 2                                  ; 22F2 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8+4H]               ; 22F5 _ 8B. 44 D0, 04
+        cmp     dword [ebp+0CH], eax                    ; 22F9 _ 39. 45, 0C
+        ja      ?_088                                   ; 22FC _ 77, 6F
+        mov     eax, dword [ebp+8H]                     ; 22FE _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 2301 _ 8B. 55, F8
+        add     edx, 2                                  ; 2304 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8]                  ; 2307 _ 8B. 04 D0
+        mov     dword [ebp-4H], eax                     ; 230A _ 89. 45, FC
+        mov     eax, dword [ebp+8H]                     ; 230D _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 2310 _ 8B. 55, F8
+        add     edx, 2                                  ; 2313 _ 83. C2, 02
+        mov     edx, dword [eax+edx*8]                  ; 2316 _ 8B. 14 D0
+        mov     eax, dword [ebp+0CH]                    ; 2319 _ 8B. 45, 0C
+        lea     ecx, [edx+eax]                          ; 231C _ 8D. 0C 02
+        mov     eax, dword [ebp+8H]                     ; 231F _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 2322 _ 8B. 55, F8
+        add     edx, 2                                  ; 2325 _ 83. C2, 02
+        mov     dword [eax+edx*8], ecx                  ; 2328 _ 89. 0C D0
+        mov     eax, dword [ebp+8H]                     ; 232B _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 232E _ 8B. 55, F8
+        add     edx, 2                                  ; 2331 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8+4H]               ; 2334 _ 8B. 44 D0, 04
+        sub     eax, dword [ebp+0CH]                    ; 2338 _ 2B. 45, 0C
+        mov     edx, eax                                ; 233B _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 233D _ 8B. 45, 08
+        mov     ecx, dword [ebp-8H]                     ; 2340 _ 8B. 4D, F8
+        add     ecx, 2                                  ; 2343 _ 83. C1, 02
+        mov     dword [eax+ecx*8+4H], edx               ; 2346 _ 89. 54 C8, 04
+        mov     eax, dword [ebp+8H]                     ; 234A _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 234D _ 8B. 55, F8
+        add     edx, 2                                  ; 2350 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8+4H]               ; 2353 _ 8B. 44 D0, 04
+        test    eax, eax                                ; 2357 _ 85. C0
+        jnz     ?_087                                   ; 2359 _ 75, 0D
+        mov     eax, dword [ebp+8H]                     ; 235B _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 235E _ 8B. 00
+        lea     edx, [eax-1H]                           ; 2360 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 2363 _ 8B. 45, 08
+        mov     dword [eax], edx                        ; 2366 _ 89. 10
+?_087:  mov     eax, dword [ebp-4H]                     ; 2368 _ 8B. 45, FC
+        jmp     ?_090                                   ; 236B _ EB, 17
 
-?_088:  add     dword [ebp-8H], 1                       ; 236A _ 83. 45, F8, 01
-?_089:  mov     eax, dword [ebp+8H]                     ; 236E _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 2371 _ 8B. 00
-        cmp     dword [ebp-8H], eax                     ; 2373 _ 39. 45, F8
-        jl      ?_086                                   ; 2376 _ 0F 8C, FFFFFF6D
-        mov     eax, 0                                  ; 237C _ B8, 00000000
-?_090:  leave                                           ; 2381 _ C9
-        ret                                             ; 2382 _ C3
+?_088:  add     dword [ebp-8H], 1                       ; 236D _ 83. 45, F8, 01
+?_089:  mov     eax, dword [ebp+8H]                     ; 2371 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2374 _ 8B. 00
+        cmp     dword [ebp-8H], eax                     ; 2376 _ 39. 45, F8
+        jl      ?_086                                   ; 2379 _ 0F 8C, FFFFFF6D
+        mov     eax, 0                                  ; 237F _ B8, 00000000
+?_090:  leave                                           ; 2384 _ C9
+        ret                                             ; 2385 _ C3
 ; memman_alloc_FF End of function
 
 memman_alloc_4K:; Function begin
-        push    ebp                                     ; 2383 _ 55
-        mov     ebp, esp                                ; 2384 _ 89. E5
-        sub     esp, 16                                 ; 2386 _ 83. EC, 10
-        mov     eax, dword [ebp+0CH]                    ; 2389 _ 8B. 45, 0C
-        add     eax, 4095                               ; 238C _ 05, 00000FFF
-        and     eax, 0FFFFF000H                         ; 2391 _ 25, FFFFF000
-        mov     dword [ebp+0CH], eax                    ; 2396 _ 89. 45, 0C
-        push    dword [ebp+0CH]                         ; 2399 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 239C _ FF. 75, 08
-        call    memman_alloc_FF                         ; 239F _ E8, FFFFFFFC(rel)
-        add     esp, 8                                  ; 23A4 _ 83. C4, 08
-        mov     dword [ebp-4H], eax                     ; 23A7 _ 89. 45, FC
-        mov     eax, dword [ebp-4H]                     ; 23AA _ 8B. 45, FC
-        leave                                           ; 23AD _ C9
-        ret                                             ; 23AE _ C3
+        push    ebp                                     ; 2386 _ 55
+        mov     ebp, esp                                ; 2387 _ 89. E5
+        sub     esp, 16                                 ; 2389 _ 83. EC, 10
+        mov     eax, dword [ebp+0CH]                    ; 238C _ 8B. 45, 0C
+        add     eax, 4095                               ; 238F _ 05, 00000FFF
+        and     eax, 0FFFFF000H                         ; 2394 _ 25, FFFFF000
+        mov     dword [ebp+0CH], eax                    ; 2399 _ 89. 45, 0C
+        push    dword [ebp+0CH]                         ; 239C _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 239F _ FF. 75, 08
+        call    memman_alloc_FF                         ; 23A2 _ E8, FFFFFFFC(rel)
+        add     esp, 8                                  ; 23A7 _ 83. C4, 08
+        mov     dword [ebp-4H], eax                     ; 23AA _ 89. 45, FC
+        mov     eax, dword [ebp-4H]                     ; 23AD _ 8B. 45, FC
+        leave                                           ; 23B0 _ C9
+        ret                                             ; 23B1 _ C3
 ; memman_alloc_4K End of function
 
 memman_free:; Function begin
-        push    ebp                                     ; 23AF _ 55
-        mov     ebp, esp                                ; 23B0 _ 89. E5
-        push    ebx                                     ; 23B2 _ 53
-        sub     esp, 16                                 ; 23B3 _ 83. EC, 10
-        mov     dword [ebp-0CH], 0                      ; 23B6 _ C7. 45, F4, 00000000
-        jmp     ?_092                                   ; 23BD _ EB, 15
+        push    ebp                                     ; 23B2 _ 55
+        mov     ebp, esp                                ; 23B3 _ 89. E5
+        push    ebx                                     ; 23B5 _ 53
+        sub     esp, 16                                 ; 23B6 _ 83. EC, 10
+        mov     dword [ebp-0CH], 0                      ; 23B9 _ C7. 45, F4, 00000000
+        jmp     ?_092                                   ; 23C0 _ EB, 15
 
-?_091:  mov     eax, dword [ebp+8H]                     ; 23BF _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 23C2 _ 8B. 55, F4
-        add     edx, 2                                  ; 23C5 _ 83. C2, 02
-        mov     eax, dword [eax+edx*8]                  ; 23C8 _ 8B. 04 D0
-        cmp     dword [ebp+0CH], eax                    ; 23CB _ 39. 45, 0C
-        jc      ?_093                                   ; 23CE _ 72, 10
-        add     dword [ebp-0CH], 1                      ; 23D0 _ 83. 45, F4, 01
-?_092:  mov     eax, dword [ebp+8H]                     ; 23D4 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 23D7 _ 8B. 00
-        cmp     dword [ebp-0CH], eax                    ; 23D9 _ 39. 45, F4
-        jl      ?_091                                   ; 23DC _ 7C, E1
-        jmp     ?_094                                   ; 23DE _ EB, 01
+?_091:  mov     eax, dword [ebp+8H]                     ; 23C2 _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 23C5 _ 8B. 55, F4
+        add     edx, 2                                  ; 23C8 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8]                  ; 23CB _ 8B. 04 D0
+        cmp     dword [ebp+0CH], eax                    ; 23CE _ 39. 45, 0C
+        jc      ?_093                                   ; 23D1 _ 72, 10
+        add     dword [ebp-0CH], 1                      ; 23D3 _ 83. 45, F4, 01
+?_092:  mov     eax, dword [ebp+8H]                     ; 23D7 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 23DA _ 8B. 00
+        cmp     dword [ebp-0CH], eax                    ; 23DC _ 39. 45, F4
+        jl      ?_091                                   ; 23DF _ 7C, E1
+        jmp     ?_094                                   ; 23E1 _ EB, 01
 
-?_093:  nop                                             ; 23E0 _ 90
-?_094:  cmp     dword [ebp-0CH], 0                      ; 23E1 _ 83. 7D, F4, 00
-        jle     ?_096                                   ; 23E5 _ 0F 8E, 000000BA
-        mov     eax, dword [ebp-0CH]                    ; 23EB _ 8B. 45, F4
-        lea     edx, [eax-1H]                           ; 23EE _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 23F1 _ 8B. 45, 08
-        add     edx, 2                                  ; 23F4 _ 83. C2, 02
-        mov     edx, dword [eax+edx*8]                  ; 23F7 _ 8B. 14 D0
-        mov     eax, dword [ebp-0CH]                    ; 23FA _ 8B. 45, F4
-        lea     ecx, [eax-1H]                           ; 23FD _ 8D. 48, FF
-        mov     eax, dword [ebp+8H]                     ; 2400 _ 8B. 45, 08
-        add     ecx, 2                                  ; 2403 _ 83. C1, 02
-        mov     eax, dword [eax+ecx*8+4H]               ; 2406 _ 8B. 44 C8, 04
-        add     eax, edx                                ; 240A _ 01. D0
-        cmp     dword [ebp+0CH], eax                    ; 240C _ 39. 45, 0C
-        jne     ?_096                                   ; 240F _ 0F 85, 00000090
-        mov     eax, dword [ebp-0CH]                    ; 2415 _ 8B. 45, F4
-        lea     edx, [eax-1H]                           ; 2418 _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 241B _ 8B. 45, 08
-        add     edx, 2                                  ; 241E _ 83. C2, 02
-        mov     edx, dword [eax+edx*8+4H]               ; 2421 _ 8B. 54 D0, 04
-        mov     eax, dword [ebp-0CH]                    ; 2425 _ 8B. 45, F4
-        lea     ebx, [eax-1H]                           ; 2428 _ 8D. 58, FF
-        mov     eax, dword [ebp+10H]                    ; 242B _ 8B. 45, 10
-        lea     ecx, [edx+eax]                          ; 242E _ 8D. 0C 02
-        mov     eax, dword [ebp+8H]                     ; 2431 _ 8B. 45, 08
-        lea     edx, [ebx+2H]                           ; 2434 _ 8D. 53, 02
-        mov     dword [eax+edx*8+4H], ecx               ; 2437 _ 89. 4C D0, 04
-        mov     eax, dword [ebp+8H]                     ; 243B _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 243E _ 8B. 00
-        cmp     dword [ebp-0CH], eax                    ; 2440 _ 39. 45, F4
-        jge     ?_095                                   ; 2443 _ 7D, 56
-        mov     edx, dword [ebp+0CH]                    ; 2445 _ 8B. 55, 0C
-        mov     eax, dword [ebp+10H]                    ; 2448 _ 8B. 45, 10
-        lea     ecx, [edx+eax]                          ; 244B _ 8D. 0C 02
-        mov     eax, dword [ebp+8H]                     ; 244E _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 2451 _ 8B. 55, F4
-        add     edx, 2                                  ; 2454 _ 83. C2, 02
-        mov     eax, dword [eax+edx*8]                  ; 2457 _ 8B. 04 D0
-        cmp     ecx, eax                                ; 245A _ 39. C1
-        jnz     ?_095                                   ; 245C _ 75, 3D
-        mov     eax, dword [ebp-0CH]                    ; 245E _ 8B. 45, F4
-        lea     edx, [eax-1H]                           ; 2461 _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 2464 _ 8B. 45, 08
-        add     edx, 2                                  ; 2467 _ 83. C2, 02
-        mov     edx, dword [eax+edx*8+4H]               ; 246A _ 8B. 54 D0, 04
-        mov     eax, dword [ebp+8H]                     ; 246E _ 8B. 45, 08
-        mov     ecx, dword [ebp-0CH]                    ; 2471 _ 8B. 4D, F4
-        add     ecx, 2                                  ; 2474 _ 83. C1, 02
-        mov     eax, dword [eax+ecx*8+4H]               ; 2477 _ 8B. 44 C8, 04
-        mov     ecx, dword [ebp-0CH]                    ; 247B _ 8B. 4D, F4
-        lea     ebx, [ecx-1H]                           ; 247E _ 8D. 59, FF
-        lea     ecx, [edx+eax]                          ; 2481 _ 8D. 0C 02
-        mov     eax, dword [ebp+8H]                     ; 2484 _ 8B. 45, 08
-        lea     edx, [ebx+2H]                           ; 2487 _ 8D. 53, 02
-        mov     dword [eax+edx*8+4H], ecx               ; 248A _ 89. 4C D0, 04
-        mov     eax, dword [ebp+8H]                     ; 248E _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 2491 _ 8B. 00
-        lea     edx, [eax-1H]                           ; 2493 _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 2496 _ 8B. 45, 08
-        mov     dword [eax], edx                        ; 2499 _ 89. 10
-?_095:  mov     eax, 0                                  ; 249B _ B8, 00000000
-        jmp     ?_102                                   ; 24A0 _ E9, 0000011C
+?_093:  nop                                             ; 23E3 _ 90
+?_094:  cmp     dword [ebp-0CH], 0                      ; 23E4 _ 83. 7D, F4, 00
+        jle     ?_096                                   ; 23E8 _ 0F 8E, 000000BA
+        mov     eax, dword [ebp-0CH]                    ; 23EE _ 8B. 45, F4
+        lea     edx, [eax-1H]                           ; 23F1 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 23F4 _ 8B. 45, 08
+        add     edx, 2                                  ; 23F7 _ 83. C2, 02
+        mov     edx, dword [eax+edx*8]                  ; 23FA _ 8B. 14 D0
+        mov     eax, dword [ebp-0CH]                    ; 23FD _ 8B. 45, F4
+        lea     ecx, [eax-1H]                           ; 2400 _ 8D. 48, FF
+        mov     eax, dword [ebp+8H]                     ; 2403 _ 8B. 45, 08
+        add     ecx, 2                                  ; 2406 _ 83. C1, 02
+        mov     eax, dword [eax+ecx*8+4H]               ; 2409 _ 8B. 44 C8, 04
+        add     eax, edx                                ; 240D _ 01. D0
+        cmp     dword [ebp+0CH], eax                    ; 240F _ 39. 45, 0C
+        jne     ?_096                                   ; 2412 _ 0F 85, 00000090
+        mov     eax, dword [ebp-0CH]                    ; 2418 _ 8B. 45, F4
+        lea     edx, [eax-1H]                           ; 241B _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 241E _ 8B. 45, 08
+        add     edx, 2                                  ; 2421 _ 83. C2, 02
+        mov     edx, dword [eax+edx*8+4H]               ; 2424 _ 8B. 54 D0, 04
+        mov     eax, dword [ebp-0CH]                    ; 2428 _ 8B. 45, F4
+        lea     ebx, [eax-1H]                           ; 242B _ 8D. 58, FF
+        mov     eax, dword [ebp+10H]                    ; 242E _ 8B. 45, 10
+        lea     ecx, [edx+eax]                          ; 2431 _ 8D. 0C 02
+        mov     eax, dword [ebp+8H]                     ; 2434 _ 8B. 45, 08
+        lea     edx, [ebx+2H]                           ; 2437 _ 8D. 53, 02
+        mov     dword [eax+edx*8+4H], ecx               ; 243A _ 89. 4C D0, 04
+        mov     eax, dword [ebp+8H]                     ; 243E _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2441 _ 8B. 00
+        cmp     dword [ebp-0CH], eax                    ; 2443 _ 39. 45, F4
+        jge     ?_095                                   ; 2446 _ 7D, 56
+        mov     edx, dword [ebp+0CH]                    ; 2448 _ 8B. 55, 0C
+        mov     eax, dword [ebp+10H]                    ; 244B _ 8B. 45, 10
+        lea     ecx, [edx+eax]                          ; 244E _ 8D. 0C 02
+        mov     eax, dword [ebp+8H]                     ; 2451 _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 2454 _ 8B. 55, F4
+        add     edx, 2                                  ; 2457 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8]                  ; 245A _ 8B. 04 D0
+        cmp     ecx, eax                                ; 245D _ 39. C1
+        jnz     ?_095                                   ; 245F _ 75, 3D
+        mov     eax, dword [ebp-0CH]                    ; 2461 _ 8B. 45, F4
+        lea     edx, [eax-1H]                           ; 2464 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 2467 _ 8B. 45, 08
+        add     edx, 2                                  ; 246A _ 83. C2, 02
+        mov     edx, dword [eax+edx*8+4H]               ; 246D _ 8B. 54 D0, 04
+        mov     eax, dword [ebp+8H]                     ; 2471 _ 8B. 45, 08
+        mov     ecx, dword [ebp-0CH]                    ; 2474 _ 8B. 4D, F4
+        add     ecx, 2                                  ; 2477 _ 83. C1, 02
+        mov     eax, dword [eax+ecx*8+4H]               ; 247A _ 8B. 44 C8, 04
+        mov     ecx, dword [ebp-0CH]                    ; 247E _ 8B. 4D, F4
+        lea     ebx, [ecx-1H]                           ; 2481 _ 8D. 59, FF
+        lea     ecx, [edx+eax]                          ; 2484 _ 8D. 0C 02
+        mov     eax, dword [ebp+8H]                     ; 2487 _ 8B. 45, 08
+        lea     edx, [ebx+2H]                           ; 248A _ 8D. 53, 02
+        mov     dword [eax+edx*8+4H], ecx               ; 248D _ 89. 4C D0, 04
+        mov     eax, dword [ebp+8H]                     ; 2491 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2494 _ 8B. 00
+        lea     edx, [eax-1H]                           ; 2496 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 2499 _ 8B. 45, 08
+        mov     dword [eax], edx                        ; 249C _ 89. 10
+?_095:  mov     eax, 0                                  ; 249E _ B8, 00000000
+        jmp     ?_102                                   ; 24A3 _ E9, 0000011C
 
-?_096:  mov     eax, dword [ebp+8H]                     ; 24A5 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 24A8 _ 8B. 00
-        cmp     dword [ebp-0CH], eax                    ; 24AA _ 39. 45, F4
-        jge     ?_097                                   ; 24AD _ 7D, 52
-        mov     edx, dword [ebp+0CH]                    ; 24AF _ 8B. 55, 0C
-        mov     eax, dword [ebp+10H]                    ; 24B2 _ 8B. 45, 10
-        lea     ecx, [edx+eax]                          ; 24B5 _ 8D. 0C 02
-        mov     eax, dword [ebp+8H]                     ; 24B8 _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 24BB _ 8B. 55, F4
-        add     edx, 2                                  ; 24BE _ 83. C2, 02
-        mov     eax, dword [eax+edx*8]                  ; 24C1 _ 8B. 04 D0
-        cmp     ecx, eax                                ; 24C4 _ 39. C1
-        jnz     ?_097                                   ; 24C6 _ 75, 39
-        mov     eax, dword [ebp+8H]                     ; 24C8 _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 24CB _ 8B. 55, F4
-        lea     ecx, [edx+2H]                           ; 24CE _ 8D. 4A, 02
-        mov     edx, dword [ebp+0CH]                    ; 24D1 _ 8B. 55, 0C
-        mov     dword [eax+ecx*8], edx                  ; 24D4 _ 89. 14 C8
-        mov     eax, dword [ebp+8H]                     ; 24D7 _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 24DA _ 8B. 55, F4
-        add     edx, 2                                  ; 24DD _ 83. C2, 02
-        mov     edx, dword [eax+edx*8+4H]               ; 24E0 _ 8B. 54 D0, 04
-        mov     eax, dword [ebp+10H]                    ; 24E4 _ 8B. 45, 10
-        lea     ecx, [edx+eax]                          ; 24E7 _ 8D. 0C 02
-        mov     eax, dword [ebp+8H]                     ; 24EA _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 24ED _ 8B. 55, F4
-        add     edx, 2                                  ; 24F0 _ 83. C2, 02
-        mov     dword [eax+edx*8+4H], ecx               ; 24F3 _ 89. 4C D0, 04
-        mov     eax, 0                                  ; 24F7 _ B8, 00000000
-        jmp     ?_102                                   ; 24FC _ E9, 000000C0
+?_096:  mov     eax, dword [ebp+8H]                     ; 24A8 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 24AB _ 8B. 00
+        cmp     dword [ebp-0CH], eax                    ; 24AD _ 39. 45, F4
+        jge     ?_097                                   ; 24B0 _ 7D, 52
+        mov     edx, dword [ebp+0CH]                    ; 24B2 _ 8B. 55, 0C
+        mov     eax, dword [ebp+10H]                    ; 24B5 _ 8B. 45, 10
+        lea     ecx, [edx+eax]                          ; 24B8 _ 8D. 0C 02
+        mov     eax, dword [ebp+8H]                     ; 24BB _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 24BE _ 8B. 55, F4
+        add     edx, 2                                  ; 24C1 _ 83. C2, 02
+        mov     eax, dword [eax+edx*8]                  ; 24C4 _ 8B. 04 D0
+        cmp     ecx, eax                                ; 24C7 _ 39. C1
+        jnz     ?_097                                   ; 24C9 _ 75, 39
+        mov     eax, dword [ebp+8H]                     ; 24CB _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 24CE _ 8B. 55, F4
+        lea     ecx, [edx+2H]                           ; 24D1 _ 8D. 4A, 02
+        mov     edx, dword [ebp+0CH]                    ; 24D4 _ 8B. 55, 0C
+        mov     dword [eax+ecx*8], edx                  ; 24D7 _ 89. 14 C8
+        mov     eax, dword [ebp+8H]                     ; 24DA _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 24DD _ 8B. 55, F4
+        add     edx, 2                                  ; 24E0 _ 83. C2, 02
+        mov     edx, dword [eax+edx*8+4H]               ; 24E3 _ 8B. 54 D0, 04
+        mov     eax, dword [ebp+10H]                    ; 24E7 _ 8B. 45, 10
+        lea     ecx, [edx+eax]                          ; 24EA _ 8D. 0C 02
+        mov     eax, dword [ebp+8H]                     ; 24ED _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 24F0 _ 8B. 55, F4
+        add     edx, 2                                  ; 24F3 _ 83. C2, 02
+        mov     dword [eax+edx*8+4H], ecx               ; 24F6 _ 89. 4C D0, 04
+        mov     eax, 0                                  ; 24FA _ B8, 00000000
+        jmp     ?_102                                   ; 24FF _ E9, 000000C0
 
-?_097:  mov     eax, dword [ebp+8H]                     ; 2501 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 2504 _ 8B. 00
-        cmp     eax, 4095                               ; 2506 _ 3D, 00000FFF
-        jg      ?_101                                   ; 250B _ 0F 8F, 00000087
-        mov     eax, dword [ebp+8H]                     ; 2511 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 2514 _ 8B. 00
-        mov     dword [ebp-8H], eax                     ; 2516 _ 89. 45, F8
-        jmp     ?_099                                   ; 2519 _ EB, 28
+?_097:  mov     eax, dword [ebp+8H]                     ; 2504 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2507 _ 8B. 00
+        cmp     eax, 4095                               ; 2509 _ 3D, 00000FFF
+        jg      ?_101                                   ; 250E _ 0F 8F, 00000087
+        mov     eax, dword [ebp+8H]                     ; 2514 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2517 _ 8B. 00
+        mov     dword [ebp-8H], eax                     ; 2519 _ 89. 45, F8
+        jmp     ?_099                                   ; 251C _ EB, 28
 
-?_098:  mov     eax, dword [ebp-8H]                     ; 251B _ 8B. 45, F8
-        lea     edx, [eax-1H]                           ; 251E _ 8D. 50, FF
-        mov     ecx, dword [ebp+8H]                     ; 2521 _ 8B. 4D, 08
-        mov     eax, dword [ebp-8H]                     ; 2524 _ 8B. 45, F8
-        lea     ebx, [eax+2H]                           ; 2527 _ 8D. 58, 02
-        mov     eax, dword [ebp+8H]                     ; 252A _ 8B. 45, 08
-        add     edx, 2                                  ; 252D _ 83. C2, 02
-        lea     edx, [eax+edx*8]                        ; 2530 _ 8D. 14 D0
-        mov     eax, dword [edx]                        ; 2533 _ 8B. 02
-        mov     edx, dword [edx+4H]                     ; 2535 _ 8B. 52, 04
-        mov     dword [ecx+ebx*8], eax                  ; 2538 _ 89. 04 D9
-        mov     dword [ecx+ebx*8+4H], edx               ; 253B _ 89. 54 D9, 04
-        sub     dword [ebp-8H], 1                       ; 253F _ 83. 6D, F8, 01
-?_099:  mov     eax, dword [ebp-8H]                     ; 2543 _ 8B. 45, F8
-        cmp     eax, dword [ebp-0CH]                    ; 2546 _ 3B. 45, F4
-        jg      ?_098                                   ; 2549 _ 7F, D0
-        mov     eax, dword [ebp+8H]                     ; 254B _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 254E _ 8B. 00
-        lea     edx, [eax+1H]                           ; 2550 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 2553 _ 8B. 45, 08
-        mov     dword [eax], edx                        ; 2556 _ 89. 10
-        mov     eax, dword [ebp+8H]                     ; 2558 _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 255B _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 255E _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 2561 _ 8B. 00
-        cmp     edx, eax                                ; 2563 _ 39. C2
-        jge     ?_100                                   ; 2565 _ 7D, 0B
-        mov     eax, dword [ebp+8H]                     ; 2567 _ 8B. 45, 08
-        mov     edx, dword [eax]                        ; 256A _ 8B. 10
-        mov     eax, dword [ebp+8H]                     ; 256C _ 8B. 45, 08
-        mov     dword [eax+4H], edx                     ; 256F _ 89. 50, 04
-?_100:  mov     eax, dword [ebp+8H]                     ; 2572 _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 2575 _ 8B. 55, F4
-        lea     ecx, [edx+2H]                           ; 2578 _ 8D. 4A, 02
-        mov     edx, dword [ebp+0CH]                    ; 257B _ 8B. 55, 0C
-        mov     dword [eax+ecx*8], edx                  ; 257E _ 89. 14 C8
-        mov     eax, dword [ebp+8H]                     ; 2581 _ 8B. 45, 08
-        mov     edx, dword [ebp-0CH]                    ; 2584 _ 8B. 55, F4
-        lea     ecx, [edx+2H]                           ; 2587 _ 8D. 4A, 02
-        mov     edx, dword [ebp+10H]                    ; 258A _ 8B. 55, 10
-        mov     dword [eax+ecx*8+4H], edx               ; 258D _ 89. 54 C8, 04
-        mov     eax, 0                                  ; 2591 _ B8, 00000000
-        jmp     ?_102                                   ; 2596 _ EB, 29
+?_098:  mov     eax, dword [ebp-8H]                     ; 251E _ 8B. 45, F8
+        lea     edx, [eax-1H]                           ; 2521 _ 8D. 50, FF
+        mov     ecx, dword [ebp+8H]                     ; 2524 _ 8B. 4D, 08
+        mov     eax, dword [ebp-8H]                     ; 2527 _ 8B. 45, F8
+        lea     ebx, [eax+2H]                           ; 252A _ 8D. 58, 02
+        mov     eax, dword [ebp+8H]                     ; 252D _ 8B. 45, 08
+        add     edx, 2                                  ; 2530 _ 83. C2, 02
+        lea     edx, [eax+edx*8]                        ; 2533 _ 8D. 14 D0
+        mov     eax, dword [edx]                        ; 2536 _ 8B. 02
+        mov     edx, dword [edx+4H]                     ; 2538 _ 8B. 52, 04
+        mov     dword [ecx+ebx*8], eax                  ; 253B _ 89. 04 D9
+        mov     dword [ecx+ebx*8+4H], edx               ; 253E _ 89. 54 D9, 04
+        sub     dword [ebp-8H], 1                       ; 2542 _ 83. 6D, F8, 01
+?_099:  mov     eax, dword [ebp-8H]                     ; 2546 _ 8B. 45, F8
+        cmp     eax, dword [ebp-0CH]                    ; 2549 _ 3B. 45, F4
+        jg      ?_098                                   ; 254C _ 7F, D0
+        mov     eax, dword [ebp+8H]                     ; 254E _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2551 _ 8B. 00
+        lea     edx, [eax+1H]                           ; 2553 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 2556 _ 8B. 45, 08
+        mov     dword [eax], edx                        ; 2559 _ 89. 10
+        mov     eax, dword [ebp+8H]                     ; 255B _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 255E _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 2561 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2564 _ 8B. 00
+        cmp     edx, eax                                ; 2566 _ 39. C2
+        jge     ?_100                                   ; 2568 _ 7D, 0B
+        mov     eax, dword [ebp+8H]                     ; 256A _ 8B. 45, 08
+        mov     edx, dword [eax]                        ; 256D _ 8B. 10
+        mov     eax, dword [ebp+8H]                     ; 256F _ 8B. 45, 08
+        mov     dword [eax+4H], edx                     ; 2572 _ 89. 50, 04
+?_100:  mov     eax, dword [ebp+8H]                     ; 2575 _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 2578 _ 8B. 55, F4
+        lea     ecx, [edx+2H]                           ; 257B _ 8D. 4A, 02
+        mov     edx, dword [ebp+0CH]                    ; 257E _ 8B. 55, 0C
+        mov     dword [eax+ecx*8], edx                  ; 2581 _ 89. 14 C8
+        mov     eax, dword [ebp+8H]                     ; 2584 _ 8B. 45, 08
+        mov     edx, dword [ebp-0CH]                    ; 2587 _ 8B. 55, F4
+        lea     ecx, [edx+2H]                           ; 258A _ 8D. 4A, 02
+        mov     edx, dword [ebp+10H]                    ; 258D _ 8B. 55, 10
+        mov     dword [eax+ecx*8+4H], edx               ; 2590 _ 89. 54 C8, 04
+        mov     eax, 0                                  ; 2594 _ B8, 00000000
+        jmp     ?_102                                   ; 2599 _ EB, 29
 
-?_101:  mov     eax, dword [ebp+8H]                     ; 2598 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 259B _ 8B. 40, 0C
-        lea     edx, [eax+1H]                           ; 259E _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 25A1 _ 8B. 45, 08
-        mov     dword [eax+0CH], edx                    ; 25A4 _ 89. 50, 0C
-        mov     eax, dword [ebp+8H]                     ; 25A7 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 25AA _ 8B. 40, 08
-        mov     edx, eax                                ; 25AD _ 89. C2
-        mov     eax, dword [ebp+10H]                    ; 25AF _ 8B. 45, 10
-        add     eax, edx                                ; 25B2 _ 01. D0
-        mov     edx, eax                                ; 25B4 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 25B6 _ 8B. 45, 08
-        mov     dword [eax+8H], edx                     ; 25B9 _ 89. 50, 08
-        mov     eax, 4294967295                         ; 25BC _ B8, FFFFFFFF
-?_102:  add     esp, 16                                 ; 25C1 _ 83. C4, 10
-        pop     ebx                                     ; 25C4 _ 5B
-        pop     ebp                                     ; 25C5 _ 5D
-        ret                                             ; 25C6 _ C3
+?_101:  mov     eax, dword [ebp+8H]                     ; 259B _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 259E _ 8B. 40, 0C
+        lea     edx, [eax+1H]                           ; 25A1 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 25A4 _ 8B. 45, 08
+        mov     dword [eax+0CH], edx                    ; 25A7 _ 89. 50, 0C
+        mov     eax, dword [ebp+8H]                     ; 25AA _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 25AD _ 8B. 40, 08
+        mov     edx, eax                                ; 25B0 _ 89. C2
+        mov     eax, dword [ebp+10H]                    ; 25B2 _ 8B. 45, 10
+        add     eax, edx                                ; 25B5 _ 01. D0
+        mov     edx, eax                                ; 25B7 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 25B9 _ 8B. 45, 08
+        mov     dword [eax+8H], edx                     ; 25BC _ 89. 50, 08
+        mov     eax, 4294967295                         ; 25BF _ B8, FFFFFFFF
+?_102:  add     esp, 16                                 ; 25C4 _ 83. C4, 10
+        pop     ebx                                     ; 25C7 _ 5B
+        pop     ebp                                     ; 25C8 _ 5D
+        ret                                             ; 25C9 _ C3
 ; memman_free End of function
 
 memman_free_4K:; Function begin
-        push    ebp                                     ; 25C7 _ 55
-        mov     ebp, esp                                ; 25C8 _ 89. E5
-        sub     esp, 16                                 ; 25CA _ 83. EC, 10
-        mov     eax, dword [ebp+10H]                    ; 25CD _ 8B. 45, 10
-        add     eax, 4095                               ; 25D0 _ 05, 00000FFF
-        and     eax, 0FFFFF000H                         ; 25D5 _ 25, FFFFF000
-        mov     dword [ebp+10H], eax                    ; 25DA _ 89. 45, 10
-        push    dword [ebp+10H]                         ; 25DD _ FF. 75, 10
-        push    dword [ebp+0CH]                         ; 25E0 _ FF. 75, 0C
-        push    dword [ebp+8H]                          ; 25E3 _ FF. 75, 08
-        call    memman_free                             ; 25E6 _ E8, FFFFFFFC(rel)
-        add     esp, 12                                 ; 25EB _ 83. C4, 0C
-        mov     dword [ebp-4H], eax                     ; 25EE _ 89. 45, FC
-        mov     eax, dword [ebp-4H]                     ; 25F1 _ 8B. 45, FC
-        leave                                           ; 25F4 _ C9
-        ret                                             ; 25F5 _ C3
+        push    ebp                                     ; 25CA _ 55
+        mov     ebp, esp                                ; 25CB _ 89. E5
+        sub     esp, 16                                 ; 25CD _ 83. EC, 10
+        mov     eax, dword [ebp+10H]                    ; 25D0 _ 8B. 45, 10
+        add     eax, 4095                               ; 25D3 _ 05, 00000FFF
+        and     eax, 0FFFFF000H                         ; 25D8 _ 25, FFFFF000
+        mov     dword [ebp+10H], eax                    ; 25DD _ 89. 45, 10
+        push    dword [ebp+10H]                         ; 25E0 _ FF. 75, 10
+        push    dword [ebp+0CH]                         ; 25E3 _ FF. 75, 0C
+        push    dword [ebp+8H]                          ; 25E6 _ FF. 75, 08
+        call    memman_free                             ; 25E9 _ E8, FFFFFFFC(rel)
+        add     esp, 12                                 ; 25EE _ 83. C4, 0C
+        mov     dword [ebp-4H], eax                     ; 25F1 _ 89. 45, FC
+        mov     eax, dword [ebp-4H]                     ; 25F4 _ 8B. 45, FC
+        leave                                           ; 25F7 _ C9
+        ret                                             ; 25F8 _ C3
 ; memman_free_4K End of function
 
 shtctl_init:; Function begin
-        push    ebp                                     ; 25F6 _ 55
-        mov     ebp, esp                                ; 25F7 _ 89. E5
-        sub     esp, 24                                 ; 25F9 _ 83. EC, 18
-        sub     esp, 8                                  ; 25FC _ 83. EC, 08
-        push    9232                                    ; 25FF _ 68, 00002410
-        push    dword [ebp+8H]                          ; 2604 _ FF. 75, 08
-        call    memman_alloc_4K                         ; 2607 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 260C _ 83. C4, 10
-        mov     dword [ebp-0CH], eax                    ; 260F _ 89. 45, F4
-        cmp     dword [ebp-0CH], 0                      ; 2612 _ 83. 7D, F4, 00
-        jnz     ?_103                                   ; 2616 _ 75, 0A
-        mov     eax, 0                                  ; 2618 _ B8, 00000000
-        jmp     ?_107                                   ; 261D _ E9, 0000009A
+        push    ebp                                     ; 25F9 _ 55
+        mov     ebp, esp                                ; 25FA _ 89. E5
+        sub     esp, 24                                 ; 25FC _ 83. EC, 18
+        sub     esp, 8                                  ; 25FF _ 83. EC, 08
+        push    9232                                    ; 2602 _ 68, 00002410
+        push    dword [ebp+8H]                          ; 2607 _ FF. 75, 08
+        call    memman_alloc_4K                         ; 260A _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 260F _ 83. C4, 10
+        mov     dword [ebp-0CH], eax                    ; 2612 _ 89. 45, F4
+        cmp     dword [ebp-0CH], 0                      ; 2615 _ 83. 7D, F4, 00
+        jnz     ?_103                                   ; 2619 _ 75, 0A
+        mov     eax, 0                                  ; 261B _ B8, 00000000
+        jmp     ?_107                                   ; 2620 _ E9, 0000009A
 
-?_103:  mov     eax, dword [ebp+10H]                    ; 2622 _ 8B. 45, 10
-        imul    eax, dword [ebp+14H]                    ; 2625 _ 0F AF. 45, 14
-        sub     esp, 8                                  ; 2629 _ 83. EC, 08
-        push    eax                                     ; 262C _ 50
-        push    dword [ebp+8H]                          ; 262D _ FF. 75, 08
-        call    memman_alloc_4K                         ; 2630 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 2635 _ 83. C4, 10
-        mov     edx, eax                                ; 2638 _ 89. C2
-        mov     eax, dword [ebp-0CH]                    ; 263A _ 8B. 45, F4
-        mov     dword [eax+4H], edx                     ; 263D _ 89. 50, 04
-        mov     eax, dword [ebp-0CH]                    ; 2640 _ 8B. 45, F4
-        mov     eax, dword [eax+4H]                     ; 2643 _ 8B. 40, 04
-        test    eax, eax                                ; 2646 _ 85. C0
-        jnz     ?_104                                   ; 2648 _ 75, 1E
-        mov     eax, dword [ebp-0CH]                    ; 264A _ 8B. 45, F4
-        sub     esp, 4                                  ; 264D _ 83. EC, 04
-        push    9232                                    ; 2650 _ 68, 00002410
-        push    eax                                     ; 2655 _ 50
-        push    dword [ebp+8H]                          ; 2656 _ FF. 75, 08
-        call    memman_free_4K                          ; 2659 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 265E _ 83. C4, 10
-        mov     eax, 0                                  ; 2661 _ B8, 00000000
-        jmp     ?_107                                   ; 2666 _ EB, 54
+?_103:  mov     eax, dword [ebp+10H]                    ; 2625 _ 8B. 45, 10
+        imul    eax, dword [ebp+14H]                    ; 2628 _ 0F AF. 45, 14
+        sub     esp, 8                                  ; 262C _ 83. EC, 08
+        push    eax                                     ; 262F _ 50
+        push    dword [ebp+8H]                          ; 2630 _ FF. 75, 08
+        call    memman_alloc_4K                         ; 2633 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2638 _ 83. C4, 10
+        mov     edx, eax                                ; 263B _ 89. C2
+        mov     eax, dword [ebp-0CH]                    ; 263D _ 8B. 45, F4
+        mov     dword [eax+4H], edx                     ; 2640 _ 89. 50, 04
+        mov     eax, dword [ebp-0CH]                    ; 2643 _ 8B. 45, F4
+        mov     eax, dword [eax+4H]                     ; 2646 _ 8B. 40, 04
+        test    eax, eax                                ; 2649 _ 85. C0
+        jnz     ?_104                                   ; 264B _ 75, 1E
+        mov     eax, dword [ebp-0CH]                    ; 264D _ 8B. 45, F4
+        sub     esp, 4                                  ; 2650 _ 83. EC, 04
+        push    9232                                    ; 2653 _ 68, 00002410
+        push    eax                                     ; 2658 _ 50
+        push    dword [ebp+8H]                          ; 2659 _ FF. 75, 08
+        call    memman_free_4K                          ; 265C _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2661 _ 83. C4, 10
+        mov     eax, 0                                  ; 2664 _ B8, 00000000
+        jmp     ?_107                                   ; 2669 _ EB, 54
 
-?_104:  mov     eax, dword [ebp-0CH]                    ; 2668 _ 8B. 45, F4
-        mov     edx, dword [ebp+0CH]                    ; 266B _ 8B. 55, 0C
-        mov     dword [eax], edx                        ; 266E _ 89. 10
-        mov     eax, dword [ebp-0CH]                    ; 2670 _ 8B. 45, F4
-        mov     edx, dword [ebp+10H]                    ; 2673 _ 8B. 55, 10
-        mov     dword [eax+8H], edx                     ; 2676 _ 89. 50, 08
-        mov     eax, dword [ebp-0CH]                    ; 2679 _ 8B. 45, F4
-        mov     edx, dword [ebp+14H]                    ; 267C _ 8B. 55, 14
-        mov     dword [eax+0CH], edx                    ; 267F _ 89. 50, 0C
-        mov     eax, dword [ebp-0CH]                    ; 2682 _ 8B. 45, F4
-        mov     dword [eax+10H], -1                     ; 2685 _ C7. 40, 10, FFFFFFFF
-        mov     dword [ebp-10H], 0                      ; 268C _ C7. 45, F0, 00000000
-        jmp     ?_106                                   ; 2693 _ EB, 1B
+?_104:  mov     eax, dword [ebp-0CH]                    ; 266B _ 8B. 45, F4
+        mov     edx, dword [ebp+0CH]                    ; 266E _ 8B. 55, 0C
+        mov     dword [eax], edx                        ; 2671 _ 89. 10
+        mov     eax, dword [ebp-0CH]                    ; 2673 _ 8B. 45, F4
+        mov     edx, dword [ebp+10H]                    ; 2676 _ 8B. 55, 10
+        mov     dword [eax+8H], edx                     ; 2679 _ 89. 50, 08
+        mov     eax, dword [ebp-0CH]                    ; 267C _ 8B. 45, F4
+        mov     edx, dword [ebp+14H]                    ; 267F _ 8B. 55, 14
+        mov     dword [eax+0CH], edx                    ; 2682 _ 89. 50, 0C
+        mov     eax, dword [ebp-0CH]                    ; 2685 _ 8B. 45, F4
+        mov     dword [eax+10H], -1                     ; 2688 _ C7. 40, 10, FFFFFFFF
+        mov     dword [ebp-10H], 0                      ; 268F _ C7. 45, F0, 00000000
+        jmp     ?_106                                   ; 2696 _ EB, 1B
 
-?_105:  mov     eax, dword [ebp-0CH]                    ; 2695 _ 8B. 45, F4
-        mov     edx, dword [ebp-10H]                    ; 2698 _ 8B. 55, F0
-        add     edx, 33                                 ; 269B _ 83. C2, 21
-        shl     edx, 5                                  ; 269E _ C1. E2, 05
-        add     eax, edx                                ; 26A1 _ 01. D0
-        add     eax, 16                                 ; 26A3 _ 83. C0, 10
-        mov     dword [eax], 0                          ; 26A6 _ C7. 00, 00000000
-        add     dword [ebp-10H], 1                      ; 26AC _ 83. 45, F0, 01
-?_106:  cmp     dword [ebp-10H], 255                    ; 26B0 _ 81. 7D, F0, 000000FF
-        jle     ?_105                                   ; 26B7 _ 7E, DC
-        mov     eax, dword [ebp-0CH]                    ; 26B9 _ 8B. 45, F4
-?_107:  leave                                           ; 26BC _ C9
-        ret                                             ; 26BD _ C3
+?_105:  mov     eax, dword [ebp-0CH]                    ; 2698 _ 8B. 45, F4
+        mov     edx, dword [ebp-10H]                    ; 269B _ 8B. 55, F0
+        add     edx, 33                                 ; 269E _ 83. C2, 21
+        shl     edx, 5                                  ; 26A1 _ C1. E2, 05
+        add     eax, edx                                ; 26A4 _ 01. D0
+        add     eax, 16                                 ; 26A6 _ 83. C0, 10
+        mov     dword [eax], 0                          ; 26A9 _ C7. 00, 00000000
+        add     dword [ebp-10H], 1                      ; 26AF _ 83. 45, F0, 01
+?_106:  cmp     dword [ebp-10H], 255                    ; 26B3 _ 81. 7D, F0, 000000FF
+        jle     ?_105                                   ; 26BA _ 7E, DC
+        mov     eax, dword [ebp-0CH]                    ; 26BC _ 8B. 45, F4
+?_107:  leave                                           ; 26BF _ C9
+        ret                                             ; 26C0 _ C3
 ; shtctl_init End of function
 
 sheet_alloc:; Function begin
-        push    ebp                                     ; 26BE _ 55
-        mov     ebp, esp                                ; 26BF _ 89. E5
-        sub     esp, 16                                 ; 26C1 _ 83. EC, 10
-        mov     dword [ebp-8H], 0                       ; 26C4 _ C7. 45, F8, 00000000
-        jmp     ?_110                                   ; 26CB _ EB, 4B
+        push    ebp                                     ; 26C1 _ 55
+        mov     ebp, esp                                ; 26C2 _ 89. E5
+        sub     esp, 16                                 ; 26C4 _ 83. EC, 10
+        mov     dword [ebp-8H], 0                       ; 26C7 _ C7. 45, F8, 00000000
+        jmp     ?_110                                   ; 26CE _ EB, 4B
 
-?_108:  mov     eax, dword [ebp+8H]                     ; 26CD _ 8B. 45, 08
-        mov     edx, dword [ebp-8H]                     ; 26D0 _ 8B. 55, F8
-        add     edx, 33                                 ; 26D3 _ 83. C2, 21
-        shl     edx, 5                                  ; 26D6 _ C1. E2, 05
-        add     eax, edx                                ; 26D9 _ 01. D0
-        add     eax, 16                                 ; 26DB _ 83. C0, 10
-        mov     eax, dword [eax]                        ; 26DE _ 8B. 00
-        test    eax, eax                                ; 26E0 _ 85. C0
-        jnz     ?_109                                   ; 26E2 _ 75, 30
-        mov     eax, dword [ebp-8H]                     ; 26E4 _ 8B. 45, F8
-        shl     eax, 5                                  ; 26E7 _ C1. E0, 05
-        lea     edx, [eax+410H]                         ; 26EA _ 8D. 90, 00000410
-        mov     eax, dword [ebp+8H]                     ; 26F0 _ 8B. 45, 08
-        add     eax, edx                                ; 26F3 _ 01. D0
-        add     eax, 4                                  ; 26F5 _ 83. C0, 04
-        mov     dword [ebp-4H], eax                     ; 26F8 _ 89. 45, FC
-        mov     eax, dword [ebp-4H]                     ; 26FB _ 8B. 45, FC
-        mov     dword [eax+1CH], 1                      ; 26FE _ C7. 40, 1C, 00000001
-        mov     eax, dword [ebp-4H]                     ; 2705 _ 8B. 45, FC
-        mov     dword [eax+18H], -1                     ; 2708 _ C7. 40, 18, FFFFFFFF
-        mov     eax, dword [ebp-4H]                     ; 270F _ 8B. 45, FC
-        jmp     ?_111                                   ; 2712 _ EB, 12
+?_108:  mov     eax, dword [ebp+8H]                     ; 26D0 _ 8B. 45, 08
+        mov     edx, dword [ebp-8H]                     ; 26D3 _ 8B. 55, F8
+        add     edx, 33                                 ; 26D6 _ 83. C2, 21
+        shl     edx, 5                                  ; 26D9 _ C1. E2, 05
+        add     eax, edx                                ; 26DC _ 01. D0
+        add     eax, 16                                 ; 26DE _ 83. C0, 10
+        mov     eax, dword [eax]                        ; 26E1 _ 8B. 00
+        test    eax, eax                                ; 26E3 _ 85. C0
+        jnz     ?_109                                   ; 26E5 _ 75, 30
+        mov     eax, dword [ebp-8H]                     ; 26E7 _ 8B. 45, F8
+        shl     eax, 5                                  ; 26EA _ C1. E0, 05
+        lea     edx, [eax+410H]                         ; 26ED _ 8D. 90, 00000410
+        mov     eax, dword [ebp+8H]                     ; 26F3 _ 8B. 45, 08
+        add     eax, edx                                ; 26F6 _ 01. D0
+        add     eax, 4                                  ; 26F8 _ 83. C0, 04
+        mov     dword [ebp-4H], eax                     ; 26FB _ 89. 45, FC
+        mov     eax, dword [ebp-4H]                     ; 26FE _ 8B. 45, FC
+        mov     dword [eax+1CH], 1                      ; 2701 _ C7. 40, 1C, 00000001
+        mov     eax, dword [ebp-4H]                     ; 2708 _ 8B. 45, FC
+        mov     dword [eax+18H], -1                     ; 270B _ C7. 40, 18, FFFFFFFF
+        mov     eax, dword [ebp-4H]                     ; 2712 _ 8B. 45, FC
+        jmp     ?_111                                   ; 2715 _ EB, 12
 
-?_109:  add     dword [ebp-8H], 1                       ; 2714 _ 83. 45, F8, 01
-?_110:  cmp     dword [ebp-8H], 255                     ; 2718 _ 81. 7D, F8, 000000FF
-        jle     ?_108                                   ; 271F _ 7E, AC
-        mov     eax, 0                                  ; 2721 _ B8, 00000000
-?_111:  leave                                           ; 2726 _ C9
-        ret                                             ; 2727 _ C3
+?_109:  add     dword [ebp-8H], 1                       ; 2717 _ 83. 45, F8, 01
+?_110:  cmp     dword [ebp-8H], 255                     ; 271B _ 81. 7D, F8, 000000FF
+        jle     ?_108                                   ; 2722 _ 7E, AC
+        mov     eax, 0                                  ; 2724 _ B8, 00000000
+?_111:  leave                                           ; 2729 _ C9
+        ret                                             ; 272A _ C3
 ; sheet_alloc End of function
 
 sheet_setbuf:; Function begin
-        push    ebp                                     ; 2728 _ 55
-        mov     ebp, esp                                ; 2729 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 272B _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 272E _ 8B. 55, 0C
-        mov     dword [eax], edx                        ; 2731 _ 89. 10
-        mov     eax, dword [ebp+8H]                     ; 2733 _ 8B. 45, 08
-        mov     edx, dword [ebp+10H]                    ; 2736 _ 8B. 55, 10
-        mov     dword [eax+4H], edx                     ; 2739 _ 89. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 273C _ 8B. 45, 08
-        mov     edx, dword [ebp+14H]                    ; 273F _ 8B. 55, 14
-        mov     dword [eax+8H], edx                     ; 2742 _ 89. 50, 08
-        mov     eax, dword [ebp+8H]                     ; 2745 _ 8B. 45, 08
-        mov     edx, dword [ebp+18H]                    ; 2748 _ 8B. 55, 18
-        mov     dword [eax+14H], edx                    ; 274B _ 89. 50, 14
-        nop                                             ; 274E _ 90
-        pop     ebp                                     ; 274F _ 5D
-        ret                                             ; 2750 _ C3
+        push    ebp                                     ; 272B _ 55
+        mov     ebp, esp                                ; 272C _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 272E _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 2731 _ 8B. 55, 0C
+        mov     dword [eax], edx                        ; 2734 _ 89. 10
+        mov     eax, dword [ebp+8H]                     ; 2736 _ 8B. 45, 08
+        mov     edx, dword [ebp+10H]                    ; 2739 _ 8B. 55, 10
+        mov     dword [eax+4H], edx                     ; 273C _ 89. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 273F _ 8B. 45, 08
+        mov     edx, dword [ebp+14H]                    ; 2742 _ 8B. 55, 14
+        mov     dword [eax+8H], edx                     ; 2745 _ 89. 50, 08
+        mov     eax, dword [ebp+8H]                     ; 2748 _ 8B. 45, 08
+        mov     edx, dword [ebp+18H]                    ; 274B _ 8B. 55, 18
+        mov     dword [eax+14H], edx                    ; 274E _ 89. 50, 14
+        nop                                             ; 2751 _ 90
+        pop     ebp                                     ; 2752 _ 5D
+        ret                                             ; 2753 _ C3
 ; sheet_setbuf End of function
 
 sheet_level_updown:; Function begin
-        push    ebp                                     ; 2751 _ 55
-        mov     ebp, esp                                ; 2752 _ 89. E5
-        push    esi                                     ; 2754 _ 56
-        push    ebx                                     ; 2755 _ 53
-        sub     esp, 32                                 ; 2756 _ 83. EC, 20
-        mov     eax, dword [ebp+0CH]                    ; 2759 _ 8B. 45, 0C
-        mov     eax, dword [eax+18H]                    ; 275C _ 8B. 40, 18
-        mov     dword [ebp-0CH], eax                    ; 275F _ 89. 45, F4
-        mov     eax, dword [ebp+8H]                     ; 2762 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 2765 _ 8B. 40, 10
-        add     eax, 1                                  ; 2768 _ 83. C0, 01
-        cmp     dword [ebp+10H], eax                    ; 276B _ 39. 45, 10
-        jle     ?_112                                   ; 276E _ 7E, 0C
-        mov     eax, dword [ebp+8H]                     ; 2770 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 2773 _ 8B. 40, 10
-        add     eax, 1                                  ; 2776 _ 83. C0, 01
-        mov     dword [ebp+10H], eax                    ; 2779 _ 89. 45, 10
-?_112:  cmp     dword [ebp+10H], -1                     ; 277C _ 83. 7D, 10, FF
-        jge     ?_113                                   ; 2780 _ 7D, 07
-        mov     dword [ebp+10H], -1                     ; 2782 _ C7. 45, 10, FFFFFFFF
-?_113:  mov     eax, dword [ebp+0CH]                    ; 2789 _ 8B. 45, 0C
-        mov     edx, dword [ebp+10H]                    ; 278C _ 8B. 55, 10
-        mov     dword [eax+18H], edx                    ; 278F _ 89. 50, 18
-        mov     eax, dword [ebp-0CH]                    ; 2792 _ 8B. 45, F4
-        cmp     eax, dword [ebp+10H]                    ; 2795 _ 3B. 45, 10
-        jle     ?_120                                   ; 2798 _ 0F 8E, 000001D5
-        cmp     dword [ebp+10H], 0                      ; 279E _ 83. 7D, 10, 00
-        js      ?_116                                   ; 27A2 _ 0F 88, 000000E2
-        mov     eax, dword [ebp-0CH]                    ; 27A8 _ 8B. 45, F4
-        mov     dword [ebp-1CH], eax                    ; 27AB _ 89. 45, E4
-        jmp     ?_115                                   ; 27AE _ EB, 34
+        push    ebp                                     ; 2754 _ 55
+        mov     ebp, esp                                ; 2755 _ 89. E5
+        push    esi                                     ; 2757 _ 56
+        push    ebx                                     ; 2758 _ 53
+        sub     esp, 32                                 ; 2759 _ 83. EC, 20
+        mov     eax, dword [ebp+0CH]                    ; 275C _ 8B. 45, 0C
+        mov     eax, dword [eax+18H]                    ; 275F _ 8B. 40, 18
+        mov     dword [ebp-0CH], eax                    ; 2762 _ 89. 45, F4
+        mov     eax, dword [ebp+8H]                     ; 2765 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 2768 _ 8B. 40, 10
+        add     eax, 1                                  ; 276B _ 83. C0, 01
+        cmp     dword [ebp+10H], eax                    ; 276E _ 39. 45, 10
+        jle     ?_112                                   ; 2771 _ 7E, 0C
+        mov     eax, dword [ebp+8H]                     ; 2773 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 2776 _ 8B. 40, 10
+        add     eax, 1                                  ; 2779 _ 83. C0, 01
+        mov     dword [ebp+10H], eax                    ; 277C _ 89. 45, 10
+?_112:  cmp     dword [ebp+10H], -1                     ; 277F _ 83. 7D, 10, FF
+        jge     ?_113                                   ; 2783 _ 7D, 07
+        mov     dword [ebp+10H], -1                     ; 2785 _ C7. 45, 10, FFFFFFFF
+?_113:  mov     eax, dword [ebp+0CH]                    ; 278C _ 8B. 45, 0C
+        mov     edx, dword [ebp+10H]                    ; 278F _ 8B. 55, 10
+        mov     dword [eax+18H], edx                    ; 2792 _ 89. 50, 18
+        mov     eax, dword [ebp-0CH]                    ; 2795 _ 8B. 45, F4
+        cmp     eax, dword [ebp+10H]                    ; 2798 _ 3B. 45, 10
+        jle     ?_120                                   ; 279B _ 0F 8E, 000001D5
+        cmp     dword [ebp+10H], 0                      ; 27A1 _ 83. 7D, 10, 00
+        js      ?_116                                   ; 27A5 _ 0F 88, 000000E2
+        mov     eax, dword [ebp-0CH]                    ; 27AB _ 8B. 45, F4
+        mov     dword [ebp-1CH], eax                    ; 27AE _ 89. 45, E4
+        jmp     ?_115                                   ; 27B1 _ EB, 34
 
-?_114:  mov     eax, dword [ebp-1CH]                    ; 27B0 _ 8B. 45, E4
-        lea     edx, [eax-1H]                           ; 27B3 _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 27B6 _ 8B. 45, 08
-        add     edx, 4                                  ; 27B9 _ 83. C2, 04
-        mov     edx, dword [eax+edx*4+4H]               ; 27BC _ 8B. 54 90, 04
-        mov     eax, dword [ebp+8H]                     ; 27C0 _ 8B. 45, 08
-        mov     ecx, dword [ebp-1CH]                    ; 27C3 _ 8B. 4D, E4
-        add     ecx, 4                                  ; 27C6 _ 83. C1, 04
-        mov     dword [eax+ecx*4+4H], edx               ; 27C9 _ 89. 54 88, 04
-        mov     eax, dword [ebp+8H]                     ; 27CD _ 8B. 45, 08
-        mov     edx, dword [ebp-1CH]                    ; 27D0 _ 8B. 55, E4
-        add     edx, 4                                  ; 27D3 _ 83. C2, 04
-        mov     eax, dword [eax+edx*4+4H]               ; 27D6 _ 8B. 44 90, 04
-        mov     edx, dword [ebp-1CH]                    ; 27DA _ 8B. 55, E4
-        mov     dword [eax+18H], edx                    ; 27DD _ 89. 50, 18
-        sub     dword [ebp-1CH], 1                      ; 27E0 _ 83. 6D, E4, 01
-?_115:  mov     eax, dword [ebp-1CH]                    ; 27E4 _ 8B. 45, E4
-        cmp     eax, dword [ebp+10H]                    ; 27E7 _ 3B. 45, 10
-        jg      ?_114                                   ; 27EA _ 7F, C4
-        mov     eax, dword [ebp+8H]                     ; 27EC _ 8B. 45, 08
-        mov     edx, dword [ebp+10H]                    ; 27EF _ 8B. 55, 10
-        lea     ecx, [edx+4H]                           ; 27F2 _ 8D. 4A, 04
-        mov     edx, dword [ebp+0CH]                    ; 27F5 _ 8B. 55, 0C
-        mov     dword [eax+ecx*4+4H], edx               ; 27F8 _ 89. 54 88, 04
-        mov     eax, dword [ebp+10H]                    ; 27FC _ 8B. 45, 10
-        lea     esi, [eax+1H]                           ; 27FF _ 8D. 70, 01
-        mov     eax, dword [ebp+0CH]                    ; 2802 _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2805 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2808 _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 280B _ 8B. 40, 08
-        lea     ebx, [edx+eax]                          ; 280E _ 8D. 1C 02
-        mov     eax, dword [ebp+0CH]                    ; 2811 _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 2814 _ 8B. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 2817 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 281A _ 8B. 40, 04
-        lea     ecx, [edx+eax]                          ; 281D _ 8D. 0C 02
-        mov     eax, dword [ebp+0CH]                    ; 2820 _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2823 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2826 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2829 _ 8B. 40, 0C
-        sub     esp, 8                                  ; 282C _ 83. EC, 08
-        push    esi                                     ; 282F _ 56
-        push    ebx                                     ; 2830 _ 53
-        push    ecx                                     ; 2831 _ 51
-        push    edx                                     ; 2832 _ 52
-        push    eax                                     ; 2833 _ 50
-        push    dword [ebp+8H]                          ; 2834 _ FF. 75, 08
-        call    sheet_refreshmap                        ; 2837 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 283C _ 83. C4, 20
-        mov     eax, dword [ebp+10H]                    ; 283F _ 8B. 45, 10
-        lea     esi, [eax+1H]                           ; 2842 _ 8D. 70, 01
-        mov     eax, dword [ebp+0CH]                    ; 2845 _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2848 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 284B _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 284E _ 8B. 40, 08
-        lea     ebx, [edx+eax]                          ; 2851 _ 8D. 1C 02
-        mov     eax, dword [ebp+0CH]                    ; 2854 _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 2857 _ 8B. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 285A _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 285D _ 8B. 40, 04
-        lea     ecx, [edx+eax]                          ; 2860 _ 8D. 0C 02
-        mov     eax, dword [ebp+0CH]                    ; 2863 _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2866 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2869 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 286C _ 8B. 40, 0C
-        sub     esp, 4                                  ; 286F _ 83. EC, 04
-        push    dword [ebp-0CH]                         ; 2872 _ FF. 75, F4
-        push    esi                                     ; 2875 _ 56
-        push    ebx                                     ; 2876 _ 53
-        push    ecx                                     ; 2877 _ 51
-        push    edx                                     ; 2878 _ 52
-        push    eax                                     ; 2879 _ 50
-        push    dword [ebp+8H]                          ; 287A _ FF. 75, 08
-        call    sheet_refresh_new                       ; 287D _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2882 _ 83. C4, 20
-        jmp     ?_127                                   ; 2885 _ E9, 00000244
+?_114:  mov     eax, dword [ebp-1CH]                    ; 27B3 _ 8B. 45, E4
+        lea     edx, [eax-1H]                           ; 27B6 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 27B9 _ 8B. 45, 08
+        add     edx, 4                                  ; 27BC _ 83. C2, 04
+        mov     edx, dword [eax+edx*4+4H]               ; 27BF _ 8B. 54 90, 04
+        mov     eax, dword [ebp+8H]                     ; 27C3 _ 8B. 45, 08
+        mov     ecx, dword [ebp-1CH]                    ; 27C6 _ 8B. 4D, E4
+        add     ecx, 4                                  ; 27C9 _ 83. C1, 04
+        mov     dword [eax+ecx*4+4H], edx               ; 27CC _ 89. 54 88, 04
+        mov     eax, dword [ebp+8H]                     ; 27D0 _ 8B. 45, 08
+        mov     edx, dword [ebp-1CH]                    ; 27D3 _ 8B. 55, E4
+        add     edx, 4                                  ; 27D6 _ 83. C2, 04
+        mov     eax, dword [eax+edx*4+4H]               ; 27D9 _ 8B. 44 90, 04
+        mov     edx, dword [ebp-1CH]                    ; 27DD _ 8B. 55, E4
+        mov     dword [eax+18H], edx                    ; 27E0 _ 89. 50, 18
+        sub     dword [ebp-1CH], 1                      ; 27E3 _ 83. 6D, E4, 01
+?_115:  mov     eax, dword [ebp-1CH]                    ; 27E7 _ 8B. 45, E4
+        cmp     eax, dword [ebp+10H]                    ; 27EA _ 3B. 45, 10
+        jg      ?_114                                   ; 27ED _ 7F, C4
+        mov     eax, dword [ebp+8H]                     ; 27EF _ 8B. 45, 08
+        mov     edx, dword [ebp+10H]                    ; 27F2 _ 8B. 55, 10
+        lea     ecx, [edx+4H]                           ; 27F5 _ 8D. 4A, 04
+        mov     edx, dword [ebp+0CH]                    ; 27F8 _ 8B. 55, 0C
+        mov     dword [eax+ecx*4+4H], edx               ; 27FB _ 89. 54 88, 04
+        mov     eax, dword [ebp+10H]                    ; 27FF _ 8B. 45, 10
+        lea     esi, [eax+1H]                           ; 2802 _ 8D. 70, 01
+        mov     eax, dword [ebp+0CH]                    ; 2805 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2808 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 280B _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 280E _ 8B. 40, 08
+        lea     ebx, [edx+eax]                          ; 2811 _ 8D. 1C 02
+        mov     eax, dword [ebp+0CH]                    ; 2814 _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 2817 _ 8B. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 281A _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 281D _ 8B. 40, 04
+        lea     ecx, [edx+eax]                          ; 2820 _ 8D. 0C 02
+        mov     eax, dword [ebp+0CH]                    ; 2823 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2826 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2829 _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 282C _ 8B. 40, 0C
+        sub     esp, 8                                  ; 282F _ 83. EC, 08
+        push    esi                                     ; 2832 _ 56
+        push    ebx                                     ; 2833 _ 53
+        push    ecx                                     ; 2834 _ 51
+        push    edx                                     ; 2835 _ 52
+        push    eax                                     ; 2836 _ 50
+        push    dword [ebp+8H]                          ; 2837 _ FF. 75, 08
+        call    sheet_refreshmap                        ; 283A _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 283F _ 83. C4, 20
+        mov     eax, dword [ebp+10H]                    ; 2842 _ 8B. 45, 10
+        lea     esi, [eax+1H]                           ; 2845 _ 8D. 70, 01
+        mov     eax, dword [ebp+0CH]                    ; 2848 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 284B _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 284E _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 2851 _ 8B. 40, 08
+        lea     ebx, [edx+eax]                          ; 2854 _ 8D. 1C 02
+        mov     eax, dword [ebp+0CH]                    ; 2857 _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 285A _ 8B. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 285D _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2860 _ 8B. 40, 04
+        lea     ecx, [edx+eax]                          ; 2863 _ 8D. 0C 02
+        mov     eax, dword [ebp+0CH]                    ; 2866 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2869 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 286C _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 286F _ 8B. 40, 0C
+        sub     esp, 4                                  ; 2872 _ 83. EC, 04
+        push    dword [ebp-0CH]                         ; 2875 _ FF. 75, F4
+        push    esi                                     ; 2878 _ 56
+        push    ebx                                     ; 2879 _ 53
+        push    ecx                                     ; 287A _ 51
+        push    edx                                     ; 287B _ 52
+        push    eax                                     ; 287C _ 50
+        push    dword [ebp+8H]                          ; 287D _ FF. 75, 08
+        call    sheet_refresh_new                       ; 2880 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2885 _ 83. C4, 20
+        jmp     ?_127                                   ; 2888 _ E9, 00000244
 
-?_116:  mov     eax, dword [ebp+8H]                     ; 288A _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 288D _ 8B. 40, 10
-        cmp     dword [ebp-0CH], eax                    ; 2890 _ 39. 45, F4
-        jge     ?_119                                   ; 2893 _ 7D, 47
-        mov     eax, dword [ebp-0CH]                    ; 2895 _ 8B. 45, F4
-        mov     dword [ebp-18H], eax                    ; 2898 _ 89. 45, E8
-        jmp     ?_118                                   ; 289B _ EB, 34
+?_116:  mov     eax, dword [ebp+8H]                     ; 288D _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 2890 _ 8B. 40, 10
+        cmp     dword [ebp-0CH], eax                    ; 2893 _ 39. 45, F4
+        jge     ?_119                                   ; 2896 _ 7D, 47
+        mov     eax, dword [ebp-0CH]                    ; 2898 _ 8B. 45, F4
+        mov     dword [ebp-18H], eax                    ; 289B _ 89. 45, E8
+        jmp     ?_118                                   ; 289E _ EB, 34
 
-?_117:  mov     eax, dword [ebp-18H]                    ; 289D _ 8B. 45, E8
-        lea     edx, [eax+1H]                           ; 28A0 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 28A3 _ 8B. 45, 08
-        add     edx, 4                                  ; 28A6 _ 83. C2, 04
-        mov     edx, dword [eax+edx*4+4H]               ; 28A9 _ 8B. 54 90, 04
-        mov     eax, dword [ebp+8H]                     ; 28AD _ 8B. 45, 08
-        mov     ecx, dword [ebp-18H]                    ; 28B0 _ 8B. 4D, E8
-        add     ecx, 4                                  ; 28B3 _ 83. C1, 04
-        mov     dword [eax+ecx*4+4H], edx               ; 28B6 _ 89. 54 88, 04
-        mov     eax, dword [ebp+8H]                     ; 28BA _ 8B. 45, 08
-        mov     edx, dword [ebp-18H]                    ; 28BD _ 8B. 55, E8
-        add     edx, 4                                  ; 28C0 _ 83. C2, 04
-        mov     eax, dword [eax+edx*4+4H]               ; 28C3 _ 8B. 44 90, 04
-        mov     edx, dword [ebp-18H]                    ; 28C7 _ 8B. 55, E8
-        mov     dword [eax+18H], edx                    ; 28CA _ 89. 50, 18
-        add     dword [ebp-18H], 1                      ; 28CD _ 83. 45, E8, 01
-?_118:  mov     eax, dword [ebp+8H]                     ; 28D1 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 28D4 _ 8B. 40, 10
-        cmp     dword [ebp-18H], eax                    ; 28D7 _ 39. 45, E8
-        jl      ?_117                                   ; 28DA _ 7C, C1
-?_119:  mov     eax, dword [ebp+8H]                     ; 28DC _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 28DF _ 8B. 40, 10
-        lea     edx, [eax-1H]                           ; 28E2 _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 28E5 _ 8B. 45, 08
-        mov     dword [eax+10H], edx                    ; 28E8 _ 89. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 28EB _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 28EE _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 28F1 _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 28F4 _ 8B. 40, 08
-        lea     ebx, [edx+eax]                          ; 28F7 _ 8D. 1C 02
-        mov     eax, dword [ebp+0CH]                    ; 28FA _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 28FD _ 8B. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 2900 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 2903 _ 8B. 40, 04
-        lea     ecx, [edx+eax]                          ; 2906 _ 8D. 0C 02
-        mov     eax, dword [ebp+0CH]                    ; 2909 _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 290C _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 290F _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2912 _ 8B. 40, 0C
-        sub     esp, 8                                  ; 2915 _ 83. EC, 08
-        push    0                                       ; 2918 _ 6A, 00
-        push    ebx                                     ; 291A _ 53
-        push    ecx                                     ; 291B _ 51
-        push    edx                                     ; 291C _ 52
-        push    eax                                     ; 291D _ 50
-        push    dword [ebp+8H]                          ; 291E _ FF. 75, 08
-        call    sheet_refreshmap                        ; 2921 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2926 _ 83. C4, 20
-        mov     eax, dword [ebp-0CH]                    ; 2929 _ 8B. 45, F4
-        lea     esi, [eax-1H]                           ; 292C _ 8D. 70, FF
-        mov     eax, dword [ebp+0CH]                    ; 292F _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2932 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2935 _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 2938 _ 8B. 40, 08
-        lea     ebx, [edx+eax]                          ; 293B _ 8D. 1C 02
-        mov     eax, dword [ebp+0CH]                    ; 293E _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 2941 _ 8B. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 2944 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 2947 _ 8B. 40, 04
-        lea     ecx, [edx+eax]                          ; 294A _ 8D. 0C 02
-        mov     eax, dword [ebp+0CH]                    ; 294D _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2950 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2953 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2956 _ 8B. 40, 0C
-        sub     esp, 4                                  ; 2959 _ 83. EC, 04
-        push    esi                                     ; 295C _ 56
-        push    0                                       ; 295D _ 6A, 00
-        push    ebx                                     ; 295F _ 53
-        push    ecx                                     ; 2960 _ 51
-        push    edx                                     ; 2961 _ 52
-        push    eax                                     ; 2962 _ 50
-        push    dword [ebp+8H]                          ; 2963 _ FF. 75, 08
-        call    sheet_refresh_new                       ; 2966 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 296B _ 83. C4, 20
-        jmp     ?_127                                   ; 296E _ E9, 0000015B
+?_117:  mov     eax, dword [ebp-18H]                    ; 28A0 _ 8B. 45, E8
+        lea     edx, [eax+1H]                           ; 28A3 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 28A6 _ 8B. 45, 08
+        add     edx, 4                                  ; 28A9 _ 83. C2, 04
+        mov     edx, dword [eax+edx*4+4H]               ; 28AC _ 8B. 54 90, 04
+        mov     eax, dword [ebp+8H]                     ; 28B0 _ 8B. 45, 08
+        mov     ecx, dword [ebp-18H]                    ; 28B3 _ 8B. 4D, E8
+        add     ecx, 4                                  ; 28B6 _ 83. C1, 04
+        mov     dword [eax+ecx*4+4H], edx               ; 28B9 _ 89. 54 88, 04
+        mov     eax, dword [ebp+8H]                     ; 28BD _ 8B. 45, 08
+        mov     edx, dword [ebp-18H]                    ; 28C0 _ 8B. 55, E8
+        add     edx, 4                                  ; 28C3 _ 83. C2, 04
+        mov     eax, dword [eax+edx*4+4H]               ; 28C6 _ 8B. 44 90, 04
+        mov     edx, dword [ebp-18H]                    ; 28CA _ 8B. 55, E8
+        mov     dword [eax+18H], edx                    ; 28CD _ 89. 50, 18
+        add     dword [ebp-18H], 1                      ; 28D0 _ 83. 45, E8, 01
+?_118:  mov     eax, dword [ebp+8H]                     ; 28D4 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 28D7 _ 8B. 40, 10
+        cmp     dword [ebp-18H], eax                    ; 28DA _ 39. 45, E8
+        jl      ?_117                                   ; 28DD _ 7C, C1
+?_119:  mov     eax, dword [ebp+8H]                     ; 28DF _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 28E2 _ 8B. 40, 10
+        lea     edx, [eax-1H]                           ; 28E5 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 28E8 _ 8B. 45, 08
+        mov     dword [eax+10H], edx                    ; 28EB _ 89. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 28EE _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 28F1 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 28F4 _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 28F7 _ 8B. 40, 08
+        lea     ebx, [edx+eax]                          ; 28FA _ 8D. 1C 02
+        mov     eax, dword [ebp+0CH]                    ; 28FD _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 2900 _ 8B. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 2903 _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2906 _ 8B. 40, 04
+        lea     ecx, [edx+eax]                          ; 2909 _ 8D. 0C 02
+        mov     eax, dword [ebp+0CH]                    ; 290C _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 290F _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2912 _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 2915 _ 8B. 40, 0C
+        sub     esp, 8                                  ; 2918 _ 83. EC, 08
+        push    0                                       ; 291B _ 6A, 00
+        push    ebx                                     ; 291D _ 53
+        push    ecx                                     ; 291E _ 51
+        push    edx                                     ; 291F _ 52
+        push    eax                                     ; 2920 _ 50
+        push    dword [ebp+8H]                          ; 2921 _ FF. 75, 08
+        call    sheet_refreshmap                        ; 2924 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2929 _ 83. C4, 20
+        mov     eax, dword [ebp-0CH]                    ; 292C _ 8B. 45, F4
+        lea     esi, [eax-1H]                           ; 292F _ 8D. 70, FF
+        mov     eax, dword [ebp+0CH]                    ; 2932 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2935 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2938 _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 293B _ 8B. 40, 08
+        lea     ebx, [edx+eax]                          ; 293E _ 8D. 1C 02
+        mov     eax, dword [ebp+0CH]                    ; 2941 _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 2944 _ 8B. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 2947 _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 294A _ 8B. 40, 04
+        lea     ecx, [edx+eax]                          ; 294D _ 8D. 0C 02
+        mov     eax, dword [ebp+0CH]                    ; 2950 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2953 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2956 _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 2959 _ 8B. 40, 0C
+        sub     esp, 4                                  ; 295C _ 83. EC, 04
+        push    esi                                     ; 295F _ 56
+        push    0                                       ; 2960 _ 6A, 00
+        push    ebx                                     ; 2962 _ 53
+        push    ecx                                     ; 2963 _ 51
+        push    edx                                     ; 2964 _ 52
+        push    eax                                     ; 2965 _ 50
+        push    dword [ebp+8H]                          ; 2966 _ FF. 75, 08
+        call    sheet_refresh_new                       ; 2969 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 296E _ 83. C4, 20
+        jmp     ?_127                                   ; 2971 _ E9, 0000015B
 
-?_120:  mov     eax, dword [ebp-0CH]                    ; 2973 _ 8B. 45, F4
-        cmp     eax, dword [ebp+10H]                    ; 2976 _ 3B. 45, 10
-        jge     ?_127                                   ; 2979 _ 0F 8D, 0000014F
-        cmp     dword [ebp-0CH], 0                      ; 297F _ 83. 7D, F4, 00
-        js      ?_123                                   ; 2983 _ 78, 56
-        mov     eax, dword [ebp-0CH]                    ; 2985 _ 8B. 45, F4
-        mov     dword [ebp-14H], eax                    ; 2988 _ 89. 45, EC
-        jmp     ?_122                                   ; 298B _ EB, 34
+?_120:  mov     eax, dword [ebp-0CH]                    ; 2976 _ 8B. 45, F4
+        cmp     eax, dword [ebp+10H]                    ; 2979 _ 3B. 45, 10
+        jge     ?_127                                   ; 297C _ 0F 8D, 0000014F
+        cmp     dword [ebp-0CH], 0                      ; 2982 _ 83. 7D, F4, 00
+        js      ?_123                                   ; 2986 _ 78, 56
+        mov     eax, dword [ebp-0CH]                    ; 2988 _ 8B. 45, F4
+        mov     dword [ebp-14H], eax                    ; 298B _ 89. 45, EC
+        jmp     ?_122                                   ; 298E _ EB, 34
 
-?_121:  mov     eax, dword [ebp-14H]                    ; 298D _ 8B. 45, EC
-        lea     edx, [eax+1H]                           ; 2990 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 2993 _ 8B. 45, 08
-        add     edx, 4                                  ; 2996 _ 83. C2, 04
-        mov     edx, dword [eax+edx*4+4H]               ; 2999 _ 8B. 54 90, 04
-        mov     eax, dword [ebp+8H]                     ; 299D _ 8B. 45, 08
-        mov     ecx, dword [ebp-14H]                    ; 29A0 _ 8B. 4D, EC
-        add     ecx, 4                                  ; 29A3 _ 83. C1, 04
-        mov     dword [eax+ecx*4+4H], edx               ; 29A6 _ 89. 54 88, 04
-        mov     eax, dword [ebp+8H]                     ; 29AA _ 8B. 45, 08
-        mov     edx, dword [ebp-14H]                    ; 29AD _ 8B. 55, EC
-        add     edx, 4                                  ; 29B0 _ 83. C2, 04
-        mov     eax, dword [eax+edx*4+4H]               ; 29B3 _ 8B. 44 90, 04
-        mov     edx, dword [ebp-14H]                    ; 29B7 _ 8B. 55, EC
-        mov     dword [eax+18H], edx                    ; 29BA _ 89. 50, 18
-        add     dword [ebp-14H], 1                      ; 29BD _ 83. 45, EC, 01
-?_122:  mov     eax, dword [ebp-14H]                    ; 29C1 _ 8B. 45, EC
-        cmp     eax, dword [ebp+10H]                    ; 29C4 _ 3B. 45, 10
-        jl      ?_121                                   ; 29C7 _ 7C, C4
-        mov     eax, dword [ebp+8H]                     ; 29C9 _ 8B. 45, 08
-        mov     edx, dword [ebp+10H]                    ; 29CC _ 8B. 55, 10
-        lea     ecx, [edx+4H]                           ; 29CF _ 8D. 4A, 04
-        mov     edx, dword [ebp+0CH]                    ; 29D2 _ 8B. 55, 0C
-        mov     dword [eax+ecx*4+4H], edx               ; 29D5 _ 89. 54 88, 04
-        jmp     ?_126                                   ; 29D9 _ EB, 72
+?_121:  mov     eax, dword [ebp-14H]                    ; 2990 _ 8B. 45, EC
+        lea     edx, [eax+1H]                           ; 2993 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 2996 _ 8B. 45, 08
+        add     edx, 4                                  ; 2999 _ 83. C2, 04
+        mov     edx, dword [eax+edx*4+4H]               ; 299C _ 8B. 54 90, 04
+        mov     eax, dword [ebp+8H]                     ; 29A0 _ 8B. 45, 08
+        mov     ecx, dword [ebp-14H]                    ; 29A3 _ 8B. 4D, EC
+        add     ecx, 4                                  ; 29A6 _ 83. C1, 04
+        mov     dword [eax+ecx*4+4H], edx               ; 29A9 _ 89. 54 88, 04
+        mov     eax, dword [ebp+8H]                     ; 29AD _ 8B. 45, 08
+        mov     edx, dword [ebp-14H]                    ; 29B0 _ 8B. 55, EC
+        add     edx, 4                                  ; 29B3 _ 83. C2, 04
+        mov     eax, dword [eax+edx*4+4H]               ; 29B6 _ 8B. 44 90, 04
+        mov     edx, dword [ebp-14H]                    ; 29BA _ 8B. 55, EC
+        mov     dword [eax+18H], edx                    ; 29BD _ 89. 50, 18
+        add     dword [ebp-14H], 1                      ; 29C0 _ 83. 45, EC, 01
+?_122:  mov     eax, dword [ebp-14H]                    ; 29C4 _ 8B. 45, EC
+        cmp     eax, dword [ebp+10H]                    ; 29C7 _ 3B. 45, 10
+        jl      ?_121                                   ; 29CA _ 7C, C4
+        mov     eax, dword [ebp+8H]                     ; 29CC _ 8B. 45, 08
+        mov     edx, dword [ebp+10H]                    ; 29CF _ 8B. 55, 10
+        lea     ecx, [edx+4H]                           ; 29D2 _ 8D. 4A, 04
+        mov     edx, dword [ebp+0CH]                    ; 29D5 _ 8B. 55, 0C
+        mov     dword [eax+ecx*4+4H], edx               ; 29D8 _ 89. 54 88, 04
+        jmp     ?_126                                   ; 29DC _ EB, 72
 
-?_123:  cmp     dword [ebp-0CH], 0                      ; 29DB _ 83. 7D, F4, 00
-        jns     ?_126                                   ; 29DF _ 79, 6C
-        mov     eax, dword [ebp+8H]                     ; 29E1 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 29E4 _ 8B. 40, 10
-        mov     dword [ebp-10H], eax                    ; 29E7 _ 89. 45, F0
-        jmp     ?_125                                   ; 29EA _ EB, 3A
+?_123:  cmp     dword [ebp-0CH], 0                      ; 29DE _ 83. 7D, F4, 00
+        jns     ?_126                                   ; 29E2 _ 79, 6C
+        mov     eax, dword [ebp+8H]                     ; 29E4 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 29E7 _ 8B. 40, 10
+        mov     dword [ebp-10H], eax                    ; 29EA _ 89. 45, F0
+        jmp     ?_125                                   ; 29ED _ EB, 3A
 
-?_124:  mov     eax, dword [ebp-10H]                    ; 29EC _ 8B. 45, F0
-        lea     ecx, [eax+1H]                           ; 29EF _ 8D. 48, 01
-        mov     eax, dword [ebp+8H]                     ; 29F2 _ 8B. 45, 08
-        mov     edx, dword [ebp-10H]                    ; 29F5 _ 8B. 55, F0
-        add     edx, 4                                  ; 29F8 _ 83. C2, 04
-        mov     edx, dword [eax+edx*4+4H]               ; 29FB _ 8B. 54 90, 04
-        mov     eax, dword [ebp+8H]                     ; 29FF _ 8B. 45, 08
-        add     ecx, 4                                  ; 2A02 _ 83. C1, 04
-        mov     dword [eax+ecx*4+4H], edx               ; 2A05 _ 89. 54 88, 04
-        mov     eax, dword [ebp-10H]                    ; 2A09 _ 8B. 45, F0
-        lea     edx, [eax+1H]                           ; 2A0C _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 2A0F _ 8B. 45, 08
-        add     edx, 4                                  ; 2A12 _ 83. C2, 04
-        mov     eax, dword [eax+edx*4+4H]               ; 2A15 _ 8B. 44 90, 04
-        mov     edx, dword [ebp-10H]                    ; 2A19 _ 8B. 55, F0
-        add     edx, 1                                  ; 2A1C _ 83. C2, 01
-        mov     dword [eax+18H], edx                    ; 2A1F _ 89. 50, 18
-        sub     dword [ebp-10H], 1                      ; 2A22 _ 83. 6D, F0, 01
-?_125:  mov     eax, dword [ebp-10H]                    ; 2A26 _ 8B. 45, F0
-        cmp     eax, dword [ebp+10H]                    ; 2A29 _ 3B. 45, 10
-        jge     ?_124                                   ; 2A2C _ 7D, BE
-        mov     eax, dword [ebp+8H]                     ; 2A2E _ 8B. 45, 08
-        mov     edx, dword [ebp+10H]                    ; 2A31 _ 8B. 55, 10
-        lea     ecx, [edx+4H]                           ; 2A34 _ 8D. 4A, 04
-        mov     edx, dword [ebp+0CH]                    ; 2A37 _ 8B. 55, 0C
-        mov     dword [eax+ecx*4+4H], edx               ; 2A3A _ 89. 54 88, 04
-        mov     eax, dword [ebp+8H]                     ; 2A3E _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 2A41 _ 8B. 40, 10
-        lea     edx, [eax+1H]                           ; 2A44 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 2A47 _ 8B. 45, 08
-        mov     dword [eax+10H], edx                    ; 2A4A _ 89. 50, 10
-?_126:  mov     eax, dword [ebp+0CH]                    ; 2A4D _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2A50 _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2A53 _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 2A56 _ 8B. 40, 08
-        lea     ebx, [edx+eax]                          ; 2A59 _ 8D. 1C 02
-        mov     eax, dword [ebp+0CH]                    ; 2A5C _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 2A5F _ 8B. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 2A62 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 2A65 _ 8B. 40, 04
-        lea     ecx, [edx+eax]                          ; 2A68 _ 8D. 0C 02
-        mov     eax, dword [ebp+0CH]                    ; 2A6B _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2A6E _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2A71 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2A74 _ 8B. 40, 0C
-        sub     esp, 8                                  ; 2A77 _ 83. EC, 08
-        push    dword [ebp+10H]                         ; 2A7A _ FF. 75, 10
-        push    ebx                                     ; 2A7D _ 53
-        push    ecx                                     ; 2A7E _ 51
-        push    edx                                     ; 2A7F _ 52
-        push    eax                                     ; 2A80 _ 50
-        push    dword [ebp+8H]                          ; 2A81 _ FF. 75, 08
-        call    sheet_refreshmap                        ; 2A84 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2A89 _ 83. C4, 20
-        mov     eax, dword [ebp+0CH]                    ; 2A8C _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2A8F _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2A92 _ 8B. 45, 0C
-        mov     eax, dword [eax+8H]                     ; 2A95 _ 8B. 40, 08
-        lea     ebx, [edx+eax]                          ; 2A98 _ 8D. 1C 02
-        mov     eax, dword [ebp+0CH]                    ; 2A9B _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 2A9E _ 8B. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 2AA1 _ 8B. 45, 0C
-        mov     eax, dword [eax+4H]                     ; 2AA4 _ 8B. 40, 04
-        lea     ecx, [edx+eax]                          ; 2AA7 _ 8D. 0C 02
-        mov     eax, dword [ebp+0CH]                    ; 2AAA _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2AAD _ 8B. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2AB0 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2AB3 _ 8B. 40, 0C
-        sub     esp, 4                                  ; 2AB6 _ 83. EC, 04
-        push    dword [ebp+10H]                         ; 2AB9 _ FF. 75, 10
+?_124:  mov     eax, dword [ebp-10H]                    ; 29EF _ 8B. 45, F0
+        lea     ecx, [eax+1H]                           ; 29F2 _ 8D. 48, 01
+        mov     eax, dword [ebp+8H]                     ; 29F5 _ 8B. 45, 08
+        mov     edx, dword [ebp-10H]                    ; 29F8 _ 8B. 55, F0
+        add     edx, 4                                  ; 29FB _ 83. C2, 04
+        mov     edx, dword [eax+edx*4+4H]               ; 29FE _ 8B. 54 90, 04
+        mov     eax, dword [ebp+8H]                     ; 2A02 _ 8B. 45, 08
+        add     ecx, 4                                  ; 2A05 _ 83. C1, 04
+        mov     dword [eax+ecx*4+4H], edx               ; 2A08 _ 89. 54 88, 04
+        mov     eax, dword [ebp-10H]                    ; 2A0C _ 8B. 45, F0
+        lea     edx, [eax+1H]                           ; 2A0F _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 2A12 _ 8B. 45, 08
+        add     edx, 4                                  ; 2A15 _ 83. C2, 04
+        mov     eax, dword [eax+edx*4+4H]               ; 2A18 _ 8B. 44 90, 04
+        mov     edx, dword [ebp-10H]                    ; 2A1C _ 8B. 55, F0
+        add     edx, 1                                  ; 2A1F _ 83. C2, 01
+        mov     dword [eax+18H], edx                    ; 2A22 _ 89. 50, 18
+        sub     dword [ebp-10H], 1                      ; 2A25 _ 83. 6D, F0, 01
+?_125:  mov     eax, dword [ebp-10H]                    ; 2A29 _ 8B. 45, F0
+        cmp     eax, dword [ebp+10H]                    ; 2A2C _ 3B. 45, 10
+        jge     ?_124                                   ; 2A2F _ 7D, BE
+        mov     eax, dword [ebp+8H]                     ; 2A31 _ 8B. 45, 08
+        mov     edx, dword [ebp+10H]                    ; 2A34 _ 8B. 55, 10
+        lea     ecx, [edx+4H]                           ; 2A37 _ 8D. 4A, 04
+        mov     edx, dword [ebp+0CH]                    ; 2A3A _ 8B. 55, 0C
+        mov     dword [eax+ecx*4+4H], edx               ; 2A3D _ 89. 54 88, 04
+        mov     eax, dword [ebp+8H]                     ; 2A41 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 2A44 _ 8B. 40, 10
+        lea     edx, [eax+1H]                           ; 2A47 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 2A4A _ 8B. 45, 08
+        mov     dword [eax+10H], edx                    ; 2A4D _ 89. 50, 10
+?_126:  mov     eax, dword [ebp+0CH]                    ; 2A50 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2A53 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2A56 _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 2A59 _ 8B. 40, 08
+        lea     ebx, [edx+eax]                          ; 2A5C _ 8D. 1C 02
+        mov     eax, dword [ebp+0CH]                    ; 2A5F _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 2A62 _ 8B. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 2A65 _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2A68 _ 8B. 40, 04
+        lea     ecx, [edx+eax]                          ; 2A6B _ 8D. 0C 02
+        mov     eax, dword [ebp+0CH]                    ; 2A6E _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2A71 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2A74 _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 2A77 _ 8B. 40, 0C
+        sub     esp, 8                                  ; 2A7A _ 83. EC, 08
+        push    dword [ebp+10H]                         ; 2A7D _ FF. 75, 10
+        push    ebx                                     ; 2A80 _ 53
+        push    ecx                                     ; 2A81 _ 51
+        push    edx                                     ; 2A82 _ 52
+        push    eax                                     ; 2A83 _ 50
+        push    dword [ebp+8H]                          ; 2A84 _ FF. 75, 08
+        call    sheet_refreshmap                        ; 2A87 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2A8C _ 83. C4, 20
+        mov     eax, dword [ebp+0CH]                    ; 2A8F _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2A92 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2A95 _ 8B. 45, 0C
+        mov     eax, dword [eax+8H]                     ; 2A98 _ 8B. 40, 08
+        lea     ebx, [edx+eax]                          ; 2A9B _ 8D. 1C 02
+        mov     eax, dword [ebp+0CH]                    ; 2A9E _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 2AA1 _ 8B. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 2AA4 _ 8B. 45, 0C
+        mov     eax, dword [eax+4H]                     ; 2AA7 _ 8B. 40, 04
+        lea     ecx, [edx+eax]                          ; 2AAA _ 8D. 0C 02
+        mov     eax, dword [ebp+0CH]                    ; 2AAD _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2AB0 _ 8B. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2AB3 _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 2AB6 _ 8B. 40, 0C
+        sub     esp, 4                                  ; 2AB9 _ 83. EC, 04
         push    dword [ebp+10H]                         ; 2ABC _ FF. 75, 10
-        push    ebx                                     ; 2ABF _ 53
-        push    ecx                                     ; 2AC0 _ 51
-        push    edx                                     ; 2AC1 _ 52
-        push    eax                                     ; 2AC2 _ 50
-        push    dword [ebp+8H]                          ; 2AC3 _ FF. 75, 08
-        call    sheet_refresh_new                       ; 2AC6 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2ACB _ 83. C4, 20
-?_127:  nop                                             ; 2ACE _ 90
-        lea     esp, [ebp-8H]                           ; 2ACF _ 8D. 65, F8
-        pop     ebx                                     ; 2AD2 _ 5B
-        pop     esi                                     ; 2AD3 _ 5E
-        pop     ebp                                     ; 2AD4 _ 5D
-        ret                                             ; 2AD5 _ C3
+        push    dword [ebp+10H]                         ; 2ABF _ FF. 75, 10
+        push    ebx                                     ; 2AC2 _ 53
+        push    ecx                                     ; 2AC3 _ 51
+        push    edx                                     ; 2AC4 _ 52
+        push    eax                                     ; 2AC5 _ 50
+        push    dword [ebp+8H]                          ; 2AC6 _ FF. 75, 08
+        call    sheet_refresh_new                       ; 2AC9 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2ACE _ 83. C4, 20
+?_127:  nop                                             ; 2AD1 _ 90
+        lea     esp, [ebp-8H]                           ; 2AD2 _ 8D. 65, F8
+        pop     ebx                                     ; 2AD5 _ 5B
+        pop     esi                                     ; 2AD6 _ 5E
+        pop     ebp                                     ; 2AD7 _ 5D
+        ret                                             ; 2AD8 _ C3
 ; sheet_level_updown End of function
 
 sheet_refresh:; Function begin
-        push    ebp                                     ; 2AD6 _ 55
-        mov     ebp, esp                                ; 2AD7 _ 89. E5
-        push    edi                                     ; 2AD9 _ 57
-        push    esi                                     ; 2ADA _ 56
-        push    ebx                                     ; 2ADB _ 53
-        sub     esp, 28                                 ; 2ADC _ 83. EC, 1C
-        mov     eax, dword [ebp+0CH]                    ; 2ADF _ 8B. 45, 0C
-        mov     eax, dword [eax+18H]                    ; 2AE2 _ 8B. 40, 18
-        test    eax, eax                                ; 2AE5 _ 85. C0
-        js      ?_128                                   ; 2AE7 _ 78, 52
-        mov     eax, dword [ebp+0CH]                    ; 2AE9 _ 8B. 45, 0C
-        mov     ebx, dword [eax+18H]                    ; 2AEC _ 8B. 58, 18
-        mov     eax, dword [ebp+0CH]                    ; 2AEF _ 8B. 45, 0C
-        mov     ecx, dword [eax+18H]                    ; 2AF2 _ 8B. 48, 18
-        mov     eax, dword [ebp+0CH]                    ; 2AF5 _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2AF8 _ 8B. 50, 10
-        mov     eax, dword [ebp+1CH]                    ; 2AFB _ 8B. 45, 1C
-        lea     edi, [edx+eax]                          ; 2AFE _ 8D. 3C 02
-        mov     eax, dword [ebp+0CH]                    ; 2B01 _ 8B. 45, 0C
-        mov     edx, dword [eax+0CH]                    ; 2B04 _ 8B. 50, 0C
-        mov     eax, dword [ebp+18H]                    ; 2B07 _ 8B. 45, 18
-        lea     esi, [edx+eax]                          ; 2B0A _ 8D. 34 02
-        mov     eax, dword [ebp+0CH]                    ; 2B0D _ 8B. 45, 0C
-        mov     edx, dword [eax+10H]                    ; 2B10 _ 8B. 50, 10
-        mov     eax, dword [ebp+14H]                    ; 2B13 _ 8B. 45, 14
-        add     edx, eax                                ; 2B16 _ 01. C2
-        mov     eax, dword [ebp+0CH]                    ; 2B18 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2B1B _ 8B. 40, 0C
-        mov     dword [ebp-1CH], eax                    ; 2B1E _ 89. 45, E4
-        mov     eax, dword [ebp+10H]                    ; 2B21 _ 8B. 45, 10
-        add     eax, dword [ebp-1CH]                    ; 2B24 _ 03. 45, E4
-        sub     esp, 4                                  ; 2B27 _ 83. EC, 04
-        push    ebx                                     ; 2B2A _ 53
-        push    ecx                                     ; 2B2B _ 51
-        push    edi                                     ; 2B2C _ 57
-        push    esi                                     ; 2B2D _ 56
-        push    edx                                     ; 2B2E _ 52
-        push    eax                                     ; 2B2F _ 50
-        push    dword [ebp+8H]                          ; 2B30 _ FF. 75, 08
-        call    sheet_refresh_new                       ; 2B33 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2B38 _ 83. C4, 20
-?_128:  mov     eax, 0                                  ; 2B3B _ B8, 00000000
-        lea     esp, [ebp-0CH]                          ; 2B40 _ 8D. 65, F4
-        pop     ebx                                     ; 2B43 _ 5B
-        pop     esi                                     ; 2B44 _ 5E
-        pop     edi                                     ; 2B45 _ 5F
-        pop     ebp                                     ; 2B46 _ 5D
-        ret                                             ; 2B47 _ C3
+        push    ebp                                     ; 2AD9 _ 55
+        mov     ebp, esp                                ; 2ADA _ 89. E5
+        push    edi                                     ; 2ADC _ 57
+        push    esi                                     ; 2ADD _ 56
+        push    ebx                                     ; 2ADE _ 53
+        sub     esp, 28                                 ; 2ADF _ 83. EC, 1C
+        mov     eax, dword [ebp+0CH]                    ; 2AE2 _ 8B. 45, 0C
+        mov     eax, dword [eax+18H]                    ; 2AE5 _ 8B. 40, 18
+        test    eax, eax                                ; 2AE8 _ 85. C0
+        js      ?_128                                   ; 2AEA _ 78, 52
+        mov     eax, dword [ebp+0CH]                    ; 2AEC _ 8B. 45, 0C
+        mov     ebx, dword [eax+18H]                    ; 2AEF _ 8B. 58, 18
+        mov     eax, dword [ebp+0CH]                    ; 2AF2 _ 8B. 45, 0C
+        mov     ecx, dword [eax+18H]                    ; 2AF5 _ 8B. 48, 18
+        mov     eax, dword [ebp+0CH]                    ; 2AF8 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2AFB _ 8B. 50, 10
+        mov     eax, dword [ebp+1CH]                    ; 2AFE _ 8B. 45, 1C
+        lea     edi, [edx+eax]                          ; 2B01 _ 8D. 3C 02
+        mov     eax, dword [ebp+0CH]                    ; 2B04 _ 8B. 45, 0C
+        mov     edx, dword [eax+0CH]                    ; 2B07 _ 8B. 50, 0C
+        mov     eax, dword [ebp+18H]                    ; 2B0A _ 8B. 45, 18
+        lea     esi, [edx+eax]                          ; 2B0D _ 8D. 34 02
+        mov     eax, dword [ebp+0CH]                    ; 2B10 _ 8B. 45, 0C
+        mov     edx, dword [eax+10H]                    ; 2B13 _ 8B. 50, 10
+        mov     eax, dword [ebp+14H]                    ; 2B16 _ 8B. 45, 14
+        add     edx, eax                                ; 2B19 _ 01. C2
+        mov     eax, dword [ebp+0CH]                    ; 2B1B _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 2B1E _ 8B. 40, 0C
+        mov     dword [ebp-1CH], eax                    ; 2B21 _ 89. 45, E4
+        mov     eax, dword [ebp+10H]                    ; 2B24 _ 8B. 45, 10
+        add     eax, dword [ebp-1CH]                    ; 2B27 _ 03. 45, E4
+        sub     esp, 4                                  ; 2B2A _ 83. EC, 04
+        push    ebx                                     ; 2B2D _ 53
+        push    ecx                                     ; 2B2E _ 51
+        push    edi                                     ; 2B2F _ 57
+        push    esi                                     ; 2B30 _ 56
+        push    edx                                     ; 2B31 _ 52
+        push    eax                                     ; 2B32 _ 50
+        push    dword [ebp+8H]                          ; 2B33 _ FF. 75, 08
+        call    sheet_refresh_new                       ; 2B36 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2B3B _ 83. C4, 20
+?_128:  mov     eax, 0                                  ; 2B3E _ B8, 00000000
+        lea     esp, [ebp-0CH]                          ; 2B43 _ 8D. 65, F4
+        pop     ebx                                     ; 2B46 _ 5B
+        pop     esi                                     ; 2B47 _ 5E
+        pop     edi                                     ; 2B48 _ 5F
+        pop     ebp                                     ; 2B49 _ 5D
+        ret                                             ; 2B4A _ C3
 ; sheet_refresh End of function
 
 sheet_slide:; Function begin
-        push    ebp                                     ; 2B48 _ 55
-        mov     ebp, esp                                ; 2B49 _ 89. E5
-        push    esi                                     ; 2B4B _ 56
-        push    ebx                                     ; 2B4C _ 53
-        sub     esp, 16                                 ; 2B4D _ 83. EC, 10
-        mov     eax, dword [ebp+0CH]                    ; 2B50 _ 8B. 45, 0C
-        mov     eax, dword [eax+0CH]                    ; 2B53 _ 8B. 40, 0C
-        mov     dword [ebp-10H], eax                    ; 2B56 _ 89. 45, F0
-        mov     eax, dword [ebp+0CH]                    ; 2B59 _ 8B. 45, 0C
-        mov     eax, dword [eax+10H]                    ; 2B5C _ 8B. 40, 10
-        mov     dword [ebp-0CH], eax                    ; 2B5F _ 89. 45, F4
-        mov     eax, dword [ebp+0CH]                    ; 2B62 _ 8B. 45, 0C
-        mov     edx, dword [ebp+10H]                    ; 2B65 _ 8B. 55, 10
-        mov     dword [eax+0CH], edx                    ; 2B68 _ 89. 50, 0C
-        mov     eax, dword [ebp+0CH]                    ; 2B6B _ 8B. 45, 0C
-        mov     edx, dword [ebp+14H]                    ; 2B6E _ 8B. 55, 14
-        mov     dword [eax+10H], edx                    ; 2B71 _ 89. 50, 10
-        mov     eax, dword [ebp+0CH]                    ; 2B74 _ 8B. 45, 0C
-        mov     eax, dword [eax+18H]                    ; 2B77 _ 8B. 40, 18
-        test    eax, eax                                ; 2B7A _ 85. C0
-        js      ?_129                                   ; 2B7C _ 0F 88, 000000D3
-        mov     eax, dword [ebp+0CH]                    ; 2B82 _ 8B. 45, 0C
-        mov     edx, dword [eax+8H]                     ; 2B85 _ 8B. 50, 08
-        mov     eax, dword [ebp-0CH]                    ; 2B88 _ 8B. 45, F4
-        add     edx, eax                                ; 2B8B _ 01. C2
-        mov     eax, dword [ebp+0CH]                    ; 2B8D _ 8B. 45, 0C
-        mov     ecx, dword [eax+4H]                     ; 2B90 _ 8B. 48, 04
-        mov     eax, dword [ebp-10H]                    ; 2B93 _ 8B. 45, F0
-        add     eax, ecx                                ; 2B96 _ 01. C8
-        sub     esp, 8                                  ; 2B98 _ 83. EC, 08
-        push    0                                       ; 2B9B _ 6A, 00
-        push    edx                                     ; 2B9D _ 52
-        push    eax                                     ; 2B9E _ 50
-        push    dword [ebp-0CH]                         ; 2B9F _ FF. 75, F4
-        push    dword [ebp-10H]                         ; 2BA2 _ FF. 75, F0
-        push    dword [ebp+8H]                          ; 2BA5 _ FF. 75, 08
-        call    sheet_refreshmap                        ; 2BA8 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2BAD _ 83. C4, 20
-        mov     eax, dword [ebp+0CH]                    ; 2BB0 _ 8B. 45, 0C
-        mov     eax, dword [eax+18H]                    ; 2BB3 _ 8B. 40, 18
-        mov     edx, dword [ebp+0CH]                    ; 2BB6 _ 8B. 55, 0C
-        mov     ecx, dword [edx+8H]                     ; 2BB9 _ 8B. 4A, 08
-        mov     edx, dword [ebp+14H]                    ; 2BBC _ 8B. 55, 14
-        add     ecx, edx                                ; 2BBF _ 01. D1
-        mov     edx, dword [ebp+0CH]                    ; 2BC1 _ 8B. 55, 0C
-        mov     ebx, dword [edx+4H]                     ; 2BC4 _ 8B. 5A, 04
-        mov     edx, dword [ebp+10H]                    ; 2BC7 _ 8B. 55, 10
-        add     edx, ebx                                ; 2BCA _ 01. DA
-        sub     esp, 8                                  ; 2BCC _ 83. EC, 08
-        push    eax                                     ; 2BCF _ 50
-        push    ecx                                     ; 2BD0 _ 51
-        push    edx                                     ; 2BD1 _ 52
-        push    dword [ebp+14H]                         ; 2BD2 _ FF. 75, 14
-        push    dword [ebp+10H]                         ; 2BD5 _ FF. 75, 10
-        push    dword [ebp+8H]                          ; 2BD8 _ FF. 75, 08
-        call    sheet_refreshmap                        ; 2BDB _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2BE0 _ 83. C4, 20
-        mov     eax, dword [ebp+0CH]                    ; 2BE3 _ 8B. 45, 0C
-        mov     eax, dword [eax+18H]                    ; 2BE6 _ 8B. 40, 18
-        lea     ecx, [eax-1H]                           ; 2BE9 _ 8D. 48, FF
-        mov     eax, dword [ebp+0CH]                    ; 2BEC _ 8B. 45, 0C
-        mov     edx, dword [eax+8H]                     ; 2BEF _ 8B. 50, 08
-        mov     eax, dword [ebp-0CH]                    ; 2BF2 _ 8B. 45, F4
-        add     edx, eax                                ; 2BF5 _ 01. C2
-        mov     eax, dword [ebp+0CH]                    ; 2BF7 _ 8B. 45, 0C
-        mov     ebx, dword [eax+4H]                     ; 2BFA _ 8B. 58, 04
-        mov     eax, dword [ebp-10H]                    ; 2BFD _ 8B. 45, F0
-        add     eax, ebx                                ; 2C00 _ 01. D8
-        sub     esp, 4                                  ; 2C02 _ 83. EC, 04
-        push    ecx                                     ; 2C05 _ 51
-        push    0                                       ; 2C06 _ 6A, 00
-        push    edx                                     ; 2C08 _ 52
-        push    eax                                     ; 2C09 _ 50
-        push    dword [ebp-0CH]                         ; 2C0A _ FF. 75, F4
-        push    dword [ebp-10H]                         ; 2C0D _ FF. 75, F0
-        push    dword [ebp+8H]                          ; 2C10 _ FF. 75, 08
-        call    sheet_refresh_new                       ; 2C13 _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2C18 _ 83. C4, 20
-        mov     eax, dword [ebp+0CH]                    ; 2C1B _ 8B. 45, 0C
-        mov     edx, dword [eax+18H]                    ; 2C1E _ 8B. 50, 18
-        mov     eax, dword [ebp+0CH]                    ; 2C21 _ 8B. 45, 0C
-        mov     eax, dword [eax+18H]                    ; 2C24 _ 8B. 40, 18
-        mov     ecx, dword [ebp+0CH]                    ; 2C27 _ 8B. 4D, 0C
-        mov     ebx, dword [ecx+8H]                     ; 2C2A _ 8B. 59, 08
-        mov     ecx, dword [ebp+14H]                    ; 2C2D _ 8B. 4D, 14
-        add     ebx, ecx                                ; 2C30 _ 01. CB
-        mov     ecx, dword [ebp+0CH]                    ; 2C32 _ 8B. 4D, 0C
-        mov     esi, dword [ecx+4H]                     ; 2C35 _ 8B. 71, 04
-        mov     ecx, dword [ebp+10H]                    ; 2C38 _ 8B. 4D, 10
-        add     ecx, esi                                ; 2C3B _ 01. F1
-        sub     esp, 4                                  ; 2C3D _ 83. EC, 04
-        push    edx                                     ; 2C40 _ 52
-        push    eax                                     ; 2C41 _ 50
-        push    ebx                                     ; 2C42 _ 53
-        push    ecx                                     ; 2C43 _ 51
-        push    dword [ebp+14H]                         ; 2C44 _ FF. 75, 14
-        push    dword [ebp+10H]                         ; 2C47 _ FF. 75, 10
-        push    dword [ebp+8H]                          ; 2C4A _ FF. 75, 08
-        call    sheet_refresh_new                       ; 2C4D _ E8, FFFFFFFC(rel)
-        add     esp, 32                                 ; 2C52 _ 83. C4, 20
-?_129:  nop                                             ; 2C55 _ 90
-        lea     esp, [ebp-8H]                           ; 2C56 _ 8D. 65, F8
-        pop     ebx                                     ; 2C59 _ 5B
-        pop     esi                                     ; 2C5A _ 5E
-        pop     ebp                                     ; 2C5B _ 5D
-        ret                                             ; 2C5C _ C3
+        push    ebp                                     ; 2B4B _ 55
+        mov     ebp, esp                                ; 2B4C _ 89. E5
+        push    esi                                     ; 2B4E _ 56
+        push    ebx                                     ; 2B4F _ 53
+        sub     esp, 16                                 ; 2B50 _ 83. EC, 10
+        mov     eax, dword [ebp+0CH]                    ; 2B53 _ 8B. 45, 0C
+        mov     eax, dword [eax+0CH]                    ; 2B56 _ 8B. 40, 0C
+        mov     dword [ebp-10H], eax                    ; 2B59 _ 89. 45, F0
+        mov     eax, dword [ebp+0CH]                    ; 2B5C _ 8B. 45, 0C
+        mov     eax, dword [eax+10H]                    ; 2B5F _ 8B. 40, 10
+        mov     dword [ebp-0CH], eax                    ; 2B62 _ 89. 45, F4
+        mov     eax, dword [ebp+0CH]                    ; 2B65 _ 8B. 45, 0C
+        mov     edx, dword [ebp+10H]                    ; 2B68 _ 8B. 55, 10
+        mov     dword [eax+0CH], edx                    ; 2B6B _ 89. 50, 0C
+        mov     eax, dword [ebp+0CH]                    ; 2B6E _ 8B. 45, 0C
+        mov     edx, dword [ebp+14H]                    ; 2B71 _ 8B. 55, 14
+        mov     dword [eax+10H], edx                    ; 2B74 _ 89. 50, 10
+        mov     eax, dword [ebp+0CH]                    ; 2B77 _ 8B. 45, 0C
+        mov     eax, dword [eax+18H]                    ; 2B7A _ 8B. 40, 18
+        test    eax, eax                                ; 2B7D _ 85. C0
+        js      ?_129                                   ; 2B7F _ 0F 88, 000000D3
+        mov     eax, dword [ebp+0CH]                    ; 2B85 _ 8B. 45, 0C
+        mov     edx, dword [eax+8H]                     ; 2B88 _ 8B. 50, 08
+        mov     eax, dword [ebp-0CH]                    ; 2B8B _ 8B. 45, F4
+        add     edx, eax                                ; 2B8E _ 01. C2
+        mov     eax, dword [ebp+0CH]                    ; 2B90 _ 8B. 45, 0C
+        mov     ecx, dword [eax+4H]                     ; 2B93 _ 8B. 48, 04
+        mov     eax, dword [ebp-10H]                    ; 2B96 _ 8B. 45, F0
+        add     eax, ecx                                ; 2B99 _ 01. C8
+        sub     esp, 8                                  ; 2B9B _ 83. EC, 08
+        push    0                                       ; 2B9E _ 6A, 00
+        push    edx                                     ; 2BA0 _ 52
+        push    eax                                     ; 2BA1 _ 50
+        push    dword [ebp-0CH]                         ; 2BA2 _ FF. 75, F4
+        push    dword [ebp-10H]                         ; 2BA5 _ FF. 75, F0
+        push    dword [ebp+8H]                          ; 2BA8 _ FF. 75, 08
+        call    sheet_refreshmap                        ; 2BAB _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2BB0 _ 83. C4, 20
+        mov     eax, dword [ebp+0CH]                    ; 2BB3 _ 8B. 45, 0C
+        mov     eax, dword [eax+18H]                    ; 2BB6 _ 8B. 40, 18
+        mov     edx, dword [ebp+0CH]                    ; 2BB9 _ 8B. 55, 0C
+        mov     ecx, dword [edx+8H]                     ; 2BBC _ 8B. 4A, 08
+        mov     edx, dword [ebp+14H]                    ; 2BBF _ 8B. 55, 14
+        add     ecx, edx                                ; 2BC2 _ 01. D1
+        mov     edx, dword [ebp+0CH]                    ; 2BC4 _ 8B. 55, 0C
+        mov     ebx, dword [edx+4H]                     ; 2BC7 _ 8B. 5A, 04
+        mov     edx, dword [ebp+10H]                    ; 2BCA _ 8B. 55, 10
+        add     edx, ebx                                ; 2BCD _ 01. DA
+        sub     esp, 8                                  ; 2BCF _ 83. EC, 08
+        push    eax                                     ; 2BD2 _ 50
+        push    ecx                                     ; 2BD3 _ 51
+        push    edx                                     ; 2BD4 _ 52
+        push    dword [ebp+14H]                         ; 2BD5 _ FF. 75, 14
+        push    dword [ebp+10H]                         ; 2BD8 _ FF. 75, 10
+        push    dword [ebp+8H]                          ; 2BDB _ FF. 75, 08
+        call    sheet_refreshmap                        ; 2BDE _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2BE3 _ 83. C4, 20
+        mov     eax, dword [ebp+0CH]                    ; 2BE6 _ 8B. 45, 0C
+        mov     eax, dword [eax+18H]                    ; 2BE9 _ 8B. 40, 18
+        lea     ecx, [eax-1H]                           ; 2BEC _ 8D. 48, FF
+        mov     eax, dword [ebp+0CH]                    ; 2BEF _ 8B. 45, 0C
+        mov     edx, dword [eax+8H]                     ; 2BF2 _ 8B. 50, 08
+        mov     eax, dword [ebp-0CH]                    ; 2BF5 _ 8B. 45, F4
+        add     edx, eax                                ; 2BF8 _ 01. C2
+        mov     eax, dword [ebp+0CH]                    ; 2BFA _ 8B. 45, 0C
+        mov     ebx, dword [eax+4H]                     ; 2BFD _ 8B. 58, 04
+        mov     eax, dword [ebp-10H]                    ; 2C00 _ 8B. 45, F0
+        add     eax, ebx                                ; 2C03 _ 01. D8
+        sub     esp, 4                                  ; 2C05 _ 83. EC, 04
+        push    ecx                                     ; 2C08 _ 51
+        push    0                                       ; 2C09 _ 6A, 00
+        push    edx                                     ; 2C0B _ 52
+        push    eax                                     ; 2C0C _ 50
+        push    dword [ebp-0CH]                         ; 2C0D _ FF. 75, F4
+        push    dword [ebp-10H]                         ; 2C10 _ FF. 75, F0
+        push    dword [ebp+8H]                          ; 2C13 _ FF. 75, 08
+        call    sheet_refresh_new                       ; 2C16 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2C1B _ 83. C4, 20
+        mov     eax, dword [ebp+0CH]                    ; 2C1E _ 8B. 45, 0C
+        mov     edx, dword [eax+18H]                    ; 2C21 _ 8B. 50, 18
+        mov     eax, dword [ebp+0CH]                    ; 2C24 _ 8B. 45, 0C
+        mov     eax, dword [eax+18H]                    ; 2C27 _ 8B. 40, 18
+        mov     ecx, dword [ebp+0CH]                    ; 2C2A _ 8B. 4D, 0C
+        mov     ebx, dword [ecx+8H]                     ; 2C2D _ 8B. 59, 08
+        mov     ecx, dword [ebp+14H]                    ; 2C30 _ 8B. 4D, 14
+        add     ebx, ecx                                ; 2C33 _ 01. CB
+        mov     ecx, dword [ebp+0CH]                    ; 2C35 _ 8B. 4D, 0C
+        mov     esi, dword [ecx+4H]                     ; 2C38 _ 8B. 71, 04
+        mov     ecx, dword [ebp+10H]                    ; 2C3B _ 8B. 4D, 10
+        add     ecx, esi                                ; 2C3E _ 01. F1
+        sub     esp, 4                                  ; 2C40 _ 83. EC, 04
+        push    edx                                     ; 2C43 _ 52
+        push    eax                                     ; 2C44 _ 50
+        push    ebx                                     ; 2C45 _ 53
+        push    ecx                                     ; 2C46 _ 51
+        push    dword [ebp+14H]                         ; 2C47 _ FF. 75, 14
+        push    dword [ebp+10H]                         ; 2C4A _ FF. 75, 10
+        push    dword [ebp+8H]                          ; 2C4D _ FF. 75, 08
+        call    sheet_refresh_new                       ; 2C50 _ E8, FFFFFFFC(rel)
+        add     esp, 32                                 ; 2C55 _ 83. C4, 20
+?_129:  nop                                             ; 2C58 _ 90
+        lea     esp, [ebp-8H]                           ; 2C59 _ 8D. 65, F8
+        pop     ebx                                     ; 2C5C _ 5B
+        pop     esi                                     ; 2C5D _ 5E
+        pop     ebp                                     ; 2C5E _ 5D
+        ret                                             ; 2C5F _ C3
 ; sheet_slide End of function
 
 sheet_refresh_new:; Function begin
-        push    ebp                                     ; 2C5D _ 55
-        mov     ebp, esp                                ; 2C5E _ 89. E5
-        sub     esp, 48                                 ; 2C60 _ 83. EC, 30
-        mov     eax, dword [ebp+8H]                     ; 2C63 _ 8B. 45, 08
-        mov     eax, dword [eax]                        ; 2C66 _ 8B. 00
-        mov     dword [ebp-18H], eax                    ; 2C68 _ 89. 45, E8
-        mov     eax, dword [ebp+8H]                     ; 2C6B _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 2C6E _ 8B. 40, 04
-        mov     dword [ebp-14H], eax                    ; 2C71 _ 89. 45, EC
-        cmp     dword [ebp+0CH], 0                      ; 2C74 _ 83. 7D, 0C, 00
-        jns     ?_130                                   ; 2C78 _ 79, 07
-        mov     dword [ebp+0CH], 0                      ; 2C7A _ C7. 45, 0C, 00000000
-?_130:  cmp     dword [ebp+10H], 8                      ; 2C81 _ 83. 7D, 10, 08
-        jg      ?_131                                   ; 2C85 _ 7F, 07
-        mov     dword [ebp+10H], 0                      ; 2C87 _ C7. 45, 10, 00000000
-?_131:  mov     eax, dword [ebp+8H]                     ; 2C8E _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2C91 _ 8B. 40, 08
-        cmp     dword [ebp+14H], eax                    ; 2C94 _ 39. 45, 14
-        jle     ?_132                                   ; 2C97 _ 7E, 09
-        mov     eax, dword [ebp+8H]                     ; 2C99 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2C9C _ 8B. 40, 08
-        mov     dword [ebp+14H], eax                    ; 2C9F _ 89. 45, 14
-?_132:  mov     eax, dword [ebp+8H]                     ; 2CA2 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 2CA5 _ 8B. 40, 0C
-        cmp     dword [ebp+18H], eax                    ; 2CA8 _ 39. 45, 18
-        jle     ?_133                                   ; 2CAB _ 7E, 09
-        mov     eax, dword [ebp+8H]                     ; 2CAD _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 2CB0 _ 8B. 40, 0C
-        mov     dword [ebp+18H], eax                    ; 2CB3 _ 89. 45, 18
-?_133:  mov     eax, dword [ebp+1CH]                    ; 2CB6 _ 8B. 45, 1C
-        mov     dword [ebp-24H], eax                    ; 2CB9 _ 89. 45, DC
-        jmp     ?_140                                   ; 2CBC _ E9, 00000118
+        push    ebp                                     ; 2C60 _ 55
+        mov     ebp, esp                                ; 2C61 _ 89. E5
+        sub     esp, 48                                 ; 2C63 _ 83. EC, 30
+        mov     eax, dword [ebp+8H]                     ; 2C66 _ 8B. 45, 08
+        mov     eax, dword [eax]                        ; 2C69 _ 8B. 00
+        mov     dword [ebp-18H], eax                    ; 2C6B _ 89. 45, E8
+        mov     eax, dword [ebp+8H]                     ; 2C6E _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 2C71 _ 8B. 40, 04
+        mov     dword [ebp-14H], eax                    ; 2C74 _ 89. 45, EC
+        cmp     dword [ebp+0CH], 0                      ; 2C77 _ 83. 7D, 0C, 00
+        jns     ?_130                                   ; 2C7B _ 79, 07
+        mov     dword [ebp+0CH], 0                      ; 2C7D _ C7. 45, 0C, 00000000
+?_130:  cmp     dword [ebp+10H], 8                      ; 2C84 _ 83. 7D, 10, 08
+        jg      ?_131                                   ; 2C88 _ 7F, 07
+        mov     dword [ebp+10H], 0                      ; 2C8A _ C7. 45, 10, 00000000
+?_131:  mov     eax, dword [ebp+8H]                     ; 2C91 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2C94 _ 8B. 40, 08
+        cmp     dword [ebp+14H], eax                    ; 2C97 _ 39. 45, 14
+        jle     ?_132                                   ; 2C9A _ 7E, 09
+        mov     eax, dword [ebp+8H]                     ; 2C9C _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2C9F _ 8B. 40, 08
+        mov     dword [ebp+14H], eax                    ; 2CA2 _ 89. 45, 14
+?_132:  mov     eax, dword [ebp+8H]                     ; 2CA5 _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 2CA8 _ 8B. 40, 0C
+        cmp     dword [ebp+18H], eax                    ; 2CAB _ 39. 45, 18
+        jle     ?_133                                   ; 2CAE _ 7E, 09
+        mov     eax, dword [ebp+8H]                     ; 2CB0 _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 2CB3 _ 8B. 40, 0C
+        mov     dword [ebp+18H], eax                    ; 2CB6 _ 89. 45, 18
+?_133:  mov     eax, dword [ebp+1CH]                    ; 2CB9 _ 8B. 45, 1C
+        mov     dword [ebp-24H], eax                    ; 2CBC _ 89. 45, DC
+        jmp     ?_140                                   ; 2CBF _ E9, 00000118
 
-?_134:  mov     eax, dword [ebp+8H]                     ; 2CC1 _ 8B. 45, 08
-        mov     edx, dword [ebp-24H]                    ; 2CC4 _ 8B. 55, DC
-        add     edx, 4                                  ; 2CC7 _ 83. C2, 04
-        mov     eax, dword [eax+edx*4+4H]               ; 2CCA _ 8B. 44 90, 04
-        mov     dword [ebp-10H], eax                    ; 2CCE _ 89. 45, F0
-        mov     eax, dword [ebp-10H]                    ; 2CD1 _ 8B. 45, F0
-        mov     eax, dword [eax]                        ; 2CD4 _ 8B. 00
-        mov     dword [ebp-0CH], eax                    ; 2CD6 _ 89. 45, F4
-        mov     eax, dword [ebp-10H]                    ; 2CD9 _ 8B. 45, F0
-        mov     edx, dword [ebp+8H]                     ; 2CDC _ 8B. 55, 08
-        add     edx, 1044                               ; 2CDF _ 81. C2, 00000414
-        sub     eax, edx                                ; 2CE5 _ 29. D0
-        sar     eax, 5                                  ; 2CE7 _ C1. F8, 05
-        mov     byte [ebp-26H], al                      ; 2CEA _ 88. 45, DA
-        mov     dword [ebp-20H], 0                      ; 2CED _ C7. 45, E0, 00000000
-        jmp     ?_139                                   ; 2CF4 _ E9, 000000CD
+?_134:  mov     eax, dword [ebp+8H]                     ; 2CC4 _ 8B. 45, 08
+        mov     edx, dword [ebp-24H]                    ; 2CC7 _ 8B. 55, DC
+        add     edx, 4                                  ; 2CCA _ 83. C2, 04
+        mov     eax, dword [eax+edx*4+4H]               ; 2CCD _ 8B. 44 90, 04
+        mov     dword [ebp-10H], eax                    ; 2CD1 _ 89. 45, F0
+        mov     eax, dword [ebp-10H]                    ; 2CD4 _ 8B. 45, F0
+        mov     eax, dword [eax]                        ; 2CD7 _ 8B. 00
+        mov     dword [ebp-0CH], eax                    ; 2CD9 _ 89. 45, F4
+        mov     eax, dword [ebp-10H]                    ; 2CDC _ 8B. 45, F0
+        mov     edx, dword [ebp+8H]                     ; 2CDF _ 8B. 55, 08
+        add     edx, 1044                               ; 2CE2 _ 81. C2, 00000414
+        sub     eax, edx                                ; 2CE8 _ 29. D0
+        sar     eax, 5                                  ; 2CEA _ C1. F8, 05
+        mov     byte [ebp-26H], al                      ; 2CED _ 88. 45, DA
+        mov     dword [ebp-20H], 0                      ; 2CF0 _ C7. 45, E0, 00000000
+        jmp     ?_139                                   ; 2CF7 _ E9, 000000CD
 
-?_135:  mov     eax, dword [ebp-10H]                    ; 2CF9 _ 8B. 45, F0
-        mov     edx, dword [eax+10H]                    ; 2CFC _ 8B. 50, 10
-        mov     eax, dword [ebp-20H]                    ; 2CFF _ 8B. 45, E0
-        add     eax, edx                                ; 2D02 _ 01. D0
-        mov     dword [ebp-8H], eax                     ; 2D04 _ 89. 45, F8
-        mov     dword [ebp-1CH], 0                      ; 2D07 _ C7. 45, E4, 00000000
-        jmp     ?_138                                   ; 2D0E _ E9, 000000A0
+?_135:  mov     eax, dword [ebp-10H]                    ; 2CFC _ 8B. 45, F0
+        mov     edx, dword [eax+10H]                    ; 2CFF _ 8B. 50, 10
+        mov     eax, dword [ebp-20H]                    ; 2D02 _ 8B. 45, E0
+        add     eax, edx                                ; 2D05 _ 01. D0
+        mov     dword [ebp-8H], eax                     ; 2D07 _ 89. 45, F8
+        mov     dword [ebp-1CH], 0                      ; 2D0A _ C7. 45, E4, 00000000
+        jmp     ?_138                                   ; 2D11 _ E9, 000000A0
 
-?_136:  mov     eax, dword [ebp-10H]                    ; 2D13 _ 8B. 45, F0
-        mov     edx, dword [eax+0CH]                    ; 2D16 _ 8B. 50, 0C
-        mov     eax, dword [ebp-1CH]                    ; 2D19 _ 8B. 45, E4
-        add     eax, edx                                ; 2D1C _ 01. D0
-        mov     dword [ebp-4H], eax                     ; 2D1E _ 89. 45, FC
-        mov     eax, dword [ebp+0CH]                    ; 2D21 _ 8B. 45, 0C
-        cmp     eax, dword [ebp-4H]                     ; 2D24 _ 3B. 45, FC
-        jg      ?_137                                   ; 2D27 _ 0F 8F, 00000082
-        mov     eax, dword [ebp-4H]                     ; 2D2D _ 8B. 45, FC
-        cmp     eax, dword [ebp+14H]                    ; 2D30 _ 3B. 45, 14
-        jge     ?_137                                   ; 2D33 _ 7D, 7A
-        mov     eax, dword [ebp+10H]                    ; 2D35 _ 8B. 45, 10
-        cmp     eax, dword [ebp-8H]                     ; 2D38 _ 3B. 45, F8
-        jg      ?_137                                   ; 2D3B _ 7F, 72
-        mov     eax, dword [ebp-8H]                     ; 2D3D _ 8B. 45, F8
-        cmp     eax, dword [ebp+18H]                    ; 2D40 _ 3B. 45, 18
-        jge     ?_137                                   ; 2D43 _ 7D, 6A
-        mov     eax, dword [ebp-10H]                    ; 2D45 _ 8B. 45, F0
-        mov     eax, dword [eax+4H]                     ; 2D48 _ 8B. 40, 04
-        imul    eax, dword [ebp-20H]                    ; 2D4B _ 0F AF. 45, E0
-        mov     edx, eax                                ; 2D4F _ 89. C2
-        mov     eax, dword [ebp-1CH]                    ; 2D51 _ 8B. 45, E4
-        add     eax, edx                                ; 2D54 _ 01. D0
-        mov     edx, eax                                ; 2D56 _ 89. C2
-        mov     eax, dword [ebp-0CH]                    ; 2D58 _ 8B. 45, F4
-        add     eax, edx                                ; 2D5B _ 01. D0
-        movzx   eax, byte [eax]                         ; 2D5D _ 0F B6. 00
-        mov     byte [ebp-25H], al                      ; 2D60 _ 88. 45, DB
-        mov     eax, dword [ebp+8H]                     ; 2D63 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2D66 _ 8B. 40, 08
-        imul    eax, dword [ebp-8H]                     ; 2D69 _ 0F AF. 45, F8
-        mov     edx, eax                                ; 2D6D _ 89. C2
-        mov     eax, dword [ebp-4H]                     ; 2D6F _ 8B. 45, FC
-        add     eax, edx                                ; 2D72 _ 01. D0
-        mov     edx, eax                                ; 2D74 _ 89. C2
-        mov     eax, dword [ebp-14H]                    ; 2D76 _ 8B. 45, EC
-        add     eax, edx                                ; 2D79 _ 01. D0
-        movzx   eax, byte [eax]                         ; 2D7B _ 0F B6. 00
-        cmp     byte [ebp-26H], al                      ; 2D7E _ 38. 45, DA
-        jnz     ?_137                                   ; 2D81 _ 75, 2C
-        movzx   edx, byte [ebp-25H]                     ; 2D83 _ 0F B6. 55, DB
-        mov     eax, dword [ebp-10H]                    ; 2D87 _ 8B. 45, F0
-        mov     eax, dword [eax+14H]                    ; 2D8A _ 8B. 40, 14
-        cmp     edx, eax                                ; 2D8D _ 39. C2
-        jz      ?_137                                   ; 2D8F _ 74, 1E
-        mov     eax, dword [ebp+8H]                     ; 2D91 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2D94 _ 8B. 40, 08
-        imul    eax, dword [ebp-8H]                     ; 2D97 _ 0F AF. 45, F8
-        mov     edx, eax                                ; 2D9B _ 89. C2
-        mov     eax, dword [ebp-4H]                     ; 2D9D _ 8B. 45, FC
-        add     eax, edx                                ; 2DA0 _ 01. D0
-        mov     edx, eax                                ; 2DA2 _ 89. C2
-        mov     eax, dword [ebp-18H]                    ; 2DA4 _ 8B. 45, E8
-        add     edx, eax                                ; 2DA7 _ 01. C2
-        movzx   eax, byte [ebp-25H]                     ; 2DA9 _ 0F B6. 45, DB
-        mov     byte [edx], al                          ; 2DAD _ 88. 02
-?_137:  add     dword [ebp-1CH], 1                      ; 2DAF _ 83. 45, E4, 01
-?_138:  mov     eax, dword [ebp-10H]                    ; 2DB3 _ 8B. 45, F0
-        mov     eax, dword [eax+4H]                     ; 2DB6 _ 8B. 40, 04
-        cmp     dword [ebp-1CH], eax                    ; 2DB9 _ 39. 45, E4
-        jl      ?_136                                   ; 2DBC _ 0F 8C, FFFFFF51
-        add     dword [ebp-20H], 1                      ; 2DC2 _ 83. 45, E0, 01
-?_139:  mov     eax, dword [ebp-10H]                    ; 2DC6 _ 8B. 45, F0
-        mov     eax, dword [eax+8H]                     ; 2DC9 _ 8B. 40, 08
-        cmp     dword [ebp-20H], eax                    ; 2DCC _ 39. 45, E0
-        jl      ?_135                                   ; 2DCF _ 0F 8C, FFFFFF24
-        add     dword [ebp-24H], 1                      ; 2DD5 _ 83. 45, DC, 01
-?_140:  mov     eax, dword [ebp-24H]                    ; 2DD9 _ 8B. 45, DC
-        cmp     eax, dword [ebp+20H]                    ; 2DDC _ 3B. 45, 20
-        jle     ?_134                                   ; 2DDF _ 0F 8E, FFFFFEDC
-        nop                                             ; 2DE5 _ 90
-        leave                                           ; 2DE6 _ C9
-        ret                                             ; 2DE7 _ C3
+?_136:  mov     eax, dword [ebp-10H]                    ; 2D16 _ 8B. 45, F0
+        mov     edx, dword [eax+0CH]                    ; 2D19 _ 8B. 50, 0C
+        mov     eax, dword [ebp-1CH]                    ; 2D1C _ 8B. 45, E4
+        add     eax, edx                                ; 2D1F _ 01. D0
+        mov     dword [ebp-4H], eax                     ; 2D21 _ 89. 45, FC
+        mov     eax, dword [ebp+0CH]                    ; 2D24 _ 8B. 45, 0C
+        cmp     eax, dword [ebp-4H]                     ; 2D27 _ 3B. 45, FC
+        jg      ?_137                                   ; 2D2A _ 0F 8F, 00000082
+        mov     eax, dword [ebp-4H]                     ; 2D30 _ 8B. 45, FC
+        cmp     eax, dword [ebp+14H]                    ; 2D33 _ 3B. 45, 14
+        jge     ?_137                                   ; 2D36 _ 7D, 7A
+        mov     eax, dword [ebp+10H]                    ; 2D38 _ 8B. 45, 10
+        cmp     eax, dword [ebp-8H]                     ; 2D3B _ 3B. 45, F8
+        jg      ?_137                                   ; 2D3E _ 7F, 72
+        mov     eax, dword [ebp-8H]                     ; 2D40 _ 8B. 45, F8
+        cmp     eax, dword [ebp+18H]                    ; 2D43 _ 3B. 45, 18
+        jge     ?_137                                   ; 2D46 _ 7D, 6A
+        mov     eax, dword [ebp-10H]                    ; 2D48 _ 8B. 45, F0
+        mov     eax, dword [eax+4H]                     ; 2D4B _ 8B. 40, 04
+        imul    eax, dword [ebp-20H]                    ; 2D4E _ 0F AF. 45, E0
+        mov     edx, eax                                ; 2D52 _ 89. C2
+        mov     eax, dword [ebp-1CH]                    ; 2D54 _ 8B. 45, E4
+        add     eax, edx                                ; 2D57 _ 01. D0
+        mov     edx, eax                                ; 2D59 _ 89. C2
+        mov     eax, dword [ebp-0CH]                    ; 2D5B _ 8B. 45, F4
+        add     eax, edx                                ; 2D5E _ 01. D0
+        movzx   eax, byte [eax]                         ; 2D60 _ 0F B6. 00
+        mov     byte [ebp-25H], al                      ; 2D63 _ 88. 45, DB
+        mov     eax, dword [ebp+8H]                     ; 2D66 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2D69 _ 8B. 40, 08
+        imul    eax, dword [ebp-8H]                     ; 2D6C _ 0F AF. 45, F8
+        mov     edx, eax                                ; 2D70 _ 89. C2
+        mov     eax, dword [ebp-4H]                     ; 2D72 _ 8B. 45, FC
+        add     eax, edx                                ; 2D75 _ 01. D0
+        mov     edx, eax                                ; 2D77 _ 89. C2
+        mov     eax, dword [ebp-14H]                    ; 2D79 _ 8B. 45, EC
+        add     eax, edx                                ; 2D7C _ 01. D0
+        movzx   eax, byte [eax]                         ; 2D7E _ 0F B6. 00
+        cmp     byte [ebp-26H], al                      ; 2D81 _ 38. 45, DA
+        jnz     ?_137                                   ; 2D84 _ 75, 2C
+        movzx   edx, byte [ebp-25H]                     ; 2D86 _ 0F B6. 55, DB
+        mov     eax, dword [ebp-10H]                    ; 2D8A _ 8B. 45, F0
+        mov     eax, dword [eax+14H]                    ; 2D8D _ 8B. 40, 14
+        cmp     edx, eax                                ; 2D90 _ 39. C2
+        jz      ?_137                                   ; 2D92 _ 74, 1E
+        mov     eax, dword [ebp+8H]                     ; 2D94 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2D97 _ 8B. 40, 08
+        imul    eax, dword [ebp-8H]                     ; 2D9A _ 0F AF. 45, F8
+        mov     edx, eax                                ; 2D9E _ 89. C2
+        mov     eax, dword [ebp-4H]                     ; 2DA0 _ 8B. 45, FC
+        add     eax, edx                                ; 2DA3 _ 01. D0
+        mov     edx, eax                                ; 2DA5 _ 89. C2
+        mov     eax, dword [ebp-18H]                    ; 2DA7 _ 8B. 45, E8
+        add     edx, eax                                ; 2DAA _ 01. C2
+        movzx   eax, byte [ebp-25H]                     ; 2DAC _ 0F B6. 45, DB
+        mov     byte [edx], al                          ; 2DB0 _ 88. 02
+?_137:  add     dword [ebp-1CH], 1                      ; 2DB2 _ 83. 45, E4, 01
+?_138:  mov     eax, dword [ebp-10H]                    ; 2DB6 _ 8B. 45, F0
+        mov     eax, dword [eax+4H]                     ; 2DB9 _ 8B. 40, 04
+        cmp     dword [ebp-1CH], eax                    ; 2DBC _ 39. 45, E4
+        jl      ?_136                                   ; 2DBF _ 0F 8C, FFFFFF51
+        add     dword [ebp-20H], 1                      ; 2DC5 _ 83. 45, E0, 01
+?_139:  mov     eax, dword [ebp-10H]                    ; 2DC9 _ 8B. 45, F0
+        mov     eax, dword [eax+8H]                     ; 2DCC _ 8B. 40, 08
+        cmp     dword [ebp-20H], eax                    ; 2DCF _ 39. 45, E0
+        jl      ?_135                                   ; 2DD2 _ 0F 8C, FFFFFF24
+        add     dword [ebp-24H], 1                      ; 2DD8 _ 83. 45, DC, 01
+?_140:  mov     eax, dword [ebp-24H]                    ; 2DDC _ 8B. 45, DC
+        cmp     eax, dword [ebp+20H]                    ; 2DDF _ 3B. 45, 20
+        jle     ?_134                                   ; 2DE2 _ 0F 8E, FFFFFEDC
+        nop                                             ; 2DE8 _ 90
+        leave                                           ; 2DE9 _ C9
+        ret                                             ; 2DEA _ C3
 ; sheet_refresh_new End of function
 
 sheet_refreshmap:; Function begin
-        push    ebp                                     ; 2DE8 _ 55
-        mov     ebp, esp                                ; 2DE9 _ 89. E5
-        sub     esp, 64                                 ; 2DEB _ 83. EC, 40
-        mov     eax, dword [ebp+8H]                     ; 2DEE _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 2DF1 _ 8B. 40, 04
-        mov     dword [ebp-14H], eax                    ; 2DF4 _ 89. 45, EC
-        cmp     dword [ebp+0CH], 0                      ; 2DF7 _ 83. 7D, 0C, 00
-        jns     ?_141                                   ; 2DFB _ 79, 07
-        mov     dword [ebp+0CH], 0                      ; 2DFD _ C7. 45, 0C, 00000000
-?_141:  mov     eax, dword [ebp+8H]                     ; 2E04 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2E07 _ 8B. 40, 08
-        cmp     dword [ebp+0CH], eax                    ; 2E0A _ 39. 45, 0C
-        jle     ?_142                                   ; 2E0D _ 7E, 09
-        mov     eax, dword [ebp+8H]                     ; 2E0F _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2E12 _ 8B. 40, 08
-        mov     dword [ebp+0CH], eax                    ; 2E15 _ 89. 45, 0C
-?_142:  cmp     dword [ebp+10H], 0                      ; 2E18 _ 83. 7D, 10, 00
-        jns     ?_143                                   ; 2E1C _ 79, 07
-        mov     dword [ebp+10H], 0                      ; 2E1E _ C7. 45, 10, 00000000
-?_143:  mov     eax, dword [ebp+8H]                     ; 2E25 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 2E28 _ 8B. 40, 0C
-        cmp     dword [ebp+10H], eax                    ; 2E2B _ 39. 45, 10
-        jle     ?_144                                   ; 2E2E _ 7E, 09
-        mov     eax, dword [ebp+8H]                     ; 2E30 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 2E33 _ 8B. 40, 0C
-        mov     dword [ebp+10H], eax                    ; 2E36 _ 89. 45, 10
-?_144:  mov     eax, dword [ebp+1CH]                    ; 2E39 _ 8B. 45, 1C
-        mov     dword [ebp-20H], eax                    ; 2E3C _ 89. 45, E0
-        jmp     ?_155                                   ; 2E3F _ E9, 00000140
+        push    ebp                                     ; 2DEB _ 55
+        mov     ebp, esp                                ; 2DEC _ 89. E5
+        sub     esp, 64                                 ; 2DEE _ 83. EC, 40
+        mov     eax, dword [ebp+8H]                     ; 2DF1 _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 2DF4 _ 8B. 40, 04
+        mov     dword [ebp-14H], eax                    ; 2DF7 _ 89. 45, EC
+        cmp     dword [ebp+0CH], 0                      ; 2DFA _ 83. 7D, 0C, 00
+        jns     ?_141                                   ; 2DFE _ 79, 07
+        mov     dword [ebp+0CH], 0                      ; 2E00 _ C7. 45, 0C, 00000000
+?_141:  mov     eax, dword [ebp+8H]                     ; 2E07 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2E0A _ 8B. 40, 08
+        cmp     dword [ebp+0CH], eax                    ; 2E0D _ 39. 45, 0C
+        jle     ?_142                                   ; 2E10 _ 7E, 09
+        mov     eax, dword [ebp+8H]                     ; 2E12 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2E15 _ 8B. 40, 08
+        mov     dword [ebp+0CH], eax                    ; 2E18 _ 89. 45, 0C
+?_142:  cmp     dword [ebp+10H], 0                      ; 2E1B _ 83. 7D, 10, 00
+        jns     ?_143                                   ; 2E1F _ 79, 07
+        mov     dword [ebp+10H], 0                      ; 2E21 _ C7. 45, 10, 00000000
+?_143:  mov     eax, dword [ebp+8H]                     ; 2E28 _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 2E2B _ 8B. 40, 0C
+        cmp     dword [ebp+10H], eax                    ; 2E2E _ 39. 45, 10
+        jle     ?_144                                   ; 2E31 _ 7E, 09
+        mov     eax, dword [ebp+8H]                     ; 2E33 _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 2E36 _ 8B. 40, 0C
+        mov     dword [ebp+10H], eax                    ; 2E39 _ 89. 45, 10
+?_144:  mov     eax, dword [ebp+1CH]                    ; 2E3C _ 8B. 45, 1C
+        mov     dword [ebp-20H], eax                    ; 2E3F _ 89. 45, E0
+        jmp     ?_155                                   ; 2E42 _ E9, 00000140
 
-?_145:  mov     eax, dword [ebp+8H]                     ; 2E44 _ 8B. 45, 08
-        mov     edx, dword [ebp-20H]                    ; 2E47 _ 8B. 55, E0
-        add     edx, 4                                  ; 2E4A _ 83. C2, 04
-        mov     eax, dword [eax+edx*4+4H]               ; 2E4D _ 8B. 44 90, 04
-        mov     dword [ebp-10H], eax                    ; 2E51 _ 89. 45, F0
-        mov     eax, dword [ebp-10H]                    ; 2E54 _ 8B. 45, F0
-        mov     edx, dword [ebp+8H]                     ; 2E57 _ 8B. 55, 08
-        add     edx, 1044                               ; 2E5A _ 81. C2, 00000414
-        sub     eax, edx                                ; 2E60 _ 29. D0
-        sar     eax, 5                                  ; 2E62 _ C1. F8, 05
-        mov     byte [ebp-31H], al                      ; 2E65 _ 88. 45, CF
-        mov     eax, dword [ebp-10H]                    ; 2E68 _ 8B. 45, F0
-        mov     eax, dword [eax]                        ; 2E6B _ 8B. 00
-        mov     dword [ebp-0CH], eax                    ; 2E6D _ 89. 45, F4
-        mov     eax, dword [ebp-10H]                    ; 2E70 _ 8B. 45, F0
-        mov     eax, dword [eax+0CH]                    ; 2E73 _ 8B. 40, 0C
-        mov     edx, dword [ebp+0CH]                    ; 2E76 _ 8B. 55, 0C
-        sub     edx, eax                                ; 2E79 _ 29. C2
-        mov     eax, edx                                ; 2E7B _ 89. D0
-        mov     dword [ebp-30H], eax                    ; 2E7D _ 89. 45, D0
-        mov     eax, dword [ebp-10H]                    ; 2E80 _ 8B. 45, F0
-        mov     eax, dword [eax+10H]                    ; 2E83 _ 8B. 40, 10
-        mov     edx, dword [ebp+10H]                    ; 2E86 _ 8B. 55, 10
-        sub     edx, eax                                ; 2E89 _ 29. C2
-        mov     eax, edx                                ; 2E8B _ 89. D0
-        mov     dword [ebp-2CH], eax                    ; 2E8D _ 89. 45, D4
-        mov     eax, dword [ebp-10H]                    ; 2E90 _ 8B. 45, F0
-        mov     eax, dword [eax+0CH]                    ; 2E93 _ 8B. 40, 0C
-        mov     edx, dword [ebp+14H]                    ; 2E96 _ 8B. 55, 14
-        sub     edx, eax                                ; 2E99 _ 29. C2
-        mov     eax, edx                                ; 2E9B _ 89. D0
-        mov     dword [ebp-28H], eax                    ; 2E9D _ 89. 45, D8
-        mov     eax, dword [ebp-10H]                    ; 2EA0 _ 8B. 45, F0
-        mov     eax, dword [eax+10H]                    ; 2EA3 _ 8B. 40, 10
-        mov     edx, dword [ebp+18H]                    ; 2EA6 _ 8B. 55, 18
-        sub     edx, eax                                ; 2EA9 _ 29. C2
-        mov     eax, edx                                ; 2EAB _ 89. D0
-        mov     dword [ebp-24H], eax                    ; 2EAD _ 89. 45, DC
-        cmp     dword [ebp-30H], 0                      ; 2EB0 _ 83. 7D, D0, 00
-        jns     ?_146                                   ; 2EB4 _ 79, 07
-        mov     dword [ebp-30H], 0                      ; 2EB6 _ C7. 45, D0, 00000000
-?_146:  cmp     dword [ebp-2CH], 0                      ; 2EBD _ 83. 7D, D4, 00
-        jns     ?_147                                   ; 2EC1 _ 79, 07
-        mov     dword [ebp-2CH], 0                      ; 2EC3 _ C7. 45, D4, 00000000
-?_147:  mov     eax, dword [ebp-10H]                    ; 2ECA _ 8B. 45, F0
-        mov     eax, dword [eax+4H]                     ; 2ECD _ 8B. 40, 04
-        cmp     dword [ebp-28H], eax                    ; 2ED0 _ 39. 45, D8
-        jle     ?_148                                   ; 2ED3 _ 7E, 09
-        mov     eax, dword [ebp-10H]                    ; 2ED5 _ 8B. 45, F0
-        mov     eax, dword [eax+4H]                     ; 2ED8 _ 8B. 40, 04
-        mov     dword [ebp-28H], eax                    ; 2EDB _ 89. 45, D8
-?_148:  mov     eax, dword [ebp-10H]                    ; 2EDE _ 8B. 45, F0
-        mov     eax, dword [eax+8H]                     ; 2EE1 _ 8B. 40, 08
-        cmp     dword [ebp-24H], eax                    ; 2EE4 _ 39. 45, DC
-        jle     ?_149                                   ; 2EE7 _ 7E, 09
-        mov     eax, dword [ebp-10H]                    ; 2EE9 _ 8B. 45, F0
-        mov     eax, dword [eax+8H]                     ; 2EEC _ 8B. 40, 08
-        mov     dword [ebp-24H], eax                    ; 2EEF _ 89. 45, DC
-?_149:  mov     eax, dword [ebp-2CH]                    ; 2EF2 _ 8B. 45, D4
-        mov     dword [ebp-1CH], eax                    ; 2EF5 _ 89. 45, E4
-        jmp     ?_154                                   ; 2EF8 _ EB, 7A
+?_145:  mov     eax, dword [ebp+8H]                     ; 2E47 _ 8B. 45, 08
+        mov     edx, dword [ebp-20H]                    ; 2E4A _ 8B. 55, E0
+        add     edx, 4                                  ; 2E4D _ 83. C2, 04
+        mov     eax, dword [eax+edx*4+4H]               ; 2E50 _ 8B. 44 90, 04
+        mov     dword [ebp-10H], eax                    ; 2E54 _ 89. 45, F0
+        mov     eax, dword [ebp-10H]                    ; 2E57 _ 8B. 45, F0
+        mov     edx, dword [ebp+8H]                     ; 2E5A _ 8B. 55, 08
+        add     edx, 1044                               ; 2E5D _ 81. C2, 00000414
+        sub     eax, edx                                ; 2E63 _ 29. D0
+        sar     eax, 5                                  ; 2E65 _ C1. F8, 05
+        mov     byte [ebp-31H], al                      ; 2E68 _ 88. 45, CF
+        mov     eax, dword [ebp-10H]                    ; 2E6B _ 8B. 45, F0
+        mov     eax, dword [eax]                        ; 2E6E _ 8B. 00
+        mov     dword [ebp-0CH], eax                    ; 2E70 _ 89. 45, F4
+        mov     eax, dword [ebp-10H]                    ; 2E73 _ 8B. 45, F0
+        mov     eax, dword [eax+0CH]                    ; 2E76 _ 8B. 40, 0C
+        mov     edx, dword [ebp+0CH]                    ; 2E79 _ 8B. 55, 0C
+        sub     edx, eax                                ; 2E7C _ 29. C2
+        mov     eax, edx                                ; 2E7E _ 89. D0
+        mov     dword [ebp-30H], eax                    ; 2E80 _ 89. 45, D0
+        mov     eax, dword [ebp-10H]                    ; 2E83 _ 8B. 45, F0
+        mov     eax, dword [eax+10H]                    ; 2E86 _ 8B. 40, 10
+        mov     edx, dword [ebp+10H]                    ; 2E89 _ 8B. 55, 10
+        sub     edx, eax                                ; 2E8C _ 29. C2
+        mov     eax, edx                                ; 2E8E _ 89. D0
+        mov     dword [ebp-2CH], eax                    ; 2E90 _ 89. 45, D4
+        mov     eax, dword [ebp-10H]                    ; 2E93 _ 8B. 45, F0
+        mov     eax, dword [eax+0CH]                    ; 2E96 _ 8B. 40, 0C
+        mov     edx, dword [ebp+14H]                    ; 2E99 _ 8B. 55, 14
+        sub     edx, eax                                ; 2E9C _ 29. C2
+        mov     eax, edx                                ; 2E9E _ 89. D0
+        mov     dword [ebp-28H], eax                    ; 2EA0 _ 89. 45, D8
+        mov     eax, dword [ebp-10H]                    ; 2EA3 _ 8B. 45, F0
+        mov     eax, dword [eax+10H]                    ; 2EA6 _ 8B. 40, 10
+        mov     edx, dword [ebp+18H]                    ; 2EA9 _ 8B. 55, 18
+        sub     edx, eax                                ; 2EAC _ 29. C2
+        mov     eax, edx                                ; 2EAE _ 89. D0
+        mov     dword [ebp-24H], eax                    ; 2EB0 _ 89. 45, DC
+        cmp     dword [ebp-30H], 0                      ; 2EB3 _ 83. 7D, D0, 00
+        jns     ?_146                                   ; 2EB7 _ 79, 07
+        mov     dword [ebp-30H], 0                      ; 2EB9 _ C7. 45, D0, 00000000
+?_146:  cmp     dword [ebp-2CH], 0                      ; 2EC0 _ 83. 7D, D4, 00
+        jns     ?_147                                   ; 2EC4 _ 79, 07
+        mov     dword [ebp-2CH], 0                      ; 2EC6 _ C7. 45, D4, 00000000
+?_147:  mov     eax, dword [ebp-10H]                    ; 2ECD _ 8B. 45, F0
+        mov     eax, dword [eax+4H]                     ; 2ED0 _ 8B. 40, 04
+        cmp     dword [ebp-28H], eax                    ; 2ED3 _ 39. 45, D8
+        jle     ?_148                                   ; 2ED6 _ 7E, 09
+        mov     eax, dword [ebp-10H]                    ; 2ED8 _ 8B. 45, F0
+        mov     eax, dword [eax+4H]                     ; 2EDB _ 8B. 40, 04
+        mov     dword [ebp-28H], eax                    ; 2EDE _ 89. 45, D8
+?_148:  mov     eax, dword [ebp-10H]                    ; 2EE1 _ 8B. 45, F0
+        mov     eax, dword [eax+8H]                     ; 2EE4 _ 8B. 40, 08
+        cmp     dword [ebp-24H], eax                    ; 2EE7 _ 39. 45, DC
+        jle     ?_149                                   ; 2EEA _ 7E, 09
+        mov     eax, dword [ebp-10H]                    ; 2EEC _ 8B. 45, F0
+        mov     eax, dword [eax+8H]                     ; 2EEF _ 8B. 40, 08
+        mov     dword [ebp-24H], eax                    ; 2EF2 _ 89. 45, DC
+?_149:  mov     eax, dword [ebp-2CH]                    ; 2EF5 _ 8B. 45, D4
+        mov     dword [ebp-1CH], eax                    ; 2EF8 _ 89. 45, E4
+        jmp     ?_154                                   ; 2EFB _ EB, 7A
 
-?_150:  mov     eax, dword [ebp-10H]                    ; 2EFA _ 8B. 45, F0
-        mov     edx, dword [eax+10H]                    ; 2EFD _ 8B. 50, 10
-        mov     eax, dword [ebp-1CH]                    ; 2F00 _ 8B. 45, E4
-        add     eax, edx                                ; 2F03 _ 01. D0
-        mov     dword [ebp-8H], eax                     ; 2F05 _ 89. 45, F8
-        mov     eax, dword [ebp-30H]                    ; 2F08 _ 8B. 45, D0
-        mov     dword [ebp-18H], eax                    ; 2F0B _ 89. 45, E8
-        jmp     ?_153                                   ; 2F0E _ EB, 58
+?_150:  mov     eax, dword [ebp-10H]                    ; 2EFD _ 8B. 45, F0
+        mov     edx, dword [eax+10H]                    ; 2F00 _ 8B. 50, 10
+        mov     eax, dword [ebp-1CH]                    ; 2F03 _ 8B. 45, E4
+        add     eax, edx                                ; 2F06 _ 01. D0
+        mov     dword [ebp-8H], eax                     ; 2F08 _ 89. 45, F8
+        mov     eax, dword [ebp-30H]                    ; 2F0B _ 8B. 45, D0
+        mov     dword [ebp-18H], eax                    ; 2F0E _ 89. 45, E8
+        jmp     ?_153                                   ; 2F11 _ EB, 58
 
-?_151:  mov     eax, dword [ebp-10H]                    ; 2F10 _ 8B. 45, F0
-        mov     edx, dword [eax+0CH]                    ; 2F13 _ 8B. 50, 0C
-        mov     eax, dword [ebp-18H]                    ; 2F16 _ 8B. 45, E8
-        add     eax, edx                                ; 2F19 _ 01. D0
-        mov     dword [ebp-4H], eax                     ; 2F1B _ 89. 45, FC
-        mov     eax, dword [ebp-10H]                    ; 2F1E _ 8B. 45, F0
-        mov     eax, dword [eax+4H]                     ; 2F21 _ 8B. 40, 04
-        imul    eax, dword [ebp-1CH]                    ; 2F24 _ 0F AF. 45, E4
-        mov     edx, eax                                ; 2F28 _ 89. C2
-        mov     eax, dword [ebp-18H]                    ; 2F2A _ 8B. 45, E8
-        add     eax, edx                                ; 2F2D _ 01. D0
-        mov     edx, eax                                ; 2F2F _ 89. C2
-        mov     eax, dword [ebp-0CH]                    ; 2F31 _ 8B. 45, F4
-        add     eax, edx                                ; 2F34 _ 01. D0
-        movzx   eax, byte [eax]                         ; 2F36 _ 0F B6. 00
-        movzx   edx, al                                 ; 2F39 _ 0F B6. D0
-        mov     eax, dword [ebp-10H]                    ; 2F3C _ 8B. 45, F0
-        mov     eax, dword [eax+14H]                    ; 2F3F _ 8B. 40, 14
-        cmp     edx, eax                                ; 2F42 _ 39. C2
-        jz      ?_152                                   ; 2F44 _ 74, 1E
-        mov     eax, dword [ebp+8H]                     ; 2F46 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 2F49 _ 8B. 40, 08
-        imul    eax, dword [ebp-8H]                     ; 2F4C _ 0F AF. 45, F8
-        mov     edx, eax                                ; 2F50 _ 89. C2
-        mov     eax, dword [ebp-4H]                     ; 2F52 _ 8B. 45, FC
-        add     eax, edx                                ; 2F55 _ 01. D0
-        mov     edx, eax                                ; 2F57 _ 89. C2
-        mov     eax, dword [ebp-14H]                    ; 2F59 _ 8B. 45, EC
-        add     edx, eax                                ; 2F5C _ 01. C2
-        movzx   eax, byte [ebp-31H]                     ; 2F5E _ 0F B6. 45, CF
-        mov     byte [edx], al                          ; 2F62 _ 88. 02
-?_152:  add     dword [ebp-18H], 1                      ; 2F64 _ 83. 45, E8, 01
-?_153:  mov     eax, dword [ebp-18H]                    ; 2F68 _ 8B. 45, E8
-        cmp     eax, dword [ebp-28H]                    ; 2F6B _ 3B. 45, D8
-        jl      ?_151                                   ; 2F6E _ 7C, A0
-        add     dword [ebp-1CH], 1                      ; 2F70 _ 83. 45, E4, 01
-?_154:  mov     eax, dword [ebp-1CH]                    ; 2F74 _ 8B. 45, E4
-        cmp     eax, dword [ebp-24H]                    ; 2F77 _ 3B. 45, DC
-        jl      ?_150                                   ; 2F7A _ 0F 8C, FFFFFF7A
-        add     dword [ebp-20H], 1                      ; 2F80 _ 83. 45, E0, 01
-?_155:  mov     eax, dword [ebp+8H]                     ; 2F84 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 2F87 _ 8B. 40, 10
-        cmp     dword [ebp-20H], eax                    ; 2F8A _ 39. 45, E0
-        jle     ?_145                                   ; 2F8D _ 0F 8E, FFFFFEB1
-        nop                                             ; 2F93 _ 90
-        leave                                           ; 2F94 _ C9
-        ret                                             ; 2F95 _ C3
+?_151:  mov     eax, dword [ebp-10H]                    ; 2F13 _ 8B. 45, F0
+        mov     edx, dword [eax+0CH]                    ; 2F16 _ 8B. 50, 0C
+        mov     eax, dword [ebp-18H]                    ; 2F19 _ 8B. 45, E8
+        add     eax, edx                                ; 2F1C _ 01. D0
+        mov     dword [ebp-4H], eax                     ; 2F1E _ 89. 45, FC
+        mov     eax, dword [ebp-10H]                    ; 2F21 _ 8B. 45, F0
+        mov     eax, dword [eax+4H]                     ; 2F24 _ 8B. 40, 04
+        imul    eax, dword [ebp-1CH]                    ; 2F27 _ 0F AF. 45, E4
+        mov     edx, eax                                ; 2F2B _ 89. C2
+        mov     eax, dword [ebp-18H]                    ; 2F2D _ 8B. 45, E8
+        add     eax, edx                                ; 2F30 _ 01. D0
+        mov     edx, eax                                ; 2F32 _ 89. C2
+        mov     eax, dword [ebp-0CH]                    ; 2F34 _ 8B. 45, F4
+        add     eax, edx                                ; 2F37 _ 01. D0
+        movzx   eax, byte [eax]                         ; 2F39 _ 0F B6. 00
+        movzx   edx, al                                 ; 2F3C _ 0F B6. D0
+        mov     eax, dword [ebp-10H]                    ; 2F3F _ 8B. 45, F0
+        mov     eax, dword [eax+14H]                    ; 2F42 _ 8B. 40, 14
+        cmp     edx, eax                                ; 2F45 _ 39. C2
+        jz      ?_152                                   ; 2F47 _ 74, 1E
+        mov     eax, dword [ebp+8H]                     ; 2F49 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 2F4C _ 8B. 40, 08
+        imul    eax, dword [ebp-8H]                     ; 2F4F _ 0F AF. 45, F8
+        mov     edx, eax                                ; 2F53 _ 89. C2
+        mov     eax, dword [ebp-4H]                     ; 2F55 _ 8B. 45, FC
+        add     eax, edx                                ; 2F58 _ 01. D0
+        mov     edx, eax                                ; 2F5A _ 89. C2
+        mov     eax, dword [ebp-14H]                    ; 2F5C _ 8B. 45, EC
+        add     edx, eax                                ; 2F5F _ 01. C2
+        movzx   eax, byte [ebp-31H]                     ; 2F61 _ 0F B6. 45, CF
+        mov     byte [edx], al                          ; 2F65 _ 88. 02
+?_152:  add     dword [ebp-18H], 1                      ; 2F67 _ 83. 45, E8, 01
+?_153:  mov     eax, dword [ebp-18H]                    ; 2F6B _ 8B. 45, E8
+        cmp     eax, dword [ebp-28H]                    ; 2F6E _ 3B. 45, D8
+        jl      ?_151                                   ; 2F71 _ 7C, A0
+        add     dword [ebp-1CH], 1                      ; 2F73 _ 83. 45, E4, 01
+?_154:  mov     eax, dword [ebp-1CH]                    ; 2F77 _ 8B. 45, E4
+        cmp     eax, dword [ebp-24H]                    ; 2F7A _ 3B. 45, DC
+        jl      ?_150                                   ; 2F7D _ 0F 8C, FFFFFF7A
+        add     dword [ebp-20H], 1                      ; 2F83 _ 83. 45, E0, 01
+?_155:  mov     eax, dword [ebp+8H]                     ; 2F87 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 2F8A _ 8B. 40, 10
+        cmp     dword [ebp-20H], eax                    ; 2F8D _ 39. 45, E0
+        jle     ?_145                                   ; 2F90 _ 0F 8E, FFFFFEB1
+        nop                                             ; 2F96 _ 90
+        leave                                           ; 2F97 _ C9
+        ret                                             ; 2F98 _ C3
 ; sheet_refreshmap End of function
 
 init_pit:; Function begin
-        push    ebp                                     ; 2F96 _ 55
-        mov     ebp, esp                                ; 2F97 _ 89. E5
-        sub     esp, 24                                 ; 2F99 _ 83. EC, 18
-        sub     esp, 8                                  ; 2F9C _ 83. EC, 08
-        push    52                                      ; 2F9F _ 6A, 34
-        push    67                                      ; 2FA1 _ 6A, 43
-        call    io_out8                                 ; 2FA3 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 2FA8 _ 83. C4, 10
-        sub     esp, 8                                  ; 2FAB _ 83. EC, 08
-        push    156                                     ; 2FAE _ 68, 0000009C
-        push    64                                      ; 2FB3 _ 6A, 40
-        call    io_out8                                 ; 2FB5 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 2FBA _ 83. C4, 10
-        sub     esp, 8                                  ; 2FBD _ 83. EC, 08
-        push    46                                      ; 2FC0 _ 6A, 2E
-        push    64                                      ; 2FC2 _ 6A, 40
-        call    io_out8                                 ; 2FC4 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 2FC9 _ 83. C4, 10
-        mov     dword [timerctl], 0                     ; 2FCC _ C7. 05, 00000280(d), 00000000
-        mov     dword [ebp-0CH], 0                      ; 2FD6 _ C7. 45, F4, 00000000
-        jmp     ?_157                                   ; 2FDD _ EB, 26
+        push    ebp                                     ; 2F99 _ 55
+        mov     ebp, esp                                ; 2F9A _ 89. E5
+        sub     esp, 24                                 ; 2F9C _ 83. EC, 18
+        sub     esp, 8                                  ; 2F9F _ 83. EC, 08
+        push    52                                      ; 2FA2 _ 6A, 34
+        push    67                                      ; 2FA4 _ 6A, 43
+        call    io_out8                                 ; 2FA6 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2FAB _ 83. C4, 10
+        sub     esp, 8                                  ; 2FAE _ 83. EC, 08
+        push    156                                     ; 2FB1 _ 68, 0000009C
+        push    64                                      ; 2FB6 _ 6A, 40
+        call    io_out8                                 ; 2FB8 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2FBD _ 83. C4, 10
+        sub     esp, 8                                  ; 2FC0 _ 83. EC, 08
+        push    46                                      ; 2FC3 _ 6A, 2E
+        push    64                                      ; 2FC5 _ 6A, 40
+        call    io_out8                                 ; 2FC7 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 2FCC _ 83. C4, 10
+        mov     dword [timerctl], 0                     ; 2FCF _ C7. 05, 00000280(d), 00000000
+        mov     dword [ebp-0CH], 0                      ; 2FD9 _ C7. 45, F4, 00000000
+        jmp     ?_157                                   ; 2FE0 _ EB, 26
 
-?_156:  mov     eax, dword [ebp-0CH]                    ; 2FDF _ 8B. 45, F4
-        shl     eax, 4                                  ; 2FE2 _ C1. E0, 04
-        add     eax, ?_225                              ; 2FE5 _ 05, 00000288(d)
-        mov     dword [eax], 0                          ; 2FEA _ C7. 00, 00000000
-        mov     eax, dword [ebp-0CH]                    ; 2FF0 _ 8B. 45, F4
-        shl     eax, 4                                  ; 2FF3 _ C1. E0, 04
-        add     eax, ?_226                              ; 2FF6 _ 05, 0000028C(d)
-        mov     dword [eax], 0                          ; 2FFB _ C7. 00, 00000000
-        add     dword [ebp-0CH], 1                      ; 3001 _ 83. 45, F4, 01
-?_157:  cmp     dword [ebp-0CH], 499                    ; 3005 _ 81. 7D, F4, 000001F3
-        jle     ?_156                                   ; 300C _ 7E, D1
-        nop                                             ; 300E _ 90
-        leave                                           ; 300F _ C9
-        ret                                             ; 3010 _ C3
+?_156:  mov     eax, dword [ebp-0CH]                    ; 2FE2 _ 8B. 45, F4
+        shl     eax, 4                                  ; 2FE5 _ C1. E0, 04
+        add     eax, ?_225                              ; 2FE8 _ 05, 00000288(d)
+        mov     dword [eax], 0                          ; 2FED _ C7. 00, 00000000
+        mov     eax, dword [ebp-0CH]                    ; 2FF3 _ 8B. 45, F4
+        shl     eax, 4                                  ; 2FF6 _ C1. E0, 04
+        add     eax, ?_226                              ; 2FF9 _ 05, 0000028C(d)
+        mov     dword [eax], 0                          ; 2FFE _ C7. 00, 00000000
+        add     dword [ebp-0CH], 1                      ; 3004 _ 83. 45, F4, 01
+?_157:  cmp     dword [ebp-0CH], 499                    ; 3008 _ 81. 7D, F4, 000001F3
+        jle     ?_156                                   ; 300F _ 7E, D1
+        nop                                             ; 3011 _ 90
+        leave                                           ; 3012 _ C9
+        ret                                             ; 3013 _ C3
 ; init_pit End of function
 
 timer_alloc:; Function begin
-        push    ebp                                     ; 3011 _ 55
-        mov     ebp, esp                                ; 3012 _ 89. E5
-        sub     esp, 16                                 ; 3014 _ 83. EC, 10
-        mov     dword [ebp-4H], 0                       ; 3017 _ C7. 45, FC, 00000000
-        jmp     ?_160                                   ; 301E _ EB, 36
+        push    ebp                                     ; 3014 _ 55
+        mov     ebp, esp                                ; 3015 _ 89. E5
+        sub     esp, 16                                 ; 3017 _ 83. EC, 10
+        mov     dword [ebp-4H], 0                       ; 301A _ C7. 45, FC, 00000000
+        jmp     ?_160                                   ; 3021 _ EB, 36
 
-?_158:  mov     eax, dword [ebp-4H]                     ; 3020 _ 8B. 45, FC
-        shl     eax, 4                                  ; 3023 _ C1. E0, 04
-        add     eax, ?_225                              ; 3026 _ 05, 00000288(d)
-        mov     eax, dword [eax]                        ; 302B _ 8B. 00
-        test    eax, eax                                ; 302D _ 85. C0
-        jnz     ?_159                                   ; 302F _ 75, 21
-        mov     eax, dword [ebp-4H]                     ; 3031 _ 8B. 45, FC
-        shl     eax, 4                                  ; 3034 _ C1. E0, 04
-        add     eax, ?_225                              ; 3037 _ 05, 00000288(d)
-        mov     dword [eax], 1                          ; 303C _ C7. 00, 00000001
-        mov     eax, dword [ebp-4H]                     ; 3042 _ 8B. 45, FC
-        shl     eax, 4                                  ; 3045 _ C1. E0, 04
-        add     eax, timerctl                           ; 3048 _ 05, 00000280(d)
-        add     eax, 4                                  ; 304D _ 83. C0, 04
-        jmp     ?_161                                   ; 3050 _ EB, 12
+?_158:  mov     eax, dword [ebp-4H]                     ; 3023 _ 8B. 45, FC
+        shl     eax, 4                                  ; 3026 _ C1. E0, 04
+        add     eax, ?_225                              ; 3029 _ 05, 00000288(d)
+        mov     eax, dword [eax]                        ; 302E _ 8B. 00
+        test    eax, eax                                ; 3030 _ 85. C0
+        jnz     ?_159                                   ; 3032 _ 75, 21
+        mov     eax, dword [ebp-4H]                     ; 3034 _ 8B. 45, FC
+        shl     eax, 4                                  ; 3037 _ C1. E0, 04
+        add     eax, ?_225                              ; 303A _ 05, 00000288(d)
+        mov     dword [eax], 1                          ; 303F _ C7. 00, 00000001
+        mov     eax, dword [ebp-4H]                     ; 3045 _ 8B. 45, FC
+        shl     eax, 4                                  ; 3048 _ C1. E0, 04
+        add     eax, timerctl                           ; 304B _ 05, 00000280(d)
+        add     eax, 4                                  ; 3050 _ 83. C0, 04
+        jmp     ?_161                                   ; 3053 _ EB, 12
 
-?_159:  add     dword [ebp-4H], 1                       ; 3052 _ 83. 45, FC, 01
-?_160:  cmp     dword [ebp-4H], 499                     ; 3056 _ 81. 7D, FC, 000001F3
-        jle     ?_158                                   ; 305D _ 7E, C1
-        mov     eax, 0                                  ; 305F _ B8, 00000000
-?_161:  leave                                           ; 3064 _ C9
-        ret                                             ; 3065 _ C3
+?_159:  add     dword [ebp-4H], 1                       ; 3055 _ 83. 45, FC, 01
+?_160:  cmp     dword [ebp-4H], 499                     ; 3059 _ 81. 7D, FC, 000001F3
+        jle     ?_158                                   ; 3060 _ 7E, C1
+        mov     eax, 0                                  ; 3062 _ B8, 00000000
+?_161:  leave                                           ; 3067 _ C9
+        ret                                             ; 3068 _ C3
 ; timer_alloc End of function
 
 timer_free:; Function begin
-        push    ebp                                     ; 3066 _ 55
-        mov     ebp, esp                                ; 3067 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 3069 _ 8B. 45, 08
-        mov     dword [eax+4H], 0                       ; 306C _ C7. 40, 04, 00000000
-        nop                                             ; 3073 _ 90
-        pop     ebp                                     ; 3074 _ 5D
-        ret                                             ; 3075 _ C3
+        push    ebp                                     ; 3069 _ 55
+        mov     ebp, esp                                ; 306A _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 306C _ 8B. 45, 08
+        mov     dword [eax+4H], 0                       ; 306F _ C7. 40, 04, 00000000
+        nop                                             ; 3076 _ 90
+        pop     ebp                                     ; 3077 _ 5D
+        ret                                             ; 3078 _ C3
 ; timer_free End of function
 
 timer_init:; Function begin
-        push    ebp                                     ; 3076 _ 55
-        mov     ebp, esp                                ; 3077 _ 89. E5
-        sub     esp, 4                                  ; 3079 _ 83. EC, 04
-        mov     eax, dword [ebp+10H]                    ; 307C _ 8B. 45, 10
-        mov     byte [ebp-4H], al                       ; 307F _ 88. 45, FC
-        mov     eax, dword [ebp+8H]                     ; 3082 _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 3085 _ 8B. 55, 0C
-        mov     dword [eax+8H], edx                     ; 3088 _ 89. 50, 08
-        mov     eax, dword [ebp+8H]                     ; 308B _ 8B. 45, 08
-        movzx   edx, byte [ebp-4H]                      ; 308E _ 0F B6. 55, FC
-        mov     byte [eax+0CH], dl                      ; 3092 _ 88. 50, 0C
-        nop                                             ; 3095 _ 90
-        leave                                           ; 3096 _ C9
-        ret                                             ; 3097 _ C3
+        push    ebp                                     ; 3079 _ 55
+        mov     ebp, esp                                ; 307A _ 89. E5
+        sub     esp, 4                                  ; 307C _ 83. EC, 04
+        mov     eax, dword [ebp+10H]                    ; 307F _ 8B. 45, 10
+        mov     byte [ebp-4H], al                       ; 3082 _ 88. 45, FC
+        mov     eax, dword [ebp+8H]                     ; 3085 _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 3088 _ 8B. 55, 0C
+        mov     dword [eax+8H], edx                     ; 308B _ 89. 50, 08
+        mov     eax, dword [ebp+8H]                     ; 308E _ 8B. 45, 08
+        movzx   edx, byte [ebp-4H]                      ; 3091 _ 0F B6. 55, FC
+        mov     byte [eax+0CH], dl                      ; 3095 _ 88. 50, 0C
+        nop                                             ; 3098 _ 90
+        leave                                           ; 3099 _ C9
+        ret                                             ; 309A _ C3
 ; timer_init End of function
 
 timer_setTime:; Function begin
-        push    ebp                                     ; 3098 _ 55
-        mov     ebp, esp                                ; 3099 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 309B _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 309E _ 8B. 55, 0C
-        mov     dword [eax], edx                        ; 30A1 _ 89. 10
-        mov     eax, dword [ebp+8H]                     ; 30A3 _ 8B. 45, 08
-        mov     dword [eax+4H], 2                       ; 30A6 _ C7. 40, 04, 00000002
-        nop                                             ; 30AD _ 90
-        pop     ebp                                     ; 30AE _ 5D
-        ret                                             ; 30AF _ C3
+        push    ebp                                     ; 309B _ 55
+        mov     ebp, esp                                ; 309C _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 309E _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 30A1 _ 8B. 55, 0C
+        mov     dword [eax], edx                        ; 30A4 _ 89. 10
+        mov     eax, dword [ebp+8H]                     ; 30A6 _ 8B. 45, 08
+        mov     dword [eax+4H], 2                       ; 30A9 _ C7. 40, 04, 00000002
+        nop                                             ; 30B0 _ 90
+        pop     ebp                                     ; 30B1 _ 5D
+        ret                                             ; 30B2 _ C3
 ; timer_setTime End of function
 
 timer_settime:; Function begin
-        push    ebp                                     ; 30B0 _ 55
-        mov     ebp, esp                                ; 30B1 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 30B3 _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 30B6 _ 8B. 55, 0C
-        mov     dword [eax], edx                        ; 30B9 _ 89. 10
-        mov     eax, dword [ebp+8H]                     ; 30BB _ 8B. 45, 08
-        mov     dword [eax+4H], 2                       ; 30BE _ C7. 40, 04, 00000002
-        nop                                             ; 30C5 _ 90
-        pop     ebp                                     ; 30C6 _ 5D
-        ret                                             ; 30C7 _ C3
+        push    ebp                                     ; 30B3 _ 55
+        mov     ebp, esp                                ; 30B4 _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 30B6 _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 30B9 _ 8B. 55, 0C
+        mov     dword [eax], edx                        ; 30BC _ 89. 10
+        mov     eax, dword [ebp+8H]                     ; 30BE _ 8B. 45, 08
+        mov     dword [eax+4H], 2                       ; 30C1 _ C7. 40, 04, 00000002
+        nop                                             ; 30C8 _ 90
+        pop     ebp                                     ; 30C9 _ 5D
+        ret                                             ; 30CA _ C3
 ; timer_settime End of function
 
 getTimerController:; Function begin
-        push    ebp                                     ; 30C8 _ 55
-        mov     ebp, esp                                ; 30C9 _ 89. E5
-        mov     eax, timerctl                           ; 30CB _ B8, 00000280(d)
-        pop     ebp                                     ; 30D0 _ 5D
-        ret                                             ; 30D1 _ C3
+        push    ebp                                     ; 30CB _ 55
+        mov     ebp, esp                                ; 30CC _ 89. E5
+        mov     eax, timerctl                           ; 30CE _ B8, 00000280(d)
+        pop     ebp                                     ; 30D3 _ 5D
+        ret                                             ; 30D4 _ C3
 ; getTimerController End of function
 
 intHandlerForTimer:; Function begin
-        push    ebp                                     ; 30D2 _ 55
-        mov     ebp, esp                                ; 30D3 _ 89. E5
-        push    ebx                                     ; 30D5 _ 53
-        sub     esp, 20                                 ; 30D6 _ 83. EC, 14
-        sub     esp, 8                                  ; 30D9 _ 83. EC, 08
-        push    32                                      ; 30DC _ 6A, 20
-        push    32                                      ; 30DE _ 6A, 20
-        call    io_out8                                 ; 30E0 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 30E5 _ 83. C4, 10
-        mov     eax, dword [timerctl]                   ; 30E8 _ A1, 00000280(d)
-        add     eax, 1                                  ; 30ED _ 83. C0, 01
-        mov     dword [timerctl], eax                   ; 30F0 _ A3, 00000280(d)
-        mov     dword [ebp-10H], 0                      ; 30F5 _ C7. 45, F0, 00000000
-        mov     dword [ebp-0CH], 0                      ; 30FC _ C7. 45, F4, 00000000
-        jmp     ?_165                                   ; 3103 _ E9, 000000AD
+        push    ebp                                     ; 30D5 _ 55
+        mov     ebp, esp                                ; 30D6 _ 89. E5
+        push    ebx                                     ; 30D8 _ 53
+        sub     esp, 20                                 ; 30D9 _ 83. EC, 14
+        sub     esp, 8                                  ; 30DC _ 83. EC, 08
+        push    32                                      ; 30DF _ 6A, 20
+        push    32                                      ; 30E1 _ 6A, 20
+        call    io_out8                                 ; 30E3 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 30E8 _ 83. C4, 10
+        mov     eax, dword [timerctl]                   ; 30EB _ A1, 00000280(d)
+        add     eax, 1                                  ; 30F0 _ 83. C0, 01
+        mov     dword [timerctl], eax                   ; 30F3 _ A3, 00000280(d)
+        mov     dword [ebp-10H], 0                      ; 30F8 _ C7. 45, F0, 00000000
+        mov     dword [ebp-0CH], 0                      ; 30FF _ C7. 45, F4, 00000000
+        jmp     ?_165                                   ; 3106 _ E9, 000000AD
 
-?_162:  mov     eax, dword [ebp-0CH]                    ; 3108 _ 8B. 45, F4
-        shl     eax, 4                                  ; 310B _ C1. E0, 04
-        add     eax, ?_225                              ; 310E _ 05, 00000288(d)
-        mov     eax, dword [eax]                        ; 3113 _ 8B. 00
-        cmp     eax, 2                                  ; 3115 _ 83. F8, 02
-        jne     ?_163                                   ; 3118 _ 0F 85, 00000088
-        mov     eax, dword [ebp-0CH]                    ; 311E _ 8B. 45, F4
-        shl     eax, 4                                  ; 3121 _ C1. E0, 04
-        add     eax, ?_224                              ; 3124 _ 05, 00000284(d)
-        mov     eax, dword [eax]                        ; 3129 _ 8B. 00
-        lea     edx, [eax-1H]                           ; 312B _ 8D. 50, FF
-        mov     eax, dword [ebp-0CH]                    ; 312E _ 8B. 45, F4
-        shl     eax, 4                                  ; 3131 _ C1. E0, 04
-        add     eax, ?_224                              ; 3134 _ 05, 00000284(d)
-        mov     dword [eax], edx                        ; 3139 _ 89. 10
-        mov     eax, dword [ebp-0CH]                    ; 313B _ 8B. 45, F4
-        shl     eax, 4                                  ; 313E _ C1. E0, 04
-        add     eax, ?_224                              ; 3141 _ 05, 00000284(d)
-        mov     eax, dword [eax]                        ; 3146 _ 8B. 00
-        test    eax, eax                                ; 3148 _ 85. C0
-        jnz     ?_163                                   ; 314A _ 75, 5A
-        mov     eax, dword [ebp-0CH]                    ; 314C _ 8B. 45, F4
-        shl     eax, 4                                  ; 314F _ C1. E0, 04
-        add     eax, ?_225                              ; 3152 _ 05, 00000288(d)
-        mov     dword [eax], 1                          ; 3157 _ C7. 00, 00000001
-        mov     eax, dword [ebp-0CH]                    ; 315D _ 8B. 45, F4
-        shl     eax, 4                                  ; 3160 _ C1. E0, 04
-        add     eax, ?_227                              ; 3163 _ 05, 00000290(d)
-        movzx   eax, byte [eax]                         ; 3168 _ 0F B6. 00
-        movzx   edx, al                                 ; 316B _ 0F B6. D0
-        mov     eax, dword [ebp-0CH]                    ; 316E _ 8B. 45, F4
-        shl     eax, 4                                  ; 3171 _ C1. E0, 04
-        add     eax, ?_226                              ; 3174 _ 05, 0000028C(d)
-        mov     eax, dword [eax]                        ; 3179 _ 8B. 00
-        sub     esp, 8                                  ; 317B _ 83. EC, 08
-        push    edx                                     ; 317E _ 52
-        push    eax                                     ; 317F _ 50
-        call    fifo8_put                               ; 3180 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 3185 _ 83. C4, 10
-        mov     eax, dword [ebp-0CH]                    ; 3188 _ 8B. 45, F4
-        shl     eax, 4                                  ; 318B _ C1. E0, 04
-        add     eax, timerctl                           ; 318E _ 05, 00000280(d)
-        lea     ebx, [eax+4H]                           ; 3193 _ 8D. 58, 04
-        call    getTaskTimer                            ; 3196 _ E8, FFFFFFFC(rel)
-        cmp     ebx, eax                                ; 319B _ 39. C3
-        jnz     ?_163                                   ; 319D _ 75, 07
-        mov     dword [ebp-10H], 1                      ; 319F _ C7. 45, F0, 00000001
-?_163:  cmp     dword [ebp-10H], 1                      ; 31A6 _ 83. 7D, F0, 01
-        jnz     ?_164                                   ; 31AA _ 75, 05
-        call    task_switch                             ; 31AC _ E8, FFFFFFFC(rel)
-?_164:  add     dword [ebp-0CH], 1                      ; 31B1 _ 83. 45, F4, 01
-?_165:  cmp     dword [ebp-0CH], 499                    ; 31B5 _ 81. 7D, F4, 000001F3
-        jle     ?_162                                   ; 31BC _ 0F 8E, FFFFFF46
-        nop                                             ; 31C2 _ 90
-        mov     ebx, dword [ebp-4H]                     ; 31C3 _ 8B. 5D, FC
-        leave                                           ; 31C6 _ C9
-        ret                                             ; 31C7 _ C3
+?_162:  mov     eax, dword [ebp-0CH]                    ; 310B _ 8B. 45, F4
+        shl     eax, 4                                  ; 310E _ C1. E0, 04
+        add     eax, ?_225                              ; 3111 _ 05, 00000288(d)
+        mov     eax, dword [eax]                        ; 3116 _ 8B. 00
+        cmp     eax, 2                                  ; 3118 _ 83. F8, 02
+        jne     ?_163                                   ; 311B _ 0F 85, 00000088
+        mov     eax, dword [ebp-0CH]                    ; 3121 _ 8B. 45, F4
+        shl     eax, 4                                  ; 3124 _ C1. E0, 04
+        add     eax, ?_224                              ; 3127 _ 05, 00000284(d)
+        mov     eax, dword [eax]                        ; 312C _ 8B. 00
+        lea     edx, [eax-1H]                           ; 312E _ 8D. 50, FF
+        mov     eax, dword [ebp-0CH]                    ; 3131 _ 8B. 45, F4
+        shl     eax, 4                                  ; 3134 _ C1. E0, 04
+        add     eax, ?_224                              ; 3137 _ 05, 00000284(d)
+        mov     dword [eax], edx                        ; 313C _ 89. 10
+        mov     eax, dword [ebp-0CH]                    ; 313E _ 8B. 45, F4
+        shl     eax, 4                                  ; 3141 _ C1. E0, 04
+        add     eax, ?_224                              ; 3144 _ 05, 00000284(d)
+        mov     eax, dword [eax]                        ; 3149 _ 8B. 00
+        test    eax, eax                                ; 314B _ 85. C0
+        jnz     ?_163                                   ; 314D _ 75, 5A
+        mov     eax, dword [ebp-0CH]                    ; 314F _ 8B. 45, F4
+        shl     eax, 4                                  ; 3152 _ C1. E0, 04
+        add     eax, ?_225                              ; 3155 _ 05, 00000288(d)
+        mov     dword [eax], 1                          ; 315A _ C7. 00, 00000001
+        mov     eax, dword [ebp-0CH]                    ; 3160 _ 8B. 45, F4
+        shl     eax, 4                                  ; 3163 _ C1. E0, 04
+        add     eax, ?_227                              ; 3166 _ 05, 00000290(d)
+        movzx   eax, byte [eax]                         ; 316B _ 0F B6. 00
+        movzx   edx, al                                 ; 316E _ 0F B6. D0
+        mov     eax, dword [ebp-0CH]                    ; 3171 _ 8B. 45, F4
+        shl     eax, 4                                  ; 3174 _ C1. E0, 04
+        add     eax, ?_226                              ; 3177 _ 05, 0000028C(d)
+        mov     eax, dword [eax]                        ; 317C _ 8B. 00
+        sub     esp, 8                                  ; 317E _ 83. EC, 08
+        push    edx                                     ; 3181 _ 52
+        push    eax                                     ; 3182 _ 50
+        call    fifo8_put                               ; 3183 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 3188 _ 83. C4, 10
+        mov     eax, dword [ebp-0CH]                    ; 318B _ 8B. 45, F4
+        shl     eax, 4                                  ; 318E _ C1. E0, 04
+        add     eax, timerctl                           ; 3191 _ 05, 00000280(d)
+        lea     ebx, [eax+4H]                           ; 3196 _ 8D. 58, 04
+        call    getTaskTimer                            ; 3199 _ E8, FFFFFFFC(rel)
+        cmp     ebx, eax                                ; 319E _ 39. C3
+        jnz     ?_163                                   ; 31A0 _ 75, 07
+        mov     dword [ebp-10H], 1                      ; 31A2 _ C7. 45, F0, 00000001
+?_163:  cmp     dword [ebp-10H], 1                      ; 31A9 _ 83. 7D, F0, 01
+        jnz     ?_164                                   ; 31AD _ 75, 05
+        call    task_switch                             ; 31AF _ E8, FFFFFFFC(rel)
+?_164:  add     dword [ebp-0CH], 1                      ; 31B4 _ 83. 45, F4, 01
+?_165:  cmp     dword [ebp-0CH], 499                    ; 31B8 _ 81. 7D, F4, 000001F3
+        jle     ?_162                                   ; 31BF _ 0F 8E, FFFFFF46
+        nop                                             ; 31C5 _ 90
+        mov     ebx, dword [ebp-4H]                     ; 31C6 _ 8B. 5D, FC
+        leave                                           ; 31C9 _ C9
+        ret                                             ; 31CA _ C3
 ; intHandlerForTimer End of function
 
 fifo8_init:; Function begin
-        push    ebp                                     ; 31C8 _ 55
-        mov     ebp, esp                                ; 31C9 _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 31CB _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 31CE _ 8B. 55, 0C
-        mov     dword [eax+0CH], edx                    ; 31D1 _ 89. 50, 0C
-        mov     eax, dword [ebp+8H]                     ; 31D4 _ 8B. 45, 08
-        mov     edx, dword [ebp+10H]                    ; 31D7 _ 8B. 55, 10
-        mov     dword [eax], edx                        ; 31DA _ 89. 10
-        mov     eax, dword [ebp+8H]                     ; 31DC _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 31DF _ 8B. 55, 0C
-        mov     dword [eax+10H], edx                    ; 31E2 _ 89. 50, 10
-        mov     eax, dword [ebp+8H]                     ; 31E5 _ 8B. 45, 08
-        mov     dword [eax+4H], 0                       ; 31E8 _ C7. 40, 04, 00000000
-        mov     eax, dword [ebp+8H]                     ; 31EF _ 8B. 45, 08
-        mov     dword [eax+8H], 0                       ; 31F2 _ C7. 40, 08, 00000000
-        mov     eax, dword [ebp+8H]                     ; 31F9 _ 8B. 45, 08
-        mov     dword [eax+14H], 0                      ; 31FC _ C7. 40, 14, 00000000
-        mov     eax, dword [ebp+8H]                     ; 3203 _ 8B. 45, 08
-        mov     edx, dword [ebp+14H]                    ; 3206 _ 8B. 55, 14
-        mov     dword [eax+18H], edx                    ; 3209 _ 89. 50, 18
-        nop                                             ; 320C _ 90
-        pop     ebp                                     ; 320D _ 5D
-        ret                                             ; 320E _ C3
+        push    ebp                                     ; 31CB _ 55
+        mov     ebp, esp                                ; 31CC _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 31CE _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 31D1 _ 8B. 55, 0C
+        mov     dword [eax+0CH], edx                    ; 31D4 _ 89. 50, 0C
+        mov     eax, dword [ebp+8H]                     ; 31D7 _ 8B. 45, 08
+        mov     edx, dword [ebp+10H]                    ; 31DA _ 8B. 55, 10
+        mov     dword [eax], edx                        ; 31DD _ 89. 10
+        mov     eax, dword [ebp+8H]                     ; 31DF _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 31E2 _ 8B. 55, 0C
+        mov     dword [eax+10H], edx                    ; 31E5 _ 89. 50, 10
+        mov     eax, dword [ebp+8H]                     ; 31E8 _ 8B. 45, 08
+        mov     dword [eax+4H], 0                       ; 31EB _ C7. 40, 04, 00000000
+        mov     eax, dword [ebp+8H]                     ; 31F2 _ 8B. 45, 08
+        mov     dword [eax+8H], 0                       ; 31F5 _ C7. 40, 08, 00000000
+        mov     eax, dword [ebp+8H]                     ; 31FC _ 8B. 45, 08
+        mov     dword [eax+14H], 0                      ; 31FF _ C7. 40, 14, 00000000
+        mov     eax, dword [ebp+8H]                     ; 3206 _ 8B. 45, 08
+        mov     edx, dword [ebp+14H]                    ; 3209 _ 8B. 55, 14
+        mov     dword [eax+18H], edx                    ; 320C _ 89. 50, 18
+        nop                                             ; 320F _ 90
+        pop     ebp                                     ; 3210 _ 5D
+        ret                                             ; 3211 _ C3
 ; fifo8_init End of function
 
 fifo8_put:; Function begin
-        push    ebp                                     ; 320F _ 55
-        mov     ebp, esp                                ; 3210 _ 89. E5
-        sub     esp, 24                                 ; 3212 _ 83. EC, 18
-        mov     eax, dword [ebp+0CH]                    ; 3215 _ 8B. 45, 0C
-        mov     byte [ebp-0CH], al                      ; 3218 _ 88. 45, F4
-        cmp     dword [ebp+8H], 0                       ; 321B _ 83. 7D, 08, 00
-        jnz     ?_166                                   ; 321F _ 75, 0A
-        mov     eax, 4294967295                         ; 3221 _ B8, FFFFFFFF
-        jmp     ?_170                                   ; 3226 _ E9, 000000A0
+        push    ebp                                     ; 3212 _ 55
+        mov     ebp, esp                                ; 3213 _ 89. E5
+        sub     esp, 24                                 ; 3215 _ 83. EC, 18
+        mov     eax, dword [ebp+0CH]                    ; 3218 _ 8B. 45, 0C
+        mov     byte [ebp-0CH], al                      ; 321B _ 88. 45, F4
+        cmp     dword [ebp+8H], 0                       ; 321E _ 83. 7D, 08, 00
+        jnz     ?_166                                   ; 3222 _ 75, 0A
+        mov     eax, 4294967295                         ; 3224 _ B8, FFFFFFFF
+        jmp     ?_170                                   ; 3229 _ E9, 000000A0
 
-?_166:  mov     eax, dword [ebp+8H]                     ; 322B _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 322E _ 8B. 40, 10
-        test    eax, eax                                ; 3231 _ 85. C0
-        jnz     ?_167                                   ; 3233 _ 75, 18
-        mov     eax, dword [ebp+8H]                     ; 3235 _ 8B. 45, 08
-        mov     eax, dword [eax+14H]                    ; 3238 _ 8B. 40, 14
-        or      eax, 01H                                ; 323B _ 83. C8, 01
-        mov     edx, eax                                ; 323E _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 3240 _ 8B. 45, 08
-        mov     dword [eax+14H], edx                    ; 3243 _ 89. 50, 14
-        mov     eax, 4294967295                         ; 3246 _ B8, FFFFFFFF
-        jmp     ?_170                                   ; 324B _ EB, 7E
+?_166:  mov     eax, dword [ebp+8H]                     ; 322E _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 3231 _ 8B. 40, 10
+        test    eax, eax                                ; 3234 _ 85. C0
+        jnz     ?_167                                   ; 3236 _ 75, 18
+        mov     eax, dword [ebp+8H]                     ; 3238 _ 8B. 45, 08
+        mov     eax, dword [eax+14H]                    ; 323B _ 8B. 40, 14
+        or      eax, 01H                                ; 323E _ 83. C8, 01
+        mov     edx, eax                                ; 3241 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 3243 _ 8B. 45, 08
+        mov     dword [eax+14H], edx                    ; 3246 _ 89. 50, 14
+        mov     eax, 4294967295                         ; 3249 _ B8, FFFFFFFF
+        jmp     ?_170                                   ; 324E _ EB, 7E
 
-?_167:  mov     eax, dword [ebp+8H]                     ; 324D _ 8B. 45, 08
-        mov     edx, dword [eax]                        ; 3250 _ 8B. 10
-        mov     eax, dword [ebp+8H]                     ; 3252 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 3255 _ 8B. 40, 08
-        add     edx, eax                                ; 3258 _ 01. C2
-        movzx   eax, byte [ebp-0CH]                     ; 325A _ 0F B6. 45, F4
-        mov     byte [edx], al                          ; 325E _ 88. 02
-        mov     eax, dword [ebp+8H]                     ; 3260 _ 8B. 45, 08
-        mov     eax, dword [eax+8H]                     ; 3263 _ 8B. 40, 08
-        lea     edx, [eax+1H]                           ; 3266 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 3269 _ 8B. 45, 08
-        mov     dword [eax+8H], edx                     ; 326C _ 89. 50, 08
-        mov     eax, dword [ebp+8H]                     ; 326F _ 8B. 45, 08
-        mov     edx, dword [eax+8H]                     ; 3272 _ 8B. 50, 08
-        mov     eax, dword [ebp+8H]                     ; 3275 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 3278 _ 8B. 40, 0C
-        cmp     edx, eax                                ; 327B _ 39. C2
-        jl      ?_168                                   ; 327D _ 7C, 0A
-        mov     eax, dword [ebp+8H]                     ; 327F _ 8B. 45, 08
-        mov     dword [eax+8H], 0                       ; 3282 _ C7. 40, 08, 00000000
-?_168:  mov     eax, dword [ebp+8H]                     ; 3289 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 328C _ 8B. 40, 10
-        lea     edx, [eax-1H]                           ; 328F _ 8D. 50, FF
-        mov     eax, dword [ebp+8H]                     ; 3292 _ 8B. 45, 08
-        mov     dword [eax+10H], edx                    ; 3295 _ 89. 50, 10
-        mov     eax, dword [ebp+8H]                     ; 3298 _ 8B. 45, 08
-        mov     eax, dword [eax+18H]                    ; 329B _ 8B. 40, 18
-        test    eax, eax                                ; 329E _ 85. C0
-        jz      ?_169                                   ; 32A0 _ 74, 24
-        mov     eax, dword [ebp+8H]                     ; 32A2 _ 8B. 45, 08
-        mov     eax, dword [eax+18H]                    ; 32A5 _ 8B. 40, 18
-        mov     eax, dword [eax+4H]                     ; 32A8 _ 8B. 40, 04
-        cmp     eax, 2                                  ; 32AB _ 83. F8, 02
-        jz      ?_169                                   ; 32AE _ 74, 16
-        mov     eax, dword [ebp+8H]                     ; 32B0 _ 8B. 45, 08
-        mov     eax, dword [eax+18H]                    ; 32B3 _ 8B. 40, 18
-        sub     esp, 4                                  ; 32B6 _ 83. EC, 04
-        push    0                                       ; 32B9 _ 6A, 00
-        push    0                                       ; 32BB _ 6A, 00
-        push    eax                                     ; 32BD _ 50
-        call    task_run                                ; 32BE _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 32C3 _ 83. C4, 10
-?_169:  mov     eax, 1                                  ; 32C6 _ B8, 00000001
-?_170:  leave                                           ; 32CB _ C9
-        ret                                             ; 32CC _ C3
+?_167:  mov     eax, dword [ebp+8H]                     ; 3250 _ 8B. 45, 08
+        mov     edx, dword [eax]                        ; 3253 _ 8B. 10
+        mov     eax, dword [ebp+8H]                     ; 3255 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 3258 _ 8B. 40, 08
+        add     edx, eax                                ; 325B _ 01. C2
+        movzx   eax, byte [ebp-0CH]                     ; 325D _ 0F B6. 45, F4
+        mov     byte [edx], al                          ; 3261 _ 88. 02
+        mov     eax, dword [ebp+8H]                     ; 3263 _ 8B. 45, 08
+        mov     eax, dword [eax+8H]                     ; 3266 _ 8B. 40, 08
+        lea     edx, [eax+1H]                           ; 3269 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 326C _ 8B. 45, 08
+        mov     dword [eax+8H], edx                     ; 326F _ 89. 50, 08
+        mov     eax, dword [ebp+8H]                     ; 3272 _ 8B. 45, 08
+        mov     edx, dword [eax+8H]                     ; 3275 _ 8B. 50, 08
+        mov     eax, dword [ebp+8H]                     ; 3278 _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 327B _ 8B. 40, 0C
+        cmp     edx, eax                                ; 327E _ 39. C2
+        jl      ?_168                                   ; 3280 _ 7C, 0A
+        mov     eax, dword [ebp+8H]                     ; 3282 _ 8B. 45, 08
+        mov     dword [eax+8H], 0                       ; 3285 _ C7. 40, 08, 00000000
+?_168:  mov     eax, dword [ebp+8H]                     ; 328C _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 328F _ 8B. 40, 10
+        lea     edx, [eax-1H]                           ; 3292 _ 8D. 50, FF
+        mov     eax, dword [ebp+8H]                     ; 3295 _ 8B. 45, 08
+        mov     dword [eax+10H], edx                    ; 3298 _ 89. 50, 10
+        mov     eax, dword [ebp+8H]                     ; 329B _ 8B. 45, 08
+        mov     eax, dword [eax+18H]                    ; 329E _ 8B. 40, 18
+        test    eax, eax                                ; 32A1 _ 85. C0
+        jz      ?_169                                   ; 32A3 _ 74, 24
+        mov     eax, dword [ebp+8H]                     ; 32A5 _ 8B. 45, 08
+        mov     eax, dword [eax+18H]                    ; 32A8 _ 8B. 40, 18
+        mov     eax, dword [eax+4H]                     ; 32AB _ 8B. 40, 04
+        cmp     eax, 2                                  ; 32AE _ 83. F8, 02
+        jz      ?_169                                   ; 32B1 _ 74, 16
+        mov     eax, dword [ebp+8H]                     ; 32B3 _ 8B. 45, 08
+        mov     eax, dword [eax+18H]                    ; 32B6 _ 8B. 40, 18
+        sub     esp, 4                                  ; 32B9 _ 83. EC, 04
+        push    0                                       ; 32BC _ 6A, 00
+        push    0                                       ; 32BE _ 6A, 00
+        push    eax                                     ; 32C0 _ 50
+        call    task_run                                ; 32C1 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 32C6 _ 83. C4, 10
+?_169:  mov     eax, 1                                  ; 32C9 _ B8, 00000001
+?_170:  leave                                           ; 32CE _ C9
+        ret                                             ; 32CF _ C3
 ; fifo8_put End of function
 
 fifo8_get:; Function begin
-        push    ebp                                     ; 32CD _ 55
-        mov     ebp, esp                                ; 32CE _ 89. E5
-        sub     esp, 16                                 ; 32D0 _ 83. EC, 10
-        mov     eax, dword [ebp+8H]                     ; 32D3 _ 8B. 45, 08
-        mov     edx, dword [eax+10H]                    ; 32D6 _ 8B. 50, 10
-        mov     eax, dword [ebp+8H]                     ; 32D9 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 32DC _ 8B. 40, 0C
-        cmp     edx, eax                                ; 32DF _ 39. C2
-        jnz     ?_171                                   ; 32E1 _ 75, 07
-        mov     eax, 4294967295                         ; 32E3 _ B8, FFFFFFFF
-        jmp     ?_173                                   ; 32E8 _ EB, 51
+        push    ebp                                     ; 32D0 _ 55
+        mov     ebp, esp                                ; 32D1 _ 89. E5
+        sub     esp, 16                                 ; 32D3 _ 83. EC, 10
+        mov     eax, dword [ebp+8H]                     ; 32D6 _ 8B. 45, 08
+        mov     edx, dword [eax+10H]                    ; 32D9 _ 8B. 50, 10
+        mov     eax, dword [ebp+8H]                     ; 32DC _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 32DF _ 8B. 40, 0C
+        cmp     edx, eax                                ; 32E2 _ 39. C2
+        jnz     ?_171                                   ; 32E4 _ 75, 07
+        mov     eax, 4294967295                         ; 32E6 _ B8, FFFFFFFF
+        jmp     ?_173                                   ; 32EB _ EB, 51
 
-?_171:  mov     eax, dword [ebp+8H]                     ; 32EA _ 8B. 45, 08
-        mov     edx, dword [eax]                        ; 32ED _ 8B. 10
-        mov     eax, dword [ebp+8H]                     ; 32EF _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 32F2 _ 8B. 40, 04
-        add     eax, edx                                ; 32F5 _ 01. D0
-        movzx   eax, byte [eax]                         ; 32F7 _ 0F B6. 00
-        movzx   eax, al                                 ; 32FA _ 0F B6. C0
-        mov     dword [ebp-4H], eax                     ; 32FD _ 89. 45, FC
-        mov     eax, dword [ebp+8H]                     ; 3300 _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 3303 _ 8B. 40, 04
-        lea     edx, [eax+1H]                           ; 3306 _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 3309 _ 8B. 45, 08
-        mov     dword [eax+4H], edx                     ; 330C _ 89. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 330F _ 8B. 45, 08
-        mov     edx, dword [eax+4H]                     ; 3312 _ 8B. 50, 04
-        mov     eax, dword [ebp+8H]                     ; 3315 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 3318 _ 8B. 40, 0C
-        cmp     edx, eax                                ; 331B _ 39. C2
-        jl      ?_172                                   ; 331D _ 7C, 0A
-        mov     eax, dword [ebp+8H]                     ; 331F _ 8B. 45, 08
-        mov     dword [eax+4H], 0                       ; 3322 _ C7. 40, 04, 00000000
-?_172:  mov     eax, dword [ebp+8H]                     ; 3329 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 332C _ 8B. 40, 10
-        lea     edx, [eax+1H]                           ; 332F _ 8D. 50, 01
-        mov     eax, dword [ebp+8H]                     ; 3332 _ 8B. 45, 08
-        mov     dword [eax+10H], edx                    ; 3335 _ 89. 50, 10
-        mov     eax, dword [ebp-4H]                     ; 3338 _ 8B. 45, FC
-?_173:  leave                                           ; 333B _ C9
-        ret                                             ; 333C _ C3
+?_171:  mov     eax, dword [ebp+8H]                     ; 32ED _ 8B. 45, 08
+        mov     edx, dword [eax]                        ; 32F0 _ 8B. 10
+        mov     eax, dword [ebp+8H]                     ; 32F2 _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 32F5 _ 8B. 40, 04
+        add     eax, edx                                ; 32F8 _ 01. D0
+        movzx   eax, byte [eax]                         ; 32FA _ 0F B6. 00
+        movzx   eax, al                                 ; 32FD _ 0F B6. C0
+        mov     dword [ebp-4H], eax                     ; 3300 _ 89. 45, FC
+        mov     eax, dword [ebp+8H]                     ; 3303 _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 3306 _ 8B. 40, 04
+        lea     edx, [eax+1H]                           ; 3309 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 330C _ 8B. 45, 08
+        mov     dword [eax+4H], edx                     ; 330F _ 89. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 3312 _ 8B. 45, 08
+        mov     edx, dword [eax+4H]                     ; 3315 _ 8B. 50, 04
+        mov     eax, dword [ebp+8H]                     ; 3318 _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 331B _ 8B. 40, 0C
+        cmp     edx, eax                                ; 331E _ 39. C2
+        jl      ?_172                                   ; 3320 _ 7C, 0A
+        mov     eax, dword [ebp+8H]                     ; 3322 _ 8B. 45, 08
+        mov     dword [eax+4H], 0                       ; 3325 _ C7. 40, 04, 00000000
+?_172:  mov     eax, dword [ebp+8H]                     ; 332C _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 332F _ 8B. 40, 10
+        lea     edx, [eax+1H]                           ; 3332 _ 8D. 50, 01
+        mov     eax, dword [ebp+8H]                     ; 3335 _ 8B. 45, 08
+        mov     dword [eax+10H], edx                    ; 3338 _ 89. 50, 10
+        mov     eax, dword [ebp-4H]                     ; 333B _ 8B. 45, FC
+?_173:  leave                                           ; 333E _ C9
+        ret                                             ; 333F _ C3
 ; fifo8_get End of function
 
 fifo8_status:; Function begin
-        push    ebp                                     ; 333D _ 55
-        mov     ebp, esp                                ; 333E _ 89. E5
-        mov     eax, dword [ebp+8H]                     ; 3340 _ 8B. 45, 08
-        mov     edx, dword [eax+0CH]                    ; 3343 _ 8B. 50, 0C
-        mov     eax, dword [ebp+8H]                     ; 3346 _ 8B. 45, 08
-        mov     eax, dword [eax+10H]                    ; 3349 _ 8B. 40, 10
-        sub     edx, eax                                ; 334C _ 29. C2
-        mov     eax, edx                                ; 334E _ 89. D0
-        pop     ebp                                     ; 3350 _ 5D
-        ret                                             ; 3351 _ C3
+        push    ebp                                     ; 3340 _ 55
+        mov     ebp, esp                                ; 3341 _ 89. E5
+        mov     eax, dword [ebp+8H]                     ; 3343 _ 8B. 45, 08
+        mov     edx, dword [eax+0CH]                    ; 3346 _ 8B. 50, 0C
+        mov     eax, dword [ebp+8H]                     ; 3349 _ 8B. 45, 08
+        mov     eax, dword [eax+10H]                    ; 334C _ 8B. 40, 10
+        sub     edx, eax                                ; 334F _ 29. C2
+        mov     eax, edx                                ; 3351 _ 89. D0
+        pop     ebp                                     ; 3353 _ 5D
+        ret                                             ; 3354 _ C3
 ; fifo8_status End of function
 
 set_segmdesc:; Function begin
-        push    ebp                                     ; 3352 _ 55
-        mov     ebp, esp                                ; 3353 _ 89. E5
-        cmp     dword [ebp+0CH], 1048575                ; 3355 _ 81. 7D, 0C, 000FFFFF
-        jbe     ?_174                                   ; 335C _ 76, 10
-        or      dword [ebp+14H], 8000H                  ; 335E _ 81. 4D, 14, 00008000
-        mov     eax, dword [ebp+0CH]                    ; 3365 _ 8B. 45, 0C
-        shr     eax, 12                                 ; 3368 _ C1. E8, 0C
-        mov     dword [ebp+0CH], eax                    ; 336B _ 89. 45, 0C
-?_174:  mov     eax, dword [ebp+0CH]                    ; 336E _ 8B. 45, 0C
-        mov     edx, eax                                ; 3371 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 3373 _ 8B. 45, 08
-        mov     word [eax], dx                          ; 3376 _ 66: 89. 10
-        mov     eax, dword [ebp+10H]                    ; 3379 _ 8B. 45, 10
-        mov     edx, eax                                ; 337C _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 337E _ 8B. 45, 08
-        mov     word [eax+2H], dx                       ; 3381 _ 66: 89. 50, 02
-        mov     eax, dword [ebp+10H]                    ; 3385 _ 8B. 45, 10
-        sar     eax, 16                                 ; 3388 _ C1. F8, 10
-        mov     edx, eax                                ; 338B _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 338D _ 8B. 45, 08
-        mov     byte [eax+4H], dl                       ; 3390 _ 88. 50, 04
-        mov     eax, dword [ebp+14H]                    ; 3393 _ 8B. 45, 14
-        mov     edx, eax                                ; 3396 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 3398 _ 8B. 45, 08
-        mov     byte [eax+5H], dl                       ; 339B _ 88. 50, 05
-        mov     eax, dword [ebp+0CH]                    ; 339E _ 8B. 45, 0C
-        shr     eax, 16                                 ; 33A1 _ C1. E8, 10
-        and     eax, 0FH                                ; 33A4 _ 83. E0, 0F
-        mov     edx, eax                                ; 33A7 _ 89. C2
-        mov     eax, dword [ebp+14H]                    ; 33A9 _ 8B. 45, 14
-        sar     eax, 8                                  ; 33AC _ C1. F8, 08
-        and     eax, 0FFFFFFF0H                         ; 33AF _ 83. E0, F0
-        or      eax, edx                                ; 33B2 _ 09. D0
-        mov     edx, eax                                ; 33B4 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 33B6 _ 8B. 45, 08
-        mov     byte [eax+6H], dl                       ; 33B9 _ 88. 50, 06
-        mov     eax, dword [ebp+10H]                    ; 33BC _ 8B. 45, 10
-        shr     eax, 24                                 ; 33BF _ C1. E8, 18
-        mov     edx, eax                                ; 33C2 _ 89. C2
-        mov     eax, dword [ebp+8H]                     ; 33C4 _ 8B. 45, 08
-        mov     byte [eax+7H], dl                       ; 33C7 _ 88. 50, 07
-        nop                                             ; 33CA _ 90
-        pop     ebp                                     ; 33CB _ 5D
-        ret                                             ; 33CC _ C3
+        push    ebp                                     ; 3355 _ 55
+        mov     ebp, esp                                ; 3356 _ 89. E5
+        cmp     dword [ebp+0CH], 1048575                ; 3358 _ 81. 7D, 0C, 000FFFFF
+        jbe     ?_174                                   ; 335F _ 76, 10
+        or      dword [ebp+14H], 8000H                  ; 3361 _ 81. 4D, 14, 00008000
+        mov     eax, dword [ebp+0CH]                    ; 3368 _ 8B. 45, 0C
+        shr     eax, 12                                 ; 336B _ C1. E8, 0C
+        mov     dword [ebp+0CH], eax                    ; 336E _ 89. 45, 0C
+?_174:  mov     eax, dword [ebp+0CH]                    ; 3371 _ 8B. 45, 0C
+        mov     edx, eax                                ; 3374 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 3376 _ 8B. 45, 08
+        mov     word [eax], dx                          ; 3379 _ 66: 89. 10
+        mov     eax, dword [ebp+10H]                    ; 337C _ 8B. 45, 10
+        mov     edx, eax                                ; 337F _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 3381 _ 8B. 45, 08
+        mov     word [eax+2H], dx                       ; 3384 _ 66: 89. 50, 02
+        mov     eax, dword [ebp+10H]                    ; 3388 _ 8B. 45, 10
+        sar     eax, 16                                 ; 338B _ C1. F8, 10
+        mov     edx, eax                                ; 338E _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 3390 _ 8B. 45, 08
+        mov     byte [eax+4H], dl                       ; 3393 _ 88. 50, 04
+        mov     eax, dword [ebp+14H]                    ; 3396 _ 8B. 45, 14
+        mov     edx, eax                                ; 3399 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 339B _ 8B. 45, 08
+        mov     byte [eax+5H], dl                       ; 339E _ 88. 50, 05
+        mov     eax, dword [ebp+0CH]                    ; 33A1 _ 8B. 45, 0C
+        shr     eax, 16                                 ; 33A4 _ C1. E8, 10
+        and     eax, 0FH                                ; 33A7 _ 83. E0, 0F
+        mov     edx, eax                                ; 33AA _ 89. C2
+        mov     eax, dword [ebp+14H]                    ; 33AC _ 8B. 45, 14
+        sar     eax, 8                                  ; 33AF _ C1. F8, 08
+        and     eax, 0FFFFFFF0H                         ; 33B2 _ 83. E0, F0
+        or      eax, edx                                ; 33B5 _ 09. D0
+        mov     edx, eax                                ; 33B7 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 33B9 _ 8B. 45, 08
+        mov     byte [eax+6H], dl                       ; 33BC _ 88. 50, 06
+        mov     eax, dword [ebp+10H]                    ; 33BF _ 8B. 45, 10
+        shr     eax, 24                                 ; 33C2 _ C1. E8, 18
+        mov     edx, eax                                ; 33C5 _ 89. C2
+        mov     eax, dword [ebp+8H]                     ; 33C7 _ 8B. 45, 08
+        mov     byte [eax+7H], dl                       ; 33CA _ 88. 50, 07
+        nop                                             ; 33CD _ 90
+        pop     ebp                                     ; 33CE _ 5D
+        ret                                             ; 33CF _ C3
 ; set_segmdesc End of function
 
 getTaskTimer:; Function begin
-        push    ebp                                     ; 33CD _ 55
-        mov     ebp, esp                                ; 33CE _ 89. E5
-        mov     eax, dword [task_timer]                 ; 33D0 _ A1, 000021C4(d)
-        pop     ebp                                     ; 33D5 _ 5D
-        ret                                             ; 33D6 _ C3
+        push    ebp                                     ; 33D0 _ 55
+        mov     ebp, esp                                ; 33D1 _ 89. E5
+        mov     eax, dword [task_timer]                 ; 33D3 _ A1, 000021C4(d)
+        pop     ebp                                     ; 33D8 _ 5D
+        ret                                             ; 33D9 _ C3
 ; getTaskTimer End of function
 
 init_task_level:; Function begin
-        push    ebp                                     ; 33D7 _ 55
-        mov     ebp, esp                                ; 33D8 _ 89. E5
-        sub     esp, 16                                 ; 33DA _ 83. EC, 10
-        mov     ecx, dword [taskctl]                    ; 33DD _ 8B. 0D, 000021C8(d)
-        mov     edx, dword [ebp+8H]                     ; 33E3 _ 8B. 55, 08
-        mov     eax, edx                                ; 33E6 _ 89. D0
-        shl     eax, 2                                  ; 33E8 _ C1. E0, 02
-        add     eax, edx                                ; 33EB _ 01. D0
-        shl     eax, 2                                  ; 33ED _ C1. E0, 02
-        add     eax, ecx                                ; 33F0 _ 01. C8
-        add     eax, 8                                  ; 33F2 _ 83. C0, 08
-        mov     dword [eax], 0                          ; 33F5 _ C7. 00, 00000000
-        mov     ecx, dword [taskctl]                    ; 33FB _ 8B. 0D, 000021C8(d)
-        mov     edx, dword [ebp+8H]                     ; 3401 _ 8B. 55, 08
-        mov     eax, edx                                ; 3404 _ 89. D0
-        shl     eax, 2                                  ; 3406 _ C1. E0, 02
-        add     eax, edx                                ; 3409 _ 01. D0
-        shl     eax, 2                                  ; 340B _ C1. E0, 02
-        add     eax, ecx                                ; 340E _ 01. C8
-        add     eax, 12                                 ; 3410 _ 83. C0, 0C
-        mov     dword [eax], 0                          ; 3413 _ C7. 00, 00000000
-        mov     dword [ebp-4H], 0                       ; 3419 _ C7. 45, FC, 00000000
-        jmp     ?_176                                   ; 3420 _ EB, 21
+        push    ebp                                     ; 33DA _ 55
+        mov     ebp, esp                                ; 33DB _ 89. E5
+        sub     esp, 16                                 ; 33DD _ 83. EC, 10
+        mov     ecx, dword [taskctl]                    ; 33E0 _ 8B. 0D, 000021C8(d)
+        mov     edx, dword [ebp+8H]                     ; 33E6 _ 8B. 55, 08
+        mov     eax, edx                                ; 33E9 _ 89. D0
+        shl     eax, 2                                  ; 33EB _ C1. E0, 02
+        add     eax, edx                                ; 33EE _ 01. D0
+        shl     eax, 2                                  ; 33F0 _ C1. E0, 02
+        add     eax, ecx                                ; 33F3 _ 01. C8
+        add     eax, 8                                  ; 33F5 _ 83. C0, 08
+        mov     dword [eax], 0                          ; 33F8 _ C7. 00, 00000000
+        mov     ecx, dword [taskctl]                    ; 33FE _ 8B. 0D, 000021C8(d)
+        mov     edx, dword [ebp+8H]                     ; 3404 _ 8B. 55, 08
+        mov     eax, edx                                ; 3407 _ 89. D0
+        shl     eax, 2                                  ; 3409 _ C1. E0, 02
+        add     eax, edx                                ; 340C _ 01. D0
+        shl     eax, 2                                  ; 340E _ C1. E0, 02
+        add     eax, ecx                                ; 3411 _ 01. C8
+        add     eax, 12                                 ; 3413 _ 83. C0, 0C
+        mov     dword [eax], 0                          ; 3416 _ C7. 00, 00000000
+        mov     dword [ebp-4H], 0                       ; 341C _ C7. 45, FC, 00000000
+        jmp     ?_176                                   ; 3423 _ EB, 21
 
-?_175:  mov     ecx, dword [taskctl]                    ; 3422 _ 8B. 0D, 000021C8(d)
-        mov     edx, dword [ebp-4H]                     ; 3428 _ 8B. 55, FC
-        mov     eax, edx                                ; 342B _ 89. D0
-        add     eax, eax                                ; 342D _ 01. C0
-        add     eax, edx                                ; 342F _ 01. D0
-        shl     eax, 3                                  ; 3431 _ C1. E0, 03
-        add     eax, ecx                                ; 3434 _ 01. C8
-        add     eax, 16                                 ; 3436 _ 83. C0, 10
-        mov     dword [eax], 0                          ; 3439 _ C7. 00, 00000000
-        add     dword [ebp-4H], 1                       ; 343F _ 83. 45, FC, 01
-?_176:  cmp     dword [ebp-4H], 2                       ; 3443 _ 83. 7D, FC, 02
-        jle     ?_175                                   ; 3447 _ 7E, D9
-        nop                                             ; 3449 _ 90
-        leave                                           ; 344A _ C9
-        ret                                             ; 344B _ C3
+?_175:  mov     ecx, dword [taskctl]                    ; 3425 _ 8B. 0D, 000021C8(d)
+        mov     edx, dword [ebp-4H]                     ; 342B _ 8B. 55, FC
+        mov     eax, edx                                ; 342E _ 89. D0
+        add     eax, eax                                ; 3430 _ 01. C0
+        add     eax, edx                                ; 3432 _ 01. D0
+        shl     eax, 3                                  ; 3434 _ C1. E0, 03
+        add     eax, ecx                                ; 3437 _ 01. C8
+        add     eax, 16                                 ; 3439 _ 83. C0, 10
+        mov     dword [eax], 0                          ; 343C _ C7. 00, 00000000
+        add     dword [ebp-4H], 1                       ; 3442 _ 83. 45, FC, 01
+?_176:  cmp     dword [ebp-4H], 2                       ; 3446 _ 83. 7D, FC, 02
+        jle     ?_175                                   ; 344A _ 7E, D9
+        nop                                             ; 344C _ 90
+        leave                                           ; 344D _ C9
+        ret                                             ; 344E _ C3
 ; init_task_level End of function
 
 task_init:; Function begin
-        push    ebp                                     ; 344C _ 55
-        mov     ebp, esp                                ; 344D _ 89. E5
-        sub     esp, 24                                 ; 344F _ 83. EC, 18
-        call    get_addr_gdt                            ; 3452 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-10H], eax                    ; 3457 _ 89. 45, F0
-        sub     esp, 8                                  ; 345A _ 83. EC, 08
-        push    668                                     ; 345D _ 68, 0000029C
-        push    dword [ebp+8H]                          ; 3462 _ FF. 75, 08
-        call    memman_alloc_4K                         ; 3465 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 346A _ 83. C4, 10
-        mov     dword [taskctl], eax                    ; 346D _ A3, 000021C8(d)
-        mov     dword [ebp-14H], 0                      ; 3472 _ C7. 45, EC, 00000000
-        jmp     ?_178                                   ; 3479 _ EB, 73
+        push    ebp                                     ; 344F _ 55
+        mov     ebp, esp                                ; 3450 _ 89. E5
+        sub     esp, 24                                 ; 3452 _ 83. EC, 18
+        call    get_addr_gdt                            ; 3455 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-10H], eax                    ; 345A _ 89. 45, F0
+        sub     esp, 8                                  ; 345D _ 83. EC, 08
+        push    668                                     ; 3460 _ 68, 0000029C
+        push    dword [ebp+8H]                          ; 3465 _ FF. 75, 08
+        call    memman_alloc_4K                         ; 3468 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 346D _ 83. C4, 10
+        mov     dword [taskctl], eax                    ; 3470 _ A3, 000021C8(d)
+        mov     dword [ebp-14H], 0                      ; 3475 _ C7. 45, EC, 00000000
+        jmp     ?_178                                   ; 347C _ EB, 73
 
-?_177:  mov     edx, dword [taskctl]                    ; 347B _ 8B. 15, 000021C8(d)
-        mov     eax, dword [ebp-14H]                    ; 3481 _ 8B. 45, EC
-        imul    eax, eax, 120                           ; 3484 _ 6B. C0, 78
-        add     eax, edx                                ; 3487 _ 01. D0
-        add     eax, 72                                 ; 3489 _ 83. C0, 48
-        mov     dword [eax], 0                          ; 348C _ C7. 00, 00000000
-        mov     eax, dword [ebp-14H]                    ; 3492 _ 8B. 45, EC
-        add     eax, 7                                  ; 3495 _ 83. C0, 07
-        mov     ecx, dword [taskctl]                    ; 3498 _ 8B. 0D, 000021C8(d)
-        lea     edx, [eax*8]                            ; 349E _ 8D. 14 C5, 00000000
-        mov     eax, dword [ebp-14H]                    ; 34A5 _ 8B. 45, EC
-        imul    eax, eax, 120                           ; 34A8 _ 6B. C0, 78
-        add     eax, ecx                                ; 34AB _ 01. C8
-        add     eax, 68                                 ; 34AD _ 83. C0, 44
-        mov     dword [eax], edx                        ; 34B0 _ 89. 10
-        mov     eax, dword [taskctl]                    ; 34B2 _ A1, 000021C8(d)
-        mov     edx, dword [ebp-14H]                    ; 34B7 _ 8B. 55, EC
-        imul    edx, edx, 120                           ; 34BA _ 6B. D2, 78
-        add     edx, 80                                 ; 34BD _ 83. C2, 50
-        add     eax, edx                                ; 34C0 _ 01. D0
-        add     eax, 4                                  ; 34C2 _ 83. C0, 04
-        mov     ecx, eax                                ; 34C5 _ 89. C1
-        mov     eax, dword [ebp-14H]                    ; 34C7 _ 8B. 45, EC
-        add     eax, 7                                  ; 34CA _ 83. C0, 07
-        lea     edx, [eax*8]                            ; 34CD _ 8D. 14 C5, 00000000
-        mov     eax, dword [ebp-10H]                    ; 34D4 _ 8B. 45, F0
-        add     eax, edx                                ; 34D7 _ 01. D0
-        push    137                                     ; 34D9 _ 68, 00000089
-        push    ecx                                     ; 34DE _ 51
-        push    103                                     ; 34DF _ 6A, 67
-        push    eax                                     ; 34E1 _ 50
-        call    set_segmdesc                            ; 34E2 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 34E7 _ 83. C4, 10
-        add     dword [ebp-14H], 1                      ; 34EA _ 83. 45, EC, 01
-?_178:  cmp     dword [ebp-14H], 4                      ; 34EE _ 83. 7D, EC, 04
-        jle     ?_177                                   ; 34F2 _ 7E, 87
-        call    task_alloc                              ; 34F4 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0CH], eax                    ; 34F9 _ 89. 45, F4
-        mov     eax, dword [ebp-0CH]                    ; 34FC _ 8B. 45, F4
-        mov     dword [eax+4H], 2                       ; 34FF _ C7. 40, 04, 00000002
-        mov     eax, dword [ebp-0CH]                    ; 3506 _ 8B. 45, F4
-        mov     dword [eax+8H], 100                     ; 3509 _ C7. 40, 08, 00000064
-        mov     eax, dword [ebp-0CH]                    ; 3510 _ 8B. 45, F4
-        mov     dword [eax+0CH], 0                      ; 3513 _ C7. 40, 0C, 00000000
-        sub     esp, 12                                 ; 351A _ 83. EC, 0C
-        push    dword [ebp-0CH]                         ; 351D _ FF. 75, F4
-        call    task_add                                ; 3520 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 3525 _ 83. C4, 10
-        call    task_switchsub                          ; 3528 _ E8, FFFFFFFC(rel)
-        mov     eax, dword [ebp-0CH]                    ; 352D _ 8B. 45, F4
-        mov     eax, dword [eax]                        ; 3530 _ 8B. 00
-        sub     esp, 12                                 ; 3532 _ 83. EC, 0C
-        push    eax                                     ; 3535 _ 50
-        call    load_tr                                 ; 3536 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 353B _ 83. C4, 10
-        call    timer_alloc                             ; 353E _ E8, FFFFFFFC(rel)
-        mov     dword [task_timer], eax                 ; 3543 _ A3, 000021C4(d)
-        mov     eax, dword [ebp-0CH]                    ; 3548 _ 8B. 45, F4
-        mov     eax, dword [eax+8H]                     ; 354B _ 8B. 40, 08
-        mov     edx, eax                                ; 354E _ 89. C2
-        mov     eax, dword [task_timer]                 ; 3550 _ A1, 000021C4(d)
-        sub     esp, 8                                  ; 3555 _ 83. EC, 08
-        push    edx                                     ; 3558 _ 52
-        push    eax                                     ; 3559 _ 50
-        call    timer_setTime                           ; 355A _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 355F _ 83. C4, 10
-        mov     eax, dword [ebp-0CH]                    ; 3562 _ 8B. 45, F4
-        leave                                           ; 3565 _ C9
-        ret                                             ; 3566 _ C3
+?_177:  mov     edx, dword [taskctl]                    ; 347E _ 8B. 15, 000021C8(d)
+        mov     eax, dword [ebp-14H]                    ; 3484 _ 8B. 45, EC
+        imul    eax, eax, 120                           ; 3487 _ 6B. C0, 78
+        add     eax, edx                                ; 348A _ 01. D0
+        add     eax, 72                                 ; 348C _ 83. C0, 48
+        mov     dword [eax], 0                          ; 348F _ C7. 00, 00000000
+        mov     eax, dword [ebp-14H]                    ; 3495 _ 8B. 45, EC
+        add     eax, 7                                  ; 3498 _ 83. C0, 07
+        mov     ecx, dword [taskctl]                    ; 349B _ 8B. 0D, 000021C8(d)
+        lea     edx, [eax*8]                            ; 34A1 _ 8D. 14 C5, 00000000
+        mov     eax, dword [ebp-14H]                    ; 34A8 _ 8B. 45, EC
+        imul    eax, eax, 120                           ; 34AB _ 6B. C0, 78
+        add     eax, ecx                                ; 34AE _ 01. C8
+        add     eax, 68                                 ; 34B0 _ 83. C0, 44
+        mov     dword [eax], edx                        ; 34B3 _ 89. 10
+        mov     eax, dword [taskctl]                    ; 34B5 _ A1, 000021C8(d)
+        mov     edx, dword [ebp-14H]                    ; 34BA _ 8B. 55, EC
+        imul    edx, edx, 120                           ; 34BD _ 6B. D2, 78
+        add     edx, 80                                 ; 34C0 _ 83. C2, 50
+        add     eax, edx                                ; 34C3 _ 01. D0
+        add     eax, 4                                  ; 34C5 _ 83. C0, 04
+        mov     ecx, eax                                ; 34C8 _ 89. C1
+        mov     eax, dword [ebp-14H]                    ; 34CA _ 8B. 45, EC
+        add     eax, 7                                  ; 34CD _ 83. C0, 07
+        lea     edx, [eax*8]                            ; 34D0 _ 8D. 14 C5, 00000000
+        mov     eax, dword [ebp-10H]                    ; 34D7 _ 8B. 45, F0
+        add     eax, edx                                ; 34DA _ 01. D0
+        push    137                                     ; 34DC _ 68, 00000089
+        push    ecx                                     ; 34E1 _ 51
+        push    103                                     ; 34E2 _ 6A, 67
+        push    eax                                     ; 34E4 _ 50
+        call    set_segmdesc                            ; 34E5 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 34EA _ 83. C4, 10
+        add     dword [ebp-14H], 1                      ; 34ED _ 83. 45, EC, 01
+?_178:  cmp     dword [ebp-14H], 4                      ; 34F1 _ 83. 7D, EC, 04
+        jle     ?_177                                   ; 34F5 _ 7E, 87
+        call    task_alloc                              ; 34F7 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0CH], eax                    ; 34FC _ 89. 45, F4
+        mov     eax, dword [ebp-0CH]                    ; 34FF _ 8B. 45, F4
+        mov     dword [eax+4H], 2                       ; 3502 _ C7. 40, 04, 00000002
+        mov     eax, dword [ebp-0CH]                    ; 3509 _ 8B. 45, F4
+        mov     dword [eax+8H], 100                     ; 350C _ C7. 40, 08, 00000064
+        mov     eax, dword [ebp-0CH]                    ; 3513 _ 8B. 45, F4
+        mov     dword [eax+0CH], 0                      ; 3516 _ C7. 40, 0C, 00000000
+        sub     esp, 12                                 ; 351D _ 83. EC, 0C
+        push    dword [ebp-0CH]                         ; 3520 _ FF. 75, F4
+        call    task_add                                ; 3523 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 3528 _ 83. C4, 10
+        call    task_switchsub                          ; 352B _ E8, FFFFFFFC(rel)
+        mov     eax, dword [ebp-0CH]                    ; 3530 _ 8B. 45, F4
+        mov     eax, dword [eax]                        ; 3533 _ 8B. 00
+        sub     esp, 12                                 ; 3535 _ 83. EC, 0C
+        push    eax                                     ; 3538 _ 50
+        call    load_tr                                 ; 3539 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 353E _ 83. C4, 10
+        call    timer_alloc                             ; 3541 _ E8, FFFFFFFC(rel)
+        mov     dword [task_timer], eax                 ; 3546 _ A3, 000021C4(d)
+        mov     eax, dword [ebp-0CH]                    ; 354B _ 8B. 45, F4
+        mov     eax, dword [eax+8H]                     ; 354E _ 8B. 40, 08
+        mov     edx, eax                                ; 3551 _ 89. C2
+        mov     eax, dword [task_timer]                 ; 3553 _ A1, 000021C4(d)
+        sub     esp, 8                                  ; 3558 _ 83. EC, 08
+        push    edx                                     ; 355B _ 52
+        push    eax                                     ; 355C _ 50
+        call    timer_setTime                           ; 355D _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 3562 _ 83. C4, 10
+        mov     eax, dword [ebp-0CH]                    ; 3565 _ 8B. 45, F4
+        leave                                           ; 3568 _ C9
+        ret                                             ; 3569 _ C3
 ; task_init End of function
 
 task_alloc:; Function begin
-        push    ebp                                     ; 3567 _ 55
-        mov     ebp, esp                                ; 3568 _ 89. E5
-        sub     esp, 16                                 ; 356A _ 83. EC, 10
-        mov     dword [ebp-8H], 0                       ; 356D _ C7. 45, F8, 00000000
-        jmp     ?_181                                   ; 3574 _ E9, 000000E1
+        push    ebp                                     ; 356A _ 55
+        mov     ebp, esp                                ; 356B _ 89. E5
+        sub     esp, 16                                 ; 356D _ 83. EC, 10
+        mov     dword [ebp-8H], 0                       ; 3570 _ C7. 45, F8, 00000000
+        jmp     ?_181                                   ; 3577 _ E9, 000000E1
 
-?_179:  mov     edx, dword [taskctl]                    ; 3579 _ 8B. 15, 000021C8(d)
-        mov     eax, dword [ebp-8H]                     ; 357F _ 8B. 45, F8
-        imul    eax, eax, 120                           ; 3582 _ 6B. C0, 78
-        add     eax, edx                                ; 3585 _ 01. D0
-        add     eax, 72                                 ; 3587 _ 83. C0, 48
-        mov     eax, dword [eax]                        ; 358A _ 8B. 00
-        test    eax, eax                                ; 358C _ 85. C0
-        jne     ?_180                                   ; 358E _ 0F 85, 000000C2
-        mov     eax, dword [taskctl]                    ; 3594 _ A1, 000021C8(d)
-        mov     edx, dword [ebp-8H]                     ; 3599 _ 8B. 55, F8
-        imul    edx, edx, 120                           ; 359C _ 6B. D2, 78
-        add     edx, 64                                 ; 359F _ 83. C2, 40
-        add     eax, edx                                ; 35A2 _ 01. D0
-        add     eax, 4                                  ; 35A4 _ 83. C0, 04
-        mov     dword [ebp-4H], eax                     ; 35A7 _ 89. 45, FC
-        mov     eax, dword [ebp-4H]                     ; 35AA _ 8B. 45, FC
-        mov     dword [eax+4H], 1                       ; 35AD _ C7. 40, 04, 00000001
-        mov     eax, dword [ebp-4H]                     ; 35B4 _ 8B. 45, FC
-        mov     dword [eax+34H], 514                    ; 35B7 _ C7. 40, 34, 00000202
-        mov     eax, dword [ebp-4H]                     ; 35BE _ 8B. 45, FC
-        mov     dword [eax+38H], 0                      ; 35C1 _ C7. 40, 38, 00000000
-        mov     eax, dword [ebp-4H]                     ; 35C8 _ 8B. 45, FC
-        mov     dword [eax+3CH], 0                      ; 35CB _ C7. 40, 3C, 00000000
-        mov     eax, dword [ebp-4H]                     ; 35D2 _ 8B. 45, FC
-        mov     dword [eax+40H], 0                      ; 35D5 _ C7. 40, 40, 00000000
-        mov     eax, dword [ebp-4H]                     ; 35DC _ 8B. 45, FC
-        mov     dword [eax+44H], 0                      ; 35DF _ C7. 40, 44, 00000000
-        mov     eax, dword [ebp-4H]                     ; 35E6 _ 8B. 45, FC
-        mov     dword [eax+4CH], 0                      ; 35E9 _ C7. 40, 4C, 00000000
-        mov     eax, dword [ebp-8H]                     ; 35F0 _ 8B. 45, F8
-        add     eax, 1                                  ; 35F3 _ 83. C0, 01
-        shl     eax, 9                                  ; 35F6 _ C1. E0, 09
-        mov     edx, eax                                ; 35F9 _ 89. C2
-        mov     eax, dword [ebp-4H]                     ; 35FB _ 8B. 45, FC
-        mov     dword [eax+48H], edx                    ; 35FE _ 89. 50, 48
-        mov     eax, dword [ebp-4H]                     ; 3601 _ 8B. 45, FC
-        mov     dword [eax+50H], 0                      ; 3604 _ C7. 40, 50, 00000000
-        mov     eax, dword [ebp-4H]                     ; 360B _ 8B. 45, FC
-        mov     dword [eax+54H], 0                      ; 360E _ C7. 40, 54, 00000000
-        mov     eax, dword [ebp-4H]                     ; 3615 _ 8B. 45, FC
-        mov     dword [eax+58H], 0                      ; 3618 _ C7. 40, 58, 00000000
-        mov     eax, dword [ebp-4H]                     ; 361F _ 8B. 45, FC
-        mov     dword [eax+64H], 0                      ; 3622 _ C7. 40, 64, 00000000
-        mov     eax, dword [ebp-4H]                     ; 3629 _ 8B. 45, FC
-        mov     dword [eax+68H], 0                      ; 362C _ C7. 40, 68, 00000000
-        mov     eax, dword [ebp-4H]                     ; 3633 _ 8B. 45, FC
-        mov     dword [eax+6CH], 0                      ; 3636 _ C7. 40, 6C, 00000000
-        mov     eax, dword [ebp-4H]                     ; 363D _ 8B. 45, FC
-        mov     dword [eax+70H], 0                      ; 3640 _ C7. 40, 70, 00000000
-        mov     eax, dword [ebp-4H]                     ; 3647 _ 8B. 45, FC
-        mov     dword [eax+74H], 1073741824             ; 364A _ C7. 40, 74, 40000000
-        mov     eax, dword [ebp-4H]                     ; 3651 _ 8B. 45, FC
-        jmp     ?_182                                   ; 3654 _ EB, 13
+?_179:  mov     edx, dword [taskctl]                    ; 357C _ 8B. 15, 000021C8(d)
+        mov     eax, dword [ebp-8H]                     ; 3582 _ 8B. 45, F8
+        imul    eax, eax, 120                           ; 3585 _ 6B. C0, 78
+        add     eax, edx                                ; 3588 _ 01. D0
+        add     eax, 72                                 ; 358A _ 83. C0, 48
+        mov     eax, dword [eax]                        ; 358D _ 8B. 00
+        test    eax, eax                                ; 358F _ 85. C0
+        jne     ?_180                                   ; 3591 _ 0F 85, 000000C2
+        mov     eax, dword [taskctl]                    ; 3597 _ A1, 000021C8(d)
+        mov     edx, dword [ebp-8H]                     ; 359C _ 8B. 55, F8
+        imul    edx, edx, 120                           ; 359F _ 6B. D2, 78
+        add     edx, 64                                 ; 35A2 _ 83. C2, 40
+        add     eax, edx                                ; 35A5 _ 01. D0
+        add     eax, 4                                  ; 35A7 _ 83. C0, 04
+        mov     dword [ebp-4H], eax                     ; 35AA _ 89. 45, FC
+        mov     eax, dword [ebp-4H]                     ; 35AD _ 8B. 45, FC
+        mov     dword [eax+4H], 1                       ; 35B0 _ C7. 40, 04, 00000001
+        mov     eax, dword [ebp-4H]                     ; 35B7 _ 8B. 45, FC
+        mov     dword [eax+34H], 514                    ; 35BA _ C7. 40, 34, 00000202
+        mov     eax, dword [ebp-4H]                     ; 35C1 _ 8B. 45, FC
+        mov     dword [eax+38H], 0                      ; 35C4 _ C7. 40, 38, 00000000
+        mov     eax, dword [ebp-4H]                     ; 35CB _ 8B. 45, FC
+        mov     dword [eax+3CH], 0                      ; 35CE _ C7. 40, 3C, 00000000
+        mov     eax, dword [ebp-4H]                     ; 35D5 _ 8B. 45, FC
+        mov     dword [eax+40H], 0                      ; 35D8 _ C7. 40, 40, 00000000
+        mov     eax, dword [ebp-4H]                     ; 35DF _ 8B. 45, FC
+        mov     dword [eax+44H], 0                      ; 35E2 _ C7. 40, 44, 00000000
+        mov     eax, dword [ebp-4H]                     ; 35E9 _ 8B. 45, FC
+        mov     dword [eax+4CH], 0                      ; 35EC _ C7. 40, 4C, 00000000
+        mov     eax, dword [ebp-8H]                     ; 35F3 _ 8B. 45, F8
+        add     eax, 1                                  ; 35F6 _ 83. C0, 01
+        shl     eax, 9                                  ; 35F9 _ C1. E0, 09
+        mov     edx, eax                                ; 35FC _ 89. C2
+        mov     eax, dword [ebp-4H]                     ; 35FE _ 8B. 45, FC
+        mov     dword [eax+48H], edx                    ; 3601 _ 89. 50, 48
+        mov     eax, dword [ebp-4H]                     ; 3604 _ 8B. 45, FC
+        mov     dword [eax+50H], 0                      ; 3607 _ C7. 40, 50, 00000000
+        mov     eax, dword [ebp-4H]                     ; 360E _ 8B. 45, FC
+        mov     dword [eax+54H], 0                      ; 3611 _ C7. 40, 54, 00000000
+        mov     eax, dword [ebp-4H]                     ; 3618 _ 8B. 45, FC
+        mov     dword [eax+58H], 0                      ; 361B _ C7. 40, 58, 00000000
+        mov     eax, dword [ebp-4H]                     ; 3622 _ 8B. 45, FC
+        mov     dword [eax+64H], 0                      ; 3625 _ C7. 40, 64, 00000000
+        mov     eax, dword [ebp-4H]                     ; 362C _ 8B. 45, FC
+        mov     dword [eax+68H], 0                      ; 362F _ C7. 40, 68, 00000000
+        mov     eax, dword [ebp-4H]                     ; 3636 _ 8B. 45, FC
+        mov     dword [eax+6CH], 0                      ; 3639 _ C7. 40, 6C, 00000000
+        mov     eax, dword [ebp-4H]                     ; 3640 _ 8B. 45, FC
+        mov     dword [eax+70H], 0                      ; 3643 _ C7. 40, 70, 00000000
+        mov     eax, dword [ebp-4H]                     ; 364A _ 8B. 45, FC
+        mov     dword [eax+74H], 1073741824             ; 364D _ C7. 40, 74, 40000000
+        mov     eax, dword [ebp-4H]                     ; 3654 _ 8B. 45, FC
+        jmp     ?_182                                   ; 3657 _ EB, 13
 
-?_180:  add     dword [ebp-8H], 1                       ; 3656 _ 83. 45, F8, 01
-?_181:  cmp     dword [ebp-8H], 4                       ; 365A _ 83. 7D, F8, 04
-        jle     ?_179                                   ; 365E _ 0F 8E, FFFFFF15
-        mov     eax, 0                                  ; 3664 _ B8, 00000000
-?_182:  leave                                           ; 3669 _ C9
-        ret                                             ; 366A _ C3
+?_180:  add     dword [ebp-8H], 1                       ; 3659 _ 83. 45, F8, 01
+?_181:  cmp     dword [ebp-8H], 4                       ; 365D _ 83. 7D, F8, 04
+        jle     ?_179                                   ; 3661 _ 0F 8E, FFFFFF15
+        mov     eax, 0                                  ; 3667 _ B8, 00000000
+?_182:  leave                                           ; 366C _ C9
+        ret                                             ; 366D _ C3
 ; task_alloc End of function
 
 task_run:; Function begin
-        push    ebp                                     ; 366B _ 55
-        mov     ebp, esp                                ; 366C _ 89. E5
-        sub     esp, 8                                  ; 366E _ 83. EC, 08
-        cmp     dword [ebp+0CH], 0                      ; 3671 _ 83. 7D, 0C, 00
-        jns     ?_183                                   ; 3675 _ 79, 09
-        mov     eax, dword [ebp+8H]                     ; 3677 _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 367A _ 8B. 40, 0C
-        mov     dword [ebp+0CH], eax                    ; 367D _ 89. 45, 0C
-?_183:  cmp     dword [ebp+10H], 0                      ; 3680 _ 83. 7D, 10, 00
-        jle     ?_184                                   ; 3684 _ 7E, 09
-        mov     eax, dword [ebp+8H]                     ; 3686 _ 8B. 45, 08
-        mov     edx, dword [ebp+10H]                    ; 3689 _ 8B. 55, 10
-        mov     dword [eax+8H], edx                     ; 368C _ 89. 50, 08
-?_184:  mov     eax, dword [ebp+8H]                     ; 368F _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 3692 _ 8B. 40, 04
-        cmp     eax, 2                                  ; 3695 _ 83. F8, 02
-        jnz     ?_185                                   ; 3698 _ 75, 19
-        mov     eax, dword [ebp+8H]                     ; 369A _ 8B. 45, 08
-        mov     eax, dword [eax+0CH]                    ; 369D _ 8B. 40, 0C
-        cmp     dword [ebp+0CH], eax                    ; 36A0 _ 39. 45, 0C
-        jz      ?_185                                   ; 36A3 _ 74, 0E
-        sub     esp, 12                                 ; 36A5 _ 83. EC, 0C
-        push    dword [ebp+8H]                          ; 36A8 _ FF. 75, 08
-        call    task_remove                             ; 36AB _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 36B0 _ 83. C4, 10
-?_185:  mov     eax, dword [ebp+8H]                     ; 36B3 _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 36B6 _ 8B. 40, 04
-        cmp     eax, 2                                  ; 36B9 _ 83. F8, 02
-        jz      ?_186                                   ; 36BC _ 74, 17
-        mov     eax, dword [ebp+8H]                     ; 36BE _ 8B. 45, 08
-        mov     edx, dword [ebp+0CH]                    ; 36C1 _ 8B. 55, 0C
-        mov     dword [eax+0CH], edx                    ; 36C4 _ 89. 50, 0C
-        sub     esp, 12                                 ; 36C7 _ 83. EC, 0C
-        push    dword [ebp+8H]                          ; 36CA _ FF. 75, 08
-        call    task_add                                ; 36CD _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 36D2 _ 83. C4, 10
-?_186:  mov     eax, dword [taskctl]                    ; 36D5 _ A1, 000021C8(d)
-        mov     dword [eax+4H], 1                       ; 36DA _ C7. 40, 04, 00000001
-        nop                                             ; 36E1 _ 90
-        leave                                           ; 36E2 _ C9
-        ret                                             ; 36E3 _ C3
+        push    ebp                                     ; 366E _ 55
+        mov     ebp, esp                                ; 366F _ 89. E5
+        sub     esp, 8                                  ; 3671 _ 83. EC, 08
+        cmp     dword [ebp+0CH], 0                      ; 3674 _ 83. 7D, 0C, 00
+        jns     ?_183                                   ; 3678 _ 79, 09
+        mov     eax, dword [ebp+8H]                     ; 367A _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 367D _ 8B. 40, 0C
+        mov     dword [ebp+0CH], eax                    ; 3680 _ 89. 45, 0C
+?_183:  cmp     dword [ebp+10H], 0                      ; 3683 _ 83. 7D, 10, 00
+        jle     ?_184                                   ; 3687 _ 7E, 09
+        mov     eax, dword [ebp+8H]                     ; 3689 _ 8B. 45, 08
+        mov     edx, dword [ebp+10H]                    ; 368C _ 8B. 55, 10
+        mov     dword [eax+8H], edx                     ; 368F _ 89. 50, 08
+?_184:  mov     eax, dword [ebp+8H]                     ; 3692 _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 3695 _ 8B. 40, 04
+        cmp     eax, 2                                  ; 3698 _ 83. F8, 02
+        jnz     ?_185                                   ; 369B _ 75, 19
+        mov     eax, dword [ebp+8H]                     ; 369D _ 8B. 45, 08
+        mov     eax, dword [eax+0CH]                    ; 36A0 _ 8B. 40, 0C
+        cmp     dword [ebp+0CH], eax                    ; 36A3 _ 39. 45, 0C
+        jz      ?_185                                   ; 36A6 _ 74, 0E
+        sub     esp, 12                                 ; 36A8 _ 83. EC, 0C
+        push    dword [ebp+8H]                          ; 36AB _ FF. 75, 08
+        call    task_remove                             ; 36AE _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 36B3 _ 83. C4, 10
+?_185:  mov     eax, dword [ebp+8H]                     ; 36B6 _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 36B9 _ 8B. 40, 04
+        cmp     eax, 2                                  ; 36BC _ 83. F8, 02
+        jz      ?_186                                   ; 36BF _ 74, 17
+        mov     eax, dword [ebp+8H]                     ; 36C1 _ 8B. 45, 08
+        mov     edx, dword [ebp+0CH]                    ; 36C4 _ 8B. 55, 0C
+        mov     dword [eax+0CH], edx                    ; 36C7 _ 89. 50, 0C
+        sub     esp, 12                                 ; 36CA _ 83. EC, 0C
+        push    dword [ebp+8H]                          ; 36CD _ FF. 75, 08
+        call    task_add                                ; 36D0 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 36D5 _ 83. C4, 10
+?_186:  mov     eax, dword [taskctl]                    ; 36D8 _ A1, 000021C8(d)
+        mov     dword [eax+4H], 1                       ; 36DD _ C7. 40, 04, 00000001
+        nop                                             ; 36E4 _ 90
+        leave                                           ; 36E5 _ C9
+        ret                                             ; 36E6 _ C3
 ; task_run End of function
 
 task_switch:; Function begin
-        push    ebp                                     ; 36E4 _ 55
-        mov     ebp, esp                                ; 36E5 _ 89. E5
-        sub     esp, 24                                 ; 36E7 _ 83. EC, 18
-        mov     ecx, dword [taskctl]                    ; 36EA _ 8B. 0D, 000021C8(d)
-        mov     eax, dword [taskctl]                    ; 36F0 _ A1, 000021C8(d)
-        mov     edx, dword [eax]                        ; 36F5 _ 8B. 10
-        mov     eax, edx                                ; 36F7 _ 89. D0
-        shl     eax, 2                                  ; 36F9 _ C1. E0, 02
-        add     eax, edx                                ; 36FC _ 01. D0
-        shl     eax, 2                                  ; 36FE _ C1. E0, 02
-        add     eax, ecx                                ; 3701 _ 01. C8
-        add     eax, 8                                  ; 3703 _ 83. C0, 08
-        mov     dword [ebp-14H], eax                    ; 3706 _ 89. 45, EC
-        mov     eax, dword [ebp-14H]                    ; 3709 _ 8B. 45, EC
-        mov     edx, dword [eax+4H]                     ; 370C _ 8B. 50, 04
-        mov     eax, dword [ebp-14H]                    ; 370F _ 8B. 45, EC
-        mov     eax, dword [eax+edx*4+8H]               ; 3712 _ 8B. 44 90, 08
-        mov     dword [ebp-10H], eax                    ; 3716 _ 89. 45, F0
-        mov     eax, dword [ebp-14H]                    ; 3719 _ 8B. 45, EC
-        mov     eax, dword [eax+4H]                     ; 371C _ 8B. 40, 04
-        lea     edx, [eax+1H]                           ; 371F _ 8D. 50, 01
-        mov     eax, dword [ebp-14H]                    ; 3722 _ 8B. 45, EC
-        mov     dword [eax+4H], edx                     ; 3725 _ 89. 50, 04
-        mov     eax, dword [ebp-14H]                    ; 3728 _ 8B. 45, EC
-        mov     edx, dword [eax+4H]                     ; 372B _ 8B. 50, 04
-        mov     eax, dword [ebp-14H]                    ; 372E _ 8B. 45, EC
-        mov     eax, dword [eax]                        ; 3731 _ 8B. 00
-        cmp     edx, eax                                ; 3733 _ 39. C2
-        jnz     ?_187                                   ; 3735 _ 75, 0A
-        mov     eax, dword [ebp-14H]                    ; 3737 _ 8B. 45, EC
-        mov     dword [eax+4H], 0                       ; 373A _ C7. 40, 04, 00000000
-?_187:  mov     eax, dword [taskctl]                    ; 3741 _ A1, 000021C8(d)
-        mov     eax, dword [eax+4H]                     ; 3746 _ 8B. 40, 04
-        test    eax, eax                                ; 3749 _ 85. C0
-        jz      ?_188                                   ; 374B _ 74, 24
-        call    task_switchsub                          ; 374D _ E8, FFFFFFFC(rel)
-        mov     ecx, dword [taskctl]                    ; 3752 _ 8B. 0D, 000021C8(d)
-        mov     eax, dword [taskctl]                    ; 3758 _ A1, 000021C8(d)
-        mov     edx, dword [eax]                        ; 375D _ 8B. 10
-        mov     eax, edx                                ; 375F _ 89. D0
-        shl     eax, 2                                  ; 3761 _ C1. E0, 02
-        add     eax, edx                                ; 3764 _ 01. D0
-        shl     eax, 2                                  ; 3766 _ C1. E0, 02
-        add     eax, ecx                                ; 3769 _ 01. C8
-        add     eax, 8                                  ; 376B _ 83. C0, 08
-        mov     dword [ebp-14H], eax                    ; 376E _ 89. 45, EC
-?_188:  mov     eax, dword [ebp-14H]                    ; 3771 _ 8B. 45, EC
-        mov     edx, dword [eax+4H]                     ; 3774 _ 8B. 50, 04
-        mov     eax, dword [ebp-14H]                    ; 3777 _ 8B. 45, EC
-        mov     eax, dword [eax+edx*4+8H]               ; 377A _ 8B. 44 90, 08
-        mov     dword [ebp-0CH], eax                    ; 377E _ 89. 45, F4
-        mov     eax, dword [ebp-0CH]                    ; 3781 _ 8B. 45, F4
-        mov     eax, dword [eax+8H]                     ; 3784 _ 8B. 40, 08
-        mov     edx, eax                                ; 3787 _ 89. C2
-        mov     eax, dword [task_timer]                 ; 3789 _ A1, 000021C4(d)
-        sub     esp, 8                                  ; 378E _ 83. EC, 08
-        push    edx                                     ; 3791 _ 52
-        push    eax                                     ; 3792 _ 50
-        call    timer_setTime                           ; 3793 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 3798 _ 83. C4, 10
-        mov     eax, dword [ebp-0CH]                    ; 379B _ 8B. 45, F4
-        cmp     eax, dword [ebp-10H]                    ; 379E _ 3B. 45, F0
-        jz      ?_189                                   ; 37A1 _ 74, 1A
-        cmp     dword [ebp-0CH], 0                      ; 37A3 _ 83. 7D, F4, 00
-        jz      ?_189                                   ; 37A7 _ 74, 14
-        mov     eax, dword [ebp-0CH]                    ; 37A9 _ 8B. 45, F4
-        mov     eax, dword [eax]                        ; 37AC _ 8B. 00
-        sub     esp, 8                                  ; 37AE _ 83. EC, 08
-        push    eax                                     ; 37B1 _ 50
-        push    0                                       ; 37B2 _ 6A, 00
-        call    farjmp                                  ; 37B4 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 37B9 _ 83. C4, 10
-        nop                                             ; 37BC _ 90
-?_189:  nop                                             ; 37BD _ 90
-        leave                                           ; 37BE _ C9
-        ret                                             ; 37BF _ C3
+        push    ebp                                     ; 36E7 _ 55
+        mov     ebp, esp                                ; 36E8 _ 89. E5
+        sub     esp, 24                                 ; 36EA _ 83. EC, 18
+        mov     ecx, dword [taskctl]                    ; 36ED _ 8B. 0D, 000021C8(d)
+        mov     eax, dword [taskctl]                    ; 36F3 _ A1, 000021C8(d)
+        mov     edx, dword [eax]                        ; 36F8 _ 8B. 10
+        mov     eax, edx                                ; 36FA _ 89. D0
+        shl     eax, 2                                  ; 36FC _ C1. E0, 02
+        add     eax, edx                                ; 36FF _ 01. D0
+        shl     eax, 2                                  ; 3701 _ C1. E0, 02
+        add     eax, ecx                                ; 3704 _ 01. C8
+        add     eax, 8                                  ; 3706 _ 83. C0, 08
+        mov     dword [ebp-14H], eax                    ; 3709 _ 89. 45, EC
+        mov     eax, dword [ebp-14H]                    ; 370C _ 8B. 45, EC
+        mov     edx, dword [eax+4H]                     ; 370F _ 8B. 50, 04
+        mov     eax, dword [ebp-14H]                    ; 3712 _ 8B. 45, EC
+        mov     eax, dword [eax+edx*4+8H]               ; 3715 _ 8B. 44 90, 08
+        mov     dword [ebp-10H], eax                    ; 3719 _ 89. 45, F0
+        mov     eax, dword [ebp-14H]                    ; 371C _ 8B. 45, EC
+        mov     eax, dword [eax+4H]                     ; 371F _ 8B. 40, 04
+        lea     edx, [eax+1H]                           ; 3722 _ 8D. 50, 01
+        mov     eax, dword [ebp-14H]                    ; 3725 _ 8B. 45, EC
+        mov     dword [eax+4H], edx                     ; 3728 _ 89. 50, 04
+        mov     eax, dword [ebp-14H]                    ; 372B _ 8B. 45, EC
+        mov     edx, dword [eax+4H]                     ; 372E _ 8B. 50, 04
+        mov     eax, dword [ebp-14H]                    ; 3731 _ 8B. 45, EC
+        mov     eax, dword [eax]                        ; 3734 _ 8B. 00
+        cmp     edx, eax                                ; 3736 _ 39. C2
+        jnz     ?_187                                   ; 3738 _ 75, 0A
+        mov     eax, dword [ebp-14H]                    ; 373A _ 8B. 45, EC
+        mov     dword [eax+4H], 0                       ; 373D _ C7. 40, 04, 00000000
+?_187:  mov     eax, dword [taskctl]                    ; 3744 _ A1, 000021C8(d)
+        mov     eax, dword [eax+4H]                     ; 3749 _ 8B. 40, 04
+        test    eax, eax                                ; 374C _ 85. C0
+        jz      ?_188                                   ; 374E _ 74, 24
+        call    task_switchsub                          ; 3750 _ E8, FFFFFFFC(rel)
+        mov     ecx, dword [taskctl]                    ; 3755 _ 8B. 0D, 000021C8(d)
+        mov     eax, dword [taskctl]                    ; 375B _ A1, 000021C8(d)
+        mov     edx, dword [eax]                        ; 3760 _ 8B. 10
+        mov     eax, edx                                ; 3762 _ 89. D0
+        shl     eax, 2                                  ; 3764 _ C1. E0, 02
+        add     eax, edx                                ; 3767 _ 01. D0
+        shl     eax, 2                                  ; 3769 _ C1. E0, 02
+        add     eax, ecx                                ; 376C _ 01. C8
+        add     eax, 8                                  ; 376E _ 83. C0, 08
+        mov     dword [ebp-14H], eax                    ; 3771 _ 89. 45, EC
+?_188:  mov     eax, dword [ebp-14H]                    ; 3774 _ 8B. 45, EC
+        mov     edx, dword [eax+4H]                     ; 3777 _ 8B. 50, 04
+        mov     eax, dword [ebp-14H]                    ; 377A _ 8B. 45, EC
+        mov     eax, dword [eax+edx*4+8H]               ; 377D _ 8B. 44 90, 08
+        mov     dword [ebp-0CH], eax                    ; 3781 _ 89. 45, F4
+        mov     eax, dword [ebp-0CH]                    ; 3784 _ 8B. 45, F4
+        mov     eax, dword [eax+8H]                     ; 3787 _ 8B. 40, 08
+        mov     edx, eax                                ; 378A _ 89. C2
+        mov     eax, dword [task_timer]                 ; 378C _ A1, 000021C4(d)
+        sub     esp, 8                                  ; 3791 _ 83. EC, 08
+        push    edx                                     ; 3794 _ 52
+        push    eax                                     ; 3795 _ 50
+        call    timer_setTime                           ; 3796 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 379B _ 83. C4, 10
+        mov     eax, dword [ebp-0CH]                    ; 379E _ 8B. 45, F4
+        cmp     eax, dword [ebp-10H]                    ; 37A1 _ 3B. 45, F0
+        jz      ?_189                                   ; 37A4 _ 74, 1A
+        cmp     dword [ebp-0CH], 0                      ; 37A6 _ 83. 7D, F4, 00
+        jz      ?_189                                   ; 37AA _ 74, 14
+        mov     eax, dword [ebp-0CH]                    ; 37AC _ 8B. 45, F4
+        mov     eax, dword [eax]                        ; 37AF _ 8B. 00
+        sub     esp, 8                                  ; 37B1 _ 83. EC, 08
+        push    eax                                     ; 37B4 _ 50
+        push    0                                       ; 37B5 _ 6A, 00
+        call    farjmp                                  ; 37B7 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 37BC _ 83. C4, 10
+        nop                                             ; 37BF _ 90
+?_189:  nop                                             ; 37C0 _ 90
+        leave                                           ; 37C1 _ C9
+        ret                                             ; 37C2 _ C3
 ; task_switch End of function
 
 task_sleep:; Function begin
-        push    ebp                                     ; 37C0 _ 55
-        mov     ebp, esp                                ; 37C1 _ 89. E5
-        sub     esp, 24                                 ; 37C3 _ 83. EC, 18
-        mov     dword [ebp-0CH], 0                      ; 37C6 _ C7. 45, F4, 00000000
-        mov     byte [ebp-0DH], 0                       ; 37CD _ C6. 45, F3, 00
-        mov     eax, dword [ebp+8H]                     ; 37D1 _ 8B. 45, 08
-        mov     eax, dword [eax+4H]                     ; 37D4 _ 8B. 40, 04
-        cmp     eax, 2                                  ; 37D7 _ 83. F8, 02
-        jnz     ?_190                                   ; 37DA _ 75, 4C
-        call    task_now                                ; 37DC _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0CH], eax                    ; 37E1 _ 89. 45, F4
-        sub     esp, 12                                 ; 37E4 _ 83. EC, 0C
-        push    dword [ebp+8H]                          ; 37E7 _ FF. 75, 08
-        call    task_remove                             ; 37EA _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 37EF _ 83. C4, 10
-        mov     byte [ebp-0DH], 1                       ; 37F2 _ C6. 45, F3, 01
-        mov     eax, dword [ebp+8H]                     ; 37F6 _ 8B. 45, 08
-        cmp     eax, dword [ebp-0CH]                    ; 37F9 _ 3B. 45, F4
-        jnz     ?_190                                   ; 37FC _ 75, 2A
-        call    task_switchsub                          ; 37FE _ E8, FFFFFFFC(rel)
-        call    task_now                                ; 3803 _ E8, FFFFFFFC(rel)
-        mov     dword [ebp-0CH], eax                    ; 3808 _ 89. 45, F4
-        mov     byte [ebp-0DH], 2                       ; 380B _ C6. 45, F3, 02
-        cmp     dword [ebp-0CH], 0                      ; 380F _ 83. 7D, F4, 00
-        jz      ?_190                                   ; 3813 _ 74, 13
-        mov     eax, dword [ebp-0CH]                    ; 3815 _ 8B. 45, F4
-        mov     eax, dword [eax]                        ; 3818 _ 8B. 00
-        sub     esp, 8                                  ; 381A _ 83. EC, 08
-        push    eax                                     ; 381D _ 50
-        push    0                                       ; 381E _ 6A, 00
-        call    farjmp                                  ; 3820 _ E8, FFFFFFFC(rel)
-        add     esp, 16                                 ; 3825 _ 83. C4, 10
-?_190:  movsx   eax, byte [ebp-0DH]                     ; 3828 _ 0F BE. 45, F3
-        leave                                           ; 382C _ C9
-        ret                                             ; 382D _ C3
+        push    ebp                                     ; 37C3 _ 55
+        mov     ebp, esp                                ; 37C4 _ 89. E5
+        sub     esp, 24                                 ; 37C6 _ 83. EC, 18
+        mov     dword [ebp-0CH], 0                      ; 37C9 _ C7. 45, F4, 00000000
+        mov     byte [ebp-0DH], 0                       ; 37D0 _ C6. 45, F3, 00
+        mov     eax, dword [ebp+8H]                     ; 37D4 _ 8B. 45, 08
+        mov     eax, dword [eax+4H]                     ; 37D7 _ 8B. 40, 04
+        cmp     eax, 2                                  ; 37DA _ 83. F8, 02
+        jnz     ?_190                                   ; 37DD _ 75, 4C
+        call    task_now                                ; 37DF _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0CH], eax                    ; 37E4 _ 89. 45, F4
+        sub     esp, 12                                 ; 37E7 _ 83. EC, 0C
+        push    dword [ebp+8H]                          ; 37EA _ FF. 75, 08
+        call    task_remove                             ; 37ED _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 37F2 _ 83. C4, 10
+        mov     byte [ebp-0DH], 1                       ; 37F5 _ C6. 45, F3, 01
+        mov     eax, dword [ebp+8H]                     ; 37F9 _ 8B. 45, 08
+        cmp     eax, dword [ebp-0CH]                    ; 37FC _ 3B. 45, F4
+        jnz     ?_190                                   ; 37FF _ 75, 2A
+        call    task_switchsub                          ; 3801 _ E8, FFFFFFFC(rel)
+        call    task_now                                ; 3806 _ E8, FFFFFFFC(rel)
+        mov     dword [ebp-0CH], eax                    ; 380B _ 89. 45, F4
+        mov     byte [ebp-0DH], 2                       ; 380E _ C6. 45, F3, 02
+        cmp     dword [ebp-0CH], 0                      ; 3812 _ 83. 7D, F4, 00
+        jz      ?_190                                   ; 3816 _ 74, 13
+        mov     eax, dword [ebp-0CH]                    ; 3818 _ 8B. 45, F4
+        mov     eax, dword [eax]                        ; 381B _ 8B. 00
+        sub     esp, 8                                  ; 381D _ 83. EC, 08
+        push    eax                                     ; 3820 _ 50
+        push    0                                       ; 3821 _ 6A, 00
+        call    farjmp                                  ; 3823 _ E8, FFFFFFFC(rel)
+        add     esp, 16                                 ; 3828 _ 83. C4, 10
+?_190:  movsx   eax, byte [ebp-0DH]                     ; 382B _ 0F BE. 45, F3
+        leave                                           ; 382F _ C9
+        ret                                             ; 3830 _ C3
 ; task_sleep End of function
 
 task_now:; Function begin
-        push    ebp                                     ; 382E _ 55
-        mov     ebp, esp                                ; 382F _ 89. E5
-        sub     esp, 16                                 ; 3831 _ 83. EC, 10
-        mov     ecx, dword [taskctl]                    ; 3834 _ 8B. 0D, 000021C8(d)
-        mov     eax, dword [taskctl]                    ; 383A _ A1, 000021C8(d)
-        mov     edx, dword [eax]                        ; 383F _ 8B. 10
-        mov     eax, edx                                ; 3841 _ 89. D0
-        shl     eax, 2                                  ; 3843 _ C1. E0, 02
-        add     eax, edx                                ; 3846 _ 01. D0
-        shl     eax, 2                                  ; 3848 _ C1. E0, 02
-        add     eax, ecx                                ; 384B _ 01. C8
-        add     eax, 8                                  ; 384D _ 83. C0, 08
-        mov     dword [ebp-4H], eax                     ; 3850 _ 89. 45, FC
-        mov     eax, dword [ebp-4H]                     ; 3853 _ 8B. 45, FC
-        mov     edx, dword [eax+4H]                     ; 3856 _ 8B. 50, 04
-        mov     eax, dword [ebp-4H]                     ; 3859 _ 8B. 45, FC
-        mov     eax, dword [eax+edx*4+8H]               ; 385C _ 8B. 44 90, 08
-        leave                                           ; 3860 _ C9
-        ret                                             ; 3861 _ C3
+        push    ebp                                     ; 3831 _ 55
+        mov     ebp, esp                                ; 3832 _ 89. E5
+        sub     esp, 16                                 ; 3834 _ 83. EC, 10
+        mov     ecx, dword [taskctl]                    ; 3837 _ 8B. 0D, 000021C8(d)
+        mov     eax, dword [taskctl]                    ; 383D _ A1, 000021C8(d)
+        mov     edx, dword [eax]                        ; 3842 _ 8B. 10
+        mov     eax, edx                                ; 3844 _ 89. D0
+        shl     eax, 2                                  ; 3846 _ C1. E0, 02
+        add     eax, edx                                ; 3849 _ 01. D0
+        shl     eax, 2                                  ; 384B _ C1. E0, 02
+        add     eax, ecx                                ; 384E _ 01. C8
+        add     eax, 8                                  ; 3850 _ 83. C0, 08
+        mov     dword [ebp-4H], eax                     ; 3853 _ 89. 45, FC
+        mov     eax, dword [ebp-4H]                     ; 3856 _ 8B. 45, FC
+        mov     edx, dword [eax+4H]                     ; 3859 _ 8B. 50, 04
+        mov     eax, dword [ebp-4H]                     ; 385C _ 8B. 45, FC
+        mov     eax, dword [eax+edx*4+8H]               ; 385F _ 8B. 44 90, 08
+        leave                                           ; 3863 _ C9
+        ret                                             ; 3864 _ C3
 ; task_now End of function
 
 task_add:; Function begin
-        push    ebp                                     ; 3862 _ 55
-        mov     ebp, esp                                ; 3863 _ 89. E5
-        sub     esp, 16                                 ; 3865 _ 83. EC, 10
-        mov     ecx, dword [taskctl]                    ; 3868 _ 8B. 0D, 000021C8(d)
-        mov     eax, dword [ebp+8H]                     ; 386E _ 8B. 45, 08
-        mov     edx, dword [eax+0CH]                    ; 3871 _ 8B. 50, 0C
-        mov     eax, edx                                ; 3874 _ 89. D0
-        shl     eax, 2                                  ; 3876 _ C1. E0, 02
-        add     eax, edx                                ; 3879 _ 01. D0
-        shl     eax, 2                                  ; 387B _ C1. E0, 02
-        add     eax, ecx                                ; 387E _ 01. C8
-        add     eax, 8                                  ; 3880 _ 83. C0, 08
-        mov     dword [ebp-4H], eax                     ; 3883 _ 89. 45, FC
-        mov     eax, dword [ebp-4H]                     ; 3886 _ 8B. 45, FC
-        mov     edx, dword [eax]                        ; 3889 _ 8B. 10
-        mov     eax, dword [ebp-4H]                     ; 388B _ 8B. 45, FC
-        mov     ecx, dword [ebp+8H]                     ; 388E _ 8B. 4D, 08
-        mov     dword [eax+edx*4+8H], ecx               ; 3891 _ 89. 4C 90, 08
-        mov     eax, dword [ebp-4H]                     ; 3895 _ 8B. 45, FC
-        mov     eax, dword [eax]                        ; 3898 _ 8B. 00
-        lea     edx, [eax+1H]                           ; 389A _ 8D. 50, 01
-        mov     eax, dword [ebp-4H]                     ; 389D _ 8B. 45, FC
-        mov     dword [eax], edx                        ; 38A0 _ 89. 10
-        mov     eax, dword [ebp+8H]                     ; 38A2 _ 8B. 45, 08
-        mov     dword [eax+4H], 2                       ; 38A5 _ C7. 40, 04, 00000002
-        nop                                             ; 38AC _ 90
-        leave                                           ; 38AD _ C9
-        ret                                             ; 38AE _ C3
+        push    ebp                                     ; 3865 _ 55
+        mov     ebp, esp                                ; 3866 _ 89. E5
+        sub     esp, 16                                 ; 3868 _ 83. EC, 10
+        mov     ecx, dword [taskctl]                    ; 386B _ 8B. 0D, 000021C8(d)
+        mov     eax, dword [ebp+8H]                     ; 3871 _ 8B. 45, 08
+        mov     edx, dword [eax+0CH]                    ; 3874 _ 8B. 50, 0C
+        mov     eax, edx                                ; 3877 _ 89. D0
+        shl     eax, 2                                  ; 3879 _ C1. E0, 02
+        add     eax, edx                                ; 387C _ 01. D0
+        shl     eax, 2                                  ; 387E _ C1. E0, 02
+        add     eax, ecx                                ; 3881 _ 01. C8
+        add     eax, 8                                  ; 3883 _ 83. C0, 08
+        mov     dword [ebp-4H], eax                     ; 3886 _ 89. 45, FC
+        mov     eax, dword [ebp-4H]                     ; 3889 _ 8B. 45, FC
+        mov     edx, dword [eax]                        ; 388C _ 8B. 10
+        mov     eax, dword [ebp-4H]                     ; 388E _ 8B. 45, FC
+        mov     ecx, dword [ebp+8H]                     ; 3891 _ 8B. 4D, 08
+        mov     dword [eax+edx*4+8H], ecx               ; 3894 _ 89. 4C 90, 08
+        mov     eax, dword [ebp-4H]                     ; 3898 _ 8B. 45, FC
+        mov     eax, dword [eax]                        ; 389B _ 8B. 00
+        lea     edx, [eax+1H]                           ; 389D _ 8D. 50, 01
+        mov     eax, dword [ebp-4H]                     ; 38A0 _ 8B. 45, FC
+        mov     dword [eax], edx                        ; 38A3 _ 89. 10
+        mov     eax, dword [ebp+8H]                     ; 38A5 _ 8B. 45, 08
+        mov     dword [eax+4H], 2                       ; 38A8 _ C7. 40, 04, 00000002
+        nop                                             ; 38AF _ 90
+        leave                                           ; 38B0 _ C9
+        ret                                             ; 38B1 _ C3
 ; task_add End of function
 
 task_remove:; Function begin
-        push    ebp                                     ; 38AF _ 55
-        mov     ebp, esp                                ; 38B0 _ 89. E5
-        sub     esp, 16                                 ; 38B2 _ 83. EC, 10
-        mov     ecx, dword [taskctl]                    ; 38B5 _ 8B. 0D, 000021C8(d)
-        mov     eax, dword [ebp+8H]                     ; 38BB _ 8B. 45, 08
-        mov     edx, dword [eax+0CH]                    ; 38BE _ 8B. 50, 0C
-        mov     eax, edx                                ; 38C1 _ 89. D0
-        shl     eax, 2                                  ; 38C3 _ C1. E0, 02
-        add     eax, edx                                ; 38C6 _ 01. D0
-        shl     eax, 2                                  ; 38C8 _ C1. E0, 02
-        add     eax, ecx                                ; 38CB _ 01. C8
-        add     eax, 8                                  ; 38CD _ 83. C0, 08
-        mov     dword [ebp-4H], eax                     ; 38D0 _ 89. 45, FC
-        mov     dword [ebp-8H], 0                       ; 38D3 _ C7. 45, F8, 00000000
-        jmp     ?_193                                   ; 38DA _ EB, 23
+        push    ebp                                     ; 38B2 _ 55
+        mov     ebp, esp                                ; 38B3 _ 89. E5
+        sub     esp, 16                                 ; 38B5 _ 83. EC, 10
+        mov     ecx, dword [taskctl]                    ; 38B8 _ 8B. 0D, 000021C8(d)
+        mov     eax, dword [ebp+8H]                     ; 38BE _ 8B. 45, 08
+        mov     edx, dword [eax+0CH]                    ; 38C1 _ 8B. 50, 0C
+        mov     eax, edx                                ; 38C4 _ 89. D0
+        shl     eax, 2                                  ; 38C6 _ C1. E0, 02
+        add     eax, edx                                ; 38C9 _ 01. D0
+        shl     eax, 2                                  ; 38CB _ C1. E0, 02
+        add     eax, ecx                                ; 38CE _ 01. C8
+        add     eax, 8                                  ; 38D0 _ 83. C0, 08
+        mov     dword [ebp-4H], eax                     ; 38D3 _ 89. 45, FC
+        mov     dword [ebp-8H], 0                       ; 38D6 _ C7. 45, F8, 00000000
+        jmp     ?_193                                   ; 38DD _ EB, 23
 
-?_191:  mov     eax, dword [ebp-4H]                     ; 38DC _ 8B. 45, FC
-        mov     edx, dword [ebp-8H]                     ; 38DF _ 8B. 55, F8
-        mov     eax, dword [eax+edx*4+8H]               ; 38E2 _ 8B. 44 90, 08
-        cmp     dword [ebp+8H], eax                     ; 38E6 _ 39. 45, 08
-        jnz     ?_192                                   ; 38E9 _ 75, 10
-        mov     eax, dword [ebp-4H]                     ; 38EB _ 8B. 45, FC
-        mov     edx, dword [ebp-8H]                     ; 38EE _ 8B. 55, F8
-        mov     dword [eax+edx*4+8H], 0                 ; 38F1 _ C7. 44 90, 08, 00000000
-        jmp     ?_194                                   ; 38F9 _ EB, 0E
+?_191:  mov     eax, dword [ebp-4H]                     ; 38DF _ 8B. 45, FC
+        mov     edx, dword [ebp-8H]                     ; 38E2 _ 8B. 55, F8
+        mov     eax, dword [eax+edx*4+8H]               ; 38E5 _ 8B. 44 90, 08
+        cmp     dword [ebp+8H], eax                     ; 38E9 _ 39. 45, 08
+        jnz     ?_192                                   ; 38EC _ 75, 10
+        mov     eax, dword [ebp-4H]                     ; 38EE _ 8B. 45, FC
+        mov     edx, dword [ebp-8H]                     ; 38F1 _ 8B. 55, F8
+        mov     dword [eax+edx*4+8H], 0                 ; 38F4 _ C7. 44 90, 08, 00000000
+        jmp     ?_194                                   ; 38FC _ EB, 0E
 
-?_192:  add     dword [ebp-8H], 1                       ; 38FB _ 83. 45, F8, 01
-?_193:  mov     eax, dword [ebp-4H]                     ; 38FF _ 8B. 45, FC
-        mov     eax, dword [eax]                        ; 3902 _ 8B. 00
-        cmp     dword [ebp-8H], eax                     ; 3904 _ 39. 45, F8
-        jl      ?_191                                   ; 3907 _ 7C, D3
-?_194:  mov     eax, dword [ebp-4H]                     ; 3909 _ 8B. 45, FC
-        mov     eax, dword [eax]                        ; 390C _ 8B. 00
-        lea     edx, [eax-1H]                           ; 390E _ 8D. 50, FF
-        mov     eax, dword [ebp-4H]                     ; 3911 _ 8B. 45, FC
-        mov     dword [eax], edx                        ; 3914 _ 89. 10
-        mov     eax, dword [ebp-4H]                     ; 3916 _ 8B. 45, FC
-        mov     eax, dword [eax+4H]                     ; 3919 _ 8B. 40, 04
-        cmp     dword [ebp-8H], eax                     ; 391C _ 39. 45, F8
-        jge     ?_195                                   ; 391F _ 7D, 0F
-        mov     eax, dword [ebp-4H]                     ; 3921 _ 8B. 45, FC
-        mov     eax, dword [eax+4H]                     ; 3924 _ 8B. 40, 04
-        lea     edx, [eax-1H]                           ; 3927 _ 8D. 50, FF
-        mov     eax, dword [ebp-4H]                     ; 392A _ 8B. 45, FC
-        mov     dword [eax+4H], edx                     ; 392D _ 89. 50, 04
-?_195:  mov     eax, dword [ebp-4H]                     ; 3930 _ 8B. 45, FC
-        mov     edx, dword [eax+4H]                     ; 3933 _ 8B. 50, 04
-        mov     eax, dword [ebp-4H]                     ; 3936 _ 8B. 45, FC
-        mov     eax, dword [eax]                        ; 3939 _ 8B. 00
-        cmp     edx, eax                                ; 393B _ 39. C2
-        jl      ?_196                                   ; 393D _ 7C, 0A
-        mov     eax, dword [ebp-4H]                     ; 393F _ 8B. 45, FC
-        mov     dword [eax+4H], 0                       ; 3942 _ C7. 40, 04, 00000000
-?_196:  mov     eax, dword [ebp+8H]                     ; 3949 _ 8B. 45, 08
-        mov     dword [eax+4H], 1                       ; 394C _ C7. 40, 04, 00000001
-        jmp     ?_198                                   ; 3953 _ EB, 1B
+?_192:  add     dword [ebp-8H], 1                       ; 38FE _ 83. 45, F8, 01
+?_193:  mov     eax, dword [ebp-4H]                     ; 3902 _ 8B. 45, FC
+        mov     eax, dword [eax]                        ; 3905 _ 8B. 00
+        cmp     dword [ebp-8H], eax                     ; 3907 _ 39. 45, F8
+        jl      ?_191                                   ; 390A _ 7C, D3
+?_194:  mov     eax, dword [ebp-4H]                     ; 390C _ 8B. 45, FC
+        mov     eax, dword [eax]                        ; 390F _ 8B. 00
+        lea     edx, [eax-1H]                           ; 3911 _ 8D. 50, FF
+        mov     eax, dword [ebp-4H]                     ; 3914 _ 8B. 45, FC
+        mov     dword [eax], edx                        ; 3917 _ 89. 10
+        mov     eax, dword [ebp-4H]                     ; 3919 _ 8B. 45, FC
+        mov     eax, dword [eax+4H]                     ; 391C _ 8B. 40, 04
+        cmp     dword [ebp-8H], eax                     ; 391F _ 39. 45, F8
+        jge     ?_195                                   ; 3922 _ 7D, 0F
+        mov     eax, dword [ebp-4H]                     ; 3924 _ 8B. 45, FC
+        mov     eax, dword [eax+4H]                     ; 3927 _ 8B. 40, 04
+        lea     edx, [eax-1H]                           ; 392A _ 8D. 50, FF
+        mov     eax, dword [ebp-4H]                     ; 392D _ 8B. 45, FC
+        mov     dword [eax+4H], edx                     ; 3930 _ 89. 50, 04
+?_195:  mov     eax, dword [ebp-4H]                     ; 3933 _ 8B. 45, FC
+        mov     edx, dword [eax+4H]                     ; 3936 _ 8B. 50, 04
+        mov     eax, dword [ebp-4H]                     ; 3939 _ 8B. 45, FC
+        mov     eax, dword [eax]                        ; 393C _ 8B. 00
+        cmp     edx, eax                                ; 393E _ 39. C2
+        jl      ?_196                                   ; 3940 _ 7C, 0A
+        mov     eax, dword [ebp-4H]                     ; 3942 _ 8B. 45, FC
+        mov     dword [eax+4H], 0                       ; 3945 _ C7. 40, 04, 00000000
+?_196:  mov     eax, dword [ebp+8H]                     ; 394C _ 8B. 45, 08
+        mov     dword [eax+4H], 1                       ; 394F _ C7. 40, 04, 00000001
+        jmp     ?_198                                   ; 3956 _ EB, 1B
 
-?_197:  mov     eax, dword [ebp-8H]                     ; 3955 _ 8B. 45, F8
-        lea     edx, [eax+1H]                           ; 3958 _ 8D. 50, 01
-        mov     eax, dword [ebp-4H]                     ; 395B _ 8B. 45, FC
-        mov     ecx, dword [eax+edx*4+8H]               ; 395E _ 8B. 4C 90, 08
-        mov     eax, dword [ebp-4H]                     ; 3962 _ 8B. 45, FC
-        mov     edx, dword [ebp-8H]                     ; 3965 _ 8B. 55, F8
-        mov     dword [eax+edx*4+8H], ecx               ; 3968 _ 89. 4C 90, 08
-        add     dword [ebp-8H], 1                       ; 396C _ 83. 45, F8, 01
-?_198:  mov     eax, dword [ebp-4H]                     ; 3970 _ 8B. 45, FC
-        mov     eax, dword [eax]                        ; 3973 _ 8B. 00
-        cmp     dword [ebp-8H], eax                     ; 3975 _ 39. 45, F8
-        jl      ?_197                                   ; 3978 _ 7C, DB
-        nop                                             ; 397A _ 90
-        leave                                           ; 397B _ C9
-        ret                                             ; 397C _ C3
+?_197:  mov     eax, dword [ebp-8H]                     ; 3958 _ 8B. 45, F8
+        lea     edx, [eax+1H]                           ; 395B _ 8D. 50, 01
+        mov     eax, dword [ebp-4H]                     ; 395E _ 8B. 45, FC
+        mov     ecx, dword [eax+edx*4+8H]               ; 3961 _ 8B. 4C 90, 08
+        mov     eax, dword [ebp-4H]                     ; 3965 _ 8B. 45, FC
+        mov     edx, dword [ebp-8H]                     ; 3968 _ 8B. 55, F8
+        mov     dword [eax+edx*4+8H], ecx               ; 396B _ 89. 4C 90, 08
+        add     dword [ebp-8H], 1                       ; 396F _ 83. 45, F8, 01
+?_198:  mov     eax, dword [ebp-4H]                     ; 3973 _ 8B. 45, FC
+        mov     eax, dword [eax]                        ; 3976 _ 8B. 00
+        cmp     dword [ebp-8H], eax                     ; 3978 _ 39. 45, F8
+        jl      ?_197                                   ; 397B _ 7C, DB
+        nop                                             ; 397D _ 90
+        leave                                           ; 397E _ C9
+        ret                                             ; 397F _ C3
 ; task_remove End of function
 
 task_switchsub:; Function begin
-        push    ebp                                     ; 397D _ 55
-        mov     ebp, esp                                ; 397E _ 89. E5
-        sub     esp, 16                                 ; 3980 _ 83. EC, 10
-        mov     dword [ebp-4H], 0                       ; 3983 _ C7. 45, FC, 00000000
-        jmp     ?_200                                   ; 398A _ EB, 22
+        push    ebp                                     ; 3980 _ 55
+        mov     ebp, esp                                ; 3981 _ 89. E5
+        sub     esp, 16                                 ; 3983 _ 83. EC, 10
+        mov     dword [ebp-4H], 0                       ; 3986 _ C7. 45, FC, 00000000
+        jmp     ?_200                                   ; 398D _ EB, 22
 
-?_199:  mov     ecx, dword [taskctl]                    ; 398C _ 8B. 0D, 000021C8(d)
-        mov     edx, dword [ebp-4H]                     ; 3992 _ 8B. 55, FC
-        mov     eax, edx                                ; 3995 _ 89. D0
-        shl     eax, 2                                  ; 3997 _ C1. E0, 02
-        add     eax, edx                                ; 399A _ 01. D0
-        shl     eax, 2                                  ; 399C _ C1. E0, 02
-        add     eax, ecx                                ; 399F _ 01. C8
-        add     eax, 8                                  ; 39A1 _ 83. C0, 08
-        mov     eax, dword [eax]                        ; 39A4 _ 8B. 00
-        test    eax, eax                                ; 39A6 _ 85. C0
-        jg      ?_201                                   ; 39A8 _ 7F, 0C
-        add     dword [ebp-4H], 1                       ; 39AA _ 83. 45, FC, 01
-?_200:  cmp     dword [ebp-4H], 2                       ; 39AE _ 83. 7D, FC, 02
-        jle     ?_199                                   ; 39B2 _ 7E, D8
-        jmp     ?_202                                   ; 39B4 _ EB, 01
+?_199:  mov     ecx, dword [taskctl]                    ; 398F _ 8B. 0D, 000021C8(d)
+        mov     edx, dword [ebp-4H]                     ; 3995 _ 8B. 55, FC
+        mov     eax, edx                                ; 3998 _ 89. D0
+        shl     eax, 2                                  ; 399A _ C1. E0, 02
+        add     eax, edx                                ; 399D _ 01. D0
+        shl     eax, 2                                  ; 399F _ C1. E0, 02
+        add     eax, ecx                                ; 39A2 _ 01. C8
+        add     eax, 8                                  ; 39A4 _ 83. C0, 08
+        mov     eax, dword [eax]                        ; 39A7 _ 8B. 00
+        test    eax, eax                                ; 39A9 _ 85. C0
+        jg      ?_201                                   ; 39AB _ 7F, 0C
+        add     dword [ebp-4H], 1                       ; 39AD _ 83. 45, FC, 01
+?_200:  cmp     dword [ebp-4H], 2                       ; 39B1 _ 83. 7D, FC, 02
+        jle     ?_199                                   ; 39B5 _ 7E, D8
+        jmp     ?_202                                   ; 39B7 _ EB, 01
 
-?_201:  nop                                             ; 39B6 _ 90
-?_202:  mov     eax, dword [taskctl]                    ; 39B7 _ A1, 000021C8(d)
-        mov     edx, dword [ebp-4H]                     ; 39BC _ 8B. 55, FC
-        mov     dword [eax], edx                        ; 39BF _ 89. 10
-        mov     eax, dword [taskctl]                    ; 39C1 _ A1, 000021C8(d)
-        mov     dword [eax+4H], 0                       ; 39C6 _ C7. 40, 04, 00000000
-        nop                                             ; 39CD _ 90
-        leave                                           ; 39CE _ C9
-        ret                                             ; 39CF _ C3
+?_201:  nop                                             ; 39B9 _ 90
+?_202:  mov     eax, dword [taskctl]                    ; 39BA _ A1, 000021C8(d)
+        mov     edx, dword [ebp-4H]                     ; 39BF _ 8B. 55, FC
+        mov     dword [eax], edx                        ; 39C2 _ 89. 10
+        mov     eax, dword [taskctl]                    ; 39C4 _ A1, 000021C8(d)
+        mov     dword [eax+4H], 0                       ; 39C9 _ C7. 40, 04, 00000000
+        nop                                             ; 39D0 _ 90
+        leave                                           ; 39D1 _ C9
+        ret                                             ; 39D2 _ C3
 ; task_switchsub End of function
 
 getTaskctl:; Function begin
-        push    ebp                                     ; 39D0 _ 55
-        mov     ebp, esp                                ; 39D1 _ 89. E5
-        mov     eax, dword [taskctl]                    ; 39D3 _ A1, 000021C8(d)
-        pop     ebp                                     ; 39D8 _ 5D
-        ret                                             ; 39D9 _ C3
+        push    ebp                                     ; 39D3 _ 55
+        mov     ebp, esp                                ; 39D4 _ 89. E5
+        mov     eax, dword [taskctl]                    ; 39D6 _ A1, 000021C8(d)
+        pop     ebp                                     ; 39DB _ 5D
+        ret                                             ; 39DC _ C3
 ; getTaskctl End of function
 
 
@@ -5223,10 +5223,10 @@ keytable:                                               ; byte
         db 38H, 39H, 2DH, 34H, 35H, 36H, 2BH, 31H       ; 0068 _ 89-456+1
         db 32H, 33H, 30H, 2EH                           ; 0070 _ 230.
 
-pos.2276: dd 00000010H, 00000000H                       ; 0074 _ 16 0 
+pos.2278: dd 00000010H, 00000000H                       ; 0074 _ 16 0 
         dd 00000000H                                    ; 007C _ 0 
 
-table_rgb.2336:                                         ; byte
+table_rgb.2338:                                         ; byte
         db 00H, 00H, 00H, 0FFH, 00H, 00H, 00H, 0FFH     ; 0080 _ ........
         db 00H, 0FFH, 0FFH, 00H, 00H, 00H, 0FFH, 0FFH   ; 0088 _ ........
         db 00H, 0FFH, 00H, 0FFH, 0FFH, 0FFH, 0FFH, 0FFH ; 0090 _ ........
@@ -5236,7 +5236,7 @@ table_rgb.2336:                                         ; byte
         db 00H, 00H, 00H, 00H, 00H, 00H, 00H, 00H       ; 00B0 _ ........
         db 00H, 00H, 00H, 00H, 00H, 00H, 00H, 00H       ; 00B8 _ ........
 
-cursor.2391:                                            ; byte
+cursor.2393:                                            ; byte
         db 2AH, 2AH, 2EH, 2EH, 2EH, 2EH, 2EH, 2EH       ; 00C0 _ **......
         db 2EH, 2EH, 2EH, 2EH, 2EH, 2EH, 2EH, 2EH       ; 00C8 _ ........
         db 2AH, 4FH, 2AH, 2EH, 2EH, 2EH, 2EH, 2EH       ; 00D0 _ *O*.....
@@ -5270,7 +5270,7 @@ cursor.2391:                                            ; byte
         db 2EH, 2EH, 2EH, 2EH, 2EH, 2EH, 2AH, 2AH       ; 01B0 _ ......**
         db 2EH, 2EH, 2EH, 2EH, 2EH, 2EH, 2EH, 2EH       ; 01B8 _ ........
 
-closebtn.2534:                                          ; byte
+closebtn.2536:                                          ; byte
         db 4FH, 4FH, 4FH, 4FH, 4FH, 4FH, 4FH, 4FH       ; 01C0 _ OOOOOOOO
         db 4FH, 4FH, 4FH, 4FH, 4FH, 4FH, 4FH, 40H       ; 01C8 _ OOOOOOO@
         db 4FH, 51H, 51H, 51H, 51H, 51H, 51H, 51H       ; 01D0 _ OQQQQQQQ
@@ -5353,28 +5353,28 @@ sheet_back:                                             ; dword
 sheet_mouse:                                            ; dword
         resd    1                                       ; 0230
 
-task_a.2271:                                            ; dword
+task_a.2273:                                            ; dword
         resd    1                                       ; 0234
 
-cnt.2272: resd  1                                       ; 0238
+cnt.2274: resd  1                                       ; 0238
 
-line.2275:                                              ; dword
+line.2277:                                              ; dword
         resd    1                                       ; 023C
 
-task_b.2261:                                            ; oword
+task_b.2263:                                            ; oword
         resb    16                                      ; 0240
 
-str.2434:                                               ; byte
+str.2436:                                               ; byte
         resb    1                                       ; 0250
 
 ?_222:  resb    9                                       ; 0251
 
 ?_223:  resb    2                                       ; 025A
 
-line.2467:                                              ; dword
+line.2469:                                              ; dword
         resd    1                                       ; 025C
 
-pos.2466: resd  8                                       ; 0260
+pos.2468: resd  8                                       ; 0260
 
 timerctl:                                               ; byte
         resd    1                                       ; 0280

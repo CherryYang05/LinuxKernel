@@ -2,6 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/boot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/boot.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/ckernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/fontData.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/global_define.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/global_define.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/kernel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/kernel.asm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/mem_util.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/mem_util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/multi_task.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/multi_task.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/objconv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/pm.inc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/system.img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/timer.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/timer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/win_sheet.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/win_sheet.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/write_vga_desktop_win.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
@@ -205,7 +228,7 @@
       <workItem from="1620456314283" duration="333000" />
       <workItem from="1620714987780" duration="1366000" />
       <workItem from="1620751288640" duration="83000" />
-      <workItem from="1621175465961" duration="662000" />
+      <workItem from="1621175465961" duration="1315000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -473,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621175506283</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="No.27 实现控制台窗口">
+      <created>1621176919460</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1621176919460</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -494,7 +524,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="No.13 新增处理ASM文件的工具，及更新了README文档" />
     <MESSAGE value="No.14 实现鼠标中断，识别鼠标并获取鼠标移动信息" />
     <MESSAGE value="No.14-1 重绘鼠标图形，使其更加逼真，并修改桌面背景色为Windows蓝" />
     <MESSAGE value="No.14-2 实现鼠标的移动" />
@@ -519,6 +548,7 @@
     <MESSAGE value="No.24-4 优化了窗体和文本输入框显示" />
     <MESSAGE value="No.25 实现进程优先级调度" />
     <MESSAGE value="No.26 实现进程优先级队列" />
-    <option name="LAST_COMMIT_MESSAGE" value="No.26 实现进程优先级队列" />
+    <MESSAGE value="No.27 实现控制台窗口" />
+    <option name="LAST_COMMIT_MESSAGE" value="No.27 实现控制台窗口" />
   </component>
 </project>

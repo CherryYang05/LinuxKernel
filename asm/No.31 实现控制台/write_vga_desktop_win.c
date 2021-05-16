@@ -115,7 +115,6 @@ static struct SHEET *sheet_win;
 static struct SHEET *sheet_back;        //桌面图层
 static struct SHEET *sheet_mouse;       //鼠标图层
 
-void console_task(struct SHEET *sheet);
 void launch_console();
 //======================================== 主函数 ===================================================
 void CMain(void) {
@@ -368,37 +367,6 @@ void CMain(void) {
 //===================================== 主函数结束 ==============================================
 
 /**
- * 控制台
- */
-void launch_console() {
-    struct SHEET *sheet_console = sheet_alloc(shtctl);
-    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 256 * 180);
-    sheet_setbuf(sheet_console, buf_cons, 256, 180, COLOR_INVISIBLE);
-    make_window8(shtctl, sheet_console, "Terminal");
-    make_textbox8(sheet_console, 8, 28, 240, 144, COL8_000000);
-
-    struct TASK *task_console = task_alloc();
-    int addr_code32 = get_code32_addr();
-    task_console->tss.ldtr = 0;
-    task_console->tss.iomap = 0x40000000;
-    task_console->tss.eip =  (int)(console_task - addr_code32);
-
-    task_console->tss.es = 0;
-    task_console->tss.cs = 1 * 8;
-    task_console->tss.ss = 4 * 8;
-    task_console->tss.ds = 3 * 8;
-    task_console->tss.fs = 0;
-    task_console->tss.gs = 2 * 8;
-    task_console->tss.esp -= 8;
-    //将控制台图层对象传递到控制台进程
-    *((int*)(task_console->tss.esp + 4)) = (int)sheet_console;
-    task_run(task_console, 1, 5);
-
-    sheet_slide(shtctl,sheet_console, 350, 16);
-    sheet_level_updown(shtctl, sheet_console, 2);
-}
-
-/**
  * 控制台启动进程
  */
 void console_task(struct SHEET *sheet) {
@@ -435,6 +403,37 @@ void console_task(struct SHEET *sheet) {
         }
         
     }
+}
+
+/**
+ * 控制台
+ */
+void launch_console() {
+    struct SHEET *sheet_console = sheet_alloc(shtctl);
+    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 256 * 180);
+    sheet_setbuf(sheet_console, buf_cons, 256, 180, COLOR_INVISIBLE);
+    make_window8(shtctl, sheet_console, "Terminal");
+    make_textbox8(sheet_console, 8, 28, 240, 144, COL8_000000);
+
+    struct TASK *task_console = task_alloc();
+    int addr_code32 = get_code32_addr();
+    task_console->tss.ldtr = 0;
+    task_console->tss.iomap = 0x40000000;
+    task_console->tss.eip =  (int)(console_task - addr_code32);
+
+    task_console->tss.es = 0;
+    task_console->tss.cs = 1 * 8;
+    task_console->tss.ss = 4 * 8;
+    task_console->tss.ds = 3 * 8;
+    task_console->tss.fs = 0;
+    task_console->tss.gs = 2 * 8;
+    task_console->tss.esp -= 8;
+    //将控制台图层对象传递到控制台进程
+    *((int*)(task_console->tss.esp + 4)) = (int)sheet_console;
+    task_run(task_console, 1, 5);
+
+    sheet_slide(shtctl,sheet_console, 32, 16);
+    sheet_level_updown(shtctl, sheet_console, 2);
 }
 
 /**
