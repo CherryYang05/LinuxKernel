@@ -62,40 +62,88 @@ int getMulti_Task_tr();
  * 进程结构体(PCB)
  * @param	{sel} 该进程的TSS32结构对应的段描述符下标
  *          {priority} 进程优先级，越大优先级越高
+ *          {level} 进程重要性
  * 			{flags} 进程状态（0表示空闲，1表示挂起，2表示运行）
  */
 struct TASK {
 	int sel, flags;
     int priority;
+    int level;
 	struct TSS32 tss;
 };
 
-#define MAX_TASKS    5
-#define TASK_GDT0    7
-#define SIZE_OF_TASK 112
+#define MAX_TASKS       5
+#define MAX_TASKS_LV    3
+#define MAX_TASKLEVELS  3
+
+#define TASK_GDT0       7
+#define SIZE_OF_TASK    120
+
+/**
+ * 进程优先级队列
+ * @param {running} 正在运行的进程数量
+ *        {now} 正在执行的进程编号
+ *        {tasks}
+ */
+struct TASKLEVEL {
+    int running;
+    int now;
+    struct TASK *tasks[MAX_TASKS_LV];
+};
+
+#define SIZE_OF_TASKLEVEL (8 + 4 * MAX_TASKS_LV)
 
 /**
  * 进程管理控制器
  * @param	{running} 正在运行的进程数量
  * 			{now} 表示当前正在运行的进程编号
  */
+// struct TASKCTL {
+// 	int running;
+// 	int now;
+// 	struct TASK *tasks[MAX_TASKS];
+// 	struct TASK tasks0[MAX_TASKS];
+// };
+
+/**
+ * 进程优先级队列管理器
+ * @param	{now_lv} 当前正在运行的进程优先级队列
+ * 			{lv_change} 
+ *          {level} 进程的优先级队列
+ *          {tasks0} 存放所有进程的数组
+ */
 struct TASKCTL {
-	int running;
-	int now;
-	struct TASK *tasks[MAX_TASKS];
-	struct TASK tasks0[MAX_TASKS];
+    int  now_lv;
+    int  lv_change;
+    struct TASKLEVEL level[MAX_TASKLEVELS];
+    struct TASK tasks0[MAX_TASKS];
 };
 
 struct TASK *task_init(struct MEMMANAGER *memman);
 
-#define SIZE_OF_TASKCTL  (4 + 4 + 4 * MAX_TASKS + SIZE_OF_TASK * MAX_TASKS)
+#define SIZE_OF_TASKCTL  (4 + 4 + SIZE_OF_TASKLEVEL * MAX_TASKLEVELS + SIZE_OF_TASK * MAX_TASKS)
 
 struct TASK *task_alloc(void);
 
 /**
  * 进程运行，根据优先级
  */
-void task_run(struct TASK *task, int priority);
+void task_run(struct TASK *task, int level, int priority);
+
+/**
+ * 加入进程就绪队列
+ */
+void task_add(struct TASK *task);
+
+/**
+ * 从就绪队列中移除进程
+ */
+void task_remove(struct TASK *task);
+
+/**
+ * 改变进程优先级运行队列
+ */
+void task_switchsub();
 
 /**
  * 任务调度机制
@@ -103,9 +151,14 @@ void task_run(struct TASK *task, int priority);
 void task_switch();
 
 /**
+ * 获取当前正在运行的进程
+ */
+struct TASK *task_now();
+
+/**
  * 进程睡眠
  */
-void task_sleep(struct TASK *task);
+int task_sleep(struct TASK *task);
 
 /**
  * 获取进程管理器对象

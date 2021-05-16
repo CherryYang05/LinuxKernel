@@ -92,7 +92,8 @@ static unsigned char *buf_back, buf_mouse[256];
 void make_window8(struct SHTCTL *ctl, struct SHEET *sheet, char *title);
 
 struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int bx, int by, int x0, int y0, int level);
-struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int priority, char *title, int bx, int by, int x0, int y0, int level);
+struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int task_level, int priority, char *title, 
+                        int bx, int by, int x0, int y0, int level);
 
 //时钟中断相关
 static struct FIFO8 timerInfo;
@@ -191,7 +192,7 @@ void CMain(void) {
     sheet_win = messageBox(shtctl, "Counter", 300, 150, 170, 100, 4);     //新建窗口图层，调整窗口图层为1
     // sheet_win2 = messageBox(shtctl, "WIN_SHEET", 230, 120, 1);
     sheet_level_updown(shtctl, sheet_back, 0);                  //调整桌面图层为0
-    sheet_level_updown(shtctl, sheet_mouse, 50);                //调整鼠标图层为100
+    sheet_level_updown(shtctl, sheet_mouse, 50);                //调整鼠标图层为50
     //sheet_slide(shtctl, sheet_win, 10, 10);
     //========================================
     // showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
@@ -248,12 +249,12 @@ void CMain(void) {
 
     task_a = task_init(memman);
 
-    keyInfo.task = task_a;          //***
+    keyInfo.task = task_a;          //重要
 
-    sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 5,  "Task1", 150, 50, 150, 30, 3);
-    sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 10, "Task2", 150, 50, 300, 30, 2);
-    sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 20, "Task3", 150, 50, 450, 30, 1);
-    showString(shtctl, sheet_back, 0, 0, COL8_FFFFFF, intToHexStr(getTaskctl()->running));
+    sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 1, 5, "Task1", 150, 50, 150, 30, 2);
+    sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 1, 5, "Task2", 150, 50, 300, 30, 2);
+    sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 1, 5, "Task3", 150, 50, 450, 30, 1);
+    //showString(shtctl, sheet_back, 0, 0, COL8_FFFFFF, intToHexStr(getTaskctl()->running));
     //======================== 进程操作结束 ========================
 
     static int cnt = 0;
@@ -367,6 +368,79 @@ void CMain(void) {
 }
 //===================================== 主函数结束 ==============================================
 
+/**
+ * 控制台启动进程
+ */
+void console_task(struct SHEET *sheet) {
+    struct FIFO8 fifo;
+    struct TIMER *timer;
+    struct TASK *task = task_now();
+
+    char fifobuf[128];
+    int pos_x = 8, cursor_c = COL8_000000;
+    fifo8_init(&fifo, 128, fifobuf, task);
+    timer = timer_alloc();
+    timer_init(timer, &fifo, 1);
+    timer_setTime(timer, 50);
+    int key = 0;
+    for(;;) { 
+        io_cli();
+        if (fifo8_status(&fifo) == 0) {
+            io_sti();
+        } else {
+            key = fifo8_get(&fifo);
+            io_sti();
+            if (key <= 1) {
+                if (key == 1) {
+                    timer_init(timer, &fifo, 0);
+                    cursor_c = COL8_FFFFFF;
+                } else if (key == 0) {
+                    timer_init(timer, &fifo, 1);
+                    cursor_c = COL8_000000;
+                }
+                timer_setTime(timer, 50);
+                boxfill8(sheet->buf, sheet->bxsize, cursor_c, pos_x, 28, pos_x + 7, 43);
+                sheet_refresh(shtctl, sheet, pos_x, 28, pos_x + 8, 44);
+            }
+        }
+        
+    }
+}
+
+/**
+ * 控制台
+ */
+void launch_console() {
+    struct SHEET *sheet_console = sheet_alloc(shtctl);
+    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 256 * 180);
+    sheet_setbuf(sheet_console, buf_cons, 256, 180, COLOR_INVISIBLE);
+    make_window8(shtctl, sheet_console, "Terminal");
+    make_textbox8(sheet_console, 8, 28, 240, 144, COL8_000000);
+
+    struct TASK *task_console = task_alloc();
+    int addr_code32 = get_code32_addr();
+    task_console->tss.ldtr = 0;
+    task_console->tss.iomap = 0x40000000;
+    task_console->tss.eip =  (int)(console_task - addr_code32);
+
+    task_console->tss.es = 0;
+    task_console->tss.cs = 1 * 8;
+    task_console->tss.ss = 4 * 8;
+    task_console->tss.ds = 3 * 8;
+    task_console->tss.fs = 0;
+    task_console->tss.gs = 2 * 8;
+    task_console->tss.esp -= 8;
+    //将控制台图层对象传递到控制台进程
+    *((int*)(task_console->tss.esp + 4)) = (int)sheet_console;
+    task_run(task_console, 1, 5);
+
+    sheet_slide(shtctl,sheet_console, 32, 16);
+    sheet_level_updown(shtctl, sheet_console, 1);
+}
+
+/**
+ * 进程B
+ */
 void task_b_main(struct SHEET *sheet) {
     //multi_task_init();
     showString(shtctl, sheet_back, 0, 144, COL8_FFFFFF, "Enter Task B");
@@ -903,7 +977,8 @@ struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int bx, int by, int x0
  *        {x0, y0}  窗口左上角坐标
  *        {level}   窗口层级
  */
-struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int priority, char *title, int bx, int by, int x0, int y0, int level) {
+struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int task_level, int priority, 
+                            char *title, int bx, int by, int x0, int y0, int level) {
     struct SHEET *sheet_win;
     unsigned char *buf_win;
     buf_win = (unsigned char *)memman_alloc_4K(memman, bx * by);
@@ -925,7 +1000,7 @@ struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int priori
     task->tss.esp -= 8;
     //空出8字节存放其他信息，用4字节存放窗体信息
     *((int*)(task->tss.esp + 4)) = (int)sheet_win;
-    task_run(task, priority);
+    task_run(task, task_level, priority);
 
     sheet_slide(ctl, sheet_win, x0, y0);
     sheet_level_updown(ctl, sheet_win, level);
