@@ -115,6 +115,7 @@ static struct SHEET *sheet_win;
 static struct SHEET *sheet_back;        //桌面图层
 static struct SHEET *sheet_mouse;       //鼠标图层
 
+void launch_console();
 //======================================== 主函数 ===================================================
 void CMain(void) {
     initBootInfo(&bootInfo);
@@ -189,7 +190,7 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    sheet_win = messageBox(shtctl, "Counter", 300, 150, 170, 100, 4);     //新建窗口图层，调整窗口图层为1
+    sheet_win = messageBox(shtctl, "Counter", 300, 150, 170, 100, 1);     //新建窗口图层，调整窗口图层为1
     // sheet_win2 = messageBox(shtctl, "WIN_SHEET", 230, 120, 1);
     sheet_level_updown(shtctl, sheet_back, 0);                  //调整桌面图层为0
     sheet_level_updown(shtctl, sheet_mouse, 50);                //调整鼠标图层为50
@@ -250,10 +251,10 @@ void CMain(void) {
     task_a = task_init(memman);
 
     keyInfo.task = task_a;          //重要
-
-    sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 1, 5, "Task1", 150, 50, 150, 30, 2);
-    sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 1, 5, "Task2", 150, 50, 300, 30, 2);
-    sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 1, 5, "Task3", 150, 50, 450, 30, 1);
+    launch_console();
+    // sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 1, 5, "Task1", 150, 50, 150, 30, 2);
+    // sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 1, 5, "Task2", 150, 50, 300, 30, 2);
+    // sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 1, 5, "Task3", 150, 50, 450, 30, 1);
     //showString(shtctl, sheet_back, 0, 0, COL8_FFFFFF, intToHexStr(getTaskctl()->running));
     //======================== 进程操作结束 ========================
 
@@ -334,13 +335,10 @@ void CMain(void) {
             io_sti();
             int key = fifo8_get(&timerInfo);
             if (key == 10) {
-                //showString(shtctl, sheet_back, 0, 176, COL8_FF00FF, "switch to task b");
                 showString(shtctl, sheet_back, xpos, 160, COL8_FFFFFF, "A");
-                //farjmp(0,9*8);
-                //taskswitch9();
                 timer_setTime(timer, 100);
                 xpos += 8;
-                //A进程休眠
+                //当输出5个字符后，A进程休眠
                 stop_task_a++;
                 if (xpos >= 40 && stop_task_a == 5) {
                     io_cli();
@@ -399,7 +397,7 @@ void console_task(struct SHEET *sheet) {
                     cursor_c = COL8_000000;
                 }
                 timer_setTime(timer, 50);
-                boxfill8(sheet->buf, sheet->bxsize, cursor_c, pos_x, 28, pos_x + 7, 43);
+                boxfill8(sheet->buf, sheet->bxsize, cursor_c, pos_x, 28, pos_x + 6, 43);
                 sheet_refresh(shtctl, sheet, pos_x, 28, pos_x + 8, 44);
             }
         }
@@ -435,7 +433,7 @@ void launch_console() {
     task_run(task_console, 1, 5);
 
     sheet_slide(shtctl,sheet_console, 32, 16);
-    sheet_level_updown(shtctl, sheet_console, 1);
+    sheet_level_updown(shtctl, sheet_console, 2);
 }
 
 /**
