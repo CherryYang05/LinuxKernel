@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/boot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/boot.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/ckernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/fontData.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/global_define.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/global_define.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/kernel" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/kernel.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/mem_util.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/mem_util.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/multi_task.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/multi_task.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/objconv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/pm.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/system.img" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/timer.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/timer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/win_sheet.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/win_sheet.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asm/No.31 实现控制台/write_vga_desktop_win.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ckernel.asm" beforeDir="false" afterPath="$PROJECT_DIR$/ckernel.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernel" beforeDir="false" afterPath="$PROJECT_DIR$/kernel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/write_vga_desktop_win.c" beforeDir="false" afterPath="$PROJECT_DIR$/write_vga_desktop_win.c" afterDir="false" />
-    </list>
+    <list default="true" id="f80dcfc2-38cf-4a2b-aca5-ca885f98ae1c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +201,7 @@
       <workItem from="1620456314283" duration="333000" />
       <workItem from="1620714987780" duration="1366000" />
       <workItem from="1620751288640" duration="83000" />
-      <workItem from="1621175465961" duration="1315000" />
+      <workItem from="1621175465961" duration="1386000" />
     </task>
     <task id="LOCAL-00001" summary="No.2 实现内核加载器">
       <created>1610433593880</created>
@@ -503,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621176919460</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="No.27 实现控制台窗口">
+      <created>1621179060100</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1621179060100</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
