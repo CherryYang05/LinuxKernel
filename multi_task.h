@@ -75,7 +75,7 @@ struct TASK {
 };
 
 #define MAX_TASKS       5
-#define MAX_TASKS_LV    3
+#define MAX_TASKS_LV    5
 #define MAX_TASKLEVELS  3
 
 #define TASK_GDT0       7

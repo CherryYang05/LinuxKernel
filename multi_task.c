@@ -64,7 +64,7 @@ struct TASK *task_init(struct MEMMANAGER *memman) {
     }
     task = task_alloc();
     task->flags = TASK_RUNNING;         //active
-    task->priority = 100;
+    task->priority = 10;
     task->level = 0;
     task_add(task);
     task_switchsub();

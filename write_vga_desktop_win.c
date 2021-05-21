@@ -256,7 +256,7 @@ void CMain(void) {
     keyInfo.task = task_a;      //重要
     // sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 1, 5, "Task1", 150, 50, 150, 30, 2);
     // sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 1, 5, "Task2", 150, 50, 300, 30, 2);
-    // sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 1, 5, "Task3", 150, 50, 450, 30, 1);
+    // sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 1, 5, "Task3", 150, 50, 450, 30, 2);
     //showString(shtctl, sheet_back, 0, 0, COL8_FFFFFF, intToHexStr(getTaskctl()->running));
     //======================== 进程操作结束 ========================
 
@@ -362,7 +362,7 @@ void CMain(void) {
                 stop_task_a++;
                 if (xpos >= 40 && stop_task_a == 5) {
                     io_cli();
-                    task_sleep(task_a);
+                    // task_sleep(task_a);
                     io_sti();
                 }
             } else if (key == 2) {
@@ -414,8 +414,8 @@ struct SHEET *launch_console() {
     task_console = task_console0;
     task_run(task_console0, 1, 5);
 
-    sheet_slide(shtctl,sheet_console, 350, 16);
-    sheet_level_updown(shtctl, sheet_console, 2);
+    sheet_slide(shtctl,sheet_console, 360, 150);
+    sheet_level_updown(shtctl, sheet_console, 3);
     return sheet_console;
 }
 
@@ -1016,12 +1016,13 @@ struct SHEET *messageBox(struct SHTCTL *ctl, char *title, int bx, int by, int x0
 
 /**
  * 新建窗体图层并绑定到进程对象
- * @param {ctl}     图层控制器
- *        {task}    窗口绑定的进程对象
- *        {title}   窗口标题
- *        {bx, by}  窗口长宽
- *        {x0, y0}  窗口左上角坐标
- *        {level}   窗口层级
+ * @param {ctl}        图层控制器
+ *        {task}       窗口绑定的进程对象
+ *        {task_level} 进程所处的队列
+ *        {title}      窗口标题
+ *        {bx, by}     窗口长宽
+ *        {x0, y0}     窗口左上角坐标
+ *        {level}      窗口层级
  */
 struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int task_level, int priority, 
                             char *title, int bx, int by, int x0, int y0, int level) {
