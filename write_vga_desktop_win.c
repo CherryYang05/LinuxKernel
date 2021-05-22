@@ -101,13 +101,27 @@ static char timerbuf[8];
 
 //键盘的扫描码对应表(10H - 30H)
 static char keytable[0x54] = {
-    0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '^', 0, 0,
+    0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+', 0, 0,
     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '[', 0, 0, 'A', 'S',
     'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', ':', 0, 0, ']', 'Z', 'X', 'C', 'V',
     'B', 'N', 'M', ',', '.', '/', 0, '*', 0, ' ', 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, '7', '8', '9', '-', '4', '5', '6', '+', '1',
-    '2', '3', '0', '.'};
+    '2', '3', '0', '.'
+};
 
+int key_shift = 0;
+
+//按下shift键之后键盘的扫描码对应表
+static char keytable1[0x80] = {
+	0,   0,   '!', '@', '#', '$', '%','^', '&', '*', '(', ')', '-', '=', '~', 0,   0,
+	'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '`', '{', 0,   0,   'A', 'S',
+	'D', 'F', 'G', 'H', 'J', 'K', 'L', '+', '*', 0,   0,   '}', 'Z', 'X', 'C', 'V',
+	'B', 'N', 'M', '<', '>', '?', 0,   '*', 0,   ' ', 0,   0,   0,   0,   0,   0,
+	0,   0,   0,   0,   0,   0,   0,   '7', '8', '9', '-', '4', '5', '6', '+', '1',
+	'2', '3', '0', '.', 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+	0,   0,   0,   '_', 0,   0,   0,   0,   0,   0,   0,   0,   0,   '|', 0,   0
+};
 void make_textbox8(struct SHEET *sheet, int x0, int y0, int sx, int sy, int c);
 
 static struct SHTCTL *shtctl;           //图层控制器
@@ -119,6 +133,8 @@ void console_task(struct SHEET *sheet);
 struct SHEET *launch_console();
 static struct TASK *task_console = 0;
 void make_wtitle8(struct SHTCTL *shtctl, struct SHEET *sheet, char *title, char act);
+
+char transferScanCode(int data);
 
 //======================================== 主函数 ===================================================
 void CMain(void) {
@@ -273,7 +289,8 @@ void CMain(void) {
 
     int stop_task_a = 0;
     int key_to = 0;             //记录哪个窗口正在获取输入焦点
-    struct SHEET *sheet_console = launch_console();
+    struct SHEET *sheet_console = 0;
+    // sheet_console = launch_console();
     for (;;) {
         io_sti();
         //显示时钟中断倒计时
@@ -317,15 +334,15 @@ void CMain(void) {
                 }
                 sheet_refresh(shtctl, sheet_win, 0, 0, sheet_win->bxsize, 21);
                 sheet_refresh(shtctl, sheet_console, 0, 0, sheet_console->bxsize, 21);
-            } else if (key_to == 0) {                                                               //如果主进程窗口处于焦点状态
+            } else if (key_to == 0) {                                                       //如果主进程窗口处于焦点状态
                 showString(shtctl, sheet_back, 0, 0, COL8_848400, "Bunny...");
-                if (keytable[data] != 0 && data >= 0x10 && data <= 0x53 && line <= 142) {           //打印键盘字符
+                if (transferScanCode(data) != 0 && line <= 142) {                           //打印键盘字符
                     //闪烁光标的位置,先变成白的，防止当闪烁到黑色是写入字符而变黑
                     boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, 
                             BOX_MARGIN_LEFT + 2 + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
                     sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
                             BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
-                    char buf[2] = {keytable[data], 0};
+                    char buf[2] = {transferScanCode(data), 0};
                     showString(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
                     line += 8;
                     if (line >= sheet_win->bxsize - 2 * BOX_MARGIN_LEFT) {
@@ -385,6 +402,36 @@ void CMain(void) {
     }
 }
 //===================================== 主函数结束 ==============================================
+
+/**
+ * 处理键盘的扫描码
+ */
+char transferScanCode(int data) {
+    if (data == 0x2A) {             //左边的shift按键按下
+        key_shift |= 1;
+    }
+    if (data == 0x36) {             //右边的shift按键按下
+        key_shift |= 2;
+    }
+    if (data == 0xAA) {             //左边的shift按键弹起
+        key_shift &= ~1;
+    }
+    if (data == 0xB6) {             //右边的shift按键弹起
+        key_shift &= ~2;
+    }
+    if (data == 0x2A || data == 0x36 || data == 0xAA || data == 0xb6 || data >= 0x54) {
+        return 0;
+    }
+    char c = 0;
+    if (key_shift == 0 && data != 0x0E && data <= 0x53 && keytable[data] != 0) {
+        c = keytable[data];
+    } else if (key_shift != 0 && data < 0x80 && keytable1[data] != 0) {
+        c = keytable1[data];
+    } else {
+        c = 0;
+    }
+    return c;
+}
 
 /**
  * 控制台
@@ -466,14 +513,14 @@ void console_task(struct SHEET *sheet) {
                             BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 16);
                     sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
                             BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 18);
-                } else if (keytable[key] != 0 && key >= 0x10 && key <= 0x53 && pos_x <= sheet->bxsize - 100) {      //键盘输入字符
+                } else if (transferScanCode(key) != 0 && pos_x <= sheet->bxsize - 100) {      //键盘输入字符
                     showString(shtctl, sheet_back, 0, 16, COL8_848400, "Dans");
                     //闪烁光标的位置,先变成黑的，防止当闪烁到黑色是写入字符而变黑
                     boxfill8(sheet->buf, sheet->bxsize, COL8_000000, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5, 
                             BOX_MARGIN_LEFT + 2 + pos_x + 6, BOX_MARGIN_TOP + 3 + 16);                 
                     sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
                             BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 18);
-                    s[0] = keytable[key];
+                    s[0] = transferScanCode(key);
                     s[1] = 0;
                     showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5, COL8_FFFFFF, s);
                     pos_x += 8;
