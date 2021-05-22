@@ -109,6 +109,8 @@ static char keytable[0x54] = {
     '2', '3', '0', '.'
 };
 
+int key_shift = 0;
+
 //按下shift键之后键盘的扫描码对应表
 static char keytable1[0x80] = {
 	0,   0,   '!', '@', '#', '$', '%','^', '&', '*', '(', ')', '-', '=', '~', 0,   0,
@@ -120,10 +122,6 @@ static char keytable1[0x80] = {
 	0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
 	0,   0,   0,   '_', 0,   0,   0,   0,   0,   0,   0,   0,   0,   '|', 0,   0
 };
-
-int key_shift = 0;
-int caps_lock = 0;
-
 void make_textbox8(struct SHEET *sheet, int x0, int y0, int sx, int sy, int c);
 
 static struct SHTCTL *shtctl;           //图层控制器
@@ -137,8 +135,6 @@ static struct TASK *task_console = 0;
 void make_wtitle8(struct SHTCTL *shtctl, struct SHEET *sheet, char *title, char act);
 
 char transferScanCode(int data);
-
-int isSpecialKey(int data);
 
 //======================================== 主函数 ===================================================
 void CMain(void) {
@@ -408,18 +404,6 @@ void CMain(void) {
 //===================================== 主函数结束 ==============================================
 
 /**
- * 处理特殊按键 caps和shift
- */
-int isSpecialKey(int data) {
-    transferScanCode(data);
-    //caps和左右shift的扫描码和断码
-    if (data == 0x3a || data == 0xBA || data == 0x2A || data == 0x36 || data == 0xAA || data == 0xB6) {
-        return 1;
-    }
-    return 0;
-}
-
-/**
  * 处理键盘的扫描码
  */
 char transferScanCode(int data) {
@@ -435,24 +419,12 @@ char transferScanCode(int data) {
     if (data == 0xB6) {             //右边的shift按键弹起
         key_shift &= ~2;
     }
-    //大小写切换键
-    if (data == 0x3A) {
-        if (caps_lock == 0) {
-            caps_lock = 1;
-        } else {
-            caps_lock = 0;
-        }
-    }
-
     if (data == 0x2A || data == 0x36 || data == 0xAA || data == 0xb6 || data >= 0x54) {
         return 0;
     }
     char c = 0;
     if (key_shift == 0 && data != 0x0E && data <= 0x53 && keytable[data] != 0) {
         c = keytable[data];
-        if ('A' <= c && c <= 'Z' && caps_lock == 0) {
-            c += 0x20;
-        }
     } else if (key_shift != 0 && data < 0x80 && keytable1[data] != 0) {
         c = keytable1[data];
     } else {
