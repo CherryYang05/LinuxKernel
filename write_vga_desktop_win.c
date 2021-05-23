@@ -111,7 +111,7 @@ static char keytable[0x54] = {
 
 //按下shift键之后键盘的扫描码对应表
 static char keytable1[0x80] = {
-	0,   0,   '!', '@', '#', '$', '%','^', '&', '*', '(', ')', '-', '=', '~', 0,   0,
+	0,   0,   '!', '@', '#', '$', '%','^', '&', '*', '(', ')', '-', '=', '~', 0,
 	'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '`', '{', 0,   0,   'A', 'S',
 	'D', 'F', 'G', 'H', 'J', 'K', 'L', '+', '*', 0,   0,   '}', 'Z', 'X', 'C', 'V',
 	'B', 'N', 'M', '<', '>', '?', 0,   '*', 0,   ' ', 0,   0,   0,   0,   0,   0,
@@ -134,6 +134,7 @@ static struct SHEET *sheet_mouse;       //鼠标图层
 void console_task(struct SHEET *sheet);
 struct SHEET *launch_console();
 static struct TASK *task_console = 0;
+static struct TASK *task_main = 0;
 void make_wtitle8(struct SHTCTL *shtctl, struct SHEET *sheet, char *title, char act);
 
 char transferScanCode(int data);
@@ -214,7 +215,7 @@ void CMain(void) {
     mx = (xsize - 16) / 2;
     my = (ysize - 28 - 16) / 2;
     sheet_slide(shtctl, sheet_mouse, mx, my);
-    sheet_win = messageBox(shtctl, "Counter", 300, 150, 170, 100, 1);     //新建窗口图层，调整窗口图层为1
+    sheet_win = messageBox(shtctl, "Counter", 300, 150, 150, 80, 1);     //新建窗口图层，调整窗口图层为1
     // sheet_win2 = messageBox(shtctl, "WIN_SHEET", 230, 120, 1);
     sheet_level_updown(shtctl, sheet_back, 0);                  //调整桌面图层为0
     sheet_level_updown(shtctl, sheet_mouse, 50);                //调整鼠标图层为50
@@ -222,7 +223,7 @@ void CMain(void) {
     //========================================
     // showString(shtctl, sheet_back, 0, 16, COL8_00FF00, intToHexStr(shtctl->top));
     // showString(shtctl, sheet_back, 0, 32, COL8_00FF00, intToHexStr((int)buf_back));
-    // showString(shtctl, sheet_back, 0, 48, COL8_00FF00, intToHexStr((int)shtctl->vram));
+    // showString(shtctl, sheet_back, 0, 48, COL8_00FF00, intToHexStr((int)sh   tctl->vram));
     //======================== 图层操作结束 ========================
     
     io_sti();
@@ -272,7 +273,8 @@ void CMain(void) {
     static struct TASK *task_a;
     //struct TSS32 *pTss = (struct TSS32*)memman_alloc_4K(memman, 103);
 
-    task_a = task_init(memman);  
+    task_a = task_init(memman);
+    task_main = task_a;
     keyInfo.task = task_a;      //重要
     // sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 1, 5, "Task1", 150, 50, 150, 30, 2);
     // sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 1, 5, "Task2", 150, 50, 300, 30, 2);
@@ -294,7 +296,7 @@ void CMain(void) {
     int stop_task_a = 0;
     int key_to = 0;             //记录哪个窗口正在获取输入焦点
     struct SHEET *sheet_console = 0;
-    // sheet_console = launch_console();
+    sheet_console = launch_console();
     for (;;) {
         io_sti();
         //显示时钟中断倒计时
@@ -326,26 +328,29 @@ void CMain(void) {
                 if (cnt >= memCnt) {
                     cnt = 0;
                 }
-            } else if (data == 0x0f) {                      //Tab键,用来切换窗口输入焦点
+            } else if (data == 0x0F) {                      //Tab键,用来切换窗口输入焦点
+                int msg = -1;
                 if (key_to == 0) {                          //主进程窗口
                     key_to = 1;                             //控制台窗口
                     make_wtitle8(shtctl, sheet_win, "Counter", 0);
                     make_wtitle8(shtctl, sheet_console, "Terminal", 1);
+                    set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
+                    msg = PROC_RESUME;
                 } else {
                     key_to = 0;
                     make_wtitle8(shtctl, sheet_win, "Counter", 1);
                     make_wtitle8(shtctl, sheet_console, "Terminal", 0);
+                    msg = PROC_PAUSE;
                 }
                 sheet_refresh(shtctl, sheet_win, 0, 0, sheet_win->bxsize, 21);
                 sheet_refresh(shtctl, sheet_console, 0, 0, sheet_console->bxsize, 21);
-            } else if (key_to == 0) {                                                       //如果主进程窗口处于焦点状态
+                send_message(task_a, task_console, msg);
+            } 
+            if (key_to == 0) {                                                              //如果主进程窗口处于焦点状态
                 showString(shtctl, sheet_back, 0, 0, COL8_848400, "Bunny...");
                 if (transferScanCode(data) != 0 && line <= 142) {                           //打印键盘字符
                     //闪烁光标的位置,先变成白的，防止当闪烁到黑色是写入字符而变黑
-                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, 
-                            BOX_MARGIN_LEFT + 2 + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);                 
-                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
                     char buf[2] = {transferScanCode(data), 0};
                     showString(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, COL8_000000, buf);
                     line += 8;
@@ -355,20 +360,16 @@ void CMain(void) {
                     }
                     stop_task_a = 0;
                 } else if (data == 0x0E && line >= 8) {     //删除键
-                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
-                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
                     line -= 8;
-                    boxfill8(sheet_win->buf, sheet_win->bxsize, COL8_FFFFFF, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 14);
-                    sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
-                            BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);
+                    set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
                 }
             } else {
-                task_sleep(task_a);
                 //将数据放入控制台进程的队列中
                 fifo8_put(&task_console->fifo, data);
+                if (fifo8_status(&keyInfo) == 0) {
+                    task_sleep(task_a);
+                }
             }
         } else if (fifo8_status(&mouseInfo)) {              //鼠标缓冲有数据
             showMouseInfo(shtctl, sheet_back, sheet_mouse);
@@ -397,15 +398,22 @@ void CMain(void) {
                     cursor_c = COL8_FFFFFF;
                 }
                 timer_setTime(timer3, 50);                  //实现光标闪烁
-                boxfill8(sheet_win->buf, sheet_win->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3, 
-                        BOX_MARGIN_LEFT + 2 + line + 6, BOX_MARGIN_TOP + pos + 3 + 14);
-                sheet_refresh(shtctl, sheet_win, BOX_MARGIN_LEFT + 2 + line, BOX_MARGIN_TOP + pos + 3,
-                        BOX_MARGIN_LEFT + 2 + line + 8, BOX_MARGIN_TOP + pos + 3 + 16);           
+                set_cursor(shtctl, sheet_win, line, pos, cursor_c);          
             }
         }
     }
 }
 //===================================== 主函数结束 ==============================================
+
+/**
+ * 绘制光标，并刷新光标所在像素
+ */
+void  set_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c) {
+    boxfill8(sheet->buf, sheet->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y,
+            BOX_MARGIN_LEFT + 2 + cursor_x + 6, BOX_MARGIN_TOP + cursor_y + 4 + 14);
+    sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y, 
+            BOX_MARGIN_LEFT + 2 + cursor_x + 8, BOX_MARGIN_TOP + cursor_y + 4 + 16);
+}
 
 /**
  * 处理特殊按键 caps和shift
@@ -466,10 +474,10 @@ char transferScanCode(int data) {
  */
 struct SHEET *launch_console() {
     struct SHEET *sheet_console = sheet_alloc(shtctl);
-    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 256 * 180);
-    sheet_setbuf(sheet_console, buf_cons, 256, 180, COLOR_INVISIBLE);
+    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 300 * 240);
+    sheet_setbuf(sheet_console, buf_cons, 300, 240, COLOR_INVISIBLE);
     make_window8(shtctl, sheet_console, "Terminal", 0);
-    make_textbox8(sheet_console, 8, 28, 240, 144, COL8_000000);
+    make_textbox8(sheet_console, 8, 28, 284, 204, COL8_000000);
 
     struct TASK *task_console0 = task_alloc();
     int addr_code32 = get_code32_addr();
@@ -489,8 +497,8 @@ struct SHEET *launch_console() {
     task_console = task_console0;
     task_run(task_console0, 1, 5);
 
-    sheet_slide(shtctl,sheet_console, 360, 150);
-    sheet_level_updown(shtctl, sheet_console, 3);
+    sheet_slide(shtctl,sheet_console, 330, 160);
+    sheet_level_updown(shtctl, sheet_console, 2);
     return sheet_console;
 }
 
@@ -517,7 +525,7 @@ void console_task(struct SHEET *sheet) {
         } else {
             key = fifo8_get(&task->fifo);
             io_sti();
-            if (key <= 1) {                 //时钟中断，控制光标闪烁
+            if (key <= 1 && cursor_c >= 0) {                                                //时钟中断，控制光标闪烁
                 if (key == 1) {
                     timer_init(timer, &task->fifo, 0);
                     cursor_c = COL8_FFFFFF;
@@ -526,28 +534,23 @@ void console_task(struct SHEET *sheet) {
                     cursor_c = COL8_000000;
                 }
                 timer_setTime(timer, 50);
-                boxfill8(sheet->buf, sheet->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5, 
-                        BOX_MARGIN_LEFT + 2 + pos_x + 6, BOX_MARGIN_TOP + 3 + 16);
-                sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
-                        BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 18);
+            } else if (key == PROC_RESUME) {                                                //控制台重新获得CPU控制权
+                cursor_c = COL8_FFFFFF;
+                timer_init(timer, &task->fifo, 0);
+                timer_setTime(timer, 50);
+            } else if (key == PROC_PAUSE) {                                                 //控制台返还CPU控制权
+                set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
+                cursor_c = -1;
+                task_run(task_main, -1, 0);
             } else {
-                if (key == 0x0E && pos_x >= 16) {                                   //删除键
-                    boxfill8(sheet->buf, sheet->bxsize, COL8_000000, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
-                            BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 16);
-                    sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
-                            BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 18);
+                if (key == 0x0E && pos_x >= 16) {                                           //删除键
+                    set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
                     pos_x -= 8;
-                    boxfill8(sheet->buf, sheet->bxsize, COL8_000000, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
-                            BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 16);
-                    sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
-                            BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 18);
-                } else if (transferScanCode(key) != 0 && pos_x <= sheet->bxsize - 100) {      //键盘输入字符
-                    showString(shtctl, sheet_back, 0, 16, COL8_848400, "Dans");
+                    set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
+                } else if (transferScanCode(key) != 0 && pos_x <= sheet->bxsize - 35) {     //键盘输入字符
+                    //showString(shtctl, sheet_back, 0, 16, COL8_848400, "Dans");
                     //闪烁光标的位置,先变成黑的，防止当闪烁到黑色是写入字符而变黑
-                    boxfill8(sheet->buf, sheet->bxsize, COL8_000000, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5, 
-                            BOX_MARGIN_LEFT + 2 + pos_x + 6, BOX_MARGIN_TOP + 3 + 16);                 
-                    sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5,
-                            BOX_MARGIN_LEFT + 2 + pos_x + 8, BOX_MARGIN_TOP + 3 + 18);
+                    set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
                     s[0] = transferScanCode(key);
                     s[1] = 0;
                     showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5, COL8_FFFFFF, s);
@@ -555,7 +558,9 @@ void console_task(struct SHEET *sheet) {
                 }
             }
         }
-        
+        if (cursor_c >= 0) {
+            set_cursor(shtctl, sheet, pos_x, 2, cursor_c);
+        }
     }
 }
 

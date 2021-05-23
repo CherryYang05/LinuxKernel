@@ -167,3 +167,7 @@ int task_sleep(struct TASK *task);
  */
 struct TASKCTL *getTaskctl();
 
+#define PROC_RESUME 0x57
+#define PROC_PAUSE  0x58
+
+void send_message(struct TASK *sender, struct TASK *receiver, int msg);

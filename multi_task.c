@@ -278,3 +278,8 @@ void task_switchsub() {
 struct TASKCTL *getTaskctl() {
     return taskctl;
 }
+
+void send_message(struct TASK *sender, struct TASK *receiver, int msg) {
+    fifo8_put(&receiver->fifo, msg);
+    task_sleep(sender);
+}

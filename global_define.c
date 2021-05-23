@@ -40,6 +40,7 @@ int fifo8_put(struct FIFO8 *fifo, unsigned char data) {
         fifo->write = 0;
     }
     fifo->free--;
+    //若一个进程的消息队列绑定了该进程，那么向消息队列中存放信息的时候就会唤醒该进程
     if (fifo->task != 0) {
         if (fifo->task->flags != 2) {
             task_run(fifo->task, -1, 0);
