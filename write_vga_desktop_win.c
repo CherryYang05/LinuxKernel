@@ -74,6 +74,7 @@ struct MemRangeDesc {
 
 int get_memory_block_count();
 char *intToHexStr(unsigned int data);
+char *intToStr(unsigned int data);
 
 char *get_addr_buffer();
 int get_addr_buffer_int();
@@ -566,21 +567,9 @@ void console_task(struct SHEET *sheet) {
                 } else if (key == KEY_RETURN) {                                             //回车键
                     set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
                     cmdLine[pos_x / 8 - 1] = 0;
-                    isOrder = cmdLine[0] == 0 ? 0 : 1;
-                    pos_y = cons_newline(pos_y, sheet, isOrder);
-                    // set_cursor(shtctl, sheet, pos_x, pos_y, COL8_FFFFFF);
                     pos_x = 8;
-                    if (cmdLine[0] == 'm' && cmdLine[1] == 'e' && cmdLine[2] == 'm' && cmdLine[3] == 0) {
-                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, "BMY");
-                        pos_y = cons_newline(pos_y, sheet, 0);
-                    } else if (cmdLine[0] = 'a' && cmdLine[1] == 'u' && cmdLine[2] == 't' && 
-                        cmdLine[3] == 'h' && cmdLine[4] == 'o' && cmdLine[5] == 'r' && cmdLine[6] == 0) {
-                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, "Designed By BMY. Copyright @2021 Cherry");
-                        pos_y = cons_newline(pos_y, sheet, 0);
-                    } else {
-                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, "Undefined Order...");
-                        pos_y = cons_newline(pos_y, sheet, 0); 
-                    }
+                    command(sheet, cmdLine, &pos_y);
+                    cmdLine[0] = 0;
                 } else {                                                                    //键盘输入字符
                     char c = transferScanCode(key);
                     if (c != 0 && pos_x <= sheet->bxsize - 35) {
@@ -598,6 +587,31 @@ void console_task(struct SHEET *sheet) {
         if (cursor_c >= 0) {
             set_cursor(shtctl, sheet, pos_x, pos_y, cursor_c);
         }
+    }
+}
+
+/**
+ * 管理控制台输出
+ */
+void command(struct SHEET *sheet, char *s, int *pos_y) {
+    int isOrder = s[0] == 0 ? 0 : 1;
+    *pos_y = cons_newline(*pos_y, sheet, isOrder);
+    // set_cursor(shtctl, sheet, 8, *pos_y, COL8_FFFFFF);
+    if (s[0] == 'm' && s[1] == 'e' && s[2] == 'm' && s[3] == 0) {
+        int memTotal = memman_total(memman);
+        char *pmemTotal = intToStr(memTotal / 1024);
+        int cnt = getIntStrLen(pmemTotal);
+        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + *pos_y, COL8_FFFFFF, "Free Mem: ");
+        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 80, BOX_MARGIN_TOP + 3 + *pos_y, COL8_FFFFFF, pmemTotal);
+        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 80 + cnt * 8, BOX_MARGIN_TOP + 3 + *pos_y, COL8_FFFFFF, "KB");
+        *pos_y = cons_newline(*pos_y, sheet, 0);
+    } else if (s[0] = 'a' && s[1] == 'u' && s[2] == 't' && 
+            s[3] == 'h' && s[4] == 'o' && s[5] == 'r' && s[6] == 0) {
+        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + *pos_y, COL8_FFFFFF, "Designed By BMY. Copyright @2021 Cherry");
+        *pos_y = cons_newline(*pos_y, sheet, 0);
+    } else if (isOrder) {
+        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + *pos_y, COL8_FFFFFF, "Undefined Order...");
+        *pos_y = cons_newline(*pos_y, sheet, 0); 
     }
 }
 
@@ -948,6 +962,39 @@ char *intToHexStr(unsigned int data) {
         }
     }
     return str;
+}
+
+/**
+ * 将整型数转化成字符串显示
+ */
+char *intToStr(unsigned int data) {
+    static char str[8];
+    int cnt = 0;
+    while (data > 0) {
+        int e = data % 10;
+        str[cnt++] = e + '0';
+        data /= 10;
+    }
+    int temp = 0;
+    int l = 0, r = cnt - 1;
+    while (l < r) {
+        temp = str[l];
+        str[l] = str[r];
+        str[r] = temp;
+        l++;
+        r--;
+    }
+    str[cnt] = 0;
+    return str;
+}
+
+/**
+ * 计算整型转化成字符串的数组长度
+ */
+int getIntStrLen(char *s) {
+    int p = 0;
+    while (s[p++] != 0);
+    return p;
 }
 
 void wait_KBC_sendReady() {
