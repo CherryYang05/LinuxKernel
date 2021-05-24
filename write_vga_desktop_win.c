@@ -141,7 +141,8 @@ char transferScanCode(int data);
 
 int isSpecialKey(int data);
 void set_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c);
-int cons_newline(int cursor_y, struct SHEET *sheet);
+void set_del_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c);
+int cons_newline(int cursor_y, struct SHEET *sheet, int isOrder);
 
 //======================================== 主函数 ===================================================
 void CMain(void) {
@@ -365,7 +366,7 @@ void CMain(void) {
                 } else if (data == KEY_DELETE && line >= 8) {     //删除键
                     set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
                     line -= 8;
-                    set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
+                    set_del_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
                 }
             } else {
                 //将数据放入控制台进程的队列中
@@ -414,6 +415,16 @@ void CMain(void) {
 void set_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c) {
     boxfill8(sheet->buf, sheet->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y,
             BOX_MARGIN_LEFT + 2 + cursor_x + 6, BOX_MARGIN_TOP + cursor_y + 4 + 14);
+    sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y, 
+            BOX_MARGIN_LEFT + 2 + cursor_x + 8, BOX_MARGIN_TOP + cursor_y + 4 + 16);
+}
+
+/**
+ * 绘制删除键的光标，并刷新光标所在像素
+ */
+void set_del_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c) {
+    boxfill8(sheet->buf, sheet->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y,
+            BOX_MARGIN_LEFT + 2 + cursor_x + 8, BOX_MARGIN_TOP + cursor_y + 4 + 16);
     sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y, 
             BOX_MARGIN_LEFT + 2 + cursor_x + 8, BOX_MARGIN_TOP + cursor_y + 4 + 16);
 }
@@ -477,10 +488,10 @@ char transferScanCode(int data) {
  */
 struct SHEET *launch_console() {
     struct SHEET *sheet_console = sheet_alloc(shtctl);
-    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 300 * 232);
-    sheet_setbuf(sheet_console, buf_cons, 300, 232, COLOR_INVISIBLE);
+    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 350 * 232);
+    sheet_setbuf(sheet_console, buf_cons, 350, 232, COLOR_INVISIBLE);
     make_window8(shtctl, sheet_console, "Terminal", 0);
-    make_textbox8(sheet_console, 8, 28, 284, 196, COL8_000000);
+    make_textbox8(sheet_console, 8, 28, 334, 196, COL8_000000);
 
     struct TASK *task_console0 = task_alloc();
     int addr_code32 = get_code32_addr();
@@ -500,7 +511,7 @@ struct SHEET *launch_console() {
     task_console = task_console0;
     task_run(task_console0, 1, 5);
 
-    sheet_slide(shtctl,sheet_console, 330, 160);
+    sheet_slide(shtctl,sheet_console, 270, 180);
     sheet_level_updown(shtctl, sheet_console, 2);
     return sheet_console;
 }
@@ -511,7 +522,6 @@ struct SHEET *launch_console() {
 void console_task(struct SHEET *sheet) {
     struct TIMER *timer;
     struct TASK *task = task_now();
-    char s[2];
     char fifobuf[128];
     //pos_x控制光标位置
     int pos_x = 8, cursor_c = COL8_000000;
@@ -522,6 +532,8 @@ void console_task(struct SHEET *sheet) {
     timer_setTime(timer, 50);
     int key = 0;
     showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, ">");
+    char cmdLine[30];
+    int isOrder = 0;
     for(;;) {
         io_cli();
         if (fifo8_status(&task->fifo) == 0) {
@@ -547,23 +559,39 @@ void console_task(struct SHEET *sheet) {
                 cursor_c = -1;
                 task_run(task_main, -1, 0);
             } else {
-                if (key == KEY_DELETE && pos_x >= 16) {                                           //删除键
+                if (key == KEY_DELETE && pos_x >= 16) {                                     //删除键
                     set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
                     pos_x -= 8;
+                    set_del_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
+                } else if (key == KEY_RETURN) {                                             //回车键
                     set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
-                } else if (key == KEY_RETURN) {                                                   //回车键
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
-                    pos_y = cons_newline(pos_y, sheet); 
+                    cmdLine[pos_x / 8 - 1] = 0;
+                    isOrder = cmdLine[0] == 0 ? 0 : 1;
+                    pos_y = cons_newline(pos_y, sheet, isOrder);
+                    // set_cursor(shtctl, sheet, pos_x, pos_y, COL8_FFFFFF);
                     pos_x = 8;
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_FFFFFF);
-                } else if (transferScanCode(key) != 0 && pos_x <= sheet->bxsize - 35) {     //键盘输入字符
-                    //showString(shtctl, sheet_back, 0, 16, COL8_848400, "Dans");
-                    //闪烁光标的位置,先变成黑的，防止当闪烁到黑色时写入字符而变黑
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
-                    s[0] = transferScanCode(key);
-                    s[1] = 0;
-                    showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, s);
-                    pos_x += 8;
+                    if (cmdLine[0] == 'm' && cmdLine[1] == 'e' && cmdLine[2] == 'm' && cmdLine[3] == 0) {
+                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, "BMY");
+                        pos_y = cons_newline(pos_y, sheet, 0);
+                    } else if (cmdLine[0] = 'a' && cmdLine[1] == 'u' && cmdLine[2] == 't' && 
+                        cmdLine[3] == 'h' && cmdLine[4] == 'o' && cmdLine[5] == 'r' && cmdLine[6] == 0) {
+                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, "Designed By BMY. Copyright @2021 Cherry");
+                        pos_y = cons_newline(pos_y, sheet, 0);
+                    } else {
+                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + 0, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, "Undefined Order...");
+                        pos_y = cons_newline(pos_y, sheet, 0); 
+                    }
+                } else {                                                                    //键盘输入字符
+                    char c = transferScanCode(key);
+                    if (c != 0 && pos_x <= sheet->bxsize - 35) {
+                        //showString(shtctl, sheet_back, 0, 16, COL8_848400, "Dans");
+                        //闪烁光标的位置,先变成黑的，防止当闪烁到黑色时写入字符而变黑
+                        set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
+                        char s[2] = {c, 0};
+                        cmdLine[pos_x / 8 - 1] = c;
+                        showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, s);
+                        pos_x += 8;
+                    }
                 }
             }
         }
@@ -621,7 +649,7 @@ void task_b_main(struct SHEET *sheet) {
 /**
  * 实现控制台滚屏功能
  */
-int cons_newline(int cursor_y, struct SHEET *sheet) {
+int cons_newline(int cursor_y, struct SHEET *sheet, int isOrder) {
     int x, y;
 
     if (cursor_y + BOX_MARGIN_TOP < sheet->bysize - 36) {
@@ -640,7 +668,9 @@ int cons_newline(int cursor_y, struct SHEET *sheet) {
         }
         sheet_refresh(shtctl, sheet, 8, 28, sheet->bxsize - 8, sheet->bysize);
     }
-    showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + cursor_y, COL8_FFFFFF, ">"); 
+    if (!isOrder) {
+        showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + cursor_y, COL8_FFFFFF, ">"); 
+    }
     return cursor_y;
 }
 
