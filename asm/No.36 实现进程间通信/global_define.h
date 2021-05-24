@@ -74,9 +74,7 @@
  */
 #define COL8_848484 15
 
-#define KEY_RETURN  0x1C
-#define KEY_TAB     0x0F
-#define KEY_DELETE  0x0E
+
 /**
  * @brief: 数据缓冲区，若键盘使用大小设为 32B
  * @param {read} 读指针

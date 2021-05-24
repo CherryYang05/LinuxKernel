@@ -322,14 +322,13 @@ void CMain(void) {
             //showKeyboardInfo(shtctl, sheet_back);
             io_sti();
             data = fifo8_get(&keyInfo);
-            // if (data == 0x1C) {                             //如果按下回车键(0x1C)，显示地址范围描述符信息
-            //     showMemInfo(shtctl, sheet_back, memDesc, sheet_back->buf, cnt, xsize, COL8_FFFFFF);
-            //     cnt++;
-            //     if (cnt >= memCnt) {
-            //         cnt = 0;
-            //     }
-            // } else 
-            if (data == KEY_TAB) {                          //Tab键,用来切换窗口输入焦点
+            if (data == 0x1C) {                             //如果按下回车键(0x1C)，显示地址范围描述符信息
+                showMemInfo(shtctl, sheet_back, memDesc, sheet_back->buf, cnt, xsize, COL8_FFFFFF);
+                cnt++;
+                if (cnt >= memCnt) {
+                    cnt = 0;
+                }
+            } else if (data == 0x0F) {                      //Tab键,用来切换窗口输入焦点
                 int msg = -1;
                 if (key_to == 0) {                          //主进程窗口
                     key_to = 1;                             //控制台窗口
@@ -360,7 +359,7 @@ void CMain(void) {
                         line = 0;
                     }
                     stop_task_a = 0;
-                } else if (data == KEY_DELETE && line >= 8) {     //删除键
+                } else if (data == 0x0E && line >= 8) {     //删除键
                     set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
                     line -= 8;
                     set_cursor(shtctl, sheet_win, line, pos, COL8_FFFFFF);
@@ -372,9 +371,9 @@ void CMain(void) {
                     task_sleep(task_a);
                 }
             }
-        } else if (fifo8_status(&mouseInfo)) {                  //鼠标缓冲有数据
+        } else if (fifo8_status(&mouseInfo)) {              //鼠标缓冲有数据
             showMouseInfo(shtctl, sheet_back, sheet_mouse);
-        } else if (fifo8_status(&timerInfo)) {                  //处理时钟中断timer
+        } else if (fifo8_status(&timerInfo)) {              //处理时钟中断timer
             io_sti();
             int key = fifo8_get(&timerInfo);
             if (key == 10) {
@@ -513,13 +512,12 @@ void console_task(struct SHEET *sheet) {
     char fifobuf[128];
     //pos_x控制光标位置
     int pos_x = 8, cursor_c = COL8_000000;
-    int pos_y = 2;
     fifo8_init(&task->fifo, 128, fifobuf, task);
     timer = timer_alloc();
     timer_init(timer, &task->fifo, 1);
     timer_setTime(timer, 50);
     int key = 0;
-    showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, ">");
+    showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 5, COL8_FFFFFF, ">");
     for(;;) {
         io_cli();
         if (fifo8_status(&task->fifo) == 0) {
@@ -541,33 +539,27 @@ void console_task(struct SHEET *sheet) {
                 timer_init(timer, &task->fifo, 0);
                 timer_setTime(timer, 50);
             } else if (key == PROC_PAUSE) {                                                 //控制台返还CPU控制权
-                set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
+                set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
                 cursor_c = -1;
                 task_run(task_main, -1, 0);
             } else {
-                if (key == KEY_DELETE && pos_x >= 16) {                                           //删除键
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
+                if (key == 0x0E && pos_x >= 16) {                                           //删除键
+                    set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
                     pos_x -= 8;
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
-                } else if (key == KEY_RETURN) {                                                   //回车键
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
-                    pos_y += 16;
-                    showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, ">");
-                    pos_x = 8;
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_FFFFFF);
+                    set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
                 } else if (transferScanCode(key) != 0 && pos_x <= sheet->bxsize - 35) {     //键盘输入字符
                     //showString(shtctl, sheet_back, 0, 16, COL8_848400, "Dans");
-                    //闪烁光标的位置,先变成黑的，防止当闪烁到黑色时写入字符而变黑
-                    set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
+                    //闪烁光标的位置,先变成黑的，防止当闪烁到黑色是写入字符而变黑
+                    set_cursor(shtctl, sheet, pos_x, 2, COL8_000000);
                     s[0] = transferScanCode(key);
                     s[1] = 0;
-                    showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, s);
+                    showString(shtctl, sheet, BOX_MARGIN_LEFT + 2 + pos_x, BOX_MARGIN_TOP + 5, COL8_FFFFFF, s);
                     pos_x += 8;
                 }
             }
         }
         if (cursor_c >= 0) {
-            set_cursor(shtctl, sheet, pos_x, pos_y, cursor_c);
+            set_cursor(shtctl, sheet, pos_x, 2, cursor_c);
         }
     }
 }
