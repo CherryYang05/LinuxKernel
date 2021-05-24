@@ -140,8 +140,6 @@ void make_wtitle8(struct SHTCTL *shtctl, struct SHEET *sheet, char *title, char 
 char transferScanCode(int data);
 
 int isSpecialKey(int data);
-void set_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c);
-int cons_newline(int cursor_y, struct SHEET *sheet);
 
 //======================================== 主函数 ===================================================
 void CMain(void) {
@@ -411,7 +409,7 @@ void CMain(void) {
 /**
  * 绘制光标，并刷新光标所在像素
  */
-void set_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c) {
+void  set_cursor(struct SHTCTL *shtctl, struct SHEET *sheet, int cursor_x, int cursor_y ,int cursor_c) {
     boxfill8(sheet->buf, sheet->bxsize, cursor_c, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y,
             BOX_MARGIN_LEFT + 2 + cursor_x + 6, BOX_MARGIN_TOP + cursor_y + 4 + 14);
     sheet_refresh(shtctl, sheet, BOX_MARGIN_LEFT + 2 + cursor_x, BOX_MARGIN_TOP + 3 + cursor_y, 
@@ -477,10 +475,10 @@ char transferScanCode(int data) {
  */
 struct SHEET *launch_console() {
     struct SHEET *sheet_console = sheet_alloc(shtctl);
-    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 300 * 232);
-    sheet_setbuf(sheet_console, buf_cons, 300, 232, COLOR_INVISIBLE);
+    unsigned char *buf_cons = (unsigned char*)memman_alloc_4K(memman, 300 * 240);
+    sheet_setbuf(sheet_console, buf_cons, 300, 240, COLOR_INVISIBLE);
     make_window8(shtctl, sheet_console, "Terminal", 0);
-    make_textbox8(sheet_console, 8, 28, 284, 196, COL8_000000);
+    make_textbox8(sheet_console, 8, 28, 284, 204, COL8_000000);
 
     struct TASK *task_console0 = task_alloc();
     int addr_code32 = get_code32_addr();
@@ -553,7 +551,8 @@ void console_task(struct SHEET *sheet) {
                     set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
                 } else if (key == KEY_RETURN) {                                                   //回车键
                     set_cursor(shtctl, sheet, pos_x, pos_y, COL8_000000);
-                    pos_y = cons_newline(pos_y, sheet); 
+                    pos_y += 16;
+                    showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, ">");
                     pos_x = 8;
                     set_cursor(shtctl, sheet, pos_x, pos_y, COL8_FFFFFF);
                 } else if (transferScanCode(key) != 0 && pos_x <= sheet->bxsize - 35) {     //键盘输入字符
@@ -616,32 +615,6 @@ void task_b_main(struct SHEET *sheet) {
            }
         }
     }
-}
-
-/**
- * 实现控制台滚屏功能
- */
-int cons_newline(int cursor_y, struct SHEET *sheet) {
-    int x, y;
-
-    if (cursor_y + BOX_MARGIN_TOP < sheet->bysize - 36) {
-        cursor_y += 16;
-    } else {
-        for (y = BOX_MARGIN_TOP + 3; y < sheet->bysize - 20; y++) {
-            for (x = 8; x < sheet->bxsize - 8; x++) {
-                sheet->buf[x + y * sheet->bxsize] = sheet->buf[x + (y + 16) * sheet->bxsize];
-            }
-        }
-        //清除最后一行输入的字符
-        for (y = cursor_y + BOX_MARGIN_TOP + 3; y < cursor_y + BOX_MARGIN_TOP + 19; y++) {
-            for (x = 8; x < sheet->bxsize - 8; x++) {
-                sheet->buf[x + y * sheet->bxsize] = COL8_000000;
-            }
-        }
-        sheet_refresh(shtctl, sheet, 8, 28, sheet->bxsize - 8, sheet->bysize);
-    }
-    showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + cursor_y, COL8_FFFFFF, ">"); 
-    return cursor_y;
 }
 
 void initBootInfo(struct BOOTINFO *pBootInfo) {
