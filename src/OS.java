@@ -72,8 +72,7 @@ public class OS {
         ProcessASMFile processASMFile = new ProcessASMFile(args[0]);    //用于命令行输入参数执行
         if (ProcessASMFile.isRename) {
             processASMFile.processASM();
-            System.out.println(ProcessASMFile.bakFile.getName() +
-                    " delete " + ProcessASMFile.bakFile.delete());
+            System.out.println(ProcessASMFile.bakFile.getName() + " delete " + ProcessASMFile.bakFile.delete());
             System.out.println("ASM file modified done!");
         } else {
             System.out.println("ASM file modified failed!");

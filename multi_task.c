@@ -183,31 +183,6 @@ int task_sleep(struct TASK *task) {
         }
     }
     return rtask;
-    // int i;
-    // //循环找出这个进程
-    // for (i = 0; i < taskctl->running; ++i) {
-    //     if (taskctl->tasks[i] == task) {
-    //         break;
-    //     }
-    // }
-    // taskctl->running--;
-    // //???
-    // if (i < taskctl->now) {
-    //     taskctl->now--;
-    // }
-
-    // for (; i < taskctl->running; ++i) {
-    //     taskctl->tasks[i] = taskctl->tasks[i + 1];
-    // }
-
-    // task->flags = TASK_SUSPEND;         //挂起
-    // if (rtask != 0) {
-    //     //若当前挂起的进程是正在运行的进程，则将第0个进程调度到前台运行
-    //     if (taskctl->now >= taskctl->running) {
-    //         taskctl->now = 0;
-    //     }
-    //     farjmp(0, taskctl->tasks[taskctl->now]->sel);
-    // }
 }
 
 /**

@@ -280,7 +280,7 @@ void CMain(void) {
     task_a = task_init(memman);
     task_main = task_a;
     keyInfo.task = task_a;      //重要
-    // sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 1, 5, "Task1", 150, 50, 150, 30, 2);
+    // sheet_win_b[0] = messageBoxToTask(shtctl, task_b[0], 0, 5, "Task1", 150, 50, 150, 30, 3);
     // sheet_win_b[1] = messageBoxToTask(shtctl, task_b[1], 1, 5, "Task2", 150, 50, 300, 30, 2);
     // sheet_win_b[2] = messageBoxToTask(shtctl, task_b[2], 1, 5, "Task3", 150, 50, 450, 30, 2);
     //showString(shtctl, sheet_back, 0, 0, COL8_FFFFFF, intToHexStr(getTaskctl()->running));
@@ -382,7 +382,8 @@ void CMain(void) {
             io_sti();
             int key = fifo8_get(&timerInfo);
             if (key == 10) {
-                showString(shtctl, sheet_back, xpos, 160, COL8_FFFFFF, "A");
+                showString(shtctl, sheet_back, xpos, 480 - 48 - 32
+                , COL8_FFFFFF, "A");
                 timer_setTime(timer, 100);
                 xpos += 8;
                 //当输出5个字符后，A进程休眠
@@ -535,6 +536,15 @@ void console_task(struct SHEET *sheet) {
     showString(shtctl, sheet, BOX_MARGIN_LEFT, BOX_MARGIN_TOP + 3 + pos_y, COL8_FFFFFF, ">");
     char cmdLine[30];
     int isOrder = 0;
+
+    struct TIMER *pTimer;
+    pTimer = timer_alloc();
+    struct FIFO8 fifo_timer;
+    char timer_buf[8];
+    fifo8_init(&fifo_timer, 8, timer_buf, 0);
+    timer_init(pTimer, &fifo_timer, 123);
+    timer_setTime(pTimer, 100);
+    int xpos = 0;
     for(;;) {
         io_cli();
         if (fifo8_status(&task->fifo) == 0) {
@@ -586,6 +596,17 @@ void console_task(struct SHEET *sheet) {
         }
         if (cursor_c >= 0) {
             set_cursor(shtctl, sheet, pos_x, pos_y, cursor_c);
+        }
+        
+        if (fifo8_status(&fifo_timer) == 0) {
+            io_sti();
+        } else {
+            int i = fifo8_get(&fifo_timer);
+            if (i == 123) {
+                showString(shtctl, sheet_back, xpos, 480 - 48, COL8_FFFFFF, "C");
+               timer_setTime(pTimer, 100);
+               xpos += 8;
+            }
         }
     }
 }
@@ -658,7 +679,7 @@ void task_b_main(struct SHEET *sheet) {
            io_sti();
            if (i == 123) {
                //showString(shtctl, sheet_back, 0, 160, COL8_FFFFFF, "switch back");
-               showString(shtctl, sheet_back, xpos, 176, COL8_FFFFFF, "B");
+               showString(shtctl, sheet_back, xpos, 480 - 48 - 16, COL8_FFFFFF, "B");
                //taskswitch7();
                //farjmp(0, 7 * 8);
                timer_setTime(timer_b, 100);
@@ -1249,7 +1270,6 @@ struct SHEET *messageBoxToTask(struct SHTCTL *ctl, struct TASK *task, int task_l
     //空出8字节存放其他信息，用4字节存放窗体信息
     *((int*)(task->tss.esp + 4)) = (int)sheet_win;
     task_run(task, task_level, priority);
-
     sheet_slide(ctl, sheet_win, x0, y0);
     sheet_level_updown(ctl, sheet_win, level);
     return sheet_win;
